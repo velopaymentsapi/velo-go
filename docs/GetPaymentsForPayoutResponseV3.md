@@ -1,0 +1,14 @@
+# GetPaymentsForPayoutResponseV3
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Summary** | [**GetPaymentsForPayoutResponseV3Summary**](GetPaymentsForPayoutResponseV3_summary.md) |  | [optional] 
+**Page** | [**GetPaymentsForPayoutResponseV3Page**](GetPaymentsForPayoutResponseV3_page.md) |  | [optional] 
+**Links** | [**[]GetPayoutsResponseV3Links**](GetPayoutsResponseV3_links.md) |  | [optional] 
+**Content** | [**[]PaymentResponseV3**](PaymentResponseV3.md) |  | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
