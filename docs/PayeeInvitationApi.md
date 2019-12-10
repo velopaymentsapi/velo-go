@@ -7,8 +7,10 @@ Method | HTTP request | Description
 [**GetPayeesInvitationStatus**](PayeeInvitationApi.md#GetPayeesInvitationStatus) | **Get** /v1/payees/payors/{payorId}/invitationStatus | Get Payee Invitation Status
 [**GetPayeesInvitationStatusV2**](PayeeInvitationApi.md#GetPayeesInvitationStatusV2) | **Get** /v2/payees/payors/{payorId}/invitationStatus | Get Payee Invitation Status
 [**ResendPayeeInvite**](PayeeInvitationApi.md#ResendPayeeInvite) | **Post** /v1/payees/{payeeId}/invite | Resend Payee Invite
-[**V2CreatePayee**](PayeeInvitationApi.md#V2CreatePayee) | **Post** /v2/payees | Intiate Payee Creation
+[**V2CreatePayee**](PayeeInvitationApi.md#V2CreatePayee) | **Post** /v2/payees | Intiate Payee Creation V2
 [**V2QueryBatchStatus**](PayeeInvitationApi.md#V2QueryBatchStatus) | **Get** /v2/payees/batch/{batchId} | Query Batch Status
+[**V3CreatePayee**](PayeeInvitationApi.md#V3CreatePayee) | **Post** /v3/payees | Intiate Payee Creation V3
+[**V3QueryBatchStatus**](PayeeInvitationApi.md#V3QueryBatchStatus) | **Get** /v3/payees/batch/{batchId} | Query Batch Status
 
 
 
@@ -133,7 +135,7 @@ Name | Type | Description  | Notes
 
 > CreatePayeesCsvResponse V2CreatePayee(ctx, createPayeesRequest)
 
-Intiate Payee Creation
+Intiate Payee Creation V2
 
 Initiate the process of creating 1 to 2000 payees in a batch Use the response location header to query for status (201 - Created, 400 - invalid request body, 409 - if there is a duplicate remote id within the batch / if there is a duplicate email within the batch). 
 
@@ -166,6 +168,74 @@ Name | Type | Description  | Notes
 ## V2QueryBatchStatus
 
 > QueryBatchResponse V2QueryBatchStatus(ctx, batchId)
+
+Query Batch Status
+
+Fetch the status of a specific batch of payees. The batch is fully processed when status is ACCEPTED and pendingCount is 0 ( 200 - OK, 404 - batch not found ). 
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**batchId** | [**string**](.md)| Batch Id | 
+
+### Return type
+
+[**QueryBatchResponse**](QueryBatchResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3CreatePayee
+
+> CreatePayeesCsvResponse2 V3CreatePayee(ctx, createPayeesRequest2)
+
+Intiate Payee Creation V3
+
+Initiate the process of creating 1 to 2000 payees in a batch Use the response location header to query for status (201 - Created, 400 - invalid request body, 409 - if there is a duplicate remote id within the batch / if there is a duplicate email within the batch). 
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**createPayeesRequest2** | [**CreatePayeesRequest2**](CreatePayeesRequest2.md)| Post payees to create. | 
+
+### Return type
+
+[**CreatePayeesCsvResponse2**](CreatePayeesCSVResponse_2.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, multipart/form-data
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V3QueryBatchStatus
+
+> QueryBatchResponse V3QueryBatchStatus(ctx, batchId)
 
 Query Batch Status
 

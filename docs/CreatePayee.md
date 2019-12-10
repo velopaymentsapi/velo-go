@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayeeId** | **string** |  | [optional] [readonly] 
-**PayorRefs** | Pointer to [**[]PayeePayorRefV2**](PayeePayorRefV2.md) |  | [optional] [readonly] 
+**PayorRefs** | Pointer to [**[]PayeePayorRef2**](PayeePayorRef_2.md) |  | [optional] [readonly] 
 **Email** | **string** |  | 
 **RemoteId** | **string** |  | 
 **Type** | [**PayeeType**](PayeeType.md) |  | 

@@ -8,6 +8,8 @@ Method | HTTP request | Description
 [**GetPayeeById**](PayeesApi.md#GetPayeeById) | **Get** /v1/payees/{payeeId} | Get Payee by Id
 [**ListPayeeChanges**](PayeesApi.md#ListPayeeChanges) | **Get** /v1/deltas/payees | List Payee Changes
 [**ListPayees**](PayeesApi.md#ListPayees) | **Get** /v1/payees | List Payees
+[**ListPayeesV3**](PayeesApi.md#ListPayeesV3) | **Get** /v3/payees | List Payees
+[**V1PayeesPayeeIdRemoteIdUpdatePost**](PayeesApi.md#V1PayeesPayeeIdRemoteIdUpdatePost) | **Post** /v1/payees/{payeeId}/remoteIdUpdate | Update Payee Remote Id
 
 
 
@@ -169,7 +171,7 @@ Name | Type | Description  | Notes
  **displayName** | **optional.String**| The display name of the payees. | 
  **remoteId** | **optional.String**| The remote id of the payees. | 
  **payeeType** | [**optional.Interface of PayeeType**](.md)| The onboarded status of the payees. | 
- **payeeCountry** | **optional.String**| The country of the payees. | 
+ **payeeCountry** | **optional.String**| The country of the payee - 2 letter ISO 3166-1 country code (upper case) | 
  **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
  **pageSize** | **optional.Int32**| Page size. Default is 25. Max allowable is 100. | [default to 25]
  **sort** | **optional.String**| List of sort fields (e.g. ?sort&#x3D;onboardedStatus:asc,name:asc) Default is name:asc &#39;name&#39; is treated as company name for companies - last name + &#39;,&#39; + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus.  | [default to displayName:asc]
@@ -185,6 +187,95 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListPayeesV3
+
+> PagedPayeeResponse2 ListPayeesV3(ctx, payorId, optional)
+
+List Payees
+
+Get a paginated response listing the payees for a payor.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**payorId** | [**string**](.md)| The account owner Payor ID | 
+ **optional** | ***ListPayeesV3Opts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListPayeesV3Opts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **ofacStatus** | [**optional.Interface of WatchlistStatus**](.md)| The watchlistStatus of the payees. | 
+ **onboardedStatus** | [**optional.Interface of OnboardedStatus**](.md)| The onboarded status of the payees. | 
+ **email** | [**optional.Interface of string**](.md)| Email address | 
+ **displayName** | **optional.String**| The display name of the payees. | 
+ **remoteId** | **optional.String**| The remote id of the payees. | 
+ **payeeType** | [**optional.Interface of PayeeType**](.md)| The onboarded status of the payees. | 
+ **payeeCountry** | **optional.String**| The country of the payee - 2 letter ISO 3166-1 country code (upper case) | 
+ **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
+ **pageSize** | **optional.Int32**| Page size. Default is 25. Max allowable is 100. | [default to 25]
+ **sort** | **optional.String**| List of sort fields (e.g. ?sort&#x3D;onboardedStatus:asc,name:asc) Default is name:asc &#39;name&#39; is treated as company name for companies - last name + &#39;,&#39; + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus.  | [default to displayName:asc]
+
+### Return type
+
+[**PagedPayeeResponse2**](PagedPayeeResponse_2.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1PayeesPayeeIdRemoteIdUpdatePost
+
+> V1PayeesPayeeIdRemoteIdUpdatePost(ctx, payeeId, updateRemoteIdRequest)
+
+Update Payee Remote Id
+
+Update the remote Id for the given Payee Id.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**payeeId** | [**string**](.md)| The UUID of the payee. | 
+**updateRemoteIdRequest** | [**UpdateRemoteIdRequest**](UpdateRemoteIdRequest.md)| Request to update payee remote id | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

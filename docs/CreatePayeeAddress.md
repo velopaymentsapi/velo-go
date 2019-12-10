@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **City** | **string** |  | 
 **CountyOrProvince** | Pointer to **string** |  | [optional] 
 **ZipOrPostcode** | Pointer to **string** |  | [optional] 
-**Country** | **string** |  | 
+**Country** | **string** | Ideally a 2 letter ISO 3166-1 country code.  But a limited set of additional values will be corrected.  See Java Locale.getISOCountries() and Locale.getDisplayCountry() | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

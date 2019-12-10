@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **AddressCity** | **string** |  | 
 **AddressCountyOrProvince** | **string** |  | [optional] 
 **AddressZipOrPostcode** | **string** |  | 
-**AddressCountry** | **string** |  | 
+**AddressCountry** | **string** | Ideally a 2 letter ISO 3166-1 country code.  But a limited set of additional values will be corrected.  See Java Locale.getISOCountries() and Locale.getDisplayCountry() | 
 **IndividualNationalIdentification** | **string** |  | [optional] 
 **IndividualDateOfBirth** | **string** | Must not be date in future. Example - 1970-05-20 | [optional] 
 **IndividualTitle** | **string** |  | [optional] 

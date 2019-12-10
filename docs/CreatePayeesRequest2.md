@@ -1,12 +1,11 @@
-# PayeePayorRefV2
+# CreatePayeesRequest2
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayorId** | **string** |  | [optional] 
-**RemoteId** | **string** |  | [optional] 
-**InvitationStatus** | **string** |  | [optional] 
+**PayorId** | **string** |  | 
+**Payees** | [**[]CreatePayee2**](CreatePayee_2.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
