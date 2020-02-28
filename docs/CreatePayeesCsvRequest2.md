@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **IndividualOtherNames** | **string** |  | [optional] 
 **IndividualLastName** | **string** |  | [optional] 
 **CompanyName** | **string** |  | [optional] 
-**CompanyEIN** | **string** | Company Tax Id (EIN) must be 9 numeric characters. Must match the regular expression &#x60;&#x60;&#x60;[\\d]{9}&#x60;&#x60;&#x60;. | [optional] 
+**CompanyEIN** | **string** |  | [optional] 
 **CompanyOperatingName** | **string** |  | [optional] 
 **PaymentChannelAccountNumber** | **string** | Either routing number and account number or only iban must be set | [optional] 
 **PaymentChannelRoutingNumber** | **string** | Either routing number and account number or only iban must be set | [optional] 

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayorId** | **string** |  | [optional] [readonly] 
+**PayorId** | **string** |  | [readonly] 
 **PayorName** | **string** | The name of the payor. | 
 **Address** | [**PayorAddressV2**](PayorAddressV2.md) |  | [optional] 
 **PrimaryContactName** | **string** | Name of primary contact for the payor. | [optional] 
 **PrimaryContactPhone** | **string** | Primary contact phone number for the payor. | [optional] 
 **PrimaryContactEmail** | **string** | Primary contact email for the payor. | [optional] 
-**KycState** | **string** | The kyc state of the payor. | [optional] [readonly] 
+**KycState** | [**KycState**](KycState.md) |  | [optional] 
 **ManualLockout** | **bool** | Whether or not the payor has been manually locked by the backoffice. | [optional] 
 **PayeeGracePeriodProcessingEnabled** | **bool** | Whether grace period processing is enabled. | [optional] [readonly] 
 **PayeeGracePeriodDays** | **int32** | The grace period for paying payees in days. | [optional] [readonly] 
@@ -21,7 +21,9 @@ Name | Type | Description | Notes
 **ReminderEmailsOptOut** | **bool** | Whether or not the payor has opted-out of reminder emails being sent. | [optional] [readonly] 
 **Language** | **string** | The payor’s language preference. Must be one of [EN, FR]. | [optional] 
 **IncludesReports** | **bool** |  | [optional] 
+**WuCustomerId** | **string** |  | [optional] 
 **MaxMasterPayorAdmins** | **int32** |  | [optional] 
+**PaymentRails** | [**PaymentRails**](PaymentRails.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetPaymentsForPayout**](PayoutHistoryApi.md#GetPaymentsForPayout) | **Get** /v3/paymentaudit/payouts/{payoutId} | Get Payments for Payout
 [**GetPaymentsForPayoutV4**](PayoutHistoryApi.md#GetPaymentsForPayoutV4) | **Get** /v4/paymentaudit/payouts/{payoutId} | Get Payments for Payout
-[**GetPayoutStats**](PayoutHistoryApi.md#GetPayoutStats) | **Get** /v1/paymentaudit/payoutStatistics | Get Payout Statistics
+[**GetPayoutStatsV1**](PayoutHistoryApi.md#GetPayoutStatsV1) | **Get** /v1/paymentaudit/payoutStatistics | Get Payout Statistics
 
 
 
@@ -122,9 +122,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetPayoutStats
+## GetPayoutStatsV1
 
-> GetPayoutStatistics GetPayoutStats(ctx, optional)
+> GetPayoutStatistics GetPayoutStatsV1(ctx, optional)
 
 Get Payout Statistics
 
@@ -136,11 +136,11 @@ Get payout statistics for a payor.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***GetPayoutStatsOpts** | optional parameters | nil if no parameters
+ **optional** | ***GetPayoutStatsV1Opts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
-Optional parameters are passed through a pointer to a GetPayoutStatsOpts struct
+Optional parameters are passed through a pointer to a GetPayoutStatsV1Opts struct
 
 
 Name | Type | Description  | Notes

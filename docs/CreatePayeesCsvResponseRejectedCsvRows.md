@@ -1,0 +1,13 @@
+# CreatePayeesCsvResponseRejectedCsvRows
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**LineNumber** | **int32** |  | [optional] 
+**RejectedContent** | **string** |  | [optional] 
+**Message** | **string** |  | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

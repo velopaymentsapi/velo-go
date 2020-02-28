@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **FundingAccountRoutingNumber** | **string** | The funding account routing number to be used for the payor. | [optional] 
 **FundingAccountAccountNumber** | **string** | The funding account number to be used for the payor. | [optional] 
 **FundingAccountAccountName** | **string** | The funding account name to be used for the payor. | [optional] 
-**KycState** | **string** | The kyc state of the payor. | [optional] [readonly] 
+**KycState** | [**KycState**](KycState.md) |  | [optional] 
 **ManualLockout** | **bool** | Whether or not the payor has been manually locked by the backoffice. | [optional] 
 **PayeeGracePeriodProcessingEnabled** | **bool** | Whether grace period processing is enabled. | [optional] [readonly] 
 **PayeeGracePeriodDays** | **int32** | The grace period for paying payees in days. | [optional] [readonly] 

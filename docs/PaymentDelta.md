@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **PayorPaymentId** | Pointer to **string** |  | [optional] 
 **PaymentCurrency** | Pointer to **string** |  | [optional] 
 **PaymentAmount** | Pointer to **int32** |  | [optional] 
-**Status** | Pointer to [**PaymentStatus**](PaymentStatus.md) |  | [optional] 
+**Status** | Pointer to **string** |  | [optional] 
 **SourceCurrency** | Pointer to **string** |  | [optional] 
 **SourceAmount** | Pointer to **int32** |  | [optional] 
 

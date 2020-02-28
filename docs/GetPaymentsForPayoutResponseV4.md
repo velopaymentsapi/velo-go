@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Summary** | [**GetPaymentsForPayoutResponseV4Summary**](GetPaymentsForPayoutResponseV4_summary.md) |  | [optional] 
-**Page** | [**PagedPayeeResponsePage**](PagedPayeeResponse_page.md) |  | [optional] 
+**Page** | [**PagedPayeeInvitationStatusResponsePage**](PagedPayeeInvitationStatusResponse_page.md) |  | [optional] 
 **Links** | [**[]PagedPayeeResponseLinks**](PagedPayeeResponse_links.md) |  | [optional] 
 **Content** | [**[]PaymentResponseV4**](PaymentResponseV4.md) |  | [optional] 
 

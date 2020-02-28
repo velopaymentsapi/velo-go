@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | [**PagedPayeeResponsePage**](PagedPayeeResponse_page.md) |  | [optional] 
+**Page** | [**PagedPayeeInvitationStatusResponsePage**](PagedPayeeInvitationStatusResponse_page.md) |  | [optional] 
 **Links** | [**[]PagedPayeeResponseLinks**](PagedPayeeResponse_links.md) |  | [optional] 
 **Content** | [**[]PaymentDelta**](PaymentDelta.md) |  | [optional] 
 

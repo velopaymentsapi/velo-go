@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Summary** | [**ListPaymentsResponseSummary**](ListPaymentsResponse_summary.md) |  | [optional] 
 **Page** | [**ListPaymentsResponsePage**](ListPaymentsResponse_page.md) |  | [optional] 
 **Links** | [**[]GetPayoutsResponseV3Links**](GetPayoutsResponseV3_links.md) |  | [optional] 
 **Content** | [**[]PaymentResponseV3**](PaymentResponseV3.md) |  | [optional] 

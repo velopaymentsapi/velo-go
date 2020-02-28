@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**PayoutId** | **string** |  | [optional] 
 **PayoutFrom** | [**PayoutPayorV4**](PayoutPayorV4.md) |  | [optional] 
 **PayoutTo** | [**PayoutPayorV4**](PayoutPayorV4.md) |  | [optional] 
 

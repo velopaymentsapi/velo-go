@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **PayoutId** | **string** |  | 
 **PayorId** | **string** |  | [optional] 
 **Status** | [**PayoutStatusV3**](PayoutStatusV3.md) |  | 
-**DateTime** | [**time.Time**](time.Time.md) |  | [optional] 
 **SubmittedDateTime** | **string** |  | 
 **InstructedDateTime** | **string** |  | [optional] 
 **WithdrawnDateTime** | **string** |  | [optional] 

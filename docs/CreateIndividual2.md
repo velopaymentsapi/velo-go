@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | [**IndividualV1Name**](IndividualV1_name.md) |  | 
+**Name** | [**CreateIndividual2Name**](CreateIndividual_2_name.md) |  | 
 **NationalIdentification** | **string** |  | [optional] 
 **DateOfBirth** | **string** | Must not be date in future. Example - 1970-05-20 | 
 

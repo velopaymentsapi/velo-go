@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayoutId** | **string** |  | 
-**PayorId** | **string** | Deprecated in v2.16. Will be populated with submitting payor ID until removed in a later release. | [optional] 
+**PayoutId** | **string** |  | [optional] 
+**PayorId** | **string** |  | [optional] 
 **Status** | [**PayoutStatusV4**](PayoutStatusV4.md) |  | 
 **DateTime** | [**time.Time**](time.Time.md) |  | [optional] 
 **SubmittedDateTime** | **string** |  | 
@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **FxSummaries** | [**[]FxSummaryV4**](FxSummaryV4.md) |  | [optional] 
 **PayoutMemo** | **string** |  | [optional] 
 **PayoutType** | [**PayoutTypeV4**](PayoutTypeV4.md) |  | 
+**PayorName** | **string** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
