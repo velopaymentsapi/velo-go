@@ -39,9 +39,12 @@ trim:
 	rm -Rf api
 
 info:
+	# adjust README.md
+	sed -i.bak '1s/.*/# Go client for Velo/' README.md && rm README.md.bak
 	sed -i.bak '2s/.*/[![License](https:\/\/img.shields.io\/badge\/License-Apache%202.0-blue.svg)](https:\/\/opensource.org\/licenses\/Apache-2.0) [![npm version](https:\/\/badge.fury.io\/go\/github.com%2Fvelopaymentsapi%2Fvelo-go.svg)](https:\/\/badge.fury.io\/go\/github.com%2Fvelopaymentsapi%2Fvelo-go) [![CircleCI](https:\/\/circleci.com\/gh\/velopaymentsapi\/velo-go.svg?style=svg)](https:\/\/circleci.com\/gh\/velopaymentsapi\/velo-go)\\/' README.md && rm README.md.bak
+	# adjust go.mod
 	sed -i.bak 's/GIT_USER_ID\/GIT_REPO_ID/velopaymentsapi\/velo-go/' go.mod && rm go.mod.bak
-
+	
 build_client:
 	#
 
@@ -58,12 +61,12 @@ tests:
 
 commit:
 	git add --all
-	git commit -am 'bump version to ${VERSION}'
+	git commit -am 'bump version to v${VERSION}'
 	git push --set-upstream origin master
 
 build:
 	@echo "Not doing anything just yet"
 
 publish:
-	git tag $(VERSION)
-	git push origin tag $(VERSION)
+	git tag v$(VERSION)
+	git push origin tag v$(VERSION)
