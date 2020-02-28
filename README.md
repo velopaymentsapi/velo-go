@@ -1,4 +1,4 @@
-# Go API client for velopayments
+# Go client for Velo
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![npm version](https://badge.fury.io/go/github.com%2Fvelopaymentsapi%2Fvelo-go.svg)](https://badge.fury.io/go/github.com%2Fvelopaymentsapi%2Fvelo-go) [![CircleCI](https://circleci.com/gh/velopaymentsapi/velo-go.svg?style=svg)](https://circleci.com/gh/velopaymentsapi/velo-go)\
 ## Terms and Definitions
 
