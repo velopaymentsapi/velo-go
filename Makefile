@@ -128,6 +128,7 @@ build_client:
 client: clean generate trim info build_client
 
 tests:
+	# test and generate coverage
 	go test -race $(go list ./... | grep -v /vendor/) -v -coverprofile .testCoverage.txt -args -key=${KEY} -secret=${SECRET} -payor=${PAYOR}
 
 commit:
