@@ -47,7 +47,7 @@ trim:
 info:
 	# adjust README.md
 	sed -i.bak '1s/.*/# Go client for Velo/' README.md && rm README.md.bak
-	sed -i.bak '2s/.*/[![License](https:\/\/img.shields.io\/badge\/License-Apache%202.0-blue.svg)](https:\/\/opensource.org\/licenses\/Apache-2.0) [![npm version](https:\/\/badge.fury.io\/go\/github.com%2Fvelopaymentsapi%2Fvelo-go.svg)](https:\/\/badge.fury.io\/go\/github.com%2Fvelopaymentsapi%2Fvelo-go) [![CircleCI](https:\/\/circleci.com\/gh\/velopaymentsapi\/velo-go.svg?style=svg)](https:\/\/circleci.com\/gh\/velopaymentsapi\/velo-go)\\/' README.md && rm README.md.bak
+	sed -i.bak '2s/.*/[![License](https:\/\/img.shields.io\/badge\/License-Apache%202.0-blue.svg)](https:\/\/opensource.org\/licenses\/Apache-2.0) [![npm version](https:\/\/badge.fury.io\/go\/github.com%2Fvelopaymentsapi%2Fvelo-go.svg)](https:\/\/badge.fury.io\/go\/github.com%2Fvelopaymentsapi%2Fvelo-go) [![CircleCI](https:\/\/circleci.com\/gh\/velopaymentsapi\/velo-go.svg?style=svg)](https:\/\/circleci.com\/gh\/velopaymentsapi\/velo-go)\/' README.md && rm README.md.bak
 	# adjust go.mod
 	sed -i.bak 's/GIT_USER_ID\/GIT_REPO_ID/velopaymentsapi\/velo-go/' go.mod
 	# remove duplicate definitions from api_payment_audit_service.go
