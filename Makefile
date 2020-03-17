@@ -132,6 +132,7 @@ tests:
 	go test -race $(go list ./... | grep -v /vendor/) -v -coverprofile .testCoverage.txt -args -key=${KEY} -secret=${SECRET} -payor=${PAYOR}
 
 commit:
+	sed -i.bak 's/- Package version: .*/- Package version: ${VERSION}/' README.md && rm README.md.bak
 	git add --all
 	git commit -am 'bump version to v${VERSION}'
 	git push --set-upstream origin master
