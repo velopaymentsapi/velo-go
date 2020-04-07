@@ -1,4 +1,4 @@
-module github.com/velopaymentsapi/velo-go
+module github.com/velopaymentsapi/velo-go/v2
 
 require (
 	github.com/antihax/optional v1.0.0
