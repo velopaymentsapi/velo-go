@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **float64** |  | [optional] 
+**Amount** | **float64** | The amount funded | [optional] 
+**Currency** | **string** | The currency of the funding | [optional] 
 **DateTime** | [**time.Time**](time.Time.md) |  | [optional] 
 **Status** | **string** |  | [optional] 
-**Currency** | **string** |  | [optional] 
 **SourceAccountName** | **string** |  | [optional] 
 **FundingAccountName** | **string** |  | [optional] 
 **FundingType** | **string** |  | [optional] 

@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**ListPayeeChangesV3**](PayeesApi.md#ListPayeeChangesV3) | **Get** /v3/payees/deltas | List Payee Changes
 [**ListPayeesV1**](PayeesApi.md#ListPayeesV1) | **Get** /v1/payees | List Payees V1
 [**ListPayeesV3**](PayeesApi.md#ListPayeesV3) | **Get** /v3/payees | List Payees
+[**PayeeDetailsUpdateV3**](PayeesApi.md#PayeeDetailsUpdateV3) | **Post** /v3/payees/{payeeId}/payeeDetailsUpdate | Update Payee Details
 [**V1PayeesPayeeIdRemoteIdUpdatePost**](PayeesApi.md#V1PayeesPayeeIdRemoteIdUpdatePost) | **Post** /v1/payees/{payeeId}/remoteIdUpdate | Update Payee Remote Id
 [**V3PayeesPayeeIdRemoteIdUpdatePost**](PayeesApi.md#V3PayeesPayeeIdRemoteIdUpdatePost) | **Post** /v3/payees/{payeeId}/remoteIdUpdate | Update Payee Remote Id
 
@@ -178,7 +179,7 @@ Name | Type | Description  | Notes
 
 ## GetPayeeByIdV3
 
-> PayeeResponseV3 GetPayeeByIdV3(ctx, payeeId, optional)
+> PayeeDetailResponse GetPayeeByIdV3(ctx, payeeId, optional)
 
 Get Payee by Id
 
@@ -205,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PayeeResponseV3**](PayeeResponseV3.md)
+[**PayeeDetailResponse**](PayeeDetailResponse.md)
 
 ### Authorization
 
@@ -396,7 +397,8 @@ Optional parameters are passed through a pointer to a ListPayeesV3Opts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **ofacStatus** | [**optional.Interface of WatchlistStatus**](.md)| The watchlistStatus of the payees. | 
+ **watchlistStatus** | [**optional.Interface of WatchlistStatus**](.md)| The watchlistStatus of the payees. | 
+ **disabled** | **optional.Bool**| Payee disabled | 
  **onboardedStatus** | [**optional.Interface of OnboardedStatus**](.md)| The onboarded status of the payees. | 
  **email** | [**optional.Interface of string**](.md)| Email address | 
  **displayName** | **optional.String**| The display name of the payees. | 
@@ -418,6 +420,41 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PayeeDetailsUpdateV3
+
+> PayeeDetailsUpdateV3(ctx, payeeId, updatePayeeDetailsRequest)
+
+Update Payee Details
+
+<p>Update payee details for the given Payee Id.<p> 
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**payeeId** | [**string**](.md)| The UUID of the payee. | 
+**updatePayeeDetailsRequest** | [**UpdatePayeeDetailsRequest**](UpdatePayeeDetailsRequest.md)| Request to update payee details | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

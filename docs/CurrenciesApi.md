@@ -4,13 +4,13 @@ All URIs are relative to *https://api.sandbox.velopayments.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListSupportedCurrencies**](CurrenciesApi.md#ListSupportedCurrencies) | **Get** /v2/currencies | List Supported Currencies
+[**ListSupportedCurrenciesV2**](CurrenciesApi.md#ListSupportedCurrenciesV2) | **Get** /v2/currencies | List Supported Currencies
 
 
 
-## ListSupportedCurrencies
+## ListSupportedCurrenciesV2
 
-> SupportedCurrencyResponse ListSupportedCurrencies(ctx, )
+> SupportedCurrencyResponseV2 ListSupportedCurrenciesV2(ctx, )
 
 List Supported Currencies
 
@@ -22,7 +22,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SupportedCurrencyResponse**](SupportedCurrencyResponse.md)
+[**SupportedCurrencyResponseV2**](SupportedCurrencyResponseV2.md)
 
 ### Authorization
 

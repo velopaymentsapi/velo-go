@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **PaymentCurrency** | [**PaymentAuditCurrencyV4**](PaymentAuditCurrencyV4.md) |  | [optional] 
 **Rate** | **float64** | The FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed | [optional] 
 **InvertedRate** | **float64** | The inverted FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed | [optional] 
+**IsPaymentCcyBaseCcy** | **bool** |  | [optional] 
 **SubmittedDateTime** | [**time.Time**](time.Time.md) |  | 
 **Status** | **string** |  | 
 **FundingStatus** | **string** | The funding status of the payment | 
@@ -40,6 +41,8 @@ Name | Type | Description | Notes
 **RailsPaymentId** | **string** |  | [optional] 
 **RailsBatchId** | **string** |  | [optional] 
 **RejectionReason** | **string** |  | [optional] 
+**WithdrawnReason** | **string** |  | [optional] 
+**Withdrawable** | **bool** |  | [optional] 
 **Payout** | [**PaymentResponseV4Payout**](PaymentResponseV4_payout.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

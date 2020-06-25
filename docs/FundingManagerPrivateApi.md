@@ -4,13 +4,13 @@ All URIs are relative to *https://api.sandbox.velopayments.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateFundingAccount**](FundingManagerPrivateApi.md#CreateFundingAccount) | **Post** /v1/fundingAccounts | Create Funding Account
+[**CreateFundingAccountV2**](FundingManagerPrivateApi.md#CreateFundingAccountV2) | **Post** /v2/fundingAccounts | Create Funding Account
 
 
 
-## CreateFundingAccount
+## CreateFundingAccountV2
 
-> CreateFundingAccount(ctx, optional)
+> CreateFundingAccountV2(ctx, optional)
 
 Create Funding Account
 
@@ -22,16 +22,16 @@ Create Funding Account
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***CreateFundingAccountOpts** | optional parameters | nil if no parameters
+ **optional** | ***CreateFundingAccountV2Opts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
-Optional parameters are passed through a pointer to a CreateFundingAccountOpts struct
+Optional parameters are passed through a pointer to a CreateFundingAccountV2Opts struct
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createFundingAccountRequest** | [**optional.Interface of CreateFundingAccountRequest**](CreateFundingAccountRequest.md)|  | 
+ **createFundingAccountRequestV2** | [**optional.Interface of CreateFundingAccountRequestV2**](CreateFundingAccountRequestV2.md)|  | 
 
 ### Return type
 

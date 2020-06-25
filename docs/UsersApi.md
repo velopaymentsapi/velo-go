@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**UnregisterMFAForSelf**](UsersApi.md#UnregisterMFAForSelf) | **Post** /v2/users/self/mfa/unregister | Unregister MFA for Self
 [**UpdatePasswordSelf**](UsersApi.md#UpdatePasswordSelf) | **Post** /v2/users/self/password | Update Password for self
 [**UserDetailsUpdate**](UsersApi.md#UserDetailsUpdate) | **Post** /v2/users/{userId}/userDetailsUpdate | Update User Details
+[**UserDetailsUpdateForSelf**](UsersApi.md#UserDetailsUpdateForSelf) | **Post** /v2/users/self/userDetailsUpdate | Update User Details for self
 [**ValidatePasswordSelf**](UsersApi.md#ValidatePasswordSelf) | **Post** /v2/users/self/password/validate | Validate the proposed password
 
 
@@ -127,7 +128,7 @@ Name | Type | Description  | Notes
 
 ## GetSelf
 
-> UserResponse2 GetSelf(ctx, )
+> UserResponse GetSelf(ctx, )
 
 Get Self
 
@@ -139,7 +140,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserResponse2**](UserResponse_2.md)
+[**UserResponse**](UserResponse.md)
 
 ### Authorization
 
@@ -250,7 +251,7 @@ Name | Type | Description  | Notes
  **status** | [**optional.Interface of UserStatus**](.md)| The status of the User. | 
  **entityId** | [**optional.Interface of string**](.md)| The entityId of the User. | 
  **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
- **pageSize** | **optional.Int32**| Page size. Default is 25. Max allowable is 100. | [default to 25]
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
  **sort** | **optional.String**| List of sort fields (e.g. ?sort&#x3D;email:asc,lastName:asc) Default is email:asc &#39;name&#39; The supported sort fields are - email, lastNmae.  | [default to email:asc]
 
 ### Return type
@@ -528,6 +529,40 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **userId** | [**string**](.md)| The UUID of the User. | 
 **userDetailsUpdateRequest** | [**UserDetailsUpdateRequest**](UserDetailsUpdateRequest.md)| The details of the user to update | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UserDetailsUpdateForSelf
+
+> UserDetailsUpdateForSelf(ctx, payeeUserSelfUpdateRequest)
+
+Update User Details for self
+
+<p>Update the profile details for the given user</p> <p>Only Payee user types are supported</p> 
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**payeeUserSelfUpdateRequest** | [**PayeeUserSelfUpdateRequest**](PayeeUserSelfUpdateRequest.md)| The details of the user to update | 
 
 ### Return type
 

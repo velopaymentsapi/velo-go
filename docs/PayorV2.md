@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **WuCustomerId** | **string** |  | [optional] 
 **MaxMasterPayorAdmins** | **int32** |  | [optional] 
 **PaymentRails** | [**PaymentRails**](PaymentRails.md) |  | [optional] 
+**TransmissionTypes** | [**TransmissionTypes2**](TransmissionTypes_2.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -29,7 +29,7 @@ Get a Single Payor by Id.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The account owner Payor ID | 
+**payorId** | [**string**](.md)| The Payor Id | 
 
 ### Return type
 
@@ -63,7 +63,7 @@ Get a Single Payor by Id.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The account owner Payor ID | 
+**payorId** | [**string**](.md)| The Payor Id | 
 
 ### Return type
 
@@ -97,7 +97,7 @@ Add Payor Logo. Logo file is used in your branding, and emails sent to payees.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The account owner Payor ID | 
+**payorId** | [**string**](.md)| The Payor Id | 
  **optional** | ***PayorAddPayorLogoOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -142,7 +142,7 @@ Create an an API key for the given payor Id and application Id
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The account owner Payor ID | 
+**payorId** | [**string**](.md)| The Payor Id | 
 **applicationId** | [**string**](.md)| Application ID | 
 **payorCreateApiKeyRequest** | [**PayorCreateApiKeyRequest**](PayorCreateApiKeyRequest.md)| Details of application API key to create | 
 
@@ -178,7 +178,7 @@ Create an application for the given Payor ID. Applications are programatic users
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The account owner Payor ID | 
+**payorId** | [**string**](.md)| The Payor Id | 
 **payorCreateApplicationRequest** | [**PayorCreateApplicationRequest**](PayorCreateApplicationRequest.md)| Details of application to create | 
 
 ### Return type
@@ -213,7 +213,7 @@ Update the emailRemindersOptOut field for a Payor. This API can be used to opt o
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The account owner Payor ID | 
+**payorId** | [**string**](.md)| The Payor Id | 
 **payorEmailOptOutRequest** | [**PayorEmailOptOutRequest**](PayorEmailOptOutRequest.md)| Reminder Emails Opt-Out Request | 
 
 ### Return type
@@ -248,7 +248,7 @@ Get the payor branding details.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The account owner Payor ID | 
+**payorId** | [**string**](.md)| The Payor Id | 
 
 ### Return type
 

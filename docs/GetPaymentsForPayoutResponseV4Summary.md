@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **ReleasedPayments** | **int32** | The count of payments within the payout which have been released. | [optional] 
 **IncompletePayments** | **int32** | The count of payments within the payout which are incomplete. | [optional] 
 **ReturnedPayments** | **int32** | The count of payments within the payout which have been returned. | [optional] 
+**WithdrawnPayments** | **int32** | The count of payments within the payout which have been withdrawn. | [optional] 
 **PayoutType** | [**PayoutTypeV4**](PayoutTypeV4.md) |  | [optional] 
 **Submitting** | [**PayoutPayorV4**](PayoutPayorV4.md) |  | [optional] 
 **PayoutFrom** | [**PayoutPayorV4**](PayoutPayorV4.md) |  | [optional] 

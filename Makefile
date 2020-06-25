@@ -22,6 +22,7 @@ clean:
 	mkdir tests
 	mv *_test.go tests
 	rm -f *.go
+	rm -f go.*.tmp
 	mv tests/* ./
 	rm -Rf tests
 	rm -f README.md
@@ -50,11 +51,6 @@ info:
 	sed -i.bak '2s/.*/[![License](https:\/\/img.shields.io\/badge\/License-Apache%202.0-blue.svg)](https:\/\/opensource.org\/licenses\/Apache-2.0) [![npm version](https:\/\/badge.fury.io\/go\/github.com%2Fvelopaymentsapi%2Fvelo-go.svg)](https:\/\/badge.fury.io\/go\/github.com%2Fvelopaymentsapi%2Fvelo-go) [![CircleCI](https:\/\/circleci.com\/gh\/velopaymentsapi\/velo-go.svg?style=svg)](https:\/\/circleci.com\/gh\/velopaymentsapi\/velo-go)\\/' README.md && rm README.md.bak
 	# adjust go.mod
 	sed -i.bak 's/GIT_USER_ID\/GIT_REPO_ID/velopaymentsapi\/velo-go/' go.mod
-	# remove duplicate definitions from api_payment_audit_service.go
-	sed -i.bak '/GetFundingsV1Opts Optional/,/}/d' api_payment_audit_service.go
-	sed -i.bak '/GetPaymentsForPayoutOpts Optional/,/}/d' api_payment_audit_service.go
-	sed -i.bak '/GetFundingsV1Opts Optional/,/}/d' api_payment_audit_service.go
-	sed -i.bak '/GetPaymentsForPayoutV4Opts Optional/,/}/d' api_payment_audit_service.go
 	# rename duplicate definitions from model_language_2.go
 	sed -i.bak 's/AR Language2/LANGUAGE_2_AR Language2/' model_language_2.go && rm model_language_2.go.bak
 	sed -i.bak 's/EN Language2/LANGUAGE_2_EN Language2/' model_language_2.go && rm model_language_2.go.bak
@@ -118,6 +114,24 @@ info:
 	sed -i.bak 's/BACKOFFICE UserType2/USERTYPE2_BACKOFFICE UserType2/' model_user_type_2.go && rm model_user_type_2.go.bak
 	sed -i.bak 's/PAYOR UserType2/USERTYPE2_PAYOR UserType2/' model_user_type_2.go && rm model_user_type_2.go.bak
 	sed -i.bak 's/PAYEE UserType2/USERTYPE2_PAYEE UserType2/' model_user_type_2.go && rm model_user_type_2.go.bak
+	# rename duplicate definitions from model_invitation_status_2.go
+	sed -i.bak 's/BACKOFFICE InvitationStatus2/INVITATIONSTATUS2_BACKOFFICE InvitationStatus2/' model_invitation_status_2.go && rm model_invitation_status_2.go.bak
+	sed -i.bak 's/PAYOR InvitationStatus2/INVITATIONSTATUS2_PAYOR InvitationStatus2/' model_invitation_status_2.go && rm model_invitation_status_2.go.bak
+	sed -i.bak 's/PAYEE InvitationStatus2/INVITATIONSTATUS2_PAYEE InvitationStatus2/' model_invitation_status_2.go && rm model_invitation_status_2.go.bak
+	# rename duplicate definitions from model_invitation_status.go
+	sed -i.bak 's/ACCEPTED InvitationStatus/INVITATIONSTATUS_ACCEPTED InvitationStatus/' model_invitation_status.go && rm model_invitation_status.go.bak
+	sed -i.bak 's/PENDING InvitationStatus/INVITATIONSTATUS_PENDING InvitationStatus/' model_invitation_status.go && rm model_invitation_status.go.bak
+	sed -i.bak 's/DECLINED InvitationStatus/INVITATIONSTATUS_DECLINED InvitationStatus/' model_invitation_status.go && rm model_invitation_status.go.bak
+	# rename duplicate definitions from model_invitation_status_2.go
+	sed -i.bak 's/ACCEPTED InvitationStatus2/INVITATIONSTATUS2_ACCEPTED InvitationStatus2/' model_invitation_status_2.go && rm model_invitation_status_2.go.bak
+	sed -i.bak 's/PENDING InvitationStatus2/INVITATIONSTATUS2_PENDING InvitationStatus2/' model_invitation_status_2.go && rm model_invitation_status_2.go.bak
+	sed -i.bak 's/DECLINED InvitationStatus2/INVITATIONSTATUS2_DECLINED InvitationStatus2/' model_invitation_status_2.go && rm model_invitation_status_2.go.bak
+	# rename duplicate definitions from model_payee_type_2.go
+	sed -i.bak 's/INDIVIDUAL PayeeType2/PAYEETYPE2_INDIVIDUAL PayeeType2/' model_payee_type_2.go && rm model_payee_type_2.go.bak
+	sed -i.bak 's/COMPANY PayeeType2/PAYEETYPE2_COMPANY PayeeType2/' model_payee_type_2.go && rm model_payee_type_2.go.bak
+	# rename duplicate definitions from model_source_account_type.go
+	sed -i.bak 's/FBO SourceAccountType/SOURCEACCOUNTTYPE_FBO SourceAccountType/' model_source_account_type.go && rm model_source_account_type.go.bak
+	sed -i.bak 's/WUBS_DECOUPLED SourceAccountType/SOURCEACCOUNTTYPE_WUBS_DECOUPLED SourceAccountType/' model_source_account_type.go && rm model_source_account_type.go.bak
 
 	- rm *.bak
 	- rm ./docs/*.bak

@@ -18,7 +18,8 @@ Name | Type | Description | Notes
 **PhysicalAccountId** | **string** |  | [optional] 
 **Notifications** | [**Notifications**](Notifications.md) |  | [optional] 
 **FundingAccountId** | Pointer to **string** |  | [optional] 
-**AutoTopUpConfig** | [**AutoTopUpConfig**](AutoTopUpConfig.md) |  | 
+**AutoTopUpConfig** | [**AutoTopUpConfig**](AutoTopUpConfig.md) |  | [optional] 
+**AccountType** | **string** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -7,13 +7,17 @@ Method | HTTP request | Description
 [**ExportTransactionsCSVV3**](PaymentAuditServiceApi.md#ExportTransactionsCSVV3) | **Get** /v3/paymentaudit/transactions | Export Transactions
 [**ExportTransactionsCSVV4**](PaymentAuditServiceApi.md#ExportTransactionsCSVV4) | **Get** /v4/paymentaudit/transactions | Export Transactions
 [**GetFundingsV1**](PaymentAuditServiceApi.md#GetFundingsV1) | **Get** /v1/paymentaudit/fundings | Get Fundings for Payor
+[**GetFundingsV4**](PaymentAuditServiceApi.md#GetFundingsV4) | **Get** /v4/paymentaudit/fundings | Get Fundings for Payor
 [**GetPaymentDetails**](PaymentAuditServiceApi.md#GetPaymentDetails) | **Get** /v3/paymentaudit/payments/{paymentId} | Get Payment
 [**GetPaymentDetailsV4**](PaymentAuditServiceApi.md#GetPaymentDetailsV4) | **Get** /v4/paymentaudit/payments/{paymentId} | Get Payment
 [**GetPaymentsForPayout**](PaymentAuditServiceApi.md#GetPaymentsForPayout) | **Get** /v3/paymentaudit/payouts/{payoutId} | Get Payments for Payout
 [**GetPaymentsForPayoutV4**](PaymentAuditServiceApi.md#GetPaymentsForPayoutV4) | **Get** /v4/paymentaudit/payouts/{payoutId} | Get Payments for Payout
+[**GetPayoutStatsV1**](PaymentAuditServiceApi.md#GetPayoutStatsV1) | **Get** /v1/paymentaudit/payoutStatistics | Get Payout Statistics
+[**GetPayoutStatsV4**](PaymentAuditServiceApi.md#GetPayoutStatsV4) | **Get** /v4/paymentaudit/payoutStatistics | Get Payout Statistics
 [**GetPayoutsForPayorV3**](PaymentAuditServiceApi.md#GetPayoutsForPayorV3) | **Get** /v3/paymentaudit/payouts | Get Payouts for Payor
 [**GetPayoutsForPayorV4**](PaymentAuditServiceApi.md#GetPayoutsForPayorV4) | **Get** /v4/paymentaudit/payouts | Get Payouts for Payor
 [**ListPaymentChanges**](PaymentAuditServiceApi.md#ListPaymentChanges) | **Get** /v1/deltas/payments | List Payment Changes
+[**ListPaymentChangesV4**](PaymentAuditServiceApi.md#ListPaymentChangesV4) | **Get** /v4/payments/deltas | List Payment Changes
 [**ListPaymentsAudit**](PaymentAuditServiceApi.md#ListPaymentsAudit) | **Get** /v3/paymentaudit/payments | Get List of Payments
 [**ListPaymentsAuditV4**](PaymentAuditServiceApi.md#ListPaymentsAuditV4) | **Get** /v4/paymentaudit/payments | Get List of Payments
 
@@ -57,7 +61,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/csv
+- **Accept**: application/csv, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -87,10 +91,10 @@ Optional parameters are passed through a pointer to a ExportTransactionsCSVV4Opt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**optional.Interface of string**](.md)| The Payor ID for whom you wish to run the report. For a Payor requesting the report, this could be their exact Payor, or it could be a child/descendant Payor.  | 
+ **payorId** | [**optional.Interface of string**](.md)| &lt;p&gt;The Payor ID for whom you wish to run the report.&lt;/p&gt; &lt;p&gt;For a Payor requesting the report, this could be their exact Payor, or it could be a child/descendant Payor.&lt;/p&gt;  | 
  **startDate** | **optional.String**| Start date, inclusive. Format is YYYY-MM-DD | 
- **submittedDateFrom** | **optional.String**| Start date, inclusive. Format is YYYY-MM-DD | 
- **include** | **optional.String**| Mode to determine whether to include other Payor&#39;s data in the results. May only be used if payorId is specified. Can be omitted or set to &#39;payorOnly&#39; or &#39;payorAndDescendants&#39;. payorOnly: Only include results for the specified Payor. This is the default if &#39;include&#39; is omitted. payorAndDescendants: Aggregate results for all descendant Payors of the specified Payor. Should only be used if the Payor with the specified payorId has at least one child Payor.                      Note when a Payor requests the report and include&#x3D;payorAndDescendants is used, the following additional columns are included in the CSV: Payor Name, Payor Id  | 
+ **endDate** | **optional.String**| End date, inclusive. Format is YYYY-MM-DD | 
+ **include** | **optional.String**| &lt;p&gt;Mode to determine whether to include other Payor&#39;s data in the results.&lt;/p&gt; &lt;p&gt;May only be used if payorId is specified.&lt;/p&gt; &lt;p&gt;Can be omitted or set to &#39;payorOnly&#39; or &#39;payorAndDescendants&#39;.&lt;/p&gt; &lt;p&gt;payorOnly: Only include results for the specified Payor. This is the default if &#39;include&#39; is omitted.&lt;/p&gt; &lt;p&gt;payorAndDescendants: Aggregate results for all descendant Payors of the specified Payor. Should only be used if the Payor with the specified payorId has at least one child Payor.&lt;/p&gt; &lt;p&gt;Note when a Payor requests the report and include&#x3D;payorAndDescendants is used, the following additional columns are included in the CSV: Payor Name, Payor Id&lt;/p&gt;  | 
 
 ### Return type
 
@@ -112,11 +116,11 @@ Name | Type | Description  | Notes
 
 ## GetFundingsV1
 
-> GetFundingsResponse GetFundingsV1(ctx, optional)
+> GetFundingsResponse GetFundingsV1(ctx, payorId, optional)
 
 Get Fundings for Payor
 
-Get a list of Fundings for a payor. 
+<p>Get a list of Fundings for a payor.</p> <p>Deprecated (use v4/paymentaudit/fundings)</p> 
 
 ### Required Parameters
 
@@ -124,6 +128,7 @@ Get a list of Fundings for a payor.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**payorId** | [**string**](.md)| The account owner Payor ID | 
  **optional** | ***GetFundingsV1Opts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -133,9 +138,56 @@ Optional parameters are passed through a pointer to a GetFundingsV1Opts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**optional.Interface of string**](.md)| The account owner Payor ID | 
+
  **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
- **pageSize** | **optional.Int32**| Page size. Default is 25. Max allowable is 100. | [default to 25]
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
+ **sort** | **optional.String**| List of sort fields. Example: &#x60;&#x60;&#x60;?sort&#x3D;destinationCurrency:asc,destinationAmount:asc&#x60;&#x60;&#x60; Default is no sort. The supported sort fields are: dateTime and amount.  | 
+
+### Return type
+
+[**GetFundingsResponse**](GetFundingsResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFundingsV4
+
+> GetFundingsResponse GetFundingsV4(ctx, payorId, optional)
+
+Get Fundings for Payor
+
+<p>Get a list of Fundings for a payor.</p> 
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**payorId** | [**string**](.md)| The account owner Payor ID | 
+ **optional** | ***GetFundingsV4Opts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetFundingsV4Opts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
  **sort** | **optional.String**| List of sort fields. Example: &#x60;&#x60;&#x60;?sort&#x3D;destinationCurrency:asc,destinationAmount:asc&#x60;&#x60;&#x60; Default is no sort. The supported sort fields are: dateTime and amount.  | 
 
 ### Return type
@@ -280,8 +332,8 @@ Name | Type | Description  | Notes
  **submittedDateFrom** | **optional.String**| The submitted date from range filter. Format is yyyy-MM-dd. | 
  **submittedDateTo** | **optional.String**| The submitted date to range filter. Format is yyyy-MM-dd. | 
  **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
- **pageSize** | **optional.Int32**| Page size. Default is 25. Max allowable is 100. | [default to 25]
- **sort** | **optional.String**| List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,status:asc). Default is sort by remoteId The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency, routingNumber, accountNumber, remoteId, submittedDateTime and status  | 
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
+ **sort** | **optional.String**| &lt;p&gt;List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,status:asc). Default is sort by remoteId&lt;/p&gt; &lt;p&gt;The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency, routingNumber, accountNumber, remoteId, submittedDateTime and status&lt;/p&gt;  | 
  **sensitive** | **optional.Bool**| Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  | 
 
 ### Return type
@@ -336,7 +388,7 @@ Name | Type | Description  | Notes
  **submittedDateFrom** | **optional.String**| The submitted date from range filter. Format is yyyy-MM-dd. | 
  **submittedDateTo** | **optional.String**| The submitted date to range filter. Format is yyyy-MM-dd. | 
  **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
- **pageSize** | **optional.Int32**| Page size. Default is 25. Max allowable is 100. | [default to 25]
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
  **sort** | **optional.String**| List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,status:asc). Default is sort by remoteId The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency, routingNumber, accountNumber, remoteId, submittedDateTime and status  | 
  **sensitive** | **optional.Bool**| Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  | 
 
@@ -358,13 +410,99 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetPayoutStatsV1
+
+> GetPayoutStatistics GetPayoutStatsV1(ctx, optional)
+
+Get Payout Statistics
+
+<p>Get payout statistics for a payor.</p> <p>Deprecated (Use /v4/paymentaudit/payoutStatistics)</p> 
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***GetPayoutStatsV1Opts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetPayoutStatsV1Opts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **payorId** | [**optional.Interface of string**](.md)| The account owner Payor ID. Required for external users. | 
+
+### Return type
+
+[**GetPayoutStatistics**](GetPayoutStatistics.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPayoutStatsV4
+
+> GetPayoutStatistics GetPayoutStatsV4(ctx, optional)
+
+Get Payout Statistics
+
+<p>Get payout statistics for a payor.</p> 
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***GetPayoutStatsV4Opts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetPayoutStatsV4Opts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **payorId** | [**optional.Interface of string**](.md)| The account owner Payor ID. Required for external users. | 
+
+### Return type
+
+[**GetPayoutStatistics**](GetPayoutStatistics.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetPayoutsForPayorV3
 
 > GetPayoutsResponseV3 GetPayoutsForPayorV3(ctx, payorId, optional)
 
 Get Payouts for Payor
 
-Get List of payouts for payor 
+<p>Get List of payouts for payor</p> <p>Deprecated Use v4</p> 
 
 ### Required Parameters
 
@@ -388,7 +526,7 @@ Name | Type | Description  | Notes
  **submittedDateFrom** | **optional.String**| The submitted date from range filter. Format is yyyy-MM-dd. | 
  **submittedDateTo** | **optional.String**| The submitted date to range filter. Format is yyyy-MM-dd. | 
  **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
- **pageSize** | **optional.Int32**| Page size. Default is 25. Max allowable is 100. | [default to 25]
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
  **sort** | **optional.String**| List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,instructedDateTime:asc,status:asc) Default is submittedDateTime:asc The supported sort fields are: submittedDateTime, instructedDateTime, status.  | 
 
 ### Return type
@@ -439,7 +577,7 @@ Name | Type | Description  | Notes
  **submittedDateTo** | **optional.String**| The submitted date to range filter. Format is yyyy-MM-dd. | 
  **fromPayorName** | **optional.String**| The name of the payor whose payees are being paid. This filters via a case insensitive substring match. | 
  **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
- **pageSize** | **optional.Int32**| Page size. Default is 25. Max allowable is 100. | [default to 25]
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
  **sort** | **optional.String**| List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,instructedDateTime:asc,status:asc) Default is submittedDateTime:asc The supported sort fields are: submittedDateTime, instructedDateTime, status, totalPayments, payoutId  | 
 
 ### Return type
@@ -488,7 +626,7 @@ Name | Type | Description  | Notes
 
 
  **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
- **pageSize** | **optional.Int32**| Page size. Default is 100. Max allowable is 1000. | [default to 100]
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 100]
 
 ### Return type
 
@@ -508,9 +646,57 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ListPaymentChangesV4
+
+> PaymentDeltaResponseV4 ListPaymentChangesV4(ctx, payorId, updatedSince, optional)
+
+List Payment Changes
+
+Get a paginated response listing payment changes.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**payorId** | [**string**](.md)| The Payor ID to find associated Payments | 
+**updatedSince** | **time.Time**| The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm | 
+ **optional** | ***ListPaymentChangesV4Opts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListPaymentChangesV4Opts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 100]
+
+### Return type
+
+[**PaymentDeltaResponseV4**](PaymentDeltaResponseV4.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListPaymentsAudit
 
-> ListPaymentsResponse ListPaymentsAudit(ctx, optional)
+> ListPaymentsResponseV3 ListPaymentsAudit(ctx, optional)
 
 Get List of Payments
 
@@ -547,13 +733,13 @@ Name | Type | Description  | Notes
  **submittedDateTo** | **optional.String**| The submitted date to range filter. Format is yyyy-MM-dd. | 
  **paymentMemo** | **optional.String**| The payment memo filter. This filters via a case insensitive substring match. | 
  **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
- **pageSize** | **optional.Int32**| Page size. Default is 25. Max allowable is 100. | [default to 25]
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
  **sort** | **optional.String**| List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,status:asc). Default is sort by remoteId The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency, routingNumber, accountNumber, remoteId, submittedDateTime and status  | 
  **sensitive** | **optional.Bool**| Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  | 
 
 ### Return type
 
-[**ListPaymentsResponse**](ListPaymentsResponse.md)
+[**ListPaymentsResponseV3**](ListPaymentsResponseV3.md)
 
 ### Authorization
 
@@ -608,7 +794,7 @@ Name | Type | Description  | Notes
  **submittedDateTo** | **optional.String**| The submitted date to range filter. Format is yyyy-MM-dd. | 
  **paymentMemo** | **optional.String**| The payment memo filter. This filters via a case insensitive substring match. | 
  **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
- **pageSize** | **optional.Int32**| Page size. Default is 25. Max allowable is 100. | [default to 25]
+ **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
  **sort** | **optional.String**| List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,status:asc). Default is sort by submittedDateTime:desc,paymentId:asc The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency, routingNumber, accountNumber, remoteId, submittedDateTime, status and paymentId  | 
  **sensitive** | **optional.Bool**| Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  | 
 

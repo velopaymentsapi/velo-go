@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **Language** | **string** | The payor’s language preference. Must be one of [EN, FR]. | [optional] 
 **IncludesReports** | **bool** |  | [optional] 
 **MaxMasterPayorAdmins** | **int32** |  | [optional] 
+**TransmissionTypes** | [**TransmissionTypes**](TransmissionTypes.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

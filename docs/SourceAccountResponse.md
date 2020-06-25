@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **CustomerId** | Pointer to **string** |  | [optional] 
 **PhysicalAccountId** | **string** |  | [optional] 
 **FundingAccountId** | Pointer to **string** |  | [optional] 
+**AccountType** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
