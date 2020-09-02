@@ -1,6 +1,13 @@
 package velopayments
 
-import "testing"
+import (
+	"context"
+	"os"
+	"testing"
+
+	"github.com/antihax/optional"
+	"github.com/stretchr/testify/assert"
+)
 
 func TestDeleteUserByIdV2(t *testing.T) {
 	if testing.Short() {
@@ -39,8 +46,35 @@ func TestInviteUser(t *testing.T) {
 }
 
 func TestListUsers(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping test")
+	cases := map[string]struct{ ExpectedStatus int }{
+		"valid": {200},
+	}
+
+	payorID := os.Getenv("PAYOR")
+
+	token, err := authWithVelo()
+	if err != nil {
+		t.Errorf("oauth token not generated")
+	}
+
+	cfg := NewConfiguration()
+	client := NewAPIClient(cfg)
+
+	for k, tc := range cases {
+		auth := context.WithValue(context.TODO(), ContextAccessToken, token)
+
+		opts := ListUsersOpts{
+			EntityId: optional.NewInterface(payorID),
+			Page:     optional.NewInt32(1),
+			PageSize: optional.NewInt32(25),
+		}
+
+		_, h, err := client.UsersApi.ListUsers(auth, &opts)
+		if err != nil {
+			t.Errorf("TEST %s FAILED with error", k)
+		}
+
+		assert.Equal(t, tc.ExpectedStatus, h.StatusCode, "ListUsers: %s - returned 200", k)
 	}
 }
 

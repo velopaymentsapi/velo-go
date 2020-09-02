@@ -1,6 +1,13 @@
 package velopayments
 
-import "testing"
+import (
+	"context"
+	"os"
+	"testing"
+
+	"github.com/antihax/optional"
+	"github.com/stretchr/testify/assert"
+)
 
 func TestGetPayorById(t *testing.T) {
 	if testing.Short() {
@@ -45,7 +52,32 @@ func TestPayorGetBranding(t *testing.T) {
 }
 
 func TestPayorLinks(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping test")
+	cases := map[string]struct{ ExpectedStatus int }{
+		"valid": {200},
+	}
+
+	payorID := os.Getenv("PAYOR")
+
+	token, err := authWithVelo()
+	if err != nil {
+		t.Errorf("oauth token not generated")
+	}
+
+	cfg := NewConfiguration()
+	client := NewAPIClient(cfg)
+
+	for k, tc := range cases {
+		auth := context.WithValue(context.TODO(), ContextAccessToken, token)
+
+		opts := PayorLinksOpts{
+			DescendantsOfPayor: optional.NewInterface(payorID),
+		}
+
+		_, h, err := client.PayorsApi.PayorLinks(auth, &opts)
+		if err != nil {
+			t.Errorf("TEST %s FAILED with error", k)
+		}
+
+		assert.Equal(t, tc.ExpectedStatus, h.StatusCode, "PayorLinks: %s - returned 200", k)
 	}
 }
