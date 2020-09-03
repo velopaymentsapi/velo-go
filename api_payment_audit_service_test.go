@@ -35,6 +35,7 @@ func TestGetFundingsV1(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -67,6 +68,7 @@ func TestGetFundingsV4(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -123,6 +125,7 @@ func TestGetPayoutStatsV1(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -152,6 +155,7 @@ func TestGetPayoutStatsV4(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -181,6 +185,7 @@ func TestGetPayoutsForPayorV3(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -213,6 +218,7 @@ func TestGetPayoutsForPayorV4(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -246,6 +252,7 @@ func TestListPaymentChanges(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -315,6 +322,7 @@ func TestListPaymentsAudit(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -348,6 +356,7 @@ func TestListPaymentsAuditV4(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {

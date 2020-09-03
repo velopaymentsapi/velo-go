@@ -2,6 +2,7 @@ package velopayments
 
 import (
 	"context"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -13,6 +14,7 @@ func TestListSupportedCountriesV1(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -36,6 +38,7 @@ func TestListSupportedCountriesV2(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -60,6 +63,7 @@ func TestListPaymentChannelRulesV1(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {

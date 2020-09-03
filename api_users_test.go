@@ -58,6 +58,7 @@ func TestListUsers(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {

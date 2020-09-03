@@ -22,6 +22,7 @@ func TestGetPayeesInvitationStatusV1(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -49,6 +50,7 @@ func TestGetPayeesInvitationStatusV2(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
@@ -78,6 +80,7 @@ func TestGetPayeesInvitationStatusV3(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
+	cfg.BasePath = os.Getenv("APIURL")
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
