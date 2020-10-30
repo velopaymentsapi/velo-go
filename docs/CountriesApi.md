@@ -12,15 +12,46 @@ Method | HTTP request | Description
 
 ## ListPaymentChannelRulesV1
 
-> PaymentChannelRulesResponse ListPaymentChannelRulesV1(ctx, )
+> PaymentChannelRulesResponse ListPaymentChannelRulesV1(ctx).Execute()
 
 List Payment Channel Country Rules
 
-List the country specific payment channel rules.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CountriesApi.ListPaymentChannelRulesV1(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CountriesApi.ListPaymentChannelRulesV1``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListPaymentChannelRulesV1`: PaymentChannelRulesResponse
+    fmt.Fprintf(os.Stdout, "Response from `CountriesApi.ListPaymentChannelRulesV1`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListPaymentChannelRulesV1Request struct via the builder pattern
+
 
 ### Return type
 
@@ -42,15 +73,46 @@ This endpoint does not need any parameter.
 
 ## ListSupportedCountriesV1
 
-> SupportedCountriesResponse ListSupportedCountriesV1(ctx, )
+> SupportedCountriesResponse ListSupportedCountriesV1(ctx).Execute()
 
 List Supported Countries
 
-<p>List the supported countries.</p> <p>This version will be retired in March 2020. Use /v2/supportedCountries</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CountriesApi.ListSupportedCountriesV1(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CountriesApi.ListSupportedCountriesV1``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListSupportedCountriesV1`: SupportedCountriesResponse
+    fmt.Fprintf(os.Stdout, "Response from `CountriesApi.ListSupportedCountriesV1`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListSupportedCountriesV1Request struct via the builder pattern
+
 
 ### Return type
 
@@ -72,15 +134,46 @@ No authorization required
 
 ## ListSupportedCountriesV2
 
-> SupportedCountriesResponseV2 ListSupportedCountriesV2(ctx, )
+> SupportedCountriesResponseV2 ListSupportedCountriesV2(ctx).Execute()
 
 List Supported Countries
 
-List the supported countries.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CountriesApi.ListSupportedCountriesV2(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CountriesApi.ListSupportedCountriesV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListSupportedCountriesV2`: SupportedCountriesResponseV2
+    fmt.Fprintf(os.Stdout, "Response from `CountriesApi.ListSupportedCountriesV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListSupportedCountriesV2Request struct via the builder pattern
+
 
 ### Return type
 

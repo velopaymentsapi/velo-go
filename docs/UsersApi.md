@@ -26,19 +26,53 @@ Method | HTTP request | Description
 
 ## DeleteUserByIdV2
 
-> DeleteUserByIdV2(ctx, userId)
+> DeleteUserByIdV2(ctx, userId).Execute()
 
 Delete a User
 
-Delete User by Id. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    userId := TODO // string | The UUID of the User.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.DeleteUserByIdV2(context.Background(), userId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.DeleteUserByIdV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md)| The UUID of the User. | 
+**userId** | [**string**](.md) | The UUID of the User. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteUserByIdV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -60,19 +94,53 @@ Name | Type | Description  | Notes
 
 ## DisableUserV2
 
-> DisableUserV2(ctx, userId)
+> DisableUserV2(ctx, userId).Execute()
 
 Disable a User
 
-<p>If a user is enabled this endpoint will disable them </p> <p>The invoker must have the appropriate permission </p> <p>A user cannot disable themself </p> <p>When a user is disabled any active access tokens will be revoked and the user will not be able to log in</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    userId := TODO // string | The UUID of the User.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.DisableUserV2(context.Background(), userId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.DisableUserV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md)| The UUID of the User. | 
+**userId** | [**string**](.md) | The UUID of the User. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDisableUserV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -94,19 +162,53 @@ Name | Type | Description  | Notes
 
 ## EnableUserV2
 
-> EnableUserV2(ctx, userId)
+> EnableUserV2(ctx, userId).Execute()
 
 Enable a User
 
-<p>If a user has been disabled this endpoints will enable them </p> <p>The invoker must have the appropriate permission </p> <p>A user cannot enable themself </p> <p>If the user is a payor user and the payor is disabled this operation is not allowed</p> <p>If enabling a payor user would breach the limit for master admin payor users the request will be rejected </p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    userId := TODO // string | The UUID of the User.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.EnableUserV2(context.Background(), userId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.EnableUserV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md)| The UUID of the User. | 
+**userId** | [**string**](.md) | The UUID of the User. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEnableUserV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -128,15 +230,46 @@ Name | Type | Description  | Notes
 
 ## GetSelf
 
-> UserResponse GetSelf(ctx, )
+> UserResponse GetSelf(ctx).Execute()
 
 Get Self
 
-Get the user's details 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.GetSelf(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.GetSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetSelf`: UserResponse
+    fmt.Fprintf(os.Stdout, "Response from `UsersApi.GetSelf`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSelfRequest struct via the builder pattern
+
 
 ### Return type
 
@@ -158,19 +291,55 @@ This endpoint does not need any parameter.
 
 ## GetUserByIdV2
 
-> UserResponse GetUserByIdV2(ctx, userId)
+> UserResponse GetUserByIdV2(ctx, userId).Execute()
 
 Get User
 
-Get a Single User by Id. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    userId := TODO // string | The UUID of the User.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.GetUserByIdV2(context.Background(), userId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.GetUserByIdV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetUserByIdV2`: UserResponse
+    fmt.Fprintf(os.Stdout, "Response from `UsersApi.GetUserByIdV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md)| The UUID of the User. | 
+**userId** | [**string**](.md) | The UUID of the User. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserByIdV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -192,19 +361,49 @@ Name | Type | Description  | Notes
 
 ## InviteUser
 
-> InviteUser(ctx, inviteUserRequest)
+> InviteUser(ctx).InviteUserRequest(inviteUserRequest).Execute()
 
 Invite a User
 
-Create a User and invite them to the system 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    inviteUserRequest := *openapiclient.NewInviteUserRequest("Email_example", "MfaType_example", "SmsNumber_example", "PrimaryContactNumber_example", []string{"Roles_example")) // InviteUserRequest | Details of User to invite
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.InviteUser(context.Background()).InviteUserRequest(inviteUserRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.InviteUser``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiInviteUserRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**inviteUserRequest** | [**InviteUserRequest**](InviteUserRequest.md)| Details of User to invite | 
+ **inviteUserRequest** | [**InviteUserRequest**](InviteUserRequest.md) | Details of User to invite | 
 
 ### Return type
 
@@ -226,33 +425,61 @@ Name | Type | Description  | Notes
 
 ## ListUsers
 
-> PagedUserResponse ListUsers(ctx, optional)
+> PagedUserResponse ListUsers(ctx).Type_(type_).Status(status).EntityId(entityId).Page(page).PageSize(pageSize).Sort(sort).Execute()
 
 List Users
 
-Get a paginated response listing the Users
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    type_ := *openapiclient.NewUserType() // UserType | The Type of the User. (optional)
+    status := *openapiclient.NewUserStatus() // UserStatus | The status of the User. (optional)
+    entityId := TODO // string | The entityId of the User. (optional)
+    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
+    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
+    sort := "sort_example" // string | List of sort fields (e.g. ?sort=email:asc,lastName:asc) Default is email:asc 'name' The supported sort fields are - email, lastNmae.  (optional) (default to "email:asc")
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.ListUsers(context.Background()).Type_(type_).Status(status).EntityId(entityId).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.ListUsers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListUsers`: PagedUserResponse
+    fmt.Fprintf(os.Stdout, "Response from `UsersApi.ListUsers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListUsersRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ListUsersOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a ListUsersOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **type_** | [**optional.Interface of UserType**](.md)| The Type of the User. | 
- **status** | [**optional.Interface of UserStatus**](.md)| The status of the User. | 
- **entityId** | [**optional.Interface of string**](.md)| The entityId of the User. | 
- **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
- **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
- **sort** | **optional.String**| List of sort fields (e.g. ?sort&#x3D;email:asc,lastName:asc) Default is email:asc &#39;name&#39; The supported sort fields are - email, lastNmae.  | [default to email:asc]
+ **type_** | [**UserType**](.md) | The Type of the User. | 
+ **status** | [**UserStatus**](.md) | The status of the User. | 
+ **entityId** | [**string**](.md) | The entityId of the User. | 
+ **page** | **int32** | Page number. Default is 1. | [default to 1]
+ **pageSize** | **int32** | The number of results to return in a page | [default to 25]
+ **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;email:asc,lastName:asc) Default is email:asc &#39;name&#39; The supported sort fields are - email, lastNmae.  | [default to &quot;email:asc&quot;]
 
 ### Return type
 
@@ -274,19 +501,49 @@ Name | Type | Description  | Notes
 
 ## RegisterSms
 
-> RegisterSms(ctx, registerSmsRequest)
+> RegisterSms(ctx).RegisterSmsRequest(registerSmsRequest).Execute()
 
 Register SMS Number
 
-<p>Register an Sms number and send an OTP to it </p> <p>Used for manual verification of a user </p> <p>The backoffice user initiates the request to send the OTP to the user's sms </p> <p>The user then reads back the OTP which the backoffice user enters in the verifactionCode property for requests that require it</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    registerSmsRequest := *openapiclient.NewRegisterSmsRequest("SmsNumber_example") // RegisterSmsRequest | a SMS Number to send an OTP to
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.RegisterSms(context.Background()).RegisterSmsRequest(registerSmsRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.RegisterSms``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRegisterSmsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**registerSmsRequest** | [**RegisterSmsRequest**](RegisterSmsRequest.md)| a SMS Number to send an OTP to | 
+ **registerSmsRequest** | [**RegisterSmsRequest**](RegisterSmsRequest.md) | a SMS Number to send an OTP to | 
 
 ### Return type
 
@@ -308,20 +565,55 @@ Name | Type | Description  | Notes
 
 ## ResendToken
 
-> ResendToken(ctx, userId, resendTokenRequest)
+> ResendToken(ctx, userId).ResendTokenRequest(resendTokenRequest).Execute()
 
 Resend a token
 
-<p>Resend the specified token </p> <p>The token to resend must already exist for the user </p> <p>It will be revoked and a new one issued</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    userId := TODO // string | The UUID of the User.
+    resendTokenRequest := *openapiclient.NewResendTokenRequest("TokenType_example") // ResendTokenRequest | The type of token to resend
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.ResendToken(context.Background(), userId).ResendTokenRequest(resendTokenRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.ResendToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md)| The UUID of the User. | 
-**resendTokenRequest** | [**ResendTokenRequest**](ResendTokenRequest.md)| The type of token to resend | 
+**userId** | [**string**](.md) | The UUID of the User. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResendTokenRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **resendTokenRequest** | [**ResendTokenRequest**](ResendTokenRequest.md) | The type of token to resend | 
 
 ### Return type
 
@@ -343,20 +635,55 @@ Name | Type | Description  | Notes
 
 ## RoleUpdate
 
-> RoleUpdate(ctx, userId, roleUpdateRequest)
+> RoleUpdate(ctx, userId).RoleUpdateRequest(roleUpdateRequest).Execute()
 
 Update User Role
 
-<p>Update the user's Role</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    userId := TODO // string | The UUID of the User.
+    roleUpdateRequest := *openapiclient.NewRoleUpdateRequest([]string{"Roles_example")) // RoleUpdateRequest | The Role to change to
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.RoleUpdate(context.Background(), userId).RoleUpdateRequest(roleUpdateRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.RoleUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md)| The UUID of the User. | 
-**roleUpdateRequest** | [**RoleUpdateRequest**](RoleUpdateRequest.md)| The Role to change to | 
+**userId** | [**string**](.md) | The UUID of the User. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRoleUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **roleUpdateRequest** | [**RoleUpdateRequest**](RoleUpdateRequest.md) | The Role to change to | 
 
 ### Return type
 
@@ -378,19 +705,53 @@ Name | Type | Description  | Notes
 
 ## UnlockUserV2
 
-> UnlockUserV2(ctx, userId)
+> UnlockUserV2(ctx, userId).Execute()
 
 Unlock a User
 
-If a user is locked this endpoint will unlock them 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    userId := TODO // string | The UUID of the User.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.UnlockUserV2(context.Background(), userId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UnlockUserV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md)| The UUID of the User. | 
+**userId** | [**string**](.md) | The UUID of the User. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUnlockUserV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -412,20 +773,55 @@ Name | Type | Description  | Notes
 
 ## UnregisterMFA
 
-> UnregisterMFA(ctx, userId, unregisterMfaRequest)
+> UnregisterMFA(ctx, userId).UnregisterMFARequest(unregisterMFARequest).Execute()
 
 Unregister MFA for the user
 
-<p>Unregister the MFA device for the user </p> <p>If the user does not require further verification then a register new MFA device token will be sent to them via their email address</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    userId := TODO // string | The UUID of the User.
+    unregisterMFARequest := *openapiclient.NewUnregisterMFARequest("MfaType_example") // UnregisterMFARequest | The MFA Type to unregister
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.UnregisterMFA(context.Background(), userId).UnregisterMFARequest(unregisterMFARequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UnregisterMFA``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md)| The UUID of the User. | 
-**unregisterMfaRequest** | [**UnregisterMfaRequest**](UnregisterMfaRequest.md)| The MFA Type to unregister | 
+**userId** | [**string**](.md) | The UUID of the User. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUnregisterMFARequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **unregisterMFARequest** | [**UnregisterMFARequest**](UnregisterMFARequest.md) | The MFA Type to unregister | 
 
 ### Return type
 
@@ -447,19 +843,51 @@ Name | Type | Description  | Notes
 
 ## UnregisterMFAForSelf
 
-> UnregisterMFAForSelf(ctx, selfMfaTypeUnregisterRequest)
+> UnregisterMFAForSelf(ctx).SelfMFATypeUnregisterRequest(selfMFATypeUnregisterRequest).Authorization(authorization).Execute()
 
 Unregister MFA for Self
 
-<p>Unregister the MFA device for the user </p> <p>If the user does not require further verification then a register new MFA device token will be sent to them via their email address</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    selfMFATypeUnregisterRequest := *openapiclient.NewSelfMFATypeUnregisterRequest("MfaType_example") // SelfMFATypeUnregisterRequest | The MFA Type to unregister
+    authorization := "authorization_example" // string | Bearer token authorization leg of validate (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.UnregisterMFAForSelf(context.Background()).SelfMFATypeUnregisterRequest(selfMFATypeUnregisterRequest).Authorization(authorization).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UnregisterMFAForSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUnregisterMFAForSelfRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**selfMfaTypeUnregisterRequest** | [**SelfMfaTypeUnregisterRequest**](SelfMfaTypeUnregisterRequest.md)| The MFA Type to unregister | 
+ **selfMFATypeUnregisterRequest** | [**SelfMFATypeUnregisterRequest**](SelfMFATypeUnregisterRequest.md) | The MFA Type to unregister | 
+ **authorization** | **string** | Bearer token authorization leg of validate | 
 
 ### Return type
 
@@ -481,19 +909,49 @@ Name | Type | Description  | Notes
 
 ## UpdatePasswordSelf
 
-> UpdatePasswordSelf(ctx, selfUpdatePasswordRequest)
+> UpdatePasswordSelf(ctx).SelfUpdatePasswordRequest(selfUpdatePasswordRequest).Execute()
 
 Update Password for self
 
-Update password for self 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    selfUpdatePasswordRequest := *openapiclient.NewSelfUpdatePasswordRequest("OldPassword_example", "NewPassword_example") // SelfUpdatePasswordRequest | The password
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.UpdatePasswordSelf(context.Background()).SelfUpdatePasswordRequest(selfUpdatePasswordRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UpdatePasswordSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdatePasswordSelfRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**selfUpdatePasswordRequest** | [**SelfUpdatePasswordRequest**](SelfUpdatePasswordRequest.md)| The password | 
+ **selfUpdatePasswordRequest** | [**SelfUpdatePasswordRequest**](SelfUpdatePasswordRequest.md) | The password | 
 
 ### Return type
 
@@ -515,20 +973,55 @@ Name | Type | Description  | Notes
 
 ## UserDetailsUpdate
 
-> UserDetailsUpdate(ctx, userId, userDetailsUpdateRequest)
+> UserDetailsUpdate(ctx, userId).UserDetailsUpdateRequest(userDetailsUpdateRequest).Execute()
 
 Update User Details
 
-<p>Update the profile details for the given user</p> <p>When updating Payor users with the role of payor.master_admin a verificationCode is required</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    userId := TODO // string | The UUID of the User.
+    userDetailsUpdateRequest := *openapiclient.NewUserDetailsUpdateRequest() // UserDetailsUpdateRequest | The details of the user to update
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.UserDetailsUpdate(context.Background(), userId).UserDetailsUpdateRequest(userDetailsUpdateRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UserDetailsUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md)| The UUID of the User. | 
-**userDetailsUpdateRequest** | [**UserDetailsUpdateRequest**](UserDetailsUpdateRequest.md)| The details of the user to update | 
+**userId** | [**string**](.md) | The UUID of the User. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUserDetailsUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **userDetailsUpdateRequest** | [**UserDetailsUpdateRequest**](UserDetailsUpdateRequest.md) | The details of the user to update | 
 
 ### Return type
 
@@ -550,19 +1043,49 @@ Name | Type | Description  | Notes
 
 ## UserDetailsUpdateForSelf
 
-> UserDetailsUpdateForSelf(ctx, payeeUserSelfUpdateRequest)
+> UserDetailsUpdateForSelf(ctx).PayeeUserSelfUpdateRequest(payeeUserSelfUpdateRequest).Execute()
 
 Update User Details for self
 
-<p>Update the profile details for the given user</p> <p>Only Payee user types are supported</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payeeUserSelfUpdateRequest := *openapiclient.NewPayeeUserSelfUpdateRequest() // PayeeUserSelfUpdateRequest | The details of the user to update
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.UserDetailsUpdateForSelf(context.Background()).PayeeUserSelfUpdateRequest(payeeUserSelfUpdateRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UserDetailsUpdateForSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUserDetailsUpdateForSelfRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeUserSelfUpdateRequest** | [**PayeeUserSelfUpdateRequest**](PayeeUserSelfUpdateRequest.md)| The details of the user to update | 
+ **payeeUserSelfUpdateRequest** | [**PayeeUserSelfUpdateRequest**](PayeeUserSelfUpdateRequest.md) | The details of the user to update | 
 
 ### Return type
 
@@ -584,19 +1107,51 @@ Name | Type | Description  | Notes
 
 ## ValidatePasswordSelf
 
-> ValidatePasswordResponse ValidatePasswordSelf(ctx, passwordRequest)
+> ValidatePasswordResponse ValidatePasswordSelf(ctx).PasswordRequest(passwordRequest).Execute()
 
 Validate the proposed password
 
-validate the password and return a score 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    passwordRequest := *openapiclient.NewPasswordRequest("Password_example") // PasswordRequest | The password
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UsersApi.ValidatePasswordSelf(context.Background()).PasswordRequest(passwordRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.ValidatePasswordSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ValidatePasswordSelf`: ValidatePasswordResponse
+    fmt.Fprintf(os.Stdout, "Response from `UsersApi.ValidatePasswordSelf`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiValidatePasswordSelfRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**passwordRequest** | [**PasswordRequest**](PasswordRequest.md)| The password | 
+ **passwordRequest** | [**PasswordRequest**](PasswordRequest.md) | The password | 
 
 ### Return type
 

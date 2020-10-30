@@ -10,20 +10,55 @@ Method | HTTP request | Description
 
 ## ResendToken
 
-> ResendToken(ctx, userId, resendTokenRequest)
+> ResendToken(ctx, userId).ResendTokenRequest(resendTokenRequest).Execute()
 
 Resend a token
 
-<p>Resend the specified token </p> <p>The token to resend must already exist for the user </p> <p>It will be revoked and a new one issued</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    userId := TODO // string | The UUID of the User.
+    resendTokenRequest := *openapiclient.NewResendTokenRequest("TokenType_example") // ResendTokenRequest | The type of token to resend
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TokensApi.ResendToken(context.Background(), userId).ResendTokenRequest(resendTokenRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TokensApi.ResendToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md)| The UUID of the User. | 
-**resendTokenRequest** | [**ResendTokenRequest**](ResendTokenRequest.md)| The type of token to resend | 
+**userId** | [**string**](.md) | The UUID of the User. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResendTokenRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **resendTokenRequest** | [**ResendTokenRequest**](ResendTokenRequest.md) | The type of token to resend | 
 
 ### Return type
 

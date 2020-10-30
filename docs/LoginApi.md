@@ -13,15 +13,44 @@ Method | HTTP request | Description
 
 ## Logout
 
-> Logout(ctx, )
+> Logout(ctx).Execute()
 
 Logout
 
-<p>Given a valid access token in the header then log out the authenticated user or client </p> <p>Will revoke the token</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.LoginApi.Logout(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.Logout``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLogoutRequest struct via the builder pattern
+
 
 ### Return type
 
@@ -43,19 +72,49 @@ This endpoint does not need any parameter.
 
 ## ResetPassword
 
-> ResetPassword(ctx, resetPasswordRequest)
+> ResetPassword(ctx).ResetPasswordRequest(resetPasswordRequest).Execute()
 
 Reset password
 
-<p>Reset password </p> <p>An email with an embedded link will be sent to the receipient of the email address </p> <p>The link will contain a token to be used for resetting the password </p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    resetPasswordRequest := *openapiclient.NewResetPasswordRequest("Email_example") // ResetPasswordRequest | An Email address to send the reset password link to
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.LoginApi.ResetPassword(context.Background()).ResetPasswordRequest(resetPasswordRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.ResetPassword``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResetPasswordRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**resetPasswordRequest** | [**ResetPasswordRequest**](ResetPasswordRequest.md)| An Email address to send the reset password link to | 
+ **resetPasswordRequest** | [**ResetPasswordRequest**](ResetPasswordRequest.md) | An Email address to send the reset password link to | 
 
 ### Return type
 
@@ -77,19 +136,53 @@ No authorization required
 
 ## ValidateAccessToken
 
-> AccessTokenResponse ValidateAccessToken(ctx, accessTokenValidationRequest)
+> AccessTokenResponse ValidateAccessToken(ctx).AccessTokenValidationRequest(accessTokenValidationRequest).Authorization(authorization).Execute()
 
 validate
 
-<p>The second part of login involves validating using an MFA device</p> <p>An access token with PRE_AUTH authorities is required</p> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    accessTokenValidationRequest := *openapiclient.NewAccessTokenValidationRequest("Otp_example") // AccessTokenValidationRequest | An OTP from the user's registered MFA Device 
+    authorization := "authorization_example" // string | Bearer token authorization leg of validate (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.LoginApi.ValidateAccessToken(context.Background()).AccessTokenValidationRequest(accessTokenValidationRequest).Authorization(authorization).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.ValidateAccessToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ValidateAccessToken`: AccessTokenResponse
+    fmt.Fprintf(os.Stdout, "Response from `LoginApi.ValidateAccessToken`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiValidateAccessTokenRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accessTokenValidationRequest** | [**AccessTokenValidationRequest**](AccessTokenValidationRequest.md)| An OTP from the user&#39;s registered MFA Device  | 
+ **accessTokenValidationRequest** | [**AccessTokenValidationRequest**](AccessTokenValidationRequest.md) | An OTP from the user&#39;s registered MFA Device  | 
+ **authorization** | **string** | Bearer token authorization leg of validate | 
 
 ### Return type
 
@@ -111,28 +204,51 @@ Name | Type | Description  | Notes
 
 ## VeloAuth
 
-> AuthResponse VeloAuth(ctx, optional)
+> AuthResponse VeloAuth(ctx).GrantType(grantType).Execute()
 
 Authentication endpoint
 
-Use this endpoint to obtain an access token for calling Velo Payments APIs. Use HTTP Basic Auth. String value of Basic and a Base64 endcoded string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret  (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. Basic 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    grantType := "grantType_example" // string | OAuth grant type. Should use 'client_credentials' (optional) (default to "client_credentials")
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.LoginApi.VeloAuth(context.Background()).GrantType(grantType).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.VeloAuth``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `VeloAuth`: AuthResponse
+    fmt.Fprintf(os.Stdout, "Response from `LoginApi.VeloAuth`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiVeloAuthRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***VeloAuthOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a VeloAuthOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **grantType** | **optional.String**| OAuth grant type. Should use &#39;client_credentials&#39; | [default to client_credentials]
+ **grantType** | **string** | OAuth grant type. Should use &#39;client_credentials&#39; | [default to &quot;client_credentials&quot;]
 
 ### Return type
 

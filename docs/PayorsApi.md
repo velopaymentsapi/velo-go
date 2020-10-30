@@ -17,19 +17,55 @@ Method | HTTP request | Description
 
 ## GetPayorById
 
-> PayorV1 GetPayorById(ctx, payorId)
+> PayorV1 GetPayorById(ctx, payorId).Execute()
 
 Get Payor
 
-Get a Single Payor by Id. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payorId := TODO // string | The Payor Id
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayorsApi.GetPayorById(context.Background(), payorId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.GetPayorById``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPayorById`: PayorV1
+    fmt.Fprintf(os.Stdout, "Response from `PayorsApi.GetPayorById`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The Payor Id | 
+**payorId** | [**string**](.md) | The Payor Id | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPayorByIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -51,19 +87,55 @@ Name | Type | Description  | Notes
 
 ## GetPayorByIdV2
 
-> PayorV2 GetPayorByIdV2(ctx, payorId)
+> PayorV2 GetPayorByIdV2(ctx, payorId).Execute()
 
 Get Payor
 
-Get a Single Payor by Id. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payorId := TODO // string | The Payor Id
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayorsApi.GetPayorByIdV2(context.Background(), payorId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.GetPayorByIdV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPayorByIdV2`: PayorV2
+    fmt.Fprintf(os.Stdout, "Response from `PayorsApi.GetPayorByIdV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The Payor Id | 
+**payorId** | [**string**](.md) | The Payor Id | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPayorByIdV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -85,30 +157,55 @@ Name | Type | Description  | Notes
 
 ## PayorAddPayorLogo
 
-> PayorAddPayorLogo(ctx, payorId, optional)
+> PayorAddPayorLogo(ctx, payorId).Logo(logo).Execute()
 
 Add Logo
 
-Add Payor Logo. Logo file is used in your branding, and emails sent to payees.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payorId := TODO // string | The Payor Id
+    logo := 987 // *os.File |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayorsApi.PayorAddPayorLogo(context.Background(), payorId).Logo(logo).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorAddPayorLogo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The Payor Id | 
- **optional** | ***PayorAddPayorLogoOpts** | optional parameters | nil if no parameters
+**payorId** | [**string**](.md) | The Payor Id | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PayorAddPayorLogoOpts struct
+Other parameters are passed through a pointer to a apiPayorAddPayorLogoRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **logo** | **optional.Interface of *os.File****optional.*os.File**|  | 
+ **logo** | ***os.File** |  | 
 
 ### Return type
 
@@ -130,21 +227,60 @@ Name | Type | Description  | Notes
 
 ## PayorCreateApiKeyRequest
 
-> PayorCreateApiKeyResponse PayorCreateApiKeyRequest(ctx, payorId, applicationId, payorCreateApiKeyRequest)
+> PayorCreateApiKeyResponse PayorCreateApiKeyRequest(ctx, payorId, applicationId).PayorCreateApiKeyRequest(payorCreateApiKeyRequest).Execute()
 
 Create API Key
 
-Create an an API key for the given payor Id and application Id
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payorId := TODO // string | The Payor Id
+    applicationId := TODO // string | Application ID
+    payorCreateApiKeyRequest := *openapiclient.NewPayorCreateApiKeyRequest("Name_example", []string{"Roles_example")) // PayorCreateApiKeyRequest | Details of application API key to create
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayorsApi.PayorCreateApiKeyRequest(context.Background(), payorId, applicationId).PayorCreateApiKeyRequest(payorCreateApiKeyRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorCreateApiKeyRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PayorCreateApiKeyRequest`: PayorCreateApiKeyResponse
+    fmt.Fprintf(os.Stdout, "Response from `PayorsApi.PayorCreateApiKeyRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The Payor Id | 
-**applicationId** | [**string**](.md)| Application ID | 
-**payorCreateApiKeyRequest** | [**PayorCreateApiKeyRequest**](PayorCreateApiKeyRequest.md)| Details of application API key to create | 
+**payorId** | [**string**](.md) | The Payor Id | 
+**applicationId** | [**string**](.md) | Application ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPayorCreateApiKeyRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **payorCreateApiKeyRequest** | [**PayorCreateApiKeyRequest**](PayorCreateApiKeyRequest.md) | Details of application API key to create | 
 
 ### Return type
 
@@ -166,20 +302,55 @@ Name | Type | Description  | Notes
 
 ## PayorCreateApplicationRequest
 
-> PayorCreateApplicationRequest(ctx, payorId, payorCreateApplicationRequest)
+> PayorCreateApplicationRequest(ctx, payorId).PayorCreateApplicationRequest(payorCreateApplicationRequest).Execute()
 
 Create Application
 
-Create an application for the given Payor ID. Applications are programatic users which can be assigned unique keys.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payorId := TODO // string | The Payor Id
+    payorCreateApplicationRequest := *openapiclient.NewPayorCreateApplicationRequest("Name_example") // PayorCreateApplicationRequest | Details of application to create
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayorsApi.PayorCreateApplicationRequest(context.Background(), payorId).PayorCreateApplicationRequest(payorCreateApplicationRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorCreateApplicationRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The Payor Id | 
-**payorCreateApplicationRequest** | [**PayorCreateApplicationRequest**](PayorCreateApplicationRequest.md)| Details of application to create | 
+**payorId** | [**string**](.md) | The Payor Id | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPayorCreateApplicationRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **payorCreateApplicationRequest** | [**PayorCreateApplicationRequest**](PayorCreateApplicationRequest.md) | Details of application to create | 
 
 ### Return type
 
@@ -201,20 +372,55 @@ Name | Type | Description  | Notes
 
 ## PayorEmailOptOut
 
-> PayorEmailOptOut(ctx, payorId, payorEmailOptOutRequest)
+> PayorEmailOptOut(ctx, payorId).PayorEmailOptOutRequest(payorEmailOptOutRequest).Execute()
 
 Reminder Email Opt-Out
 
-Update the emailRemindersOptOut field for a Payor. This API can be used to opt out or opt into Payor Reminder emails. These emails are typically around payee events such as payees registering and onboarding. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payorId := TODO // string | The Payor Id
+    payorEmailOptOutRequest := *openapiclient.NewPayorEmailOptOutRequest(false) // PayorEmailOptOutRequest | Reminder Emails Opt-Out Request
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayorsApi.PayorEmailOptOut(context.Background(), payorId).PayorEmailOptOutRequest(payorEmailOptOutRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorEmailOptOut``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The Payor Id | 
-**payorEmailOptOutRequest** | [**PayorEmailOptOutRequest**](PayorEmailOptOutRequest.md)| Reminder Emails Opt-Out Request | 
+**payorId** | [**string**](.md) | The Payor Id | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPayorEmailOptOutRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **payorEmailOptOutRequest** | [**PayorEmailOptOutRequest**](PayorEmailOptOutRequest.md) | Reminder Emails Opt-Out Request | 
 
 ### Return type
 
@@ -236,19 +442,55 @@ Name | Type | Description  | Notes
 
 ## PayorGetBranding
 
-> PayorBrandingResponse PayorGetBranding(ctx, payorId)
+> PayorBrandingResponse PayorGetBranding(ctx, payorId).Execute()
 
 Get Branding
 
-Get the payor branding details.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payorId := TODO // string | The Payor Id
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayorsApi.PayorGetBranding(context.Background(), payorId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorGetBranding``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PayorGetBranding`: PayorBrandingResponse
+    fmt.Fprintf(os.Stdout, "Response from `PayorsApi.PayorGetBranding`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md)| The Payor Id | 
+**payorId** | [**string**](.md) | The Payor Id | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPayorGetBrandingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -270,30 +512,55 @@ Name | Type | Description  | Notes
 
 ## PayorLinks
 
-> PayorLinksResponse PayorLinks(ctx, optional)
+> PayorLinksResponse PayorLinks(ctx).DescendantsOfPayor(descendantsOfPayor).ParentOfPayor(parentOfPayor).Fields(fields).Execute()
 
 List Payor Links
 
-This endpoint allows you to list payor links
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    descendantsOfPayor := TODO // string | The Payor ID from which to start the query to show all descendants (optional)
+    parentOfPayor := TODO // string | Look for the parent payor details for this payor id (optional)
+    fields := "fields_example" // string | List of additional Payor fields to include in the response for each Payor. The values of payorId and payorName and always included for each Payor - 'fields' allows you to add to this. Example: ```fields=primaryContactEmail,kycState``` - will include payorId+payorName+primaryContactEmail+kycState for each Payor Default if not specified is to include only payorId and payorName. The supported fields are any combination of: primaryContactEmail,kycState  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayorsApi.PayorLinks(context.Background()).DescendantsOfPayor(descendantsOfPayor).ParentOfPayor(parentOfPayor).Fields(fields).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorLinks``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PayorLinks`: PayorLinksResponse
+    fmt.Fprintf(os.Stdout, "Response from `PayorsApi.PayorLinks`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPayorLinksRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***PayorLinksOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a PayorLinksOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **descendantsOfPayor** | [**optional.Interface of string**](.md)| The Payor ID from which to start the query to show all descendants | 
- **parentOfPayor** | [**optional.Interface of string**](.md)| Look for the parent payor details for this payor id | 
- **fields** | **optional.String**| List of additional Payor fields to include in the response for each Payor. The values of payorId and payorName and always included for each Payor - &#39;fields&#39; allows you to add to this. Example: &#x60;&#x60;&#x60;fields&#x3D;primaryContactEmail,kycState&#x60;&#x60;&#x60; - will include payorId+payorName+primaryContactEmail+kycState for each Payor Default if not specified is to include only payorId and payorName. The supported fields are any combination of: primaryContactEmail,kycState  | 
+ **descendantsOfPayor** | [**string**](.md) | The Payor ID from which to start the query to show all descendants | 
+ **parentOfPayor** | [**string**](.md) | Look for the parent payor details for this payor id | 
+ **fields** | **string** | List of additional Payor fields to include in the response for each Payor. The values of payorId and payorName and always included for each Payor - &#39;fields&#39; allows you to add to this. Example: &#x60;&#x60;&#x60;fields&#x3D;primaryContactEmail,kycState&#x60;&#x60;&#x60; - will include payorId+payorName+primaryContactEmail+kycState for each Payor Default if not specified is to include only payorId and payorName. The supported fields are any combination of: primaryContactEmail,kycState  | 
 
 ### Return type
 

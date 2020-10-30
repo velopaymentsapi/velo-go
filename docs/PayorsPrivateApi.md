@@ -10,19 +10,49 @@ Method | HTTP request | Description
 
 ## CreatePayorLinks
 
-> CreatePayorLinks(ctx, createPayorLinkRequest)
+> CreatePayorLinks(ctx).CreatePayorLinkRequest(createPayorLinkRequest).Execute()
 
 Create a Payor Link
 
-This endpoint allows you to create a payor link.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    createPayorLinkRequest := *openapiclient.NewCreatePayorLinkRequest("FromPayorId_example", "LinkType_example", "ToPayorId_example") // CreatePayorLinkRequest | Request to create a payor link
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayorsPrivateApi.CreatePayorLinks(context.Background()).CreatePayorLinkRequest(createPayorLinkRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsPrivateApi.CreatePayorLinks``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreatePayorLinksRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**createPayorLinkRequest** | [**CreatePayorLinkRequest**](CreatePayorLinkRequest.md)| Request to create a payor link | 
+ **createPayorLinkRequest** | [**CreatePayorLinkRequest**](CreatePayorLinkRequest.md) | Request to create a payor link | 
 
 ### Return type
 

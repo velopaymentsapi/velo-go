@@ -10,28 +10,49 @@ Method | HTTP request | Description
 
 ## CreateFundingAccountV2
 
-> CreateFundingAccountV2(ctx, optional)
+> CreateFundingAccountV2(ctx).CreateFundingAccountRequestV2(createFundingAccountRequestV2).Execute()
 
 Create Funding Account
 
-Create Funding Account
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    createFundingAccountRequestV2 := *openapiclient.NewCreateFundingAccountRequestV2("Type_example", "Name_example", "PayorId_example") // CreateFundingAccountRequestV2 |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FundingManagerPrivateApi.CreateFundingAccountV2(context.Background()).CreateFundingAccountRequestV2(createFundingAccountRequestV2).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerPrivateApi.CreateFundingAccountV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateFundingAccountV2Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***CreateFundingAccountV2Opts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a CreateFundingAccountV2Opts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createFundingAccountRequestV2** | [**optional.Interface of CreateFundingAccountRequestV2**](CreateFundingAccountRequestV2.md)|  | 
+ **createFundingAccountRequestV2** | [**CreateFundingAccountRequestV2**](CreateFundingAccountRequestV2.md) |  | 
 
 ### Return type
 

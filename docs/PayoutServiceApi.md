@@ -16,19 +16,55 @@ Method | HTTP request | Description
 
 ## CreateQuoteForPayoutV3
 
-> QuoteResponseV3 CreateQuoteForPayoutV3(ctx, payoutId)
+> QuoteResponseV3 CreateQuoteForPayoutV3(ctx, payoutId).Execute()
 
 Create a quote for the payout
 
-Create quote for a payout
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payoutId := TODO // string | Id of the payout
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayoutServiceApi.CreateQuoteForPayoutV3(context.Background(), payoutId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.CreateQuoteForPayoutV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateQuoteForPayoutV3`: QuoteResponseV3
+    fmt.Fprintf(os.Stdout, "Response from `PayoutServiceApi.CreateQuoteForPayoutV3`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md)| Id of the payout | 
+**payoutId** | [**string**](.md) | Id of the payout | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateQuoteForPayoutV3Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -50,36 +86,69 @@ Name | Type | Description  | Notes
 
 ## GetPaymentsForPayoutV3
 
-> PagedPaymentsResponseV3 GetPaymentsForPayoutV3(ctx, payoutId, optional)
+> PagedPaymentsResponseV3 GetPaymentsForPayoutV3(ctx, payoutId).Status(status).RemoteId(remoteId).PayorPaymentId(payorPaymentId).SourceAccountName(sourceAccountName).PaymentMemo(paymentMemo).PageSize(pageSize).Page(page).Execute()
 
 Retrieve payments for a payout
 
-Retrieve payments for a payout
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payoutId := TODO // string | Id of the payout
+    status := "status_example" // string | Payment Status * ACCEPTED: any payment which was accepted at submission time (status may have changed since) * REJECTED: any payment rejected by initial submission processing * WITHDRAWN: any payment which has been withdrawn * WITHDRAWABLE: any payment eligible for withdrawal  (optional)
+    remoteId := "remoteId_example" // string | The remote id of the payees. (optional)
+    payorPaymentId := "payorPaymentId_example" // string | Payor's Id of the Payment (optional)
+    sourceAccountName := "sourceAccountName_example" // string | Physical Account Name (optional)
+    paymentMemo := "paymentMemo_example" // string | Payment Memo of the Payment (optional)
+    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
+    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayoutServiceApi.GetPaymentsForPayoutV3(context.Background(), payoutId).Status(status).RemoteId(remoteId).PayorPaymentId(payorPaymentId).SourceAccountName(sourceAccountName).PaymentMemo(paymentMemo).PageSize(pageSize).Page(page).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.GetPaymentsForPayoutV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPaymentsForPayoutV3`: PagedPaymentsResponseV3
+    fmt.Fprintf(os.Stdout, "Response from `PayoutServiceApi.GetPaymentsForPayoutV3`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md)| Id of the payout | 
- **optional** | ***GetPaymentsForPayoutV3Opts** | optional parameters | nil if no parameters
+**payoutId** | [**string**](.md) | Id of the payout | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a GetPaymentsForPayoutV3Opts struct
+Other parameters are passed through a pointer to a apiGetPaymentsForPayoutV3Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **status** | **optional.String**| Payment Status * ACCEPTED: any payment which was accepted at submission time (status may have changed since) * REJECTED: any payment rejected by initial submission processing * WITHDRAWN: any payment which has been withdrawn * WITHDRAWABLE: any payment eligible for withdrawal  | 
- **remoteId** | **optional.String**| The remote id of the payees. | 
- **payorPaymentId** | **optional.String**| Payor&#39;s Id of the Payment | 
- **sourceAccountName** | **optional.String**| Physical Account Name | 
- **paymentMemo** | **optional.String**| Payment Memo of the Payment | 
- **pageSize** | **optional.Int32**| The number of results to return in a page | [default to 25]
- **page** | **optional.Int32**| Page number. Default is 1. | [default to 1]
+ **status** | **string** | Payment Status * ACCEPTED: any payment which was accepted at submission time (status may have changed since) * REJECTED: any payment rejected by initial submission processing * WITHDRAWN: any payment which has been withdrawn * WITHDRAWABLE: any payment eligible for withdrawal  | 
+ **remoteId** | **string** | The remote id of the payees. | 
+ **payorPaymentId** | **string** | Payor&#39;s Id of the Payment | 
+ **sourceAccountName** | **string** | Physical Account Name | 
+ **paymentMemo** | **string** | Payment Memo of the Payment | 
+ **pageSize** | **int32** | The number of results to return in a page | [default to 25]
+ **page** | **int32** | Page number. Default is 1. | [default to 1]
 
 ### Return type
 
@@ -101,19 +170,55 @@ Name | Type | Description  | Notes
 
 ## GetPayoutSummaryV3
 
-> PayoutSummaryResponseV3 GetPayoutSummaryV3(ctx, payoutId)
+> PayoutSummaryResponseV3 GetPayoutSummaryV3(ctx, payoutId).Execute()
 
 Get Payout Summary
 
-Get payout summary - returns the current state of the payout.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payoutId := TODO // string | Id of the payout
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayoutServiceApi.GetPayoutSummaryV3(context.Background(), payoutId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.GetPayoutSummaryV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPayoutSummaryV3`: PayoutSummaryResponseV3
+    fmt.Fprintf(os.Stdout, "Response from `PayoutServiceApi.GetPayoutSummaryV3`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md)| Id of the payout | 
+**payoutId** | [**string**](.md) | Id of the payout | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPayoutSummaryV3Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -135,19 +240,53 @@ Name | Type | Description  | Notes
 
 ## InstructPayoutV3
 
-> InstructPayoutV3(ctx, payoutId)
+> InstructPayoutV3(ctx, payoutId).Execute()
 
 Instruct Payout
 
-Instruct a payout to be made for the specified payoutId.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payoutId := TODO // string | Id of the payout
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayoutServiceApi.InstructPayoutV3(context.Background(), payoutId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.InstructPayoutV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md)| Id of the payout | 
+**payoutId** | [**string**](.md) | Id of the payout | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiInstructPayoutV3Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -169,19 +308,49 @@ Name | Type | Description  | Notes
 
 ## SubmitPayoutV3
 
-> SubmitPayoutV3(ctx, createPayoutRequestV3)
+> SubmitPayoutV3(ctx).CreatePayoutRequestV3(createPayoutRequestV3).Execute()
 
 Submit Payout
 
-<p>Create a new payout and return a location header with a link to get the payout.</p> <p>Basic validation of the payout is performed before returning but more comprehensive validation is done asynchronously.</p> <p>The results can be obtained by issuing a HTTP GET to the URL returned in the location header.</p> <p>**NOTE:** amount values in payments must be in 'minor units' format. E.g. cents for USD, pence for GBP etc.</p>  with no decimal places. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    createPayoutRequestV3 := *openapiclient.NewCreatePayoutRequestV3([]PaymentInstructionV3{*openapiclient.NewPaymentInstructionV3("RemoteId_example", "Currency_example", int64(123), "SourceAccountName_example"))) // CreatePayoutRequestV3 | Post amount to transfer using stored funding account details.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayoutServiceApi.SubmitPayoutV3(context.Background()).CreatePayoutRequestV3(createPayoutRequestV3).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.SubmitPayoutV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSubmitPayoutV3Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**createPayoutRequestV3** | [**CreatePayoutRequestV3**](CreatePayoutRequestV3.md)| Post amount to transfer using stored funding account details. | 
+ **createPayoutRequestV3** | [**CreatePayoutRequestV3**](CreatePayoutRequestV3.md) | Post amount to transfer using stored funding account details. | 
 
 ### Return type
 
@@ -203,20 +372,55 @@ Name | Type | Description  | Notes
 
 ## WithdrawPayment
 
-> WithdrawPayment(ctx, paymentId, withdrawPaymentRequest)
+> WithdrawPayment(ctx, paymentId).WithdrawPaymentRequest(withdrawPaymentRequest).Execute()
 
 Withdraw a Payment
 
-<p>withdraw a payment </p> <p>There are a variety of reasons why this can fail</p> <ul>     <li>the payment must be in a state of 'accepted' or 'unfunded'</li>     <li>the payout must not be in a state of 'instructed'</li> </ul> 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    paymentId := TODO // string | Id of the Payment
+    withdrawPaymentRequest := *openapiclient.NewWithdrawPaymentRequest("Reason_example") // WithdrawPaymentRequest | details for withdrawal
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayoutServiceApi.WithdrawPayment(context.Background(), paymentId).WithdrawPaymentRequest(withdrawPaymentRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.WithdrawPayment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**paymentId** | [**string**](.md)| Id of the Payment | 
-**withdrawPaymentRequest** | [**WithdrawPaymentRequest**](WithdrawPaymentRequest.md)| details for withdrawal | 
+**paymentId** | [**string**](.md) | Id of the Payment | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWithdrawPaymentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **withdrawPaymentRequest** | [**WithdrawPaymentRequest**](WithdrawPaymentRequest.md) | details for withdrawal | 
 
 ### Return type
 
@@ -238,19 +442,53 @@ Name | Type | Description  | Notes
 
 ## WithdrawPayoutV3
 
-> WithdrawPayoutV3(ctx, payoutId)
+> WithdrawPayoutV3(ctx, payoutId).Execute()
 
 Withdraw Payout
 
-Withdraw Payout will delete payout details from payout service and rails services but will just move the status of the payout to WITHDRAWN in payment audit.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payoutId := TODO // string | Id of the payout
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PayoutServiceApi.WithdrawPayoutV3(context.Background(), payoutId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.WithdrawPayoutV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md)| Id of the payout | 
+**payoutId** | [**string**](.md) | Id of the payout | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWithdrawPayoutV3Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
