@@ -3,8 +3,6 @@ package velopayments
 import (
 	"context"
 	"os"
-
-	"github.com/antihax/optional"
 )
 
 func authWithVelo() (token string, err error) {
@@ -13,13 +11,11 @@ func authWithVelo() (token string, err error) {
 	if token == "" {
 		cfg := NewConfiguration()
 		client := NewAPIClient(cfg)
-		args := VeloAuthOpts{}
-		args.GrantType = optional.NewString("client_credentials")
 		authctx := context.WithValue(context.Background(), ContextBasicAuth, BasicAuth{
 			UserName: os.Getenv("KEY"),
 			Password: os.Getenv("SECRET"),
 		})
-		r, h, e := client.LoginApi.VeloAuth(authctx, &args)
+		r, h, e := client.LoginApi.VeloAuth(authctx).GrantType("client_credentials").Execute()
 
 		if h.StatusCode == 200 {
 			os.Setenv("APITOKEN", r.AccessToken)

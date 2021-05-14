@@ -15,11 +15,13 @@ Name | Type | Description | Notes
 **Pooled** | Pointer to **bool** | The pooled account flag (will not be set for DECOUPLED accounts). | [optional] 
 **CustomerId** | Pointer to **NullableString** |  | [optional] 
 **PhysicalAccountId** | Pointer to **string** | The physical account id (will not be set for DECOUPLED accounts). | [optional] 
-**Notifications** | Pointer to [**Notifications2**](Notifications_2.md) |  | [optional] 
-**AutoTopUpConfig** | Pointer to [**AutoTopUpConfig2**](AutoTopUpConfig_2.md) |  | [optional] 
+**Notifications** | Pointer to [**Notifications2**](Notifications2.md) |  | [optional] 
+**AutoTopUpConfig** | Pointer to [**AutoTopUpConfig2**](AutoTopUpConfig2.md) |  | [optional] 
 **Type** | **string** |  | 
 **Country** | Pointer to **string** | The two character ISO country code for the associated account | [optional] 
-**Archived** | Pointer to **bool** | A flag for whether the source account has been archived.  Only present in the response if true. | [optional] 
+**Deleted** | Pointer to **bool** | An optional flag for whether the source account has been deleted. Only present in the response if true. | [optional] 
+**UserDeleted** | Pointer to **bool** | An optional flag for whether the source account has been deleted by a user. Only present in the response if true. | [optional] 
+**DeletedAt** | Pointer to **time.Time** | An optional timestamp when the source account has been deleted. Only present in the response if deleted. | [optional] 
 
 ## Methods
 
@@ -410,30 +412,80 @@ SetCountry sets Country field to given value.
 
 HasCountry returns a boolean if a field has been set.
 
-### GetArchived
+### GetDeleted
 
-`func (o *SourceAccountResponseV3) GetArchived() bool`
+`func (o *SourceAccountResponseV3) GetDeleted() bool`
 
-GetArchived returns the Archived field if non-nil, zero value otherwise.
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
 
-### GetArchivedOk
+### GetDeletedOk
 
-`func (o *SourceAccountResponseV3) GetArchivedOk() (*bool, bool)`
+`func (o *SourceAccountResponseV3) GetDeletedOk() (*bool, bool)`
 
-GetArchivedOk returns a tuple with the Archived field if it's non-nil, zero value otherwise
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetArchived
+### SetDeleted
 
-`func (o *SourceAccountResponseV3) SetArchived(v bool)`
+`func (o *SourceAccountResponseV3) SetDeleted(v bool)`
 
-SetArchived sets Archived field to given value.
+SetDeleted sets Deleted field to given value.
 
-### HasArchived
+### HasDeleted
 
-`func (o *SourceAccountResponseV3) HasArchived() bool`
+`func (o *SourceAccountResponseV3) HasDeleted() bool`
 
-HasArchived returns a boolean if a field has been set.
+HasDeleted returns a boolean if a field has been set.
+
+### GetUserDeleted
+
+`func (o *SourceAccountResponseV3) GetUserDeleted() bool`
+
+GetUserDeleted returns the UserDeleted field if non-nil, zero value otherwise.
+
+### GetUserDeletedOk
+
+`func (o *SourceAccountResponseV3) GetUserDeletedOk() (*bool, bool)`
+
+GetUserDeletedOk returns a tuple with the UserDeleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserDeleted
+
+`func (o *SourceAccountResponseV3) SetUserDeleted(v bool)`
+
+SetUserDeleted sets UserDeleted field to given value.
+
+### HasUserDeleted
+
+`func (o *SourceAccountResponseV3) HasUserDeleted() bool`
+
+HasUserDeleted returns a boolean if a field has been set.
+
+### GetDeletedAt
+
+`func (o *SourceAccountResponseV3) GetDeletedAt() time.Time`
+
+GetDeletedAt returns the DeletedAt field if non-nil, zero value otherwise.
+
+### GetDeletedAtOk
+
+`func (o *SourceAccountResponseV3) GetDeletedAtOk() (*time.Time, bool)`
+
+GetDeletedAtOk returns a tuple with the DeletedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeletedAt
+
+`func (o *SourceAccountResponseV3) SetDeletedAt(v time.Time)`
+
+SetDeletedAt sets DeletedAt field to given value.
+
+### HasDeletedAt
+
+`func (o *SourceAccountResponseV3) HasDeletedAt() bool`
+
+HasDeletedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

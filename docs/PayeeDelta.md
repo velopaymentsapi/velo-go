@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **DbaName** | Pointer to **string** |  | [optional] 
 **Email** | Pointer to **NullableString** |  | [optional] 
 **PayeeCountry** | Pointer to **string** |  | [optional] 
-**OnboardedStatus** | Pointer to [**OnboardedStatus**](OnboardedStatus.md) |  | [optional] 
+**OnboardedStatus** | Pointer to [**OnboardedStatus2**](OnboardedStatus2.md) |  | [optional] 
 
 ## Methods
 
@@ -183,20 +183,20 @@ HasPayeeCountry returns a boolean if a field has been set.
 
 ### GetOnboardedStatus
 
-`func (o *PayeeDelta) GetOnboardedStatus() OnboardedStatus`
+`func (o *PayeeDelta) GetOnboardedStatus() OnboardedStatus2`
 
 GetOnboardedStatus returns the OnboardedStatus field if non-nil, zero value otherwise.
 
 ### GetOnboardedStatusOk
 
-`func (o *PayeeDelta) GetOnboardedStatusOk() (*OnboardedStatus, bool)`
+`func (o *PayeeDelta) GetOnboardedStatusOk() (*OnboardedStatus2, bool)`
 
 GetOnboardedStatusOk returns a tuple with the OnboardedStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOnboardedStatus
 
-`func (o *PayeeDelta) SetOnboardedStatus(v OnboardedStatus)`
+`func (o *PayeeDelta) SetOnboardedStatus(v OnboardedStatus2)`
 
 SetOnboardedStatus sets OnboardedStatus field to given value.
 

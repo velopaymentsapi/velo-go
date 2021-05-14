@@ -7,18 +7,18 @@ Name | Type | Description | Notes
 **PayeeId** | Pointer to **string** |  | [optional] [readonly] 
 **PayorRefs** | Pointer to [**[]PayeePayorRefV3**](PayeePayorRefV3.md) |  | [optional] [readonly] 
 **Email** | Pointer to **NullableString** |  | [optional] 
-**OnboardedStatus** | Pointer to [**OnboardedStatus2**](OnboardedStatus_2.md) |  | [optional] 
+**OnboardedStatus** | Pointer to [**OnboardedStatus2**](OnboardedStatus2.md) |  | [optional] 
 **WatchlistStatus** | Pointer to [**WatchlistStatus**](WatchlistStatus.md) |  | [optional] 
 **WatchlistStatusUpdatedTimestamp** | Pointer to **NullableString** |  | [optional] [readonly] 
 **WatchlistOverrideComment** | Pointer to **NullableString** |  | [optional] 
-**Language** | Pointer to [**Language2**](Language_2.md) |  | [optional] 
-**Created** | Pointer to [**time.Time**](time.Time.md) |  | [optional] 
+**Language** | Pointer to **string** | An IETF BCP 47 language code which has been configured for use within this Velo environment.&lt;BR&gt; See the /v1/supportedLanguages endpoint to list the available codes for an environment.  | [optional] 
+**Created** | Pointer to **time.Time** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
 **PayeeType** | Pointer to [**PayeeType**](PayeeType.md) |  | [optional] 
 **Disabled** | Pointer to **bool** |  | [optional] 
 **DisabledComment** | Pointer to **string** |  | [optional] 
-**DisabledUpdatedTimestamp** | Pointer to [**time.Time**](time.Time.md) |  | [optional] 
+**DisabledUpdatedTimestamp** | Pointer to **time.Time** |  | [optional] 
 **Individual** | Pointer to [**GetPayeeListResponseIndividual**](GetPayeeListResponseIndividual.md) |  | [optional] 
 **Company** | Pointer to [**GetPayeeListResponseCompany**](GetPayeeListResponseCompany.md) |  | [optional] 
 
@@ -258,20 +258,20 @@ HasWatchlistOverrideComment returns a boolean if a field has been set.
 UnsetWatchlistOverrideComment ensures that no value is present for WatchlistOverrideComment, not even an explicit nil
 ### GetLanguage
 
-`func (o *GetPayeeListResponse) GetLanguage() Language2`
+`func (o *GetPayeeListResponse) GetLanguage() string`
 
 GetLanguage returns the Language field if non-nil, zero value otherwise.
 
 ### GetLanguageOk
 
-`func (o *GetPayeeListResponse) GetLanguageOk() (*Language2, bool)`
+`func (o *GetPayeeListResponse) GetLanguageOk() (*string, bool)`
 
 GetLanguageOk returns a tuple with the Language field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLanguage
 
-`func (o *GetPayeeListResponse) SetLanguage(v Language2)`
+`func (o *GetPayeeListResponse) SetLanguage(v string)`
 
 SetLanguage sets Language field to given value.
 

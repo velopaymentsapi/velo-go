@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Summary** | Pointer to [**GetPaymentsForPayoutResponseV4Summary**](GetPaymentsForPayoutResponseV4_summary.md) |  | [optional] 
-**Page** | Pointer to [**PagedPayeeInvitationStatusResponsePage**](PagedPayeeInvitationStatusResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponse_links.md) |  | [optional] 
+**Summary** | Pointer to [**GetPaymentsForPayoutResponseV4Summary**](GetPaymentsForPayoutResponseV4Summary.md) |  | [optional] 
+**Page** | Pointer to [**PagedPayeeInvitationStatusResponsePage**](PagedPayeeInvitationStatusResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponseLinks.md) |  | [optional] 
 **Content** | Pointer to [**[]PaymentResponseV4**](PaymentResponseV4.md) |  | [optional] 
 
 ## Methods

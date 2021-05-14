@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayoutId** | Pointer to **string** |  | [optional] 
-**PayoutFrom** | Pointer to [**PayoutPayorV4**](PayoutPayorV4.md) |  | [optional] 
-**PayoutTo** | Pointer to [**PayoutPayorV4**](PayoutPayorV4.md) |  | [optional] 
+**PayoutFrom** | Pointer to [**PayoutPayor**](PayoutPayor.md) |  | [optional] 
+**PayoutTo** | Pointer to [**PayoutPayor**](PayoutPayor.md) |  | [optional] 
 
 ## Methods
 
@@ -54,20 +54,20 @@ HasPayoutId returns a boolean if a field has been set.
 
 ### GetPayoutFrom
 
-`func (o *PaymentResponseV4Payout) GetPayoutFrom() PayoutPayorV4`
+`func (o *PaymentResponseV4Payout) GetPayoutFrom() PayoutPayor`
 
 GetPayoutFrom returns the PayoutFrom field if non-nil, zero value otherwise.
 
 ### GetPayoutFromOk
 
-`func (o *PaymentResponseV4Payout) GetPayoutFromOk() (*PayoutPayorV4, bool)`
+`func (o *PaymentResponseV4Payout) GetPayoutFromOk() (*PayoutPayor, bool)`
 
 GetPayoutFromOk returns a tuple with the PayoutFrom field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayoutFrom
 
-`func (o *PaymentResponseV4Payout) SetPayoutFrom(v PayoutPayorV4)`
+`func (o *PaymentResponseV4Payout) SetPayoutFrom(v PayoutPayor)`
 
 SetPayoutFrom sets PayoutFrom field to given value.
 
@@ -79,20 +79,20 @@ HasPayoutFrom returns a boolean if a field has been set.
 
 ### GetPayoutTo
 
-`func (o *PaymentResponseV4Payout) GetPayoutTo() PayoutPayorV4`
+`func (o *PaymentResponseV4Payout) GetPayoutTo() PayoutPayor`
 
 GetPayoutTo returns the PayoutTo field if non-nil, zero value otherwise.
 
 ### GetPayoutToOk
 
-`func (o *PaymentResponseV4Payout) GetPayoutToOk() (*PayoutPayorV4, bool)`
+`func (o *PaymentResponseV4Payout) GetPayoutToOk() (*PayoutPayor, bool)`
 
 GetPayoutToOk returns a tuple with the PayoutTo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayoutTo
 
-`func (o *PaymentResponseV4Payout) SetPayoutTo(v PayoutPayorV4)`
+`func (o *PaymentResponseV4Payout) SetPayoutTo(v PayoutPayor)`
 
 SetPayoutTo sets PayoutTo field to given value.
 

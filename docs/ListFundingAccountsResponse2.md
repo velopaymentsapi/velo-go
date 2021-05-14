@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**ListSourceAccountResponsePage**](ListSourceAccountResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]ListSourceAccountResponseLinks**](ListSourceAccountResponse_links.md) |  | [optional] 
-**Content** | Pointer to [**[]FundingAccountResponse2**](FundingAccountResponse_2.md) |  | [optional] 
+**Page** | Pointer to [**ListSourceAccountResponsePage**](ListSourceAccountResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]ListSourceAccountResponseLinks**](ListSourceAccountResponseLinks.md) |  | [optional] 
+**Content** | Pointer to [**[]FundingAccountResponse2**](FundingAccountResponse2.md) |  | [optional] 
 
 ## Methods
 

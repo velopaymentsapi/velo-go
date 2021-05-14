@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | Pointer to [**PayeeAddress2**](PayeeAddress_2.md) |  | [optional] 
-**Individual** | Pointer to [**Individual2**](Individual_2.md) |  | [optional] 
-**Company** | Pointer to [**NullableCompany2**](Company_2.md) |  | [optional] 
-**Language** | Pointer to [**Language2**](Language_2.md) |  | [optional] 
-**PayeeType** | Pointer to [**PayeeType2**](PayeeType_2.md) |  | [optional] 
-**Challenge** | Pointer to [**Challenge2**](Challenge_2.md) |  | [optional] 
+**Address** | Pointer to [**PayeeAddress2**](PayeeAddress2.md) |  | [optional] 
+**Individual** | Pointer to [**Individual2**](Individual2.md) |  | [optional] 
+**Company** | Pointer to [**NullableCompany2**](Company2.md) |  | [optional] 
+**Language** | Pointer to **string** | An IETF BCP 47 language code which has been configured for use within this Velo environment.&lt;BR&gt; See the /v1/supportedLanguages endpoint to list the available codes for an environment.  | [optional] 
+**PayeeType** | Pointer to [**PayeeType**](PayeeType.md) |  | [optional] 
+**Challenge** | Pointer to [**Challenge2**](Challenge2.md) |  | [optional] 
 **Email** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -118,20 +118,20 @@ HasCompany returns a boolean if a field has been set.
 UnsetCompany ensures that no value is present for Company, not even an explicit nil
 ### GetLanguage
 
-`func (o *UpdatePayeeDetailsRequest2) GetLanguage() Language2`
+`func (o *UpdatePayeeDetailsRequest2) GetLanguage() string`
 
 GetLanguage returns the Language field if non-nil, zero value otherwise.
 
 ### GetLanguageOk
 
-`func (o *UpdatePayeeDetailsRequest2) GetLanguageOk() (*Language2, bool)`
+`func (o *UpdatePayeeDetailsRequest2) GetLanguageOk() (*string, bool)`
 
 GetLanguageOk returns a tuple with the Language field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLanguage
 
-`func (o *UpdatePayeeDetailsRequest2) SetLanguage(v Language2)`
+`func (o *UpdatePayeeDetailsRequest2) SetLanguage(v string)`
 
 SetLanguage sets Language field to given value.
 
@@ -143,20 +143,20 @@ HasLanguage returns a boolean if a field has been set.
 
 ### GetPayeeType
 
-`func (o *UpdatePayeeDetailsRequest2) GetPayeeType() PayeeType2`
+`func (o *UpdatePayeeDetailsRequest2) GetPayeeType() PayeeType`
 
 GetPayeeType returns the PayeeType field if non-nil, zero value otherwise.
 
 ### GetPayeeTypeOk
 
-`func (o *UpdatePayeeDetailsRequest2) GetPayeeTypeOk() (*PayeeType2, bool)`
+`func (o *UpdatePayeeDetailsRequest2) GetPayeeTypeOk() (*PayeeType, bool)`
 
 GetPayeeTypeOk returns a tuple with the PayeeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayeeType
 
-`func (o *UpdatePayeeDetailsRequest2) SetPayeeType(v PayeeType2)`
+`func (o *UpdatePayeeDetailsRequest2) SetPayeeType(v PayeeType)`
 
 SetPayeeType sets PayeeType field to given value.
 

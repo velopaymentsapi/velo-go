@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | Batch Status | [optional] 
 **FailureCount** | Pointer to **int64** |  | [optional] 
 **PendingCount** | Pointer to **int64** |  | [optional] 
-**Failures** | Pointer to [**[]FailedSubmission2**](FailedSubmission_2.md) |  | [optional] 
+**Failures** | Pointer to [**[]FailedSubmission2**](FailedSubmission2.md) |  | [optional] 
 
 ## Methods
 

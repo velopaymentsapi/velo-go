@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **Amount** | **int32** |  | 
 **SourceAccountName** | **string** |  | 
 **PayorPaymentId** | **string** |  | 
+**RemoteSystemId** | Pointer to **string** |  | [optional] 
+**PaymentMetadata** | Pointer to **string** |  | [optional] 
 **Reason** | **string** |  | 
 **ReasonCode** | Pointer to **string** |  | [optional] 
 **LineNumber** | Pointer to **int32** |  | [optional] 
@@ -132,6 +134,56 @@ and a boolean to check if the value has been set.
 
 SetPayorPaymentId sets PayorPaymentId field to given value.
 
+
+### GetRemoteSystemId
+
+`func (o *RejectedPaymentV3) GetRemoteSystemId() string`
+
+GetRemoteSystemId returns the RemoteSystemId field if non-nil, zero value otherwise.
+
+### GetRemoteSystemIdOk
+
+`func (o *RejectedPaymentV3) GetRemoteSystemIdOk() (*string, bool)`
+
+GetRemoteSystemIdOk returns a tuple with the RemoteSystemId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteSystemId
+
+`func (o *RejectedPaymentV3) SetRemoteSystemId(v string)`
+
+SetRemoteSystemId sets RemoteSystemId field to given value.
+
+### HasRemoteSystemId
+
+`func (o *RejectedPaymentV3) HasRemoteSystemId() bool`
+
+HasRemoteSystemId returns a boolean if a field has been set.
+
+### GetPaymentMetadata
+
+`func (o *RejectedPaymentV3) GetPaymentMetadata() string`
+
+GetPaymentMetadata returns the PaymentMetadata field if non-nil, zero value otherwise.
+
+### GetPaymentMetadataOk
+
+`func (o *RejectedPaymentV3) GetPaymentMetadataOk() (*string, bool)`
+
+GetPaymentMetadataOk returns a tuple with the PaymentMetadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMetadata
+
+`func (o *RejectedPaymentV3) SetPaymentMetadata(v string)`
+
+SetPaymentMetadata sets PaymentMetadata field to given value.
+
+### HasPaymentMetadata
+
+`func (o *RejectedPaymentV3) HasPaymentMetadata() bool`
+
+HasPaymentMetadata returns a boolean if a field has been set.
 
 ### GetReason
 

@@ -91,7 +91,7 @@ import (
 )
 
 func main() {
-    resetPasswordRequest := *openapiclient.NewResetPasswordRequest("Email_example") // ResetPasswordRequest | An Email address to send the reset password link to
+    resetPasswordRequest := *openapiclient.NewResetPasswordRequest("foo@example.com") // ResetPasswordRequest | An Email address to send the reset password link to
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -155,7 +155,7 @@ import (
 )
 
 func main() {
-    accessTokenValidationRequest := *openapiclient.NewAccessTokenValidationRequest("Otp_example") // AccessTokenValidationRequest | An OTP from the user's registered MFA Device 
+    accessTokenValidationRequest := *openapiclient.NewAccessTokenValidationRequest("123456") // AccessTokenValidationRequest | An OTP from the user's registered MFA Device 
     authorization := "authorization_example" // string | Bearer token authorization leg of validate (optional)
 
     configuration := openapiclient.NewConfiguration()

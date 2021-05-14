@@ -7,21 +7,21 @@ Name | Type | Description | Notes
 **PayeeId** | Pointer to **string** |  | [optional] [readonly] 
 **PayorRefs** | Pointer to [**[]PayeePayorRefV3**](PayeePayorRefV3.md) |  | [optional] [readonly] 
 **Email** | Pointer to **NullableString** |  | [optional] 
-**OnboardedStatus** | Pointer to [**OnboardedStatus2**](OnboardedStatus_2.md) |  | [optional] 
+**OnboardedStatus** | Pointer to [**OnboardedStatus2**](OnboardedStatus2.md) |  | [optional] 
 **WatchlistStatus** | Pointer to [**WatchlistStatus**](WatchlistStatus.md) |  | [optional] 
-**WatchlistOverrideExpiresAtTimestamp** | Pointer to [**NullableTime**](time.Time.md) |  | [optional] 
+**WatchlistOverrideExpiresAtTimestamp** | Pointer to **NullableTime** |  | [optional] 
 **WatchlistOverrideComment** | Pointer to **string** |  | [optional] 
-**Language** | Pointer to [**Language2**](Language_2.md) |  | [optional] 
-**Created** | Pointer to [**time.Time**](time.Time.md) |  | [optional] 
+**Language** | Pointer to **string** | An IETF BCP 47 language code which has been configured for use within this Velo environment.&lt;BR&gt; See the /v1/supportedLanguages endpoint to list the available codes for an environment.  | [optional] 
+**Created** | Pointer to **time.Time** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
 **PayeeType** | Pointer to [**PayeeType**](PayeeType.md) |  | [optional] 
 **Disabled** | Pointer to **bool** |  | [optional] 
 **DisabledComment** | Pointer to **string** |  | [optional] 
-**DisabledUpdatedTimestamp** | Pointer to [**time.Time**](time.Time.md) |  | [optional] 
-**Address** | Pointer to [**PayeeAddress2**](PayeeAddress_2.md) |  | [optional] 
-**Individual** | Pointer to [**Individual2**](Individual_2.md) |  | [optional] 
-**Company** | Pointer to [**NullableCompany2**](Company_2.md) |  | [optional] 
+**DisabledUpdatedTimestamp** | Pointer to **time.Time** |  | [optional] 
+**Address** | Pointer to [**PayeeAddress**](PayeeAddress.md) |  | [optional] 
+**Individual** | Pointer to [**Individual**](Individual.md) |  | [optional] 
+**Company** | Pointer to [**NullableCompany**](Company.md) |  | [optional] 
 **CellphoneNumber** | Pointer to **string** |  | [optional] 
 **WatchlistStatusUpdatedTimestamp** | Pointer to **NullableString** |  | [optional] [readonly] 
 **GracePeriodEndDate** | Pointer to **NullableString** |  | [optional] [readonly] 
@@ -31,8 +31,8 @@ Name | Type | Description | Notes
 **PausePaymentTimestamp** | Pointer to **NullableString** |  | [optional] 
 **MarketingOptInDecision** | Pointer to **bool** |  | [optional] 
 **MarketingOptInTimestamp** | Pointer to **NullableString** |  | [optional] 
-**AcceptTermsAndConditionsTimestamp** | Pointer to [**NullableTime**](time.Time.md) | The timestamp when the payee last accepted T&amp;Cs | [optional] [readonly] 
-**Challenge** | Pointer to [**Challenge2**](Challenge_2.md) |  | [optional] 
+**AcceptTermsAndConditionsTimestamp** | Pointer to **NullableTime** | The timestamp when the payee last accepted T&amp;Cs | [optional] [readonly] 
+**Challenge** | Pointer to [**Challenge**](Challenge.md) |  | [optional] 
 
 ## Methods
 
@@ -260,20 +260,20 @@ HasWatchlistOverrideComment returns a boolean if a field has been set.
 
 ### GetLanguage
 
-`func (o *PayeeDetailResponse) GetLanguage() Language2`
+`func (o *PayeeDetailResponse) GetLanguage() string`
 
 GetLanguage returns the Language field if non-nil, zero value otherwise.
 
 ### GetLanguageOk
 
-`func (o *PayeeDetailResponse) GetLanguageOk() (*Language2, bool)`
+`func (o *PayeeDetailResponse) GetLanguageOk() (*string, bool)`
 
 GetLanguageOk returns a tuple with the Language field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLanguage
 
-`func (o *PayeeDetailResponse) SetLanguage(v Language2)`
+`func (o *PayeeDetailResponse) SetLanguage(v string)`
 
 SetLanguage sets Language field to given value.
 
@@ -460,20 +460,20 @@ HasDisabledUpdatedTimestamp returns a boolean if a field has been set.
 
 ### GetAddress
 
-`func (o *PayeeDetailResponse) GetAddress() PayeeAddress2`
+`func (o *PayeeDetailResponse) GetAddress() PayeeAddress`
 
 GetAddress returns the Address field if non-nil, zero value otherwise.
 
 ### GetAddressOk
 
-`func (o *PayeeDetailResponse) GetAddressOk() (*PayeeAddress2, bool)`
+`func (o *PayeeDetailResponse) GetAddressOk() (*PayeeAddress, bool)`
 
 GetAddressOk returns a tuple with the Address field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddress
 
-`func (o *PayeeDetailResponse) SetAddress(v PayeeAddress2)`
+`func (o *PayeeDetailResponse) SetAddress(v PayeeAddress)`
 
 SetAddress sets Address field to given value.
 
@@ -485,20 +485,20 @@ HasAddress returns a boolean if a field has been set.
 
 ### GetIndividual
 
-`func (o *PayeeDetailResponse) GetIndividual() Individual2`
+`func (o *PayeeDetailResponse) GetIndividual() Individual`
 
 GetIndividual returns the Individual field if non-nil, zero value otherwise.
 
 ### GetIndividualOk
 
-`func (o *PayeeDetailResponse) GetIndividualOk() (*Individual2, bool)`
+`func (o *PayeeDetailResponse) GetIndividualOk() (*Individual, bool)`
 
 GetIndividualOk returns a tuple with the Individual field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIndividual
 
-`func (o *PayeeDetailResponse) SetIndividual(v Individual2)`
+`func (o *PayeeDetailResponse) SetIndividual(v Individual)`
 
 SetIndividual sets Individual field to given value.
 
@@ -510,20 +510,20 @@ HasIndividual returns a boolean if a field has been set.
 
 ### GetCompany
 
-`func (o *PayeeDetailResponse) GetCompany() Company2`
+`func (o *PayeeDetailResponse) GetCompany() Company`
 
 GetCompany returns the Company field if non-nil, zero value otherwise.
 
 ### GetCompanyOk
 
-`func (o *PayeeDetailResponse) GetCompanyOk() (*Company2, bool)`
+`func (o *PayeeDetailResponse) GetCompanyOk() (*Company, bool)`
 
 GetCompanyOk returns a tuple with the Company field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCompany
 
-`func (o *PayeeDetailResponse) SetCompany(v Company2)`
+`func (o *PayeeDetailResponse) SetCompany(v Company)`
 
 SetCompany sets Company field to given value.
 
@@ -855,20 +855,20 @@ HasAcceptTermsAndConditionsTimestamp returns a boolean if a field has been set.
 UnsetAcceptTermsAndConditionsTimestamp ensures that no value is present for AcceptTermsAndConditionsTimestamp, not even an explicit nil
 ### GetChallenge
 
-`func (o *PayeeDetailResponse) GetChallenge() Challenge2`
+`func (o *PayeeDetailResponse) GetChallenge() Challenge`
 
 GetChallenge returns the Challenge field if non-nil, zero value otherwise.
 
 ### GetChallengeOk
 
-`func (o *PayeeDetailResponse) GetChallengeOk() (*Challenge2, bool)`
+`func (o *PayeeDetailResponse) GetChallengeOk() (*Challenge, bool)`
 
 GetChallengeOk returns a tuple with the Challenge field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetChallenge
 
-`func (o *PayeeDetailResponse) SetChallenge(v Challenge2)`
+`func (o *PayeeDetailResponse) SetChallenge(v Challenge)`
 
 SetChallenge sets Challenge field to given value.
 

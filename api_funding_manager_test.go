@@ -6,7 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/antihax/optional"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -53,15 +52,17 @@ func TestGetFundingAccounts(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
-	cfg.BasePath = os.Getenv("APIURL")
+	cfg.Servers = ServerConfigurations{
+		{
+			URL:         os.Getenv("APIURL"),
+			Description: "Velo Payments for testing",
+		},
+	}
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
 		auth := context.WithValue(context.TODO(), ContextAccessToken, token)
-		opts := GetFundingAccountsOpts{
-			PayorId: optional.NewInterface(payorID),
-		}
-		_, h, err := client.FundingManagerApi.GetFundingAccounts(auth, &opts)
+		_, h, err := client.FundingManagerApi.GetFundingAccounts(auth).PayorId(payorID).Execute()
 		if err != nil {
 			t.Errorf("TEST %s FAILED with error", k)
 		}
@@ -83,15 +84,17 @@ func TestGetFundingAccountsV2(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
-	cfg.BasePath = os.Getenv("APIURL")
+	cfg.Servers = ServerConfigurations{
+		{
+			URL:         os.Getenv("APIURL"),
+			Description: "Velo Payments for testing",
+		},
+	}
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
 		auth := context.WithValue(context.TODO(), ContextAccessToken, token)
-		opts := GetFundingAccountsV2Opts{
-			PayorId: optional.NewInterface(payorID),
-		}
-		_, h, err := client.FundingManagerApi.GetFundingAccountsV2(auth, &opts)
+		_, h, err := client.FundingManagerApi.GetFundingAccountsV2(auth).PayorId(payorID).Execute()
 		if err != nil {
 			t.Errorf("TEST %s FAILED with error", k)
 		}
@@ -131,15 +134,17 @@ func TestGetSourceAccounts(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
-	cfg.BasePath = os.Getenv("APIURL")
+	cfg.Servers = ServerConfigurations{
+		{
+			URL:         os.Getenv("APIURL"),
+			Description: "Velo Payments for testing",
+		},
+	}
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
 		auth := context.WithValue(context.TODO(), ContextAccessToken, token)
-		opts := GetSourceAccountsOpts{
-			PayorId: optional.NewInterface(payorID),
-		}
-		_, h, err := client.FundingManagerApi.GetSourceAccounts(auth, &opts)
+		_, h, err := client.FundingManagerApi.GetSourceAccounts(auth).PayorId(payorID).Execute()
 		if err != nil {
 			t.Errorf("TEST %s FAILED with error", k)
 		}
@@ -161,15 +166,17 @@ func TestGetSourceAccountsV2(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
-	cfg.BasePath = os.Getenv("APIURL")
+	cfg.Servers = ServerConfigurations{
+		{
+			URL:         os.Getenv("APIURL"),
+			Description: "Velo Payments for testing",
+		},
+	}
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
 		auth := context.WithValue(context.TODO(), ContextAccessToken, token)
-		opts := GetSourceAccountsV2Opts{
-			PayorId: optional.NewInterface(payorID),
-		}
-		_, h, err := client.FundingManagerApi.GetSourceAccountsV2(auth, &opts)
+		_, h, err := client.FundingManagerApi.GetSourceAccountsV2(auth).PayorId(payorID).Execute()
 		if err != nil {
 			t.Errorf("TEST %s FAILED with error", k)
 		}
@@ -191,15 +198,17 @@ func TestGetSourceAccountsV3(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
-	cfg.BasePath = os.Getenv("APIURL")
+	cfg.Servers = ServerConfigurations{
+		{
+			URL:         os.Getenv("APIURL"),
+			Description: "Velo Payments for testing",
+		},
+	}
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
 		auth := context.WithValue(context.TODO(), ContextAccessToken, token)
-		opts := GetSourceAccountsV3Opts{
-			PayorId: optional.NewInterface(payorID),
-		}
-		_, h, err := client.FundingManagerApi.GetSourceAccountsV3(auth, &opts)
+		_, h, err := client.FundingManagerApi.GetSourceAccountsV3(auth).PayorId(payorID).Execute()
 		if err != nil {
 			t.Errorf("TEST %s FAILED with error", k)
 		}
@@ -222,13 +231,17 @@ func TestListFundingAuditDeltas(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
-	cfg.BasePath = os.Getenv("APIURL")
+	cfg.Servers = ServerConfigurations{
+		{
+			URL:         os.Getenv("APIURL"),
+			Description: "Velo Payments for testing",
+		},
+	}
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
 		auth := context.WithValue(context.TODO(), ContextAccessToken, token)
-		opts := ListFundingAuditDeltasOpts{}
-		_, h, err := client.FundingManagerApi.ListFundingAuditDeltas(auth, payorID, now, &opts)
+		_, h, err := client.FundingManagerApi.ListFundingAuditDeltas(auth).PayorId(payorID).UpdatedSince(now).Execute()
 		if err != nil {
 			t.Errorf("TEST %s FAILED with error", k)
 		}

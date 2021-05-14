@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**GetPayoutsResponseV3Page**](GetPayoutsResponseV3_page.md) |  | [optional] 
-**Links** | Pointer to [**[]GetPayoutsResponseV3Links**](GetPayoutsResponseV3_links.md) |  | [optional] 
+**Page** | Pointer to [**GetPayoutsResponseV3Page**](GetPayoutsResponseV3Page.md) |  | [optional] 
+**Links** | Pointer to [**[]GetPayoutsResponseV3Links**](GetPayoutsResponseV3Links.md) |  | [optional] 
 **Content** | Pointer to [**[]PayoutSummaryAuditV3**](PayoutSummaryAuditV3.md) |  | [optional] 
 
 ## Methods

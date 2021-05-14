@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**PagedUserResponsePage**](PagedUserResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]ListSourceAccountResponseV3Links**](ListSourceAccountResponseV3_links.md) |  | [optional] 
+**Page** | Pointer to [**PagedUserResponsePage**](PagedUserResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]ListSourceAccountResponseV3Links**](ListSourceAccountResponseV3Links.md) |  | [optional] 
 **Content** | Pointer to [**[]SourceAccountResponseV3**](SourceAccountResponseV3.md) |  | [optional] 
 
 ## Methods

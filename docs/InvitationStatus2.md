@@ -1,9 +1,13 @@
 # InvitationStatus2
 
-## Properties
+## Enum
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+
+* `ACCEPTED` (value: `"ACCEPTED"`)
+
+* `PENDING` (value: `"PENDING"`)
+
+* `DECLINED` (value: `"DECLINED"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

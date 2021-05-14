@@ -5,9 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayorId** | **string** |  | 
-**WebhookUrl** | **string** |  | 
-**AuthorizationHeader** | Pointer to **string** |  | [optional] 
-**Enabled** | **bool** |  | 
+**WebhookUrl** | **string** | the webhook URL to use. | 
+**AuthorizationHeader** | Pointer to **string** | the authorization header to include with the notification. | [optional] 
+**Enabled** | **bool** | whether the webhook is enabled. | 
+**Categories** | Pointer to [**[]Category**](Category.md) | the categories to enable. | [optional] 
 
 ## Methods
 
@@ -112,6 +113,31 @@ and a boolean to check if the value has been set.
 
 SetEnabled sets Enabled field to given value.
 
+
+### GetCategories
+
+`func (o *CreateWebhookRequest) GetCategories() []Category`
+
+GetCategories returns the Categories field if non-nil, zero value otherwise.
+
+### GetCategoriesOk
+
+`func (o *CreateWebhookRequest) GetCategoriesOk() (*[]Category, bool)`
+
+GetCategoriesOk returns a tuple with the Categories field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCategories
+
+`func (o *CreateWebhookRequest) SetCategories(v []Category)`
+
+SetCategories sets Categories field to given value.
+
+### HasCategories
+
+`func (o *CreateWebhookRequest) HasCategories() bool`
+
+HasCategories returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | [**CreateIndividual2Name**](CreateIndividual_2_name.md) |  | 
+**Name** | [**CreateIndividualName**](CreateIndividualName.md) |  | 
 **NationalIdentification** | Pointer to **string** |  | [optional] 
 **DateOfBirth** | **string** | Must not be date in future. Example - 1970-05-20 | 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewCreateIndividual2
 
-`func NewCreateIndividual2(name CreateIndividual2Name, dateOfBirth string, ) *CreateIndividual2`
+`func NewCreateIndividual2(name CreateIndividualName, dateOfBirth string, ) *CreateIndividual2`
 
 NewCreateIndividual2 instantiates a new CreateIndividual2 object
 This constructor will assign default values to properties that have it defined,
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetName
 
-`func (o *CreateIndividual2) GetName() CreateIndividual2Name`
+`func (o *CreateIndividual2) GetName() CreateIndividualName`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *CreateIndividual2) GetNameOk() (*CreateIndividual2Name, bool)`
+`func (o *CreateIndividual2) GetNameOk() (*CreateIndividualName, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *CreateIndividual2) SetName(v CreateIndividual2Name)`
+`func (o *CreateIndividual2) SetName(v CreateIndividualName)`
 
 SetName sets Name field to given value.
 

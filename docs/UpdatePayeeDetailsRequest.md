@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | Pointer to [**PayeeAddress2**](PayeeAddress_2.md) |  | [optional] 
-**Individual** | Pointer to [**Individual2**](Individual_2.md) |  | [optional] 
-**Company** | Pointer to [**NullableCompany2**](Company_2.md) |  | [optional] 
-**Language** | Pointer to [**Language2**](Language_2.md) |  | [optional] 
-**PayeeType** | Pointer to [**PayeeType2**](PayeeType_2.md) |  | [optional] 
-**Challenge** | Pointer to [**Challenge2**](Challenge_2.md) |  | [optional] 
+**Address** | Pointer to [**PayeeAddress**](PayeeAddress.md) |  | [optional] 
+**Individual** | Pointer to [**Individual**](Individual.md) |  | [optional] 
+**Company** | Pointer to [**NullableCompany**](Company.md) |  | [optional] 
+**Language** | Pointer to **string** | An IETF BCP 47 language code which has been configured for use within this Velo environment.&lt;BR&gt; See the /v1/supportedLanguages endpoint to list the available codes for an environment.  | [optional] 
+**PayeeType** | Pointer to [**PayeeType**](PayeeType.md) |  | [optional] 
+**Challenge** | Pointer to [**Challenge**](Challenge.md) |  | [optional] 
 **Email** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -33,20 +33,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAddress
 
-`func (o *UpdatePayeeDetailsRequest) GetAddress() PayeeAddress2`
+`func (o *UpdatePayeeDetailsRequest) GetAddress() PayeeAddress`
 
 GetAddress returns the Address field if non-nil, zero value otherwise.
 
 ### GetAddressOk
 
-`func (o *UpdatePayeeDetailsRequest) GetAddressOk() (*PayeeAddress2, bool)`
+`func (o *UpdatePayeeDetailsRequest) GetAddressOk() (*PayeeAddress, bool)`
 
 GetAddressOk returns a tuple with the Address field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddress
 
-`func (o *UpdatePayeeDetailsRequest) SetAddress(v PayeeAddress2)`
+`func (o *UpdatePayeeDetailsRequest) SetAddress(v PayeeAddress)`
 
 SetAddress sets Address field to given value.
 
@@ -58,20 +58,20 @@ HasAddress returns a boolean if a field has been set.
 
 ### GetIndividual
 
-`func (o *UpdatePayeeDetailsRequest) GetIndividual() Individual2`
+`func (o *UpdatePayeeDetailsRequest) GetIndividual() Individual`
 
 GetIndividual returns the Individual field if non-nil, zero value otherwise.
 
 ### GetIndividualOk
 
-`func (o *UpdatePayeeDetailsRequest) GetIndividualOk() (*Individual2, bool)`
+`func (o *UpdatePayeeDetailsRequest) GetIndividualOk() (*Individual, bool)`
 
 GetIndividualOk returns a tuple with the Individual field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIndividual
 
-`func (o *UpdatePayeeDetailsRequest) SetIndividual(v Individual2)`
+`func (o *UpdatePayeeDetailsRequest) SetIndividual(v Individual)`
 
 SetIndividual sets Individual field to given value.
 
@@ -83,20 +83,20 @@ HasIndividual returns a boolean if a field has been set.
 
 ### GetCompany
 
-`func (o *UpdatePayeeDetailsRequest) GetCompany() Company2`
+`func (o *UpdatePayeeDetailsRequest) GetCompany() Company`
 
 GetCompany returns the Company field if non-nil, zero value otherwise.
 
 ### GetCompanyOk
 
-`func (o *UpdatePayeeDetailsRequest) GetCompanyOk() (*Company2, bool)`
+`func (o *UpdatePayeeDetailsRequest) GetCompanyOk() (*Company, bool)`
 
 GetCompanyOk returns a tuple with the Company field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCompany
 
-`func (o *UpdatePayeeDetailsRequest) SetCompany(v Company2)`
+`func (o *UpdatePayeeDetailsRequest) SetCompany(v Company)`
 
 SetCompany sets Company field to given value.
 
@@ -118,20 +118,20 @@ HasCompany returns a boolean if a field has been set.
 UnsetCompany ensures that no value is present for Company, not even an explicit nil
 ### GetLanguage
 
-`func (o *UpdatePayeeDetailsRequest) GetLanguage() Language2`
+`func (o *UpdatePayeeDetailsRequest) GetLanguage() string`
 
 GetLanguage returns the Language field if non-nil, zero value otherwise.
 
 ### GetLanguageOk
 
-`func (o *UpdatePayeeDetailsRequest) GetLanguageOk() (*Language2, bool)`
+`func (o *UpdatePayeeDetailsRequest) GetLanguageOk() (*string, bool)`
 
 GetLanguageOk returns a tuple with the Language field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLanguage
 
-`func (o *UpdatePayeeDetailsRequest) SetLanguage(v Language2)`
+`func (o *UpdatePayeeDetailsRequest) SetLanguage(v string)`
 
 SetLanguage sets Language field to given value.
 
@@ -143,20 +143,20 @@ HasLanguage returns a boolean if a field has been set.
 
 ### GetPayeeType
 
-`func (o *UpdatePayeeDetailsRequest) GetPayeeType() PayeeType2`
+`func (o *UpdatePayeeDetailsRequest) GetPayeeType() PayeeType`
 
 GetPayeeType returns the PayeeType field if non-nil, zero value otherwise.
 
 ### GetPayeeTypeOk
 
-`func (o *UpdatePayeeDetailsRequest) GetPayeeTypeOk() (*PayeeType2, bool)`
+`func (o *UpdatePayeeDetailsRequest) GetPayeeTypeOk() (*PayeeType, bool)`
 
 GetPayeeTypeOk returns a tuple with the PayeeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayeeType
 
-`func (o *UpdatePayeeDetailsRequest) SetPayeeType(v PayeeType2)`
+`func (o *UpdatePayeeDetailsRequest) SetPayeeType(v PayeeType)`
 
 SetPayeeType sets PayeeType field to given value.
 
@@ -168,20 +168,20 @@ HasPayeeType returns a boolean if a field has been set.
 
 ### GetChallenge
 
-`func (o *UpdatePayeeDetailsRequest) GetChallenge() Challenge2`
+`func (o *UpdatePayeeDetailsRequest) GetChallenge() Challenge`
 
 GetChallenge returns the Challenge field if non-nil, zero value otherwise.
 
 ### GetChallengeOk
 
-`func (o *UpdatePayeeDetailsRequest) GetChallengeOk() (*Challenge2, bool)`
+`func (o *UpdatePayeeDetailsRequest) GetChallengeOk() (*Challenge, bool)`
 
 GetChallengeOk returns a tuple with the Challenge field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetChallenge
 
-`func (o *UpdatePayeeDetailsRequest) SetChallenge(v Challenge2)`
+`func (o *UpdatePayeeDetailsRequest) SetChallenge(v Challenge)`
 
 SetChallenge sets Challenge field to given value.
 

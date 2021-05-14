@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayoutStatus** | Pointer to **string** | The current status of the payout. | [optional] 
-**SubmittedDateTime** | Pointer to [**time.Time**](time.Time.md) | The date/time at which the payout was submitted. | [optional] 
-**InstructedDateTime** | Pointer to [**time.Time**](time.Time.md) | The date/time at which the payout was instructed. | [optional] 
-**WithdrawnDateTime** | Pointer to [**time.Time**](time.Time.md) |  | [optional] 
-**QuotedDateTime** | Pointer to [**time.Time**](time.Time.md) | The date/time at which the payout was quoted. | [optional] 
+**PayoutStatus** | Pointer to [**PayoutStatus**](PayoutStatus.md) |  | [optional] 
+**SubmittedDateTime** | Pointer to **time.Time** | The date/time at which the payout was submitted. | [optional] 
+**InstructedDateTime** | Pointer to **time.Time** | The date/time at which the payout was instructed. | [optional] 
+**WithdrawnDateTime** | Pointer to **time.Time** |  | [optional] 
+**QuotedDateTime** | Pointer to **time.Time** | The date/time at which the payout was quoted. | [optional] 
 **PayoutMemo** | Pointer to **string** | The memo attached to the payout. | [optional] 
 **TotalPayments** | Pointer to **int32** | The count of payments within the payout. | [optional] 
 **ConfirmedPayments** | Pointer to **int32** | The count of payments within the payout which have been confirmed. | [optional] 
@@ -16,13 +16,13 @@ Name | Type | Description | Notes
 **IncompletePayments** | Pointer to **int32** | The count of payments within the payout which are incomplete. | [optional] 
 **ReturnedPayments** | Pointer to **int32** | The count of payments within the payout which have been returned. | [optional] 
 **WithdrawnPayments** | Pointer to **int32** | The count of payments within the payout which have been withdrawn. | [optional] 
-**PayoutType** | Pointer to [**PayoutTypeV4**](PayoutTypeV4.md) |  | [optional] 
-**Submitting** | Pointer to [**PayoutPayorV4**](PayoutPayorV4.md) |  | [optional] 
-**PayoutFrom** | Pointer to [**PayoutPayorV4**](PayoutPayorV4.md) |  | [optional] 
-**PayoutTo** | Pointer to [**PayoutPayorV4**](PayoutPayorV4.md) |  | [optional] 
-**Quoted** | Pointer to [**PayoutPrincipalV4**](PayoutPrincipalV4.md) |  | [optional] 
-**Instructed** | Pointer to [**PayoutPrincipalV4**](PayoutPrincipalV4.md) |  | [optional] 
-**Withdrawn** | Pointer to [**PayoutPrincipalV4**](PayoutPrincipalV4.md) |  | [optional] 
+**PayoutType** | Pointer to [**PayoutType**](PayoutType.md) |  | [optional] 
+**Submitting** | Pointer to [**PayoutPayor**](PayoutPayor.md) |  | [optional] 
+**PayoutFrom** | Pointer to [**PayoutPayor**](PayoutPayor.md) |  | [optional] 
+**PayoutTo** | Pointer to [**PayoutPayor**](PayoutPayor.md) |  | [optional] 
+**Quoted** | Pointer to [**PayoutPrincipal**](PayoutPrincipal.md) |  | [optional] 
+**Instructed** | Pointer to [**PayoutPrincipal**](PayoutPrincipal.md) |  | [optional] 
+**Withdrawn** | Pointer to [**PayoutPrincipal**](PayoutPrincipal.md) |  | [optional] 
 
 ## Methods
 
@@ -45,20 +45,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPayoutStatus
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutStatus() string`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutStatus() PayoutStatus`
 
 GetPayoutStatus returns the PayoutStatus field if non-nil, zero value otherwise.
 
 ### GetPayoutStatusOk
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutStatusOk() (*string, bool)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutStatusOk() (*PayoutStatus, bool)`
 
 GetPayoutStatusOk returns a tuple with the PayoutStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayoutStatus
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutStatus(v string)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutStatus(v PayoutStatus)`
 
 SetPayoutStatus sets PayoutStatus field to given value.
 
@@ -345,20 +345,20 @@ HasWithdrawnPayments returns a boolean if a field has been set.
 
 ### GetPayoutType
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutType() PayoutTypeV4`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutType() PayoutType`
 
 GetPayoutType returns the PayoutType field if non-nil, zero value otherwise.
 
 ### GetPayoutTypeOk
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutTypeOk() (*PayoutTypeV4, bool)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutTypeOk() (*PayoutType, bool)`
 
 GetPayoutTypeOk returns a tuple with the PayoutType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayoutType
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutType(v PayoutTypeV4)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutType(v PayoutType)`
 
 SetPayoutType sets PayoutType field to given value.
 
@@ -370,20 +370,20 @@ HasPayoutType returns a boolean if a field has been set.
 
 ### GetSubmitting
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetSubmitting() PayoutPayorV4`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetSubmitting() PayoutPayor`
 
 GetSubmitting returns the Submitting field if non-nil, zero value otherwise.
 
 ### GetSubmittingOk
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetSubmittingOk() (*PayoutPayorV4, bool)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetSubmittingOk() (*PayoutPayor, bool)`
 
 GetSubmittingOk returns a tuple with the Submitting field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSubmitting
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) SetSubmitting(v PayoutPayorV4)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetSubmitting(v PayoutPayor)`
 
 SetSubmitting sets Submitting field to given value.
 
@@ -395,20 +395,20 @@ HasSubmitting returns a boolean if a field has been set.
 
 ### GetPayoutFrom
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutFrom() PayoutPayorV4`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutFrom() PayoutPayor`
 
 GetPayoutFrom returns the PayoutFrom field if non-nil, zero value otherwise.
 
 ### GetPayoutFromOk
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutFromOk() (*PayoutPayorV4, bool)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutFromOk() (*PayoutPayor, bool)`
 
 GetPayoutFromOk returns a tuple with the PayoutFrom field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayoutFrom
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutFrom(v PayoutPayorV4)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutFrom(v PayoutPayor)`
 
 SetPayoutFrom sets PayoutFrom field to given value.
 
@@ -420,20 +420,20 @@ HasPayoutFrom returns a boolean if a field has been set.
 
 ### GetPayoutTo
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutTo() PayoutPayorV4`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutTo() PayoutPayor`
 
 GetPayoutTo returns the PayoutTo field if non-nil, zero value otherwise.
 
 ### GetPayoutToOk
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutToOk() (*PayoutPayorV4, bool)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutToOk() (*PayoutPayor, bool)`
 
 GetPayoutToOk returns a tuple with the PayoutTo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayoutTo
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutTo(v PayoutPayorV4)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutTo(v PayoutPayor)`
 
 SetPayoutTo sets PayoutTo field to given value.
 
@@ -445,20 +445,20 @@ HasPayoutTo returns a boolean if a field has been set.
 
 ### GetQuoted
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetQuoted() PayoutPrincipalV4`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetQuoted() PayoutPrincipal`
 
 GetQuoted returns the Quoted field if non-nil, zero value otherwise.
 
 ### GetQuotedOk
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetQuotedOk() (*PayoutPrincipalV4, bool)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetQuotedOk() (*PayoutPrincipal, bool)`
 
 GetQuotedOk returns a tuple with the Quoted field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuoted
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) SetQuoted(v PayoutPrincipalV4)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetQuoted(v PayoutPrincipal)`
 
 SetQuoted sets Quoted field to given value.
 
@@ -470,20 +470,20 @@ HasQuoted returns a boolean if a field has been set.
 
 ### GetInstructed
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetInstructed() PayoutPrincipalV4`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetInstructed() PayoutPrincipal`
 
 GetInstructed returns the Instructed field if non-nil, zero value otherwise.
 
 ### GetInstructedOk
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetInstructedOk() (*PayoutPrincipalV4, bool)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetInstructedOk() (*PayoutPrincipal, bool)`
 
 GetInstructedOk returns a tuple with the Instructed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInstructed
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) SetInstructed(v PayoutPrincipalV4)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetInstructed(v PayoutPrincipal)`
 
 SetInstructed sets Instructed field to given value.
 
@@ -495,20 +495,20 @@ HasInstructed returns a boolean if a field has been set.
 
 ### GetWithdrawn
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetWithdrawn() PayoutPrincipalV4`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetWithdrawn() PayoutPrincipal`
 
 GetWithdrawn returns the Withdrawn field if non-nil, zero value otherwise.
 
 ### GetWithdrawnOk
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetWithdrawnOk() (*PayoutPrincipalV4, bool)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetWithdrawnOk() (*PayoutPrincipal, bool)`
 
 GetWithdrawnOk returns a tuple with the Withdrawn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetWithdrawn
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) SetWithdrawn(v PayoutPrincipalV4)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetWithdrawn(v PayoutPrincipal)`
 
 SetWithdrawn sets Withdrawn field to given value.
 

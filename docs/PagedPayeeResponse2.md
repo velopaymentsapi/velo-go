@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Summary** | Pointer to [**PagedPayeeResponse2Summary**](PagedPayeeResponse_2_summary.md) |  | [optional] 
-**Page** | Pointer to [**PagedPayeeResponsePage**](PagedPayeeResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponse_links.md) |  | [optional] 
-**Content** | Pointer to [**[]GetPayeeListResponse**](GetPayeeListResponse.md) |  | [optional] 
+**Summary** | Pointer to [**PagedPayeeResponseSummary**](PagedPayeeResponseSummary.md) |  | [optional] 
+**Page** | Pointer to [**PagedPayeeResponsePage**](PagedPayeeResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponseLinks.md) |  | [optional] 
+**Content** | Pointer to [**[]GetPayeeListResponse2**](GetPayeeListResponse2.md) |  | [optional] 
 
 ## Methods
 
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetSummary
 
-`func (o *PagedPayeeResponse2) GetSummary() PagedPayeeResponse2Summary`
+`func (o *PagedPayeeResponse2) GetSummary() PagedPayeeResponseSummary`
 
 GetSummary returns the Summary field if non-nil, zero value otherwise.
 
 ### GetSummaryOk
 
-`func (o *PagedPayeeResponse2) GetSummaryOk() (*PagedPayeeResponse2Summary, bool)`
+`func (o *PagedPayeeResponse2) GetSummaryOk() (*PagedPayeeResponseSummary, bool)`
 
 GetSummaryOk returns a tuple with the Summary field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSummary
 
-`func (o *PagedPayeeResponse2) SetSummary(v PagedPayeeResponse2Summary)`
+`func (o *PagedPayeeResponse2) SetSummary(v PagedPayeeResponseSummary)`
 
 SetSummary sets Summary field to given value.
 
@@ -105,20 +105,20 @@ HasLinks returns a boolean if a field has been set.
 
 ### GetContent
 
-`func (o *PagedPayeeResponse2) GetContent() []GetPayeeListResponse`
+`func (o *PagedPayeeResponse2) GetContent() []GetPayeeListResponse2`
 
 GetContent returns the Content field if non-nil, zero value otherwise.
 
 ### GetContentOk
 
-`func (o *PagedPayeeResponse2) GetContentOk() (*[]GetPayeeListResponse, bool)`
+`func (o *PagedPayeeResponse2) GetContentOk() (*[]GetPayeeListResponse2, bool)`
 
 GetContentOk returns a tuple with the Content field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContent
 
-`func (o *PagedPayeeResponse2) SetContent(v []GetPayeeListResponse)`
+`func (o *PagedPayeeResponse2) SetContent(v []GetPayeeListResponse2)`
 
 SetContent sets Content field to given value.
 

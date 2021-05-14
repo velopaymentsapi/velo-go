@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **TotalInvitedCount** | Pointer to **int32** |  | [optional] 
 **TotalRegisteredCount** | Pointer to **int32** |  | [optional] 
 **TotalOnboardedCount** | Pointer to **int32** |  | [optional] 
-**TotalOfacFailedCount** | Pointer to **int32** |  | [optional] 
+**TotalWatchlistFailedCount** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
@@ -129,30 +129,30 @@ SetTotalOnboardedCount sets TotalOnboardedCount field to given value.
 
 HasTotalOnboardedCount returns a boolean if a field has been set.
 
-### GetTotalOfacFailedCount
+### GetTotalWatchlistFailedCount
 
-`func (o *PagedPayeeResponseSummary) GetTotalOfacFailedCount() int32`
+`func (o *PagedPayeeResponseSummary) GetTotalWatchlistFailedCount() int32`
 
-GetTotalOfacFailedCount returns the TotalOfacFailedCount field if non-nil, zero value otherwise.
+GetTotalWatchlistFailedCount returns the TotalWatchlistFailedCount field if non-nil, zero value otherwise.
 
-### GetTotalOfacFailedCountOk
+### GetTotalWatchlistFailedCountOk
 
-`func (o *PagedPayeeResponseSummary) GetTotalOfacFailedCountOk() (*int32, bool)`
+`func (o *PagedPayeeResponseSummary) GetTotalWatchlistFailedCountOk() (*int32, bool)`
 
-GetTotalOfacFailedCountOk returns a tuple with the TotalOfacFailedCount field if it's non-nil, zero value otherwise
+GetTotalWatchlistFailedCountOk returns a tuple with the TotalWatchlistFailedCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTotalOfacFailedCount
+### SetTotalWatchlistFailedCount
 
-`func (o *PagedPayeeResponseSummary) SetTotalOfacFailedCount(v int32)`
+`func (o *PagedPayeeResponseSummary) SetTotalWatchlistFailedCount(v int32)`
 
-SetTotalOfacFailedCount sets TotalOfacFailedCount field to given value.
+SetTotalWatchlistFailedCount sets TotalWatchlistFailedCount field to given value.
 
-### HasTotalOfacFailedCount
+### HasTotalWatchlistFailedCount
 
-`func (o *PagedPayeeResponseSummary) HasTotalOfacFailedCount() bool`
+`func (o *PagedPayeeResponseSummary) HasTotalWatchlistFailedCount() bool`
 
-HasTotalOfacFailedCount returns a boolean if a field has been set.
+HasTotalWatchlistFailedCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

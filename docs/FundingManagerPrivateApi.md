@@ -5,6 +5,7 @@ All URIs are relative to *https://api.sandbox.velopayments.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateFundingAccountV2**](FundingManagerPrivateApi.md#CreateFundingAccountV2) | **Post** /v2/fundingAccounts | Create Funding Account
+[**DeleteSourceAccountV3**](FundingManagerPrivateApi.md#DeleteSourceAccountV3) | **Delete** /v3/sourceAccounts/{sourceAccountId} | Delete a source account by ID
 
 
 
@@ -65,6 +66,74 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteSourceAccountV3
+
+> DeleteSourceAccountV3(ctx, sourceAccountId).Execute()
+
+Delete a source account by ID
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    sourceAccountId := TODO // string | Source account id
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FundingManagerPrivateApi.DeleteSourceAccountV3(context.Background(), sourceAccountId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerPrivateApi.DeleteSourceAccountV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**sourceAccountId** | [**string**](.md) | Source account id | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteSourceAccountV3Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EventId** | Pointer to **string** |  | [optional] 
-**EventDateTime** | Pointer to [**time.Time**](time.Time.md) |  | [optional] 
+**EventDateTime** | Pointer to **time.Time** |  | [optional] 
 **FundingEventType** | Pointer to [**FundingEventType**](FundingEventType.md) |  | [optional] 
 **Principal** | Pointer to **string** |  | [optional] 
 

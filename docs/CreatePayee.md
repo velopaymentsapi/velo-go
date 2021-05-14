@@ -5,15 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayeeId** | Pointer to **string** |  | [optional] [readonly] 
-**PayorRefs** | Pointer to [**[]PayeePayorRefV2**](PayeePayorRefV2.md) |  | [optional] [readonly] 
+**PayorRefs** | Pointer to [**[]PayeePayorRefV3**](PayeePayorRefV3.md) |  | [optional] [readonly] 
 **Email** | **string** |  | 
 **RemoteId** | **string** |  | 
 **Type** | [**PayeeType**](PayeeType.md) |  | 
 **Address** | [**CreatePayeeAddress**](CreatePayeeAddress.md) |  | 
 **PaymentChannel** | Pointer to [**CreatePaymentChannel**](CreatePaymentChannel.md) |  | [optional] 
 **Challenge** | Pointer to [**Challenge**](Challenge.md) |  | [optional] 
-**Language** | Pointer to [**Language**](Language.md) |  | [optional] 
-**Company** | Pointer to [**NullableCompanyV1**](CompanyV1.md) |  | [optional] 
+**Language** | Pointer to **string** | An IETF BCP 47 language code which has been configured for use within this Velo environment.&lt;BR&gt; See the /v1/supportedLanguages endpoint to list the available codes for an environment.  | [optional] 
+**Company** | Pointer to [**NullableCompany**](Company.md) |  | [optional] 
 **Individual** | Pointer to [**CreateIndividual**](CreateIndividual.md) |  | [optional] 
 
 ## Methods
@@ -62,20 +62,20 @@ HasPayeeId returns a boolean if a field has been set.
 
 ### GetPayorRefs
 
-`func (o *CreatePayee) GetPayorRefs() []PayeePayorRefV2`
+`func (o *CreatePayee) GetPayorRefs() []PayeePayorRefV3`
 
 GetPayorRefs returns the PayorRefs field if non-nil, zero value otherwise.
 
 ### GetPayorRefsOk
 
-`func (o *CreatePayee) GetPayorRefsOk() (*[]PayeePayorRefV2, bool)`
+`func (o *CreatePayee) GetPayorRefsOk() (*[]PayeePayorRefV3, bool)`
 
 GetPayorRefsOk returns a tuple with the PayorRefs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayorRefs
 
-`func (o *CreatePayee) SetPayorRefs(v []PayeePayorRefV2)`
+`func (o *CreatePayee) SetPayorRefs(v []PayeePayorRefV3)`
 
 SetPayorRefs sets PayorRefs field to given value.
 
@@ -227,20 +227,20 @@ HasChallenge returns a boolean if a field has been set.
 
 ### GetLanguage
 
-`func (o *CreatePayee) GetLanguage() Language`
+`func (o *CreatePayee) GetLanguage() string`
 
 GetLanguage returns the Language field if non-nil, zero value otherwise.
 
 ### GetLanguageOk
 
-`func (o *CreatePayee) GetLanguageOk() (*Language, bool)`
+`func (o *CreatePayee) GetLanguageOk() (*string, bool)`
 
 GetLanguageOk returns a tuple with the Language field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLanguage
 
-`func (o *CreatePayee) SetLanguage(v Language)`
+`func (o *CreatePayee) SetLanguage(v string)`
 
 SetLanguage sets Language field to given value.
 
@@ -252,20 +252,20 @@ HasLanguage returns a boolean if a field has been set.
 
 ### GetCompany
 
-`func (o *CreatePayee) GetCompany() CompanyV1`
+`func (o *CreatePayee) GetCompany() Company`
 
 GetCompany returns the Company field if non-nil, zero value otherwise.
 
 ### GetCompanyOk
 
-`func (o *CreatePayee) GetCompanyOk() (*CompanyV1, bool)`
+`func (o *CreatePayee) GetCompanyOk() (*Company, bool)`
 
 GetCompanyOk returns a tuple with the Company field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCompany
 
-`func (o *CreatePayee) SetCompany(v CompanyV1)`
+`func (o *CreatePayee) SetCompany(v Company)`
 
 SetCompany sets Company field to given value.
 

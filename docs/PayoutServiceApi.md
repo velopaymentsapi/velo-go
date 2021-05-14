@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## GetPaymentsForPayoutV3
 
-> PagedPaymentsResponseV3 GetPaymentsForPayoutV3(ctx, payoutId).Status(status).RemoteId(remoteId).PayorPaymentId(payorPaymentId).SourceAccountName(sourceAccountName).PaymentMemo(paymentMemo).PageSize(pageSize).Page(page).Execute()
+> PagedPaymentsResponseV3 GetPaymentsForPayoutV3(ctx, payoutId).Status(status).RemoteId(remoteId).PayorPaymentId(payorPaymentId).SourceAccountName(sourceAccountName).TransmissionType(transmissionType).PaymentMemo(paymentMemo).PageSize(pageSize).Page(page).Execute()
 
 Retrieve payments for a payout
 
@@ -110,13 +110,14 @@ func main() {
     remoteId := "remoteId_example" // string | The remote id of the payees. (optional)
     payorPaymentId := "payorPaymentId_example" // string | Payor's Id of the Payment (optional)
     sourceAccountName := "sourceAccountName_example" // string | Physical Account Name (optional)
+    transmissionType := "transmissionType_example" // string | Transmission Type * ACH * SAME_DAY_ACH * WIRE  (optional)
     paymentMemo := "paymentMemo_example" // string | Payment Memo of the Payment (optional)
-    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
-    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
+    pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
+    page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayoutServiceApi.GetPaymentsForPayoutV3(context.Background(), payoutId).Status(status).RemoteId(remoteId).PayorPaymentId(payorPaymentId).SourceAccountName(sourceAccountName).PaymentMemo(paymentMemo).PageSize(pageSize).Page(page).Execute()
+    resp, r, err := api_client.PayoutServiceApi.GetPaymentsForPayoutV3(context.Background(), payoutId).Status(status).RemoteId(remoteId).PayorPaymentId(payorPaymentId).SourceAccountName(sourceAccountName).TransmissionType(transmissionType).PaymentMemo(paymentMemo).PageSize(pageSize).Page(page).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.GetPaymentsForPayoutV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -146,6 +147,7 @@ Name | Type | Description  | Notes
  **remoteId** | **string** | The remote id of the payees. | 
  **payorPaymentId** | **string** | Payor&#39;s Id of the Payment | 
  **sourceAccountName** | **string** | Physical Account Name | 
+ **transmissionType** | **string** | Transmission Type * ACH * SAME_DAY_ACH * WIRE  | 
  **paymentMemo** | **string** | Payment Memo of the Payment | 
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **page** | **int32** | Page number. Default is 1. | [default to 1]
@@ -327,7 +329,7 @@ import (
 )
 
 func main() {
-    createPayoutRequestV3 := *openapiclient.NewCreatePayoutRequestV3([]PaymentInstructionV3{*openapiclient.NewPaymentInstructionV3("RemoteId_example", "Currency_example", int64(123), "SourceAccountName_example"))) // CreatePayoutRequestV3 | Post amount to transfer using stored funding account details.
+    createPayoutRequestV3 := *openapiclient.NewCreatePayoutRequestV3([]openapiclient.PaymentInstructionV3{*openapiclient.NewPaymentInstructionV3("remoteId1234", "USD", int64(1299), "MyAccountName")}) // CreatePayoutRequestV3 | Post amount to transfer using stored funding account details.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -392,7 +394,7 @@ import (
 
 func main() {
     paymentId := TODO // string | Id of the Payment
-    withdrawPaymentRequest := *openapiclient.NewWithdrawPaymentRequest("Reason_example") // WithdrawPaymentRequest | details for withdrawal
+    withdrawPaymentRequest := *openapiclient.NewWithdrawPaymentRequest("Payment submitted in error") // WithdrawPaymentRequest | details for withdrawal
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

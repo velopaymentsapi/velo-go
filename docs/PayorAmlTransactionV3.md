@@ -18,15 +18,12 @@ Name | Type | Description | Notes
 **ReturnDescription** | Pointer to **string** |  | [optional] 
 **FundingType** | Pointer to **string** |  | [optional] 
 **DateFundingRequested** | Pointer to **string** |  | [optional] 
-**PayeeName** | Pointer to **string** |  | [optional] 
 **RemoteId** | Pointer to **string** | Remote ID of the Payee, set by Payor | [optional] 
 **PayeeType** | Pointer to **string** |  | [optional] 
-**PayeeEmail** | Pointer to **string** |  | [optional] 
 **SourceAccount** | Pointer to **string** |  | [optional] 
 **PaymentAmount** | Pointer to **int64** |  | [optional] 
 **PaymentCurrency** | Pointer to **string** | ISO 4217 3 character currency code | [optional] 
 **PaymentMemo** | Pointer to **string** |  | [optional] 
-**PaymentType** | Pointer to **string** |  | [optional] 
 **PaymentRails** | Pointer to **string** |  | [optional] 
 **PayorPaymentId** | Pointer to **string** |  | [optional] 
 **PaymentStatus** | Pointer to **string** |  | [optional] 
@@ -402,31 +399,6 @@ SetDateFundingRequested sets DateFundingRequested field to given value.
 
 HasDateFundingRequested returns a boolean if a field has been set.
 
-### GetPayeeName
-
-`func (o *PayorAmlTransactionV3) GetPayeeName() string`
-
-GetPayeeName returns the PayeeName field if non-nil, zero value otherwise.
-
-### GetPayeeNameOk
-
-`func (o *PayorAmlTransactionV3) GetPayeeNameOk() (*string, bool)`
-
-GetPayeeNameOk returns a tuple with the PayeeName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPayeeName
-
-`func (o *PayorAmlTransactionV3) SetPayeeName(v string)`
-
-SetPayeeName sets PayeeName field to given value.
-
-### HasPayeeName
-
-`func (o *PayorAmlTransactionV3) HasPayeeName() bool`
-
-HasPayeeName returns a boolean if a field has been set.
-
 ### GetRemoteId
 
 `func (o *PayorAmlTransactionV3) GetRemoteId() string`
@@ -476,31 +448,6 @@ SetPayeeType sets PayeeType field to given value.
 `func (o *PayorAmlTransactionV3) HasPayeeType() bool`
 
 HasPayeeType returns a boolean if a field has been set.
-
-### GetPayeeEmail
-
-`func (o *PayorAmlTransactionV3) GetPayeeEmail() string`
-
-GetPayeeEmail returns the PayeeEmail field if non-nil, zero value otherwise.
-
-### GetPayeeEmailOk
-
-`func (o *PayorAmlTransactionV3) GetPayeeEmailOk() (*string, bool)`
-
-GetPayeeEmailOk returns a tuple with the PayeeEmail field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPayeeEmail
-
-`func (o *PayorAmlTransactionV3) SetPayeeEmail(v string)`
-
-SetPayeeEmail sets PayeeEmail field to given value.
-
-### HasPayeeEmail
-
-`func (o *PayorAmlTransactionV3) HasPayeeEmail() bool`
-
-HasPayeeEmail returns a boolean if a field has been set.
 
 ### GetSourceAccount
 
@@ -601,31 +548,6 @@ SetPaymentMemo sets PaymentMemo field to given value.
 `func (o *PayorAmlTransactionV3) HasPaymentMemo() bool`
 
 HasPaymentMemo returns a boolean if a field has been set.
-
-### GetPaymentType
-
-`func (o *PayorAmlTransactionV3) GetPaymentType() string`
-
-GetPaymentType returns the PaymentType field if non-nil, zero value otherwise.
-
-### GetPaymentTypeOk
-
-`func (o *PayorAmlTransactionV3) GetPaymentTypeOk() (*string, bool)`
-
-GetPaymentTypeOk returns a tuple with the PaymentType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPaymentType
-
-`func (o *PayorAmlTransactionV3) SetPaymentType(v string)`
-
-SetPaymentType sets PaymentType field to given value.
-
-### HasPaymentType
-
-`func (o *PayorAmlTransactionV3) HasPaymentType() bool`
-
-HasPaymentType returns a boolean if a field has been set.
 
 ### GetPaymentRails
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **QuoteId** | **string** |  | 
-**CreationDateTime** | [**time.Time**](time.Time.md) |  | 
+**CreationDateTime** | **time.Time** |  | 
 **Rate** | **float32** |  | 
 **InvertedRate** | **float32** |  | 
 **TotalCost** | **int32** |  | 

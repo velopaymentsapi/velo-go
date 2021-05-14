@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayoutStatus** | Pointer to **string** | The current status of the payout. | [optional] 
-**SubmittedDateTime** | Pointer to [**time.Time**](time.Time.md) | The date/time at which the payout was submitted. | [optional] 
-**InstructedDateTime** | Pointer to [**time.Time**](time.Time.md) | The date/time at which the payout was instructed. | [optional] 
-**WithdrawnDateTime** | Pointer to [**time.Time**](time.Time.md) | The date/time at which the payout was withdrawn. | [optional] 
+**SubmittedDateTime** | Pointer to **time.Time** | The date/time at which the payout was submitted. | [optional] 
+**InstructedDateTime** | Pointer to **time.Time** | The date/time at which the payout was instructed. | [optional] 
+**WithdrawnDateTime** | Pointer to **time.Time** | The date/time at which the payout was withdrawn. | [optional] 
 **PayoutMemo** | Pointer to **string** | The memo attached to the payout. | [optional] 
 **TotalPayments** | Pointer to **int32** | The count of payments within the payout. | [optional] 
 **ConfirmedPayments** | Pointer to **int32** | The count of payments within the payout which have been confirmed. | [optional] 

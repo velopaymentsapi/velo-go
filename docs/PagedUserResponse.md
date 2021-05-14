@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**PagedUserResponsePage**](PagedUserResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]PagedUserResponseLinks**](PagedUserResponse_links.md) |  | [optional] 
+**Page** | Pointer to [**PagedUserResponsePage**](PagedUserResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]PagedUserResponseLinks**](PagedUserResponseLinks.md) |  | [optional] 
 **Content** | Pointer to [**[]UserResponse**](UserResponse.md) |  | [optional] 
 
 ## Methods

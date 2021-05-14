@@ -177,7 +177,7 @@ import (
 
 func main() {
     payorId := TODO // string | The Payor Id
-    logo := 987 // *os.File |  (optional)
+    logo := os.NewFile(1234, "some_file") // *os.File |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -248,7 +248,7 @@ import (
 func main() {
     payorId := TODO // string | The Payor Id
     applicationId := TODO // string | Application ID
-    payorCreateApiKeyRequest := *openapiclient.NewPayorCreateApiKeyRequest("Name_example", []string{"Roles_example")) // PayorCreateApiKeyRequest | Details of application API key to create
+    payorCreateApiKeyRequest := *openapiclient.NewPayorCreateApiKeyRequest("iOS Key", []string{"Roles_example"}) // PayorCreateApiKeyRequest | Details of application API key to create
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -322,7 +322,7 @@ import (
 
 func main() {
     payorId := TODO // string | The Payor Id
-    payorCreateApplicationRequest := *openapiclient.NewPayorCreateApplicationRequest("Name_example") // PayorCreateApplicationRequest | Details of application to create
+    payorCreateApplicationRequest := *openapiclient.NewPayorCreateApplicationRequest("SAP") // PayorCreateApplicationRequest | Details of application to create
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -558,8 +558,8 @@ Other parameters are passed through a pointer to a apiPayorLinksRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **descendantsOfPayor** | [**string**](.md) | The Payor ID from which to start the query to show all descendants | 
- **parentOfPayor** | [**string**](.md) | Look for the parent payor details for this payor id | 
+ **descendantsOfPayor** | [**string**](string.md) | The Payor ID from which to start the query to show all descendants | 
+ **parentOfPayor** | [**string**](string.md) | Look for the parent payor details for this payor id | 
  **fields** | **string** | List of additional Payor fields to include in the response for each Payor. The values of payorId and payorName and always included for each Payor - &#39;fields&#39; allows you to add to this. Example: &#x60;&#x60;&#x60;fields&#x3D;primaryContactEmail,kycState&#x60;&#x60;&#x60; - will include payorId+payorName+primaryContactEmail+kycState for each Payor Default if not specified is to include only payorId and payorName. The supported fields are any combination of: primaryContactEmail,kycState  | 
 
 ### Return type

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **PaymentCurrency** | Pointer to [**PaymentAuditCurrencyV3**](PaymentAuditCurrencyV3.md) |  | [optional] 
 **Rate** | Pointer to **float32** | The FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed | [optional] 
 **InvertedRate** | Pointer to **float32** | The inverted FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed | [optional] 
-**SubmittedDateTime** | [**time.Time**](time.Time.md) |  | 
+**SubmittedDateTime** | **time.Time** |  | 
 **Status** | **string** |  | 
 **FundingStatus** | **string** | The funding status of the payment | 
 **RoutingNumber** | Pointer to **string** | The routing number for the payment. | [optional] 

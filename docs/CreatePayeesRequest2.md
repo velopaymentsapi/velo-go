@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayorId** | **string** |  | 
-**Payees** | [**[]CreatePayee2**](CreatePayee_2.md) |  | 
+**Payees** | [**[]CreatePayee2**](CreatePayee2.md) |  | 
 
 ## Methods
 

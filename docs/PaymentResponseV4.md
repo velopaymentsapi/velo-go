@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 **SourceAccountId** | **string** | The id of the source account from which the payment was taken | 
 **SourceAccountName** | Pointer to **string** | The name of the source account from which the payment was taken | [optional] 
 **RemoteId** | Pointer to **string** | The remote id by which the payor refers to the payee. Only populated once payment is confirmed | [optional] 
+**RemoteSystemId** | Pointer to **string** | The velo id of the remote system orchestrating the payment. Not populated for normal Velo payments. | [optional] 
+**RemoteSystemPaymentId** | Pointer to **string** | The id of the payment in the remote system. Not populated for normal Velo payments. | [optional] 
 **SourceAmount** | Pointer to **int32** | The source amount for the payment (amount debited to make the payment) | [optional] 
-**SourceCurrency** | Pointer to [**PaymentAuditCurrencyV4**](PaymentAuditCurrencyV4.md) |  | [optional] 
+**SourceCurrency** | Pointer to [**PaymentAuditCurrency**](PaymentAuditCurrency.md) |  | [optional] 
 **PaymentAmount** | **int32** | The amount which the payee will receive | 
-**PaymentCurrency** | Pointer to [**PaymentAuditCurrencyV4**](PaymentAuditCurrencyV4.md) |  | [optional] 
+**PaymentCurrency** | Pointer to [**PaymentAuditCurrency**](PaymentAuditCurrency.md) |  | [optional] 
 **Rate** | Pointer to **float64** | The FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed | [optional] 
 **InvertedRate** | Pointer to **float64** | The inverted FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed | [optional] 
 **IsPaymentCcyBaseCcy** | Pointer to **bool** |  | [optional] 
-**SubmittedDateTime** | [**time.Time**](time.Time.md) |  | 
+**SubmittedDateTime** | **time.Time** |  | 
 **Status** | **string** |  | 
 **FundingStatus** | **string** | The funding status of the payment | 
 **RoutingNumber** | Pointer to **string** | The routing number for the payment. | [optional] 
@@ -35,7 +37,7 @@ Name | Type | Description | Notes
 **AccountName** | Pointer to **string** |  | [optional] 
 **RailsId** | **string** | The rails ID. Default value is RAILS ID UNAVAILABLE when not populated. | [default to "RAILS ID UNAVAILABLE"]
 **CountryCode** | Pointer to **string** | The country code of the payment channel. | [optional] 
-**Events** | [**[]PaymentEventResponseV4**](PaymentEventResponseV4.md) |  | 
+**Events** | [**[]PaymentEventResponse**](PaymentEventResponse.md) |  | 
 **ReturnCost** | Pointer to **int32** | The return cost if a returned payment. | [optional] 
 **ReturnReason** | Pointer to **string** |  | [optional] 
 **RailsPaymentId** | Pointer to **string** |  | [optional] 
@@ -43,13 +45,16 @@ Name | Type | Description | Notes
 **RejectionReason** | Pointer to **string** |  | [optional] 
 **WithdrawnReason** | Pointer to **string** |  | [optional] 
 **Withdrawable** | Pointer to **bool** |  | [optional] 
-**Payout** | Pointer to [**PaymentResponseV4Payout**](PaymentResponseV4_payout.md) |  | [optional] 
+**TransmissionType** | Pointer to **string** | The transmission type of the payment, e.g. ACH, SAME_DAY_ACH, WIRE | [optional] 
+**PaymentTrackingReference** | Pointer to **string** |  | [optional] 
+**PaymentMetadata** | Pointer to **string** | Metadata for the payment | [optional] 
+**Payout** | Pointer to [**PaymentResponseV4Payout**](PaymentResponseV4Payout.md) |  | [optional] 
 
 ## Methods
 
 ### NewPaymentResponseV4
 
-`func NewPaymentResponseV4(paymentId string, payeeId string, payorId string, quoteId string, sourceAccountId string, paymentAmount int32, submittedDateTime time.Time, status string, fundingStatus string, railsId string, events []PaymentEventResponseV4, ) *PaymentResponseV4`
+`func NewPaymentResponseV4(paymentId string, payeeId string, payorId string, quoteId string, sourceAccountId string, paymentAmount int32, submittedDateTime time.Time, status string, fundingStatus string, railsId string, events []PaymentEventResponse, ) *PaymentResponseV4`
 
 NewPaymentResponseV4 instantiates a new PaymentResponseV4 object
 This constructor will assign default values to properties that have it defined,
@@ -239,6 +244,56 @@ SetRemoteId sets RemoteId field to given value.
 
 HasRemoteId returns a boolean if a field has been set.
 
+### GetRemoteSystemId
+
+`func (o *PaymentResponseV4) GetRemoteSystemId() string`
+
+GetRemoteSystemId returns the RemoteSystemId field if non-nil, zero value otherwise.
+
+### GetRemoteSystemIdOk
+
+`func (o *PaymentResponseV4) GetRemoteSystemIdOk() (*string, bool)`
+
+GetRemoteSystemIdOk returns a tuple with the RemoteSystemId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteSystemId
+
+`func (o *PaymentResponseV4) SetRemoteSystemId(v string)`
+
+SetRemoteSystemId sets RemoteSystemId field to given value.
+
+### HasRemoteSystemId
+
+`func (o *PaymentResponseV4) HasRemoteSystemId() bool`
+
+HasRemoteSystemId returns a boolean if a field has been set.
+
+### GetRemoteSystemPaymentId
+
+`func (o *PaymentResponseV4) GetRemoteSystemPaymentId() string`
+
+GetRemoteSystemPaymentId returns the RemoteSystemPaymentId field if non-nil, zero value otherwise.
+
+### GetRemoteSystemPaymentIdOk
+
+`func (o *PaymentResponseV4) GetRemoteSystemPaymentIdOk() (*string, bool)`
+
+GetRemoteSystemPaymentIdOk returns a tuple with the RemoteSystemPaymentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteSystemPaymentId
+
+`func (o *PaymentResponseV4) SetRemoteSystemPaymentId(v string)`
+
+SetRemoteSystemPaymentId sets RemoteSystemPaymentId field to given value.
+
+### HasRemoteSystemPaymentId
+
+`func (o *PaymentResponseV4) HasRemoteSystemPaymentId() bool`
+
+HasRemoteSystemPaymentId returns a boolean if a field has been set.
+
 ### GetSourceAmount
 
 `func (o *PaymentResponseV4) GetSourceAmount() int32`
@@ -266,20 +321,20 @@ HasSourceAmount returns a boolean if a field has been set.
 
 ### GetSourceCurrency
 
-`func (o *PaymentResponseV4) GetSourceCurrency() PaymentAuditCurrencyV4`
+`func (o *PaymentResponseV4) GetSourceCurrency() PaymentAuditCurrency`
 
 GetSourceCurrency returns the SourceCurrency field if non-nil, zero value otherwise.
 
 ### GetSourceCurrencyOk
 
-`func (o *PaymentResponseV4) GetSourceCurrencyOk() (*PaymentAuditCurrencyV4, bool)`
+`func (o *PaymentResponseV4) GetSourceCurrencyOk() (*PaymentAuditCurrency, bool)`
 
 GetSourceCurrencyOk returns a tuple with the SourceCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceCurrency
 
-`func (o *PaymentResponseV4) SetSourceCurrency(v PaymentAuditCurrencyV4)`
+`func (o *PaymentResponseV4) SetSourceCurrency(v PaymentAuditCurrency)`
 
 SetSourceCurrency sets SourceCurrency field to given value.
 
@@ -311,20 +366,20 @@ SetPaymentAmount sets PaymentAmount field to given value.
 
 ### GetPaymentCurrency
 
-`func (o *PaymentResponseV4) GetPaymentCurrency() PaymentAuditCurrencyV4`
+`func (o *PaymentResponseV4) GetPaymentCurrency() PaymentAuditCurrency`
 
 GetPaymentCurrency returns the PaymentCurrency field if non-nil, zero value otherwise.
 
 ### GetPaymentCurrencyOk
 
-`func (o *PaymentResponseV4) GetPaymentCurrencyOk() (*PaymentAuditCurrencyV4, bool)`
+`func (o *PaymentResponseV4) GetPaymentCurrencyOk() (*PaymentAuditCurrency, bool)`
 
 GetPaymentCurrencyOk returns a tuple with the PaymentCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentCurrency
 
-`func (o *PaymentResponseV4) SetPaymentCurrency(v PaymentAuditCurrencyV4)`
+`func (o *PaymentResponseV4) SetPaymentCurrency(v PaymentAuditCurrency)`
 
 SetPaymentCurrency sets PaymentCurrency field to given value.
 
@@ -791,20 +846,20 @@ HasCountryCode returns a boolean if a field has been set.
 
 ### GetEvents
 
-`func (o *PaymentResponseV4) GetEvents() []PaymentEventResponseV4`
+`func (o *PaymentResponseV4) GetEvents() []PaymentEventResponse`
 
 GetEvents returns the Events field if non-nil, zero value otherwise.
 
 ### GetEventsOk
 
-`func (o *PaymentResponseV4) GetEventsOk() (*[]PaymentEventResponseV4, bool)`
+`func (o *PaymentResponseV4) GetEventsOk() (*[]PaymentEventResponse, bool)`
 
 GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEvents
 
-`func (o *PaymentResponseV4) SetEvents(v []PaymentEventResponseV4)`
+`func (o *PaymentResponseV4) SetEvents(v []PaymentEventResponse)`
 
 SetEvents sets Events field to given value.
 
@@ -983,6 +1038,81 @@ SetWithdrawable sets Withdrawable field to given value.
 `func (o *PaymentResponseV4) HasWithdrawable() bool`
 
 HasWithdrawable returns a boolean if a field has been set.
+
+### GetTransmissionType
+
+`func (o *PaymentResponseV4) GetTransmissionType() string`
+
+GetTransmissionType returns the TransmissionType field if non-nil, zero value otherwise.
+
+### GetTransmissionTypeOk
+
+`func (o *PaymentResponseV4) GetTransmissionTypeOk() (*string, bool)`
+
+GetTransmissionTypeOk returns a tuple with the TransmissionType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransmissionType
+
+`func (o *PaymentResponseV4) SetTransmissionType(v string)`
+
+SetTransmissionType sets TransmissionType field to given value.
+
+### HasTransmissionType
+
+`func (o *PaymentResponseV4) HasTransmissionType() bool`
+
+HasTransmissionType returns a boolean if a field has been set.
+
+### GetPaymentTrackingReference
+
+`func (o *PaymentResponseV4) GetPaymentTrackingReference() string`
+
+GetPaymentTrackingReference returns the PaymentTrackingReference field if non-nil, zero value otherwise.
+
+### GetPaymentTrackingReferenceOk
+
+`func (o *PaymentResponseV4) GetPaymentTrackingReferenceOk() (*string, bool)`
+
+GetPaymentTrackingReferenceOk returns a tuple with the PaymentTrackingReference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentTrackingReference
+
+`func (o *PaymentResponseV4) SetPaymentTrackingReference(v string)`
+
+SetPaymentTrackingReference sets PaymentTrackingReference field to given value.
+
+### HasPaymentTrackingReference
+
+`func (o *PaymentResponseV4) HasPaymentTrackingReference() bool`
+
+HasPaymentTrackingReference returns a boolean if a field has been set.
+
+### GetPaymentMetadata
+
+`func (o *PaymentResponseV4) GetPaymentMetadata() string`
+
+GetPaymentMetadata returns the PaymentMetadata field if non-nil, zero value otherwise.
+
+### GetPaymentMetadataOk
+
+`func (o *PaymentResponseV4) GetPaymentMetadataOk() (*string, bool)`
+
+GetPaymentMetadataOk returns a tuple with the PaymentMetadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMetadata
+
+`func (o *PaymentResponseV4) SetPaymentMetadata(v string)`
+
+SetPaymentMetadata sets PaymentMetadata field to given value.
+
+### HasPaymentMetadata
+
+`func (o *PaymentResponseV4) HasPaymentMetadata() bool`
+
+HasPaymentMetadata returns a boolean if a field has been set.
 
 ### GetPayout
 

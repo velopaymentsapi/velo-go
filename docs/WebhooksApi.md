@@ -168,8 +168,8 @@ import (
 
 func main() {
     payorId := TODO // string | The Payor ID
-    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
-    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
+    page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
+    pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -194,7 +194,7 @@ Other parameters are passed through a pointer to a apiListWebhooksV1Request stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](.md) | The Payor ID | 
+ **payorId** | [**string**](string.md) | The Payor ID | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
 

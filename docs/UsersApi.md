@@ -380,7 +380,7 @@ import (
 )
 
 func main() {
-    inviteUserRequest := *openapiclient.NewInviteUserRequest("Email_example", "MfaType_example", "SmsNumber_example", "PrimaryContactNumber_example", []string{"Roles_example")) // InviteUserRequest | Details of User to invite
+    inviteUserRequest := *openapiclient.NewInviteUserRequest("foo@example.com", "TOTP", "11235555555", "11235555555", []string{"Roles_example"}) // InviteUserRequest | Details of User to invite
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -444,11 +444,11 @@ import (
 )
 
 func main() {
-    type_ := *openapiclient.NewUserType() // UserType | The Type of the User. (optional)
-    status := *openapiclient.NewUserStatus() // UserStatus | The status of the User. (optional)
+    type_ := openapiclient.UserType("BACKOFFICE") // UserType | The Type of the User. (optional)
+    status := openapiclient.UserStatus("ENABLED") // UserStatus | The status of the User. (optional)
     entityId := TODO // string | The entityId of the User. (optional)
-    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
-    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
+    page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
+    pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields (e.g. ?sort=email:asc,lastName:asc) Default is email:asc 'name' The supported sort fields are - email, lastNmae.  (optional) (default to "email:asc")
 
     configuration := openapiclient.NewConfiguration()
@@ -474,9 +474,9 @@ Other parameters are passed through a pointer to a apiListUsersRequest struct vi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **type_** | [**UserType**](.md) | The Type of the User. | 
- **status** | [**UserStatus**](.md) | The status of the User. | 
- **entityId** | [**string**](.md) | The entityId of the User. | 
+ **type_** | [**UserType**](UserType.md) | The Type of the User. | 
+ **status** | [**UserStatus**](UserStatus.md) | The status of the User. | 
+ **entityId** | [**string**](string.md) | The entityId of the User. | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;email:asc,lastName:asc) Default is email:asc &#39;name&#39; The supported sort fields are - email, lastNmae.  | [default to &quot;email:asc&quot;]
@@ -520,7 +520,7 @@ import (
 )
 
 func main() {
-    registerSmsRequest := *openapiclient.NewRegisterSmsRequest("SmsNumber_example") // RegisterSmsRequest | a SMS Number to send an OTP to
+    registerSmsRequest := *openapiclient.NewRegisterSmsRequest("11235555555") // RegisterSmsRequest | a SMS Number to send an OTP to
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -585,7 +585,7 @@ import (
 
 func main() {
     userId := TODO // string | The UUID of the User.
-    resendTokenRequest := *openapiclient.NewResendTokenRequest("TokenType_example") // ResendTokenRequest | The type of token to resend
+    resendTokenRequest := *openapiclient.NewResendTokenRequest("INVITE_MFA_USER") // ResendTokenRequest | The type of token to resend
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -655,7 +655,7 @@ import (
 
 func main() {
     userId := TODO // string | The UUID of the User.
-    roleUpdateRequest := *openapiclient.NewRoleUpdateRequest([]string{"Roles_example")) // RoleUpdateRequest | The Role to change to
+    roleUpdateRequest := *openapiclient.NewRoleUpdateRequest([]string{"Roles_example"}) // RoleUpdateRequest | The Role to change to
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -793,7 +793,7 @@ import (
 
 func main() {
     userId := TODO // string | The UUID of the User.
-    unregisterMFARequest := *openapiclient.NewUnregisterMFARequest("MfaType_example") // UnregisterMFARequest | The MFA Type to unregister
+    unregisterMFARequest := *openapiclient.NewUnregisterMFARequest("TOTP") // UnregisterMFARequest | The MFA Type to unregister
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -862,7 +862,7 @@ import (
 )
 
 func main() {
-    selfMFATypeUnregisterRequest := *openapiclient.NewSelfMFATypeUnregisterRequest("MfaType_example") // SelfMFATypeUnregisterRequest | The MFA Type to unregister
+    selfMFATypeUnregisterRequest := *openapiclient.NewSelfMFATypeUnregisterRequest("TOTP") // SelfMFATypeUnregisterRequest | The MFA Type to unregister
     authorization := "authorization_example" // string | Bearer token authorization leg of validate (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -928,7 +928,7 @@ import (
 )
 
 func main() {
-    selfUpdatePasswordRequest := *openapiclient.NewSelfUpdatePasswordRequest("OldPassword_example", "NewPassword_example") // SelfUpdatePasswordRequest | The password
+    selfUpdatePasswordRequest := *openapiclient.NewSelfUpdatePasswordRequest("My_current_password", "My_new_password") // SelfUpdatePasswordRequest | The password
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -1126,7 +1126,7 @@ import (
 )
 
 func main() {
-    passwordRequest := *openapiclient.NewPasswordRequest("Password_example") // PasswordRequest | The password
+    passwordRequest := *openapiclient.NewPasswordRequest("My_strong_password") // PasswordRequest | The password
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

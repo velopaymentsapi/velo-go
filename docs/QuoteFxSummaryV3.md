@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Rate** | **float32** |  | 
 **InvertedRate** | Pointer to **float32** |  | [optional] 
-**CreationTime** | [**time.Time**](time.Time.md) |  | 
-**ExpiryTime** | Pointer to [**time.Time**](time.Time.md) |  | [optional] 
+**CreationTime** | **time.Time** |  | 
+**ExpiryTime** | Pointer to **time.Time** |  | [optional] 
 **QuoteId** | **string** |  | 
 **TotalSourceAmount** | **int32** |  | 
 **TotalPaymentAmount** | **int32** |  | 

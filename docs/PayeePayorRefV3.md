@@ -6,9 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayorId** | Pointer to **string** |  | [optional] 
 **RemoteId** | Pointer to **string** |  | [optional] 
-**InvitationStatus** | Pointer to [**InvitationStatus2**](InvitationStatus_2.md) |  | [optional] 
-**InvitationStatusTimestamp** | Pointer to [**NullableTime**](time.Time.md) | The timestamp when the invitation status is updated | [optional] 
+**InvitationStatus** | Pointer to [**InvitationStatus2**](InvitationStatus2.md) |  | [optional] 
+**InvitationStatusTimestamp** | Pointer to **NullableTime** | The timestamp when the invitation status is updated | [optional] 
 **PaymentChannelId** | Pointer to **string** |  | [optional] 
+**PayableStatus** | Pointer to **bool** | Indicates if the payee is payable for this payor | [optional] 
+**PayableIssues** | Pointer to [**[]PayableIssue**](PayableIssue.md) | Indicates any conditions which prevent the payee from being payable for this payor | [optional] 
 
 ## Methods
 
@@ -163,6 +165,56 @@ SetPaymentChannelId sets PaymentChannelId field to given value.
 `func (o *PayeePayorRefV3) HasPaymentChannelId() bool`
 
 HasPaymentChannelId returns a boolean if a field has been set.
+
+### GetPayableStatus
+
+`func (o *PayeePayorRefV3) GetPayableStatus() bool`
+
+GetPayableStatus returns the PayableStatus field if non-nil, zero value otherwise.
+
+### GetPayableStatusOk
+
+`func (o *PayeePayorRefV3) GetPayableStatusOk() (*bool, bool)`
+
+GetPayableStatusOk returns a tuple with the PayableStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPayableStatus
+
+`func (o *PayeePayorRefV3) SetPayableStatus(v bool)`
+
+SetPayableStatus sets PayableStatus field to given value.
+
+### HasPayableStatus
+
+`func (o *PayeePayorRefV3) HasPayableStatus() bool`
+
+HasPayableStatus returns a boolean if a field has been set.
+
+### GetPayableIssues
+
+`func (o *PayeePayorRefV3) GetPayableIssues() []PayableIssue`
+
+GetPayableIssues returns the PayableIssues field if non-nil, zero value otherwise.
+
+### GetPayableIssuesOk
+
+`func (o *PayeePayorRefV3) GetPayableIssuesOk() (*[]PayableIssue, bool)`
+
+GetPayableIssuesOk returns a tuple with the PayableIssues field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPayableIssues
+
+`func (o *PayeePayorRefV3) SetPayableIssues(v []PayableIssue)`
+
+SetPayableIssues sets PayableIssues field to given value.
+
+### HasPayableIssues
+
+`func (o *PayeePayorRefV3) HasPayableIssues() bool`
+
+HasPayableIssues returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

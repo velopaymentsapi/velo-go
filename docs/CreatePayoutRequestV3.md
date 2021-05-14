@@ -4,10 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayorId** | Pointer to **string** | Deprecated in v2.16. Any value supplied here will be ignored. | [optional] 
-**PayoutFromPayorId** | Pointer to **string** | The id of the payor whose source account(s) will be debited. payoutFromPayorId and payoutToPayorId must be both supplied or both omitted. | [optional] 
-**PayoutToPayorId** | Pointer to **string** | The id of the payor whose payees will be paid. payoutFromPayorId and payoutToPayorId must be both supplied or both omitted. | [optional] 
-**PayoutMemo** | Pointer to **string** | Text applied to all payment memos unless specified explicitly on a payment. This should be the reference field on the statement seen by the payee (but not via ACH) | [optional] 
+**PayoutFromPayorId** | Pointer to **string** | &lt;p&gt;The id of the payor whose source account(s) will be debited&lt;/p&gt; &lt;p&gt;payoutFromPayorId and payoutToPayorId must be both supplied or both omitted&lt;/p&gt;  | [optional] 
+**PayoutToPayorId** | Pointer to **string** | &lt;p&gt;The id of the payor whose payees will be paid&lt;/p&gt; &lt;p&gt;payoutFromPayorId and payoutToPayorId must be both supplied or both omitted&lt;/p&gt;  | [optional] 
+**PayoutMemo** | Pointer to **string** | &lt;p&gt;Text applied to all payment memos unless specified explicitly on a payment&lt;/p&gt; &lt;p&gt;This should be the reference field on the statement seen by the payee (but not via ACH)&lt;/p&gt;  | [optional] 
 **Payments** | [**[]PaymentInstructionV3**](PaymentInstructionV3.md) |  | 
 
 ## Methods
@@ -28,31 +27,6 @@ will change when the set of required properties is changed
 NewCreatePayoutRequestV3WithDefaults instantiates a new CreatePayoutRequestV3 object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetPayorId
-
-`func (o *CreatePayoutRequestV3) GetPayorId() string`
-
-GetPayorId returns the PayorId field if non-nil, zero value otherwise.
-
-### GetPayorIdOk
-
-`func (o *CreatePayoutRequestV3) GetPayorIdOk() (*string, bool)`
-
-GetPayorIdOk returns a tuple with the PayorId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPayorId
-
-`func (o *CreatePayoutRequestV3) SetPayorId(v string)`
-
-SetPayorId sets PayorId field to given value.
-
-### HasPayorId
-
-`func (o *CreatePayoutRequestV3) HasPayorId() bool`
-
-HasPayorId returns a boolean if a field has been set.
 
 ### GetPayoutFromPayorId
 

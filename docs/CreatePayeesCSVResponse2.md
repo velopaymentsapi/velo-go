@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BatchId** | Pointer to **string** |  | [optional] 
-**RejectedCsvRows** | Pointer to [**[]CreatePayeesCSVResponseRejectedCsvRows**](CreatePayeesCSVResponse_rejectedCsvRows.md) |  | [optional] 
+**RejectedCsvRows** | Pointer to [**[]CreatePayeesCSVResponseRejectedCsvRows**](CreatePayeesCSVResponseRejectedCsvRows.md) |  | [optional] 
 
 ## Methods
 

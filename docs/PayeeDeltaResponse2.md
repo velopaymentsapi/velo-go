@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**PayeeDeltaResponsePage**](PayeeDeltaResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]PayeeDeltaResponse2Links**](PayeeDeltaResponse_2_links.md) |  | [optional] 
-**Content** | Pointer to [**[]PayeeDelta2**](PayeeDelta_2.md) |  | [optional] 
+**Page** | Pointer to [**PayeeDeltaResponsePage**](PayeeDeltaResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]PayeeDeltaResponse2Links**](PayeeDeltaResponse2Links.md) |  | [optional] 
+**Content** | Pointer to [**[]PayeeDelta2**](PayeeDelta2.md) |  | [optional] 
 
 ## Methods
 

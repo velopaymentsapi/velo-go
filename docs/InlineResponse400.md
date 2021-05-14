@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Errors** | Pointer to [**[]InlineResponse400Errors**](inline_response_400_errors.md) | one or more errors | [optional] 
+**Errors** | Pointer to [**[]Error**](Error.md) | one or more errors | [optional] 
 **CorrelationId** | Pointer to **NullableString** | a unique identifier to track a request or related sequence of requests | [optional] 
+**HttpStatusCode** | Pointer to **int32** | this will mirror the Status-Code part of the Status-Line http response header and is included for extra clarity | [optional] 
 
 ## Methods
 
@@ -28,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetErrors
 
-`func (o *InlineResponse400) GetErrors() []InlineResponse400Errors`
+`func (o *InlineResponse400) GetErrors() []Error`
 
 GetErrors returns the Errors field if non-nil, zero value otherwise.
 
 ### GetErrorsOk
 
-`func (o *InlineResponse400) GetErrorsOk() (*[]InlineResponse400Errors, bool)`
+`func (o *InlineResponse400) GetErrorsOk() (*[]Error, bool)`
 
 GetErrorsOk returns a tuple with the Errors field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetErrors
 
-`func (o *InlineResponse400) SetErrors(v []InlineResponse400Errors)`
+`func (o *InlineResponse400) SetErrors(v []Error)`
 
 SetErrors sets Errors field to given value.
 
@@ -96,6 +97,31 @@ HasCorrelationId returns a boolean if a field has been set.
 `func (o *InlineResponse400) UnsetCorrelationId()`
 
 UnsetCorrelationId ensures that no value is present for CorrelationId, not even an explicit nil
+### GetHttpStatusCode
+
+`func (o *InlineResponse400) GetHttpStatusCode() int32`
+
+GetHttpStatusCode returns the HttpStatusCode field if non-nil, zero value otherwise.
+
+### GetHttpStatusCodeOk
+
+`func (o *InlineResponse400) GetHttpStatusCodeOk() (*int32, bool)`
+
+GetHttpStatusCodeOk returns a tuple with the HttpStatusCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttpStatusCode
+
+`func (o *InlineResponse400) SetHttpStatusCode(v int32)`
+
+SetHttpStatusCode sets HttpStatusCode field to given value.
+
+### HasHttpStatusCode
+
+`func (o *InlineResponse400) HasHttpStatusCode() bool`
+
+HasHttpStatusCode returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

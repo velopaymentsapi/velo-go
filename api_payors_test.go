@@ -5,7 +5,6 @@ import (
 	"os"
 	"testing"
 
-	"github.com/antihax/optional"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -64,17 +63,17 @@ func TestPayorLinks(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
-	cfg.BasePath = os.Getenv("APIURL")
+	cfg.Servers = ServerConfigurations{
+		{
+			URL:         os.Getenv("APIURL"),
+			Description: "Velo Payments for testing",
+		},
+	}
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
 		auth := context.WithValue(context.TODO(), ContextAccessToken, token)
-
-		opts := PayorLinksOpts{
-			DescendantsOfPayor: optional.NewInterface(payorID),
-		}
-
-		_, h, err := client.PayorsApi.PayorLinks(auth, &opts)
+		_, h, err := client.PayorsApi.PayorLinks(auth).DescendantsOfPayor(payorID).Execute()
 		if err != nil {
 			t.Errorf("TEST %s FAILED with error", k)
 		}

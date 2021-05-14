@@ -7,10 +7,12 @@ Name | Type | Description | Notes
 **RemoteId** | **string** | Your identifier for payee | 
 **Currency** | **string** | Valid ISO 4217 3 letter currency code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-4217-currency-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | 
 **Amount** | **int64** | &lt;p&gt;Amount to send to Payee&lt;/p&gt; &lt;p&gt;The maximum payment amount is dependent on the currency&lt;/p&gt;  | 
-**PaymentMemo** | Pointer to **string** |  | [optional] 
-**SourceAccountName** | **string** |  | 
-**PayorPaymentId** | Pointer to **string** |  | [optional] 
+**PaymentMemo** | Pointer to **string** | &lt;p&gt;Any value here will override the memo value in the parent payout&lt;/p&gt; &lt;p&gt;This should be the reference field on the statement seen by the payee (but not via ACH)&lt;/p&gt;  | [optional] 
+**SourceAccountName** | **string** | Must match a valid source account name belonging to the payor | 
+**PayorPaymentId** | Pointer to **string** | A reference identifier for the payor for the given payee payment | [optional] 
 **TransmissionType** | Pointer to [**TransmissionType**](TransmissionType.md) |  | [optional] 
+**RemoteSystemId** | Pointer to **string** | &lt;p&gt;The identifier for the remote payments system if not Velo&lt;/p&gt; &lt;p&gt;Should only be used after consultation with Velo Payments&lt;/p&gt;  | [optional] 
+**PaymentMetadata** | Pointer to **string** | &lt;p&gt;Metadata about the payment that may be relevant to the specific rails or remote system making the payout&lt;/p&gt; &lt;p&gt;The structure of the data will be dictated by the requirements of the payment rails&lt;/p&gt;  | [optional] 
 
 ## Methods
 
@@ -185,6 +187,56 @@ SetTransmissionType sets TransmissionType field to given value.
 `func (o *PaymentInstructionV3) HasTransmissionType() bool`
 
 HasTransmissionType returns a boolean if a field has been set.
+
+### GetRemoteSystemId
+
+`func (o *PaymentInstructionV3) GetRemoteSystemId() string`
+
+GetRemoteSystemId returns the RemoteSystemId field if non-nil, zero value otherwise.
+
+### GetRemoteSystemIdOk
+
+`func (o *PaymentInstructionV3) GetRemoteSystemIdOk() (*string, bool)`
+
+GetRemoteSystemIdOk returns a tuple with the RemoteSystemId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteSystemId
+
+`func (o *PaymentInstructionV3) SetRemoteSystemId(v string)`
+
+SetRemoteSystemId sets RemoteSystemId field to given value.
+
+### HasRemoteSystemId
+
+`func (o *PaymentInstructionV3) HasRemoteSystemId() bool`
+
+HasRemoteSystemId returns a boolean if a field has been set.
+
+### GetPaymentMetadata
+
+`func (o *PaymentInstructionV3) GetPaymentMetadata() string`
+
+GetPaymentMetadata returns the PaymentMetadata field if non-nil, zero value otherwise.
+
+### GetPaymentMetadataOk
+
+`func (o *PaymentInstructionV3) GetPaymentMetadataOk() (*string, bool)`
+
+GetPaymentMetadataOk returns a tuple with the PaymentMetadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMetadata
+
+`func (o *PaymentInstructionV3) SetPaymentMetadata(v string)`
+
+SetPaymentMetadata sets PaymentMetadata field to given value.
+
+### HasPaymentMetadata
+
+`func (o *PaymentInstructionV3) HasPaymentMetadata() bool`
+
+HasPaymentMetadata returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**WebhookUrl** | Pointer to **string** |  | [optional] 
-**AuthorizationHeader** | Pointer to **NullableString** |  | [optional] 
-**Enabled** | Pointer to **bool** |  | [optional] 
+**WebhookUrl** | Pointer to **string** | the webhook URL to use. | [optional] 
+**AuthorizationHeader** | Pointer to **NullableString** | the authorization header to include with the notification. | [optional] 
+**Enabled** | Pointer to **bool** | whether the webhook is enabled. | [optional] 
+**Categories** | Pointer to [**[]Category**](Category.md) | The notification categories to enable. | [optional] 
 
 ## Methods
 
@@ -112,6 +113,41 @@ SetEnabled sets Enabled field to given value.
 
 HasEnabled returns a boolean if a field has been set.
 
+### GetCategories
+
+`func (o *UpdateWebhookRequest) GetCategories() []Category`
+
+GetCategories returns the Categories field if non-nil, zero value otherwise.
+
+### GetCategoriesOk
+
+`func (o *UpdateWebhookRequest) GetCategoriesOk() (*[]Category, bool)`
+
+GetCategoriesOk returns a tuple with the Categories field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCategories
+
+`func (o *UpdateWebhookRequest) SetCategories(v []Category)`
+
+SetCategories sets Categories field to given value.
+
+### HasCategories
+
+`func (o *UpdateWebhookRequest) HasCategories() bool`
+
+HasCategories returns a boolean if a field has been set.
+
+### SetCategoriesNil
+
+`func (o *UpdateWebhookRequest) SetCategoriesNil(b bool)`
+
+ SetCategoriesNil sets the value for Categories to be an explicit nil
+
+### UnsetCategories
+`func (o *UpdateWebhookRequest) UnsetCategories()`
+
+UnsetCategories ensures that no value is present for Categories, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

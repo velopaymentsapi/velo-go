@@ -25,7 +25,8 @@ Name | Type | Description | Notes
 **WuCustomerId** | Pointer to **string** |  | [optional] 
 **MaxMasterPayorAdmins** | Pointer to **int32** |  | [optional] 
 **PaymentRails** | Pointer to [**PaymentRails**](PaymentRails.md) |  | [optional] 
-**TransmissionTypes** | Pointer to [**TransmissionTypes2**](TransmissionTypes_2.md) |  | [optional] 
+**TransmissionTypes** | Pointer to [**TransmissionTypes2**](TransmissionTypes2.md) |  | [optional] 
+**RemoteSystemIds** | Pointer to **[]string** | The payor’s supported remote systems by id | [optional] 
 
 ## Methods
 
@@ -585,6 +586,31 @@ SetTransmissionTypes sets TransmissionTypes field to given value.
 `func (o *PayorV2) HasTransmissionTypes() bool`
 
 HasTransmissionTypes returns a boolean if a field has been set.
+
+### GetRemoteSystemIds
+
+`func (o *PayorV2) GetRemoteSystemIds() []string`
+
+GetRemoteSystemIds returns the RemoteSystemIds field if non-nil, zero value otherwise.
+
+### GetRemoteSystemIdsOk
+
+`func (o *PayorV2) GetRemoteSystemIdsOk() (*[]string, bool)`
+
+GetRemoteSystemIdsOk returns a tuple with the RemoteSystemIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteSystemIds
+
+`func (o *PayorV2) SetRemoteSystemIds(v []string)`
+
+SetRemoteSystemIds sets RemoteSystemIds field to given value.
+
+### HasRemoteSystemIds
+
+`func (o *PayorV2) HasRemoteSystemIds() bool`
+
+HasRemoteSystemIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

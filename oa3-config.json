@@ -1,4 +1,5 @@
 {
     "packageName": "velopayments",
-    "packageVersion": "2.23.78"
+    "packageVersion": "2.26.127",
+    "enumClassPrefix": true
 }

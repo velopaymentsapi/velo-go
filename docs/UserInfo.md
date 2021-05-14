@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **UserId** | Pointer to **string** | the id of the user | [optional] 
-**UserType** | Pointer to [**UserType2**](UserType_2.md) |  | [optional] 
+**UserType** | Pointer to [**UserType2**](UserType2.md) |  | [optional] 
 **MfaDetails** | Pointer to [**MFADetails**](MFADetails.md) |  | [optional] 
 
 ## Methods

@@ -30,7 +30,7 @@ import (
 
 func main() {
     userId := TODO // string | The UUID of the User.
-    resendTokenRequest := *openapiclient.NewResendTokenRequest("TokenType_example") // ResendTokenRequest | The type of token to resend
+    resendTokenRequest := *openapiclient.NewResendTokenRequest("INVITE_MFA_USER") // ResendTokenRequest | The type of token to resend
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

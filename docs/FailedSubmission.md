@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FailedSubmission** | Pointer to [**Payee2**](Payee_2.md) |  | [optional] 
+**FailedSubmission** | Pointer to [**FailedPayee**](FailedPayee.md) |  | [optional] 
 **FailureMessage** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetFailedSubmission
 
-`func (o *FailedSubmission) GetFailedSubmission() Payee2`
+`func (o *FailedSubmission) GetFailedSubmission() FailedPayee`
 
 GetFailedSubmission returns the FailedSubmission field if non-nil, zero value otherwise.
 
 ### GetFailedSubmissionOk
 
-`func (o *FailedSubmission) GetFailedSubmissionOk() (*Payee2, bool)`
+`func (o *FailedSubmission) GetFailedSubmissionOk() (*FailedPayee, bool)`
 
 GetFailedSubmissionOk returns a tuple with the FailedSubmission field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFailedSubmission
 
-`func (o *FailedSubmission) SetFailedSubmission(v Payee2)`
+`func (o *FailedSubmission) SetFailedSubmission(v FailedPayee)`
 
 SetFailedSubmission sets FailedSubmission field to given value.
 

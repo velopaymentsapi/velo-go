@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **DbaName** | Pointer to **string** |  | [optional] 
 **Email** | Pointer to **NullableString** |  | [optional] 
 **PayeeCountry** | Pointer to **string** |  | [optional] 
-**OnboardedStatus** | Pointer to [**OnboardedStatus2**](OnboardedStatus_2.md) |  | [optional] 
+**OnboardedStatus** | Pointer to [**OnboardedStatus2**](OnboardedStatus2.md) |  | [optional] 
 
 ## Methods
 

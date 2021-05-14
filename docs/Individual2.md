@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | [**IndividualV1Name**](IndividualV1_name.md) |  | 
+**Name** | [**IndividualName**](IndividualName.md) |  | 
 **NationalIdentification** | Pointer to **string** | If not authorized to view, value will be masked. Example: XXXXX1234 | [optional] [readonly] 
 **DateOfBirth** | **string** | If not authorized to view, value will be masked. Example: - XXXX-XX-XX | [readonly] 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewIndividual2
 
-`func NewIndividual2(name IndividualV1Name, dateOfBirth string, ) *Individual2`
+`func NewIndividual2(name IndividualName, dateOfBirth string, ) *Individual2`
 
 NewIndividual2 instantiates a new Individual2 object
 This constructor will assign default values to properties that have it defined,
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetName
 
-`func (o *Individual2) GetName() IndividualV1Name`
+`func (o *Individual2) GetName() IndividualName`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *Individual2) GetNameOk() (*IndividualV1Name, bool)`
+`func (o *Individual2) GetNameOk() (*IndividualName, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *Individual2) SetName(v IndividualV1Name)`
+`func (o *Individual2) SetName(v IndividualName)`
 
 SetName sets Name field to given value.
 

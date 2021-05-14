@@ -1,0 +1,3 @@
+package velopayments
+type OneOfPingPaymentStatusChangedPaymentRejectedOrReturnedOnboardingStatusChangedPayableStatusChangedPayeeDetailsChangedDebitStatusChanged struct {
+}

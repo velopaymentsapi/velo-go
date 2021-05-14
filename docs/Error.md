@@ -4,10 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ErrorMessage** | Pointer to **string** | verbose message indicating the nature of the error Will be localised  | [optional] 
+**ErrorMessage** | Pointer to **string** | English language message indicating the nature of the error | [optional] 
+**ErrorCode** | Pointer to **string** | Unique numeric code that can be used for switching client behavior or to drive translated or customised error messages | [optional] 
+**LocalisationDetails** | Pointer to [**LocalisationDetails**](LocalisationDetails.md) |  | [optional] 
 **Location** | Pointer to **string** | the property or object that caused the error | [optional] 
 **LocationType** | Pointer to **string** | the location type in the request that was the cause of the error  | [optional] 
-**ReasonCode** | Pointer to **string** | a camel-cased string that can be used by clients to localise client error messages | [optional] 
+**ReasonCode** | Pointer to **string** | a camel-cased string that can be used by clients to localise client error messages (deprecated) | [optional] 
+**ErrorData** | Pointer to [**ErrorData**](ErrorData.md) |  | [optional] 
 
 ## Methods
 
@@ -52,6 +55,56 @@ SetErrorMessage sets ErrorMessage field to given value.
 `func (o *Error) HasErrorMessage() bool`
 
 HasErrorMessage returns a boolean if a field has been set.
+
+### GetErrorCode
+
+`func (o *Error) GetErrorCode() string`
+
+GetErrorCode returns the ErrorCode field if non-nil, zero value otherwise.
+
+### GetErrorCodeOk
+
+`func (o *Error) GetErrorCodeOk() (*string, bool)`
+
+GetErrorCodeOk returns a tuple with the ErrorCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorCode
+
+`func (o *Error) SetErrorCode(v string)`
+
+SetErrorCode sets ErrorCode field to given value.
+
+### HasErrorCode
+
+`func (o *Error) HasErrorCode() bool`
+
+HasErrorCode returns a boolean if a field has been set.
+
+### GetLocalisationDetails
+
+`func (o *Error) GetLocalisationDetails() LocalisationDetails`
+
+GetLocalisationDetails returns the LocalisationDetails field if non-nil, zero value otherwise.
+
+### GetLocalisationDetailsOk
+
+`func (o *Error) GetLocalisationDetailsOk() (*LocalisationDetails, bool)`
+
+GetLocalisationDetailsOk returns a tuple with the LocalisationDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocalisationDetails
+
+`func (o *Error) SetLocalisationDetails(v LocalisationDetails)`
+
+SetLocalisationDetails sets LocalisationDetails field to given value.
+
+### HasLocalisationDetails
+
+`func (o *Error) HasLocalisationDetails() bool`
+
+HasLocalisationDetails returns a boolean if a field has been set.
 
 ### GetLocation
 
@@ -127,6 +180,31 @@ SetReasonCode sets ReasonCode field to given value.
 `func (o *Error) HasReasonCode() bool`
 
 HasReasonCode returns a boolean if a field has been set.
+
+### GetErrorData
+
+`func (o *Error) GetErrorData() ErrorData`
+
+GetErrorData returns the ErrorData field if non-nil, zero value otherwise.
+
+### GetErrorDataOk
+
+`func (o *Error) GetErrorDataOk() (*ErrorData, bool)`
+
+GetErrorDataOk returns a tuple with the ErrorData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorData
+
+`func (o *Error) SetErrorData(v ErrorData)`
+
+SetErrorData sets ErrorData field to given value.
+
+### HasErrorData
+
+`func (o *Error) HasErrorData() bool`
+
+HasErrorData returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **MfaType** | Pointer to **string** | The type of the MFA device | [optional] 
 **MfaStatus** | Pointer to **string** | The status of the MFA device | [optional] 
 **LockedOut** | Pointer to **bool** | If true the user is currently locked out and unable to log in | [optional] 
-**LockedOutTimestamp** | Pointer to [**NullableTime**](time.Time.md) | A timestamp showing when the user was locked out If null then the user is not currently locked out  | [optional] 
+**LockedOutTimestamp** | Pointer to **NullableTime** | A timestamp showing when the user was locked out If null then the user is not currently locked out  | [optional] 
 
 ## Methods
 

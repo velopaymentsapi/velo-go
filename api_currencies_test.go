@@ -14,11 +14,16 @@ func TestListSupportedCurrenciesV2(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
-	cfg.BasePath = os.Getenv("APIURL")
+	cfg.Servers = ServerConfigurations{
+		{
+			URL:         os.Getenv("APIURL"),
+			Description: "Velo Payments for testing",
+		},
+	}
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
-		_, h, err := client.CurrenciesApi.ListSupportedCurrenciesV2(context.TODO())
+		_, h, err := client.CurrenciesApi.ListSupportedCurrenciesV2(context.TODO()).Execute()
 		if err != nil {
 			t.Errorf("TEST %s FAILED with error", k)
 		}

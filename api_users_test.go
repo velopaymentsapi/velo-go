@@ -5,7 +5,6 @@ import (
 	"os"
 	"testing"
 
-	"github.com/antihax/optional"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -58,19 +57,17 @@ func TestListUsers(t *testing.T) {
 	}
 
 	cfg := NewConfiguration()
-	cfg.BasePath = os.Getenv("APIURL")
+	cfg.Servers = ServerConfigurations{
+		{
+			URL:         os.Getenv("APIURL"),
+			Description: "Velo Payments for testing",
+		},
+	}
 	client := NewAPIClient(cfg)
 
 	for k, tc := range cases {
 		auth := context.WithValue(context.TODO(), ContextAccessToken, token)
-
-		opts := ListUsersOpts{
-			EntityId: optional.NewInterface(payorID),
-			Page:     optional.NewInt32(1),
-			PageSize: optional.NewInt32(25),
-		}
-
-		_, h, err := client.UsersApi.ListUsers(auth, &opts)
+		_, h, err := client.UsersApi.ListUsers(auth).EntityId(payorID).Page(1).PageSize(25).Execute()
 		if err != nil {
 			t.Errorf("TEST %s FAILED with error", k)
 		}

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**PagedUserResponsePage**](PagedUserResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]GetFundingsResponseLinks**](GetFundingsResponse_links.md) |  | [optional] 
+**Page** | Pointer to [**PagedUserResponsePage**](PagedUserResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]GetFundingsResponseLinks**](GetFundingsResponseLinks.md) |  | [optional] 
 **Content** | Pointer to [**[]FundingAudit**](FundingAudit.md) |  | [optional] 
 
 ## Methods

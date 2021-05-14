@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FundingAccountResponse2**](FundingAccountResponse_2.md)
+[**FundingAccountResponse2**](FundingAccountResponse2.md)
 
 ### Authorization
 
@@ -401,8 +401,8 @@ import (
 func main() {
     payorId := TODO // string |  (optional)
     sourceAccountId := TODO // string |  (optional)
-    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
-    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
+    page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
+    pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields (e.g. ?sort=accountName:asc,name:asc) Default is accountName:asc The supported sort fields are - accountName, name and currency. (optional) (default to "accountName:asc")
     sensitive := true // bool |  (optional) (default to false)
 
@@ -429,8 +429,8 @@ Other parameters are passed through a pointer to a apiGetFundingAccountsRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](.md) |  | 
- **sourceAccountId** | [**string**](.md) |  | 
+ **payorId** | [**string**](string.md) |  | 
+ **sourceAccountId** | [**string**](string.md) |  | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;accountName:asc,name:asc) Default is accountName:asc The supported sort fields are - accountName, name and currency. | [default to &quot;accountName:asc&quot;]
@@ -477,11 +477,11 @@ import (
 func main() {
     payorId := TODO // string |  (optional)
     name := "name_example" // string | The descriptive funding account name (optional)
-    country := "country_example" // string | The 2 letter ISO 3166-1 country code (upper case) (optional)
-    currency := "currency_example" // string | The ISO 4217 currency code (optional)
-    type_ := *openapiclient.NewFundingAccountType() // FundingAccountType | The type of funding account. (optional)
-    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
-    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
+    country := "US" // string | The 2 letter ISO 3166-1 country code (upper case) (optional)
+    currency := "USD" // string | The ISO 4217 currency code (optional)
+    type_ := openapiclient.FundingAccountType("FBO") // FundingAccountType | The type of funding account. (optional)
+    page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
+    pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields (e.g. ?sort=accountName:asc,name:asc) Default is accountName:asc The supported sort fields are - accountName, name. (optional) (default to "accountName:asc")
     sensitive := true // bool |  (optional) (default to false)
 
@@ -508,11 +508,11 @@ Other parameters are passed through a pointer to a apiGetFundingAccountsV2Reques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](.md) |  | 
+ **payorId** | [**string**](string.md) |  | 
  **name** | **string** | The descriptive funding account name | 
  **country** | **string** | The 2 letter ISO 3166-1 country code (upper case) | 
  **currency** | **string** | The ISO 4217 currency code | 
- **type_** | [**FundingAccountType**](.md) | The type of funding account. | 
+ **type_** | [**FundingAccountType**](FundingAccountType.md) | The type of funding account. | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;accountName:asc,name:asc) Default is accountName:asc The supported sort fields are - accountName, name. | [default to &quot;accountName:asc&quot;]
@@ -520,7 +520,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListFundingAccountsResponse2**](ListFundingAccountsResponse_2.md)
+[**ListFundingAccountsResponse2**](ListFundingAccountsResponse2.md)
 
 ### Authorization
 
@@ -769,8 +769,8 @@ import (
 func main() {
     physicalAccountName := "physicalAccountName_example" // string | Physical Account Name (optional)
     payorId := TODO // string | The account owner Payor ID (optional)
-    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
-    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
+    page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
+    pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields e.g. ?sort=name:asc Default is name:asc The supported sort fields are - fundingRef  (optional) (default to "fundingRef:asc")
 
     configuration := openapiclient.NewConfiguration()
@@ -797,7 +797,7 @@ Other parameters are passed through a pointer to a apiGetSourceAccountsRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **physicalAccountName** | **string** | Physical Account Name | 
- **payorId** | [**string**](.md) | The account owner Payor ID | 
+ **payorId** | [**string**](string.md) | The account owner Payor ID | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields e.g. ?sort&#x3D;name:asc Default is name:asc The supported sort fields are - fundingRef  | [default to &quot;fundingRef:asc&quot;]
@@ -845,8 +845,8 @@ func main() {
     physicalAccountId := TODO // string | The physical account ID (optional)
     payorId := TODO // string | The account owner Payor ID (optional)
     fundingAccountId := TODO // string | The funding account ID (optional)
-    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
-    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
+    page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
+    pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields e.g. ?sort=name:asc Default is name:asc The supported sort fields are - fundingRef, name, balance  (optional) (default to "fundingRef:asc")
 
     configuration := openapiclient.NewConfiguration()
@@ -873,9 +873,9 @@ Other parameters are passed through a pointer to a apiGetSourceAccountsV2Request
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **physicalAccountName** | **string** | Physical Account Name | 
- **physicalAccountId** | [**string**](.md) | The physical account ID | 
- **payorId** | [**string**](.md) | The account owner Payor ID | 
- **fundingAccountId** | [**string**](.md) | The funding account ID | 
+ **physicalAccountId** | [**string**](string.md) | The physical account ID | 
+ **payorId** | [**string**](string.md) | The account owner Payor ID | 
+ **fundingAccountId** | [**string**](string.md) | The funding account ID | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields e.g. ?sort&#x3D;name:asc Default is name:asc The supported sort fields are - fundingRef, name, balance  | [default to &quot;fundingRef:asc&quot;]
@@ -900,7 +900,7 @@ Name | Type | Description  | Notes
 
 ## GetSourceAccountsV3
 
-> ListSourceAccountResponseV3 GetSourceAccountsV3(ctx).PhysicalAccountName(physicalAccountName).PhysicalAccountId(physicalAccountId).PayorId(payorId).FundingAccountId(fundingAccountId).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Execute()
+> ListSourceAccountResponseV3 GetSourceAccountsV3(ctx).PhysicalAccountName(physicalAccountName).PhysicalAccountId(physicalAccountId).PayorId(payorId).FundingAccountId(fundingAccountId).IncludeUserDeleted(includeUserDeleted).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Execute()
 
 Get list of source accounts
 
@@ -923,14 +923,15 @@ func main() {
     physicalAccountId := TODO // string | The physical account ID (optional)
     payorId := TODO // string | The account owner Payor ID (optional)
     fundingAccountId := TODO // string | The funding account ID (optional)
-    type_ := *openapiclient.NewSourceAccountType() // SourceAccountType | The type of source account. (optional)
-    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
-    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
+    includeUserDeleted := "includeUserDeleted_example" // bool | A filter for retrieving both active accounts and user deleted ones (optional)
+    type_ := openapiclient.SourceAccountType("FBO") // SourceAccountType | The type of source account. (optional)
+    page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
+    pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields e.g. ?sort=name:asc Default is name:asc The supported sort fields are - fundingRef, name, balance  (optional) (default to "fundingRef:asc")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetSourceAccountsV3(context.Background()).PhysicalAccountName(physicalAccountName).PhysicalAccountId(physicalAccountId).PayorId(payorId).FundingAccountId(fundingAccountId).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    resp, r, err := api_client.FundingManagerApi.GetSourceAccountsV3(context.Background()).PhysicalAccountName(physicalAccountName).PhysicalAccountId(physicalAccountId).PayorId(payorId).FundingAccountId(fundingAccountId).IncludeUserDeleted(includeUserDeleted).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetSourceAccountsV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -952,10 +953,11 @@ Other parameters are passed through a pointer to a apiGetSourceAccountsV3Request
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **physicalAccountName** | **string** | Physical Account Name | 
- **physicalAccountId** | [**string**](.md) | The physical account ID | 
- **payorId** | [**string**](.md) | The account owner Payor ID | 
- **fundingAccountId** | [**string**](.md) | The funding account ID | 
- **type_** | [**SourceAccountType**](.md) | The type of source account. | 
+ **physicalAccountId** | [**string**](string.md) | The physical account ID | 
+ **payorId** | [**string**](string.md) | The account owner Payor ID | 
+ **fundingAccountId** | [**string**](string.md) | The funding account ID | 
+ **includeUserDeleted** | **bool** | A filter for retrieving both active accounts and user deleted ones | 
+ **type_** | [**SourceAccountType**](SourceAccountType.md) | The type of source account. | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields e.g. ?sort&#x3D;name:asc Default is name:asc The supported sort fields are - fundingRef, name, balance  | [default to &quot;fundingRef:asc&quot;]
@@ -995,14 +997,15 @@ import (
     "context"
     "fmt"
     "os"
+    "time"
     openapiclient "./openapi"
 )
 
 func main() {
     payorId := TODO // string | 
     updatedSince := time.Now() // time.Time | 
-    page := 987 // int32 | Page number. Default is 1. (optional) (default to 1)
-    pageSize := 987 // int32 | The number of results to return in a page (optional) (default to 25)
+    page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
+    pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -1027,7 +1030,7 @@ Other parameters are passed through a pointer to a apiListFundingAuditDeltasRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](.md) |  | 
+ **payorId** | [**string**](string.md) |  | 
  **updatedSince** | **time.Time** |  | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
@@ -1142,7 +1145,7 @@ import (
 
 func main() {
     sourceAccountId := TODO // string | The 'from' source account id, which will be debited
-    transferRequest := *openapiclient.NewTransferRequest("ToSourceAccountId_example", int64(123), "Currency_example") // TransferRequest | Body
+    transferRequest := *openapiclient.NewTransferRequest("ToSourceAccountId_example", int64(123), "USD") // TransferRequest | Body
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -1212,7 +1215,7 @@ import (
 
 func main() {
     sourceAccountId := TODO // string | The 'from' source account id, which will be debited
-    transferRequest2 := *openapiclient.NewTransferRequest_2("ToSourceAccountId_example", int64(123), "Currency_example") // TransferRequest2 | Body
+    transferRequest2 := *openapiclient.NewTransferRequest2("ToSourceAccountId_example", int64(123), "USD") // TransferRequest2 | Body
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

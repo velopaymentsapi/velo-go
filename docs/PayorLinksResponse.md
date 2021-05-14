@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Links** | Pointer to [**[]PayorLinksResponseLinks**](PayorLinksResponse_links.md) |  | [optional] 
-**Payors** | Pointer to [**[]PayorLinksResponsePayors**](PayorLinksResponse_payors.md) |  | [optional] 
+**Links** | Pointer to [**[]PayorLinksResponseLinks**](PayorLinksResponseLinks.md) |  | [optional] 
+**Payors** | Pointer to [**[]PayorLinksResponsePayors**](PayorLinksResponsePayors.md) |  | [optional] 
 
 ## Methods
 

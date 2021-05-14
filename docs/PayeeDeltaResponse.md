@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**PayeeDeltaResponsePage**](PayeeDeltaResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]PayeeDeltaResponseLinks**](PayeeDeltaResponse_links.md) |  | [optional] 
+**Page** | Pointer to [**PayeeDeltaResponsePage**](PayeeDeltaResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]PayeeDeltaResponseLinks**](PayeeDeltaResponseLinks.md) |  | [optional] 
 **Content** | Pointer to [**[]PayeeDelta**](PayeeDelta.md) |  | [optional] 
 
 ## Methods

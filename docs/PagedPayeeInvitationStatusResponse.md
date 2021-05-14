@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**PagedPayeeInvitationStatusResponsePage**](PagedPayeeInvitationStatusResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponse_links.md) |  | [optional] 
+**Page** | Pointer to [**PagedPayeeInvitationStatusResponsePage**](PagedPayeeInvitationStatusResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponseLinks.md) |  | [optional] 
 **Content** | Pointer to [**[]PayeeInvitationStatusResponse**](PayeeInvitationStatusResponse.md) |  | [optional] 
 
 ## Methods

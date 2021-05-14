@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Summary** | Pointer to [**PagedPayeeResponseSummary**](PagedPayeeResponse_summary.md) |  | [optional] 
-**Page** | Pointer to [**PagedPayeeResponsePage**](PagedPayeeResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponse_links.md) |  | [optional] 
-**Content** | Pointer to [**[]PayeeResponse**](PayeeResponse.md) |  | [optional] 
+**Summary** | Pointer to [**PagedPayeeResponseSummary**](PagedPayeeResponseSummary.md) |  | [optional] 
+**Page** | Pointer to [**PagedPayeeResponsePage**](PagedPayeeResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponseLinks.md) |  | [optional] 
+**Content** | Pointer to [**[]GetPayeeListResponse**](GetPayeeListResponse.md) |  | [optional] 
 
 ## Methods
 
@@ -105,20 +105,20 @@ HasLinks returns a boolean if a field has been set.
 
 ### GetContent
 
-`func (o *PagedPayeeResponse) GetContent() []PayeeResponse`
+`func (o *PagedPayeeResponse) GetContent() []GetPayeeListResponse`
 
 GetContent returns the Content field if non-nil, zero value otherwise.
 
 ### GetContentOk
 
-`func (o *PagedPayeeResponse) GetContentOk() (*[]PayeeResponse, bool)`
+`func (o *PagedPayeeResponse) GetContentOk() (*[]GetPayeeListResponse, bool)`
 
 GetContentOk returns a tuple with the Content field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContent
 
-`func (o *PagedPayeeResponse) SetContent(v []PayeeResponse)`
+`func (o *PagedPayeeResponse) SetContent(v []GetPayeeListResponse)`
 
 SetContent sets Content field to given value.
 

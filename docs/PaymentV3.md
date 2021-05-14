@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **Withdrawable** | Pointer to **bool** |  | [optional] 
 **Status** | Pointer to **string** |  | [optional] 
 **TransmissionType** | Pointer to [**TransmissionType**](TransmissionType.md) |  | [optional] 
+**RemoteSystemId** | Pointer to **string** |  | [optional] 
+**PaymentMetadata** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -304,6 +306,56 @@ SetTransmissionType sets TransmissionType field to given value.
 `func (o *PaymentV3) HasTransmissionType() bool`
 
 HasTransmissionType returns a boolean if a field has been set.
+
+### GetRemoteSystemId
+
+`func (o *PaymentV3) GetRemoteSystemId() string`
+
+GetRemoteSystemId returns the RemoteSystemId field if non-nil, zero value otherwise.
+
+### GetRemoteSystemIdOk
+
+`func (o *PaymentV3) GetRemoteSystemIdOk() (*string, bool)`
+
+GetRemoteSystemIdOk returns a tuple with the RemoteSystemId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteSystemId
+
+`func (o *PaymentV3) SetRemoteSystemId(v string)`
+
+SetRemoteSystemId sets RemoteSystemId field to given value.
+
+### HasRemoteSystemId
+
+`func (o *PaymentV3) HasRemoteSystemId() bool`
+
+HasRemoteSystemId returns a boolean if a field has been set.
+
+### GetPaymentMetadata
+
+`func (o *PaymentV3) GetPaymentMetadata() string`
+
+GetPaymentMetadata returns the PaymentMetadata field if non-nil, zero value otherwise.
+
+### GetPaymentMetadataOk
+
+`func (o *PaymentV3) GetPaymentMetadataOk() (*string, bool)`
+
+GetPaymentMetadataOk returns a tuple with the PaymentMetadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMetadata
+
+`func (o *PaymentV3) SetPaymentMetadata(v string)`
+
+SetPaymentMetadata sets PaymentMetadata field to given value.
+
+### HasPaymentMetadata
+
+`func (o *PaymentV3) HasPaymentMetadata() bool`
+
+HasPaymentMetadata returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**PagedPayeeInvitationStatusResponsePage**](PagedPayeeInvitationStatusResponse_page.md) |  | [optional] 
-**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponse_links.md) |  | [optional] 
-**Content** | Pointer to [**[]PayeeInvitationStatusResponse2**](PayeeInvitationStatusResponse_2.md) |  | [optional] 
+**Page** | Pointer to [**PagedPayeeInvitationStatusResponsePage**](PagedPayeeInvitationStatusResponsePage.md) |  | [optional] 
+**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponseLinks.md) |  | [optional] 
+**Content** | Pointer to [**[]PayeeInvitationStatusResponse2**](PayeeInvitationStatusResponse2.md) |  | [optional] 
 
 ## Methods
 

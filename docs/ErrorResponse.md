@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Errors** | Pointer to [**[]Error**](Error.md) | one or more errors | [optional] 
-**CorrelationId** | Pointer to **NullableString** | a unique identifier to track a request or related sequence of requests | [optional] 
+**CorrelationId** | Pointer to **string** | a unique identifier to track a request or related sequence of requests | [optional] 
+**HttpStatusCode** | Pointer to **int32** | this will mirror the Status-Code part of the Status-Line http response header and is included for extra clarity | [optional] 
 
 ## Methods
 
@@ -51,16 +52,6 @@ SetErrors sets Errors field to given value.
 
 HasErrors returns a boolean if a field has been set.
 
-### SetErrorsNil
-
-`func (o *ErrorResponse) SetErrorsNil(b bool)`
-
- SetErrorsNil sets the value for Errors to be an explicit nil
-
-### UnsetErrors
-`func (o *ErrorResponse) UnsetErrors()`
-
-UnsetErrors ensures that no value is present for Errors, not even an explicit nil
 ### GetCorrelationId
 
 `func (o *ErrorResponse) GetCorrelationId() string`
@@ -86,16 +77,31 @@ SetCorrelationId sets CorrelationId field to given value.
 
 HasCorrelationId returns a boolean if a field has been set.
 
-### SetCorrelationIdNil
+### GetHttpStatusCode
 
-`func (o *ErrorResponse) SetCorrelationIdNil(b bool)`
+`func (o *ErrorResponse) GetHttpStatusCode() int32`
 
- SetCorrelationIdNil sets the value for CorrelationId to be an explicit nil
+GetHttpStatusCode returns the HttpStatusCode field if non-nil, zero value otherwise.
 
-### UnsetCorrelationId
-`func (o *ErrorResponse) UnsetCorrelationId()`
+### GetHttpStatusCodeOk
 
-UnsetCorrelationId ensures that no value is present for CorrelationId, not even an explicit nil
+`func (o *ErrorResponse) GetHttpStatusCodeOk() (*int32, bool)`
+
+GetHttpStatusCodeOk returns a tuple with the HttpStatusCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttpStatusCode
+
+`func (o *ErrorResponse) SetHttpStatusCode(v int32)`
+
+SetHttpStatusCode sets HttpStatusCode field to given value.
+
+### HasHttpStatusCode
+
+`func (o *ErrorResponse) HasHttpStatusCode() bool`
+
+HasHttpStatusCode returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

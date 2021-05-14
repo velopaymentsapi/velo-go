@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EventId** | **string** | The id of the event. | 
-**EventDateTime** | [**time.Time**](time.Time.md) | The date/time at which the event occurred. | 
+**EventDateTime** | **time.Time** | The date/time at which the event occurred. | 
 **EventType** | **string** | The type of the event. | 
 **SourceCurrency** | Pointer to [**PaymentAuditCurrencyV3**](PaymentAuditCurrencyV3.md) |  | [optional] 
 **SourceAmount** | Pointer to **int64** | The source amount exposed by the event. | [optional] 

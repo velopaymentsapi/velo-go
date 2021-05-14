@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | Pointer to **float64** | The amount funded | [optional] 
 **Currency** | Pointer to **string** | The currency of the funding | [optional] 
-**DateTime** | Pointer to [**time.Time**](time.Time.md) |  | [optional] 
+**DateTime** | Pointer to **time.Time** |  | [optional] 
 **Status** | Pointer to **string** |  | [optional] 
 **SourceAccountName** | Pointer to **string** |  | [optional] 
 **FundingAccountName** | Pointer to **string** |  | [optional] 
