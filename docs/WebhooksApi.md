@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**CreateWebhookV1**](WebhooksApi.md#CreateWebhookV1) | **Post** /v1/webhooks | Create Webhook
 [**GetWebhookV1**](WebhooksApi.md#GetWebhookV1) | **Get** /v1/webhooks/{webhookId} | Get details about the given webhook.
 [**ListWebhooksV1**](WebhooksApi.md#ListWebhooksV1) | **Get** /v1/webhooks | List the details about the webhooks for the given payor.
-[**PingWebhookV1**](WebhooksApi.md#PingWebhookV1) | **Post** /v1/webhooks/{webhookId}/ping | 
 [**UpdateWebhookV1**](WebhooksApi.md#UpdateWebhookV1) | **Post** /v1/webhooks/{webhookId} | Update Webhook
 
 
@@ -201,74 +200,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WebhooksResponse**](WebhooksResponse.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PingWebhookV1
-
-> PingResponse PingWebhookV1(ctx, webhookId).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    webhookId := TODO // string | Webhook id
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.WebhooksApi.PingWebhookV1(context.Background(), webhookId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.PingWebhookV1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PingWebhookV1`: PingResponse
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.PingWebhookV1`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**webhookId** | [**string**](.md) | Webhook id | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPingWebhookV1Request struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**PingResponse**](PingResponse.md)
 
 ### Authorization
 
