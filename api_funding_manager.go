@@ -1,10 +1,10 @@
 /*
- * Velo Payments APIs
- *
- * ## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
- *
- * API version: 2.26.124
- */
+Velo Payments APIs
+
+## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
+
+API version: 2.29.128
+*/
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
 
@@ -12,46 +12,51 @@ package velopayments
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // FundingManagerApiService FundingManagerApi service
 type FundingManagerApiService service
 
 type ApiCreateAchFundingRequestRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	sourceAccountId string
 	fundingRequestV1 *FundingRequestV1
 }
 
+// Body to included amount to be funded
 func (r ApiCreateAchFundingRequestRequest) FundingRequestV1(fundingRequestV1 FundingRequestV1) ApiCreateAchFundingRequestRequest {
 	r.fundingRequestV1 = &fundingRequestV1
 	return r
 }
 
-func (r ApiCreateAchFundingRequestRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiCreateAchFundingRequestRequest) Execute() (*http.Response, error) {
 	return r.ApiService.CreateAchFundingRequestExecute(r)
 }
 
 /*
- * CreateAchFundingRequest Create Funding Request
- * Instruct a funding request to transfer funds from the payor’s funding bank to the payor’s balance held within Velo.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param sourceAccountId Source account id
- * @return ApiCreateAchFundingRequestRequest
- */
-func (a *FundingManagerApiService) CreateAchFundingRequest(ctx _context.Context, sourceAccountId string) ApiCreateAchFundingRequestRequest {
+CreateAchFundingRequest Create Funding Request
+
+Instruct a funding request to transfer funds from the payor’s funding bank to the payor’s balance held within Velo.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sourceAccountId Source account id
+ @return ApiCreateAchFundingRequestRequest
+
+Deprecated
+*/
+func (a *FundingManagerApiService) CreateAchFundingRequest(ctx context.Context, sourceAccountId string) ApiCreateAchFundingRequestRequest {
 	return ApiCreateAchFundingRequestRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -59,29 +64,26 @@ func (a *FundingManagerApiService) CreateAchFundingRequest(ctx _context.Context,
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *FundingManagerApiService) CreateAchFundingRequestExecute(r ApiCreateAchFundingRequestRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+// Deprecated
+func (a *FundingManagerApiService) CreateAchFundingRequestExecute(r ApiCreateAchFundingRequestRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.CreateAchFundingRequest")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/sourceAccounts/{sourceAccountId}/achFundingRequest"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", _neturl.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", url.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.fundingRequestV1 == nil {
 		return nil, reportError("fundingRequestV1 is required and must be specified")
 	}
@@ -105,7 +107,7 @@ func (a *FundingManagerApiService) CreateAchFundingRequestExecute(r ApiCreateAch
 	}
 	// body params
 	localVarPostBody = r.fundingRequestV1
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -115,15 +117,15 @@ func (a *FundingManagerApiService) CreateAchFundingRequestExecute(r ApiCreateAch
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -163,29 +165,34 @@ func (a *FundingManagerApiService) CreateAchFundingRequestExecute(r ApiCreateAch
 }
 
 type ApiCreateFundingRequestRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	sourceAccountId string
 	fundingRequestV2 *FundingRequestV2
 }
 
+// Body to included amount to be funded
 func (r ApiCreateFundingRequestRequest) FundingRequestV2(fundingRequestV2 FundingRequestV2) ApiCreateFundingRequestRequest {
 	r.fundingRequestV2 = &fundingRequestV2
 	return r
 }
 
-func (r ApiCreateFundingRequestRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiCreateFundingRequestRequest) Execute() (*http.Response, error) {
 	return r.ApiService.CreateFundingRequestExecute(r)
 }
 
 /*
- * CreateFundingRequest Create Funding Request
- * Instruct a funding request to transfer funds from the payor’s funding bank to the payor’s balance held within Velo  (202 - accepted, 400 - invalid request body, 404 - source account not found).
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param sourceAccountId Source account id
- * @return ApiCreateFundingRequestRequest
- */
-func (a *FundingManagerApiService) CreateFundingRequest(ctx _context.Context, sourceAccountId string) ApiCreateFundingRequestRequest {
+CreateFundingRequest Create Funding Request
+
+Instruct a funding request to transfer funds from the payor’s funding bank to the payor’s balance held within Velo  (202 - accepted, 400 - invalid request body, 404 - source account not found).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sourceAccountId Source account id
+ @return ApiCreateFundingRequestRequest
+
+Deprecated
+*/
+func (a *FundingManagerApiService) CreateFundingRequest(ctx context.Context, sourceAccountId string) ApiCreateFundingRequestRequest {
 	return ApiCreateFundingRequestRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -193,29 +200,26 @@ func (a *FundingManagerApiService) CreateFundingRequest(ctx _context.Context, so
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *FundingManagerApiService) CreateFundingRequestExecute(r ApiCreateFundingRequestRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+// Deprecated
+func (a *FundingManagerApiService) CreateFundingRequestExecute(r ApiCreateFundingRequestRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.CreateFundingRequest")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/sourceAccounts/{sourceAccountId}/fundingRequest"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", _neturl.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", url.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.fundingRequestV2 == nil {
 		return nil, reportError("fundingRequestV2 is required and must be specified")
 	}
@@ -239,7 +243,7 @@ func (a *FundingManagerApiService) CreateFundingRequestExecute(r ApiCreateFundin
 	}
 	// body params
 	localVarPostBody = r.fundingRequestV2
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -249,15 +253,15 @@ func (a *FundingManagerApiService) CreateFundingRequestExecute(r ApiCreateFundin
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -307,29 +311,32 @@ func (a *FundingManagerApiService) CreateFundingRequestExecute(r ApiCreateFundin
 }
 
 type ApiCreateFundingRequestV3Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	sourceAccountId string
 	fundingRequestV3 *FundingRequestV3
 }
 
+// Body to included amount to be funded
 func (r ApiCreateFundingRequestV3Request) FundingRequestV3(fundingRequestV3 FundingRequestV3) ApiCreateFundingRequestV3Request {
 	r.fundingRequestV3 = &fundingRequestV3
 	return r
 }
 
-func (r ApiCreateFundingRequestV3Request) Execute() (*_nethttp.Response, error) {
+func (r ApiCreateFundingRequestV3Request) Execute() (*http.Response, error) {
 	return r.ApiService.CreateFundingRequestV3Execute(r)
 }
 
 /*
- * CreateFundingRequestV3 Create Funding Request
- * Instruct a funding request to transfer funds from the payor’s funding bank to the payor’s balance held within Velo  (202 - accepted, 400 - invalid request body, 404 - source account not found).
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param sourceAccountId Source account id
- * @return ApiCreateFundingRequestV3Request
- */
-func (a *FundingManagerApiService) CreateFundingRequestV3(ctx _context.Context, sourceAccountId string) ApiCreateFundingRequestV3Request {
+CreateFundingRequestV3 Create Funding Request
+
+Instruct a funding request to transfer funds from the payor’s funding bank to the payor’s balance held within Velo  (202 - accepted, 400 - invalid request body, 404 - source account not found).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sourceAccountId Source account id
+ @return ApiCreateFundingRequestV3Request
+*/
+func (a *FundingManagerApiService) CreateFundingRequestV3(ctx context.Context, sourceAccountId string) ApiCreateFundingRequestV3Request {
 	return ApiCreateFundingRequestV3Request{
 		ApiService: a,
 		ctx: ctx,
@@ -337,29 +344,25 @@ func (a *FundingManagerApiService) CreateFundingRequestV3(ctx _context.Context, 
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *FundingManagerApiService) CreateFundingRequestV3Execute(r ApiCreateFundingRequestV3Request) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *FundingManagerApiService) CreateFundingRequestV3Execute(r ApiCreateFundingRequestV3Request) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.CreateFundingRequestV3")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v3/sourceAccounts/{sourceAccountId}/fundingRequest"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", _neturl.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", url.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.fundingRequestV3 == nil {
 		return nil, reportError("fundingRequestV3 is required and must be specified")
 	}
@@ -383,7 +386,7 @@ func (a *FundingManagerApiService) CreateFundingRequestV3Execute(r ApiCreateFund
 	}
 	// body params
 	localVarPostBody = r.fundingRequestV3
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -393,15 +396,15 @@ func (a *FundingManagerApiService) CreateFundingRequestV3Execute(r ApiCreateFund
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -451,7 +454,7 @@ func (a *FundingManagerApiService) CreateFundingRequestV3Execute(r ApiCreateFund
 }
 
 type ApiGetFundingAccountRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	fundingAccountId string
 	sensitive *bool
@@ -462,18 +465,22 @@ func (r ApiGetFundingAccountRequest) Sensitive(sensitive bool) ApiGetFundingAcco
 	return r
 }
 
-func (r ApiGetFundingAccountRequest) Execute() (FundingAccountResponse, *_nethttp.Response, error) {
+func (r ApiGetFundingAccountRequest) Execute() (*FundingAccountResponse, *http.Response, error) {
 	return r.ApiService.GetFundingAccountExecute(r)
 }
 
 /*
- * GetFundingAccount Get Funding Account
- * Get Funding Account by ID
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param fundingAccountId
- * @return ApiGetFundingAccountRequest
- */
-func (a *FundingManagerApiService) GetFundingAccount(ctx _context.Context, fundingAccountId string) ApiGetFundingAccountRequest {
+GetFundingAccount Get Funding Account
+
+Get Funding Account by ID
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param fundingAccountId
+ @return ApiGetFundingAccountRequest
+
+Deprecated
+*/
+func (a *FundingManagerApiService) GetFundingAccount(ctx context.Context, fundingAccountId string) ApiGetFundingAccountRequest {
 	return ApiGetFundingAccountRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -481,31 +488,28 @@ func (a *FundingManagerApiService) GetFundingAccount(ctx _context.Context, fundi
 	}
 }
 
-/*
- * Execute executes the request
- * @return FundingAccountResponse
- */
-func (a *FundingManagerApiService) GetFundingAccountExecute(r ApiGetFundingAccountRequest) (FundingAccountResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return FundingAccountResponse
+// Deprecated
+func (a *FundingManagerApiService) GetFundingAccountExecute(r ApiGetFundingAccountRequest) (*FundingAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FundingAccountResponse
+		formFiles            []formFile
+		localVarReturnValue  *FundingAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.GetFundingAccount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/fundingAccounts/{fundingAccountId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"fundingAccountId"+"}", _neturl.PathEscape(parameterToString(r.fundingAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"fundingAccountId"+"}", url.PathEscape(parameterToString(r.fundingAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.sensitive != nil {
 		localVarQueryParams.Add("sensitive", parameterToString(*r.sensitive, ""))
@@ -527,7 +531,7 @@ func (a *FundingManagerApiService) GetFundingAccountExecute(r ApiGetFundingAccou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -537,15 +541,15 @@ func (a *FundingManagerApiService) GetFundingAccountExecute(r ApiGetFundingAccou
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -583,7 +587,7 @@ func (a *FundingManagerApiService) GetFundingAccountExecute(r ApiGetFundingAccou
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -594,7 +598,7 @@ func (a *FundingManagerApiService) GetFundingAccountExecute(r ApiGetFundingAccou
 }
 
 type ApiGetFundingAccountV2Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	fundingAccountId string
 	sensitive *bool
@@ -605,18 +609,20 @@ func (r ApiGetFundingAccountV2Request) Sensitive(sensitive bool) ApiGetFundingAc
 	return r
 }
 
-func (r ApiGetFundingAccountV2Request) Execute() (FundingAccountResponse2, *_nethttp.Response, error) {
+func (r ApiGetFundingAccountV2Request) Execute() (*FundingAccountResponse2, *http.Response, error) {
 	return r.ApiService.GetFundingAccountV2Execute(r)
 }
 
 /*
- * GetFundingAccountV2 Get Funding Account
- * Get Funding Account by ID
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param fundingAccountId
- * @return ApiGetFundingAccountV2Request
- */
-func (a *FundingManagerApiService) GetFundingAccountV2(ctx _context.Context, fundingAccountId string) ApiGetFundingAccountV2Request {
+GetFundingAccountV2 Get Funding Account
+
+Get Funding Account by ID
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param fundingAccountId
+ @return ApiGetFundingAccountV2Request
+*/
+func (a *FundingManagerApiService) GetFundingAccountV2(ctx context.Context, fundingAccountId string) ApiGetFundingAccountV2Request {
 	return ApiGetFundingAccountV2Request{
 		ApiService: a,
 		ctx: ctx,
@@ -624,31 +630,27 @@ func (a *FundingManagerApiService) GetFundingAccountV2(ctx _context.Context, fun
 	}
 }
 
-/*
- * Execute executes the request
- * @return FundingAccountResponse2
- */
-func (a *FundingManagerApiService) GetFundingAccountV2Execute(r ApiGetFundingAccountV2Request) (FundingAccountResponse2, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return FundingAccountResponse2
+func (a *FundingManagerApiService) GetFundingAccountV2Execute(r ApiGetFundingAccountV2Request) (*FundingAccountResponse2, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FundingAccountResponse2
+		formFiles            []formFile
+		localVarReturnValue  *FundingAccountResponse2
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.GetFundingAccountV2")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/fundingAccounts/{fundingAccountId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"fundingAccountId"+"}", _neturl.PathEscape(parameterToString(r.fundingAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"fundingAccountId"+"}", url.PathEscape(parameterToString(r.fundingAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.sensitive != nil {
 		localVarQueryParams.Add("sensitive", parameterToString(*r.sensitive, ""))
@@ -670,7 +672,7 @@ func (a *FundingManagerApiService) GetFundingAccountV2Execute(r ApiGetFundingAcc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -680,15 +682,15 @@ func (a *FundingManagerApiService) GetFundingAccountV2Execute(r ApiGetFundingAcc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -726,7 +728,7 @@ func (a *FundingManagerApiService) GetFundingAccountV2Execute(r ApiGetFundingAcc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -737,7 +739,7 @@ func (a *FundingManagerApiService) GetFundingAccountV2Execute(r ApiGetFundingAcc
 }
 
 type ApiGetFundingAccountsRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	payorId *string
 	sourceAccountId *string
@@ -755,14 +757,17 @@ func (r ApiGetFundingAccountsRequest) SourceAccountId(sourceAccountId string) Ap
 	r.sourceAccountId = &sourceAccountId
 	return r
 }
+// Page number. Default is 1.
 func (r ApiGetFundingAccountsRequest) Page(page int32) ApiGetFundingAccountsRequest {
 	r.page = &page
 	return r
 }
+// The number of results to return in a page
 func (r ApiGetFundingAccountsRequest) PageSize(pageSize int32) ApiGetFundingAccountsRequest {
 	r.pageSize = &pageSize
 	return r
 }
+// List of sort fields (e.g. ?sort&#x3D;accountName:asc,name:asc) Default is accountName:asc The supported sort fields are - accountName, name and currency.
 func (r ApiGetFundingAccountsRequest) Sort(sort string) ApiGetFundingAccountsRequest {
 	r.sort = &sort
 	return r
@@ -772,47 +777,48 @@ func (r ApiGetFundingAccountsRequest) Sensitive(sensitive bool) ApiGetFundingAcc
 	return r
 }
 
-func (r ApiGetFundingAccountsRequest) Execute() (ListFundingAccountsResponse, *_nethttp.Response, error) {
+func (r ApiGetFundingAccountsRequest) Execute() (*ListFundingAccountsResponse, *http.Response, error) {
 	return r.ApiService.GetFundingAccountsExecute(r)
 }
 
 /*
- * GetFundingAccounts Get Funding Accounts
- * Get the funding accounts.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiGetFundingAccountsRequest
- */
-func (a *FundingManagerApiService) GetFundingAccounts(ctx _context.Context) ApiGetFundingAccountsRequest {
+GetFundingAccounts Get Funding Accounts
+
+Get the funding accounts.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFundingAccountsRequest
+
+Deprecated
+*/
+func (a *FundingManagerApiService) GetFundingAccounts(ctx context.Context) ApiGetFundingAccountsRequest {
 	return ApiGetFundingAccountsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return ListFundingAccountsResponse
- */
-func (a *FundingManagerApiService) GetFundingAccountsExecute(r ApiGetFundingAccountsRequest) (ListFundingAccountsResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return ListFundingAccountsResponse
+// Deprecated
+func (a *FundingManagerApiService) GetFundingAccountsExecute(r ApiGetFundingAccountsRequest) (*ListFundingAccountsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ListFundingAccountsResponse
+		formFiles            []formFile
+		localVarReturnValue  *ListFundingAccountsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.GetFundingAccounts")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/fundingAccounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.payorId != nil {
 		localVarQueryParams.Add("payorId", parameterToString(*r.payorId, ""))
@@ -849,7 +855,7 @@ func (a *FundingManagerApiService) GetFundingAccountsExecute(r ApiGetFundingAcco
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -859,15 +865,15 @@ func (a *FundingManagerApiService) GetFundingAccountsExecute(r ApiGetFundingAcco
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -895,7 +901,7 @@ func (a *FundingManagerApiService) GetFundingAccountsExecute(r ApiGetFundingAcco
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -906,7 +912,7 @@ func (a *FundingManagerApiService) GetFundingAccountsExecute(r ApiGetFundingAcco
 }
 
 type ApiGetFundingAccountsV2Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	payorId *string
 	name *string
@@ -923,30 +929,37 @@ func (r ApiGetFundingAccountsV2Request) PayorId(payorId string) ApiGetFundingAcc
 	r.payorId = &payorId
 	return r
 }
+// The descriptive funding account name
 func (r ApiGetFundingAccountsV2Request) Name(name string) ApiGetFundingAccountsV2Request {
 	r.name = &name
 	return r
 }
+// The 2 letter ISO 3166-1 country code (upper case)
 func (r ApiGetFundingAccountsV2Request) Country(country string) ApiGetFundingAccountsV2Request {
 	r.country = &country
 	return r
 }
+// The ISO 4217 currency code
 func (r ApiGetFundingAccountsV2Request) Currency(currency string) ApiGetFundingAccountsV2Request {
 	r.currency = &currency
 	return r
 }
+// The type of funding account.
 func (r ApiGetFundingAccountsV2Request) Type_(type_ FundingAccountType) ApiGetFundingAccountsV2Request {
 	r.type_ = &type_
 	return r
 }
+// Page number. Default is 1.
 func (r ApiGetFundingAccountsV2Request) Page(page int32) ApiGetFundingAccountsV2Request {
 	r.page = &page
 	return r
 }
+// The number of results to return in a page
 func (r ApiGetFundingAccountsV2Request) PageSize(pageSize int32) ApiGetFundingAccountsV2Request {
 	r.pageSize = &pageSize
 	return r
 }
+// List of sort fields (e.g. ?sort&#x3D;accountName:asc,name:asc) Default is accountName:asc The supported sort fields are - accountName, name.
 func (r ApiGetFundingAccountsV2Request) Sort(sort string) ApiGetFundingAccountsV2Request {
 	r.sort = &sort
 	return r
@@ -956,47 +969,45 @@ func (r ApiGetFundingAccountsV2Request) Sensitive(sensitive bool) ApiGetFundingA
 	return r
 }
 
-func (r ApiGetFundingAccountsV2Request) Execute() (ListFundingAccountsResponse2, *_nethttp.Response, error) {
+func (r ApiGetFundingAccountsV2Request) Execute() (*ListFundingAccountsResponse2, *http.Response, error) {
 	return r.ApiService.GetFundingAccountsV2Execute(r)
 }
 
 /*
- * GetFundingAccountsV2 Get Funding Accounts
- * Get the funding accounts.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiGetFundingAccountsV2Request
- */
-func (a *FundingManagerApiService) GetFundingAccountsV2(ctx _context.Context) ApiGetFundingAccountsV2Request {
+GetFundingAccountsV2 Get Funding Accounts
+
+Get the funding accounts.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFundingAccountsV2Request
+*/
+func (a *FundingManagerApiService) GetFundingAccountsV2(ctx context.Context) ApiGetFundingAccountsV2Request {
 	return ApiGetFundingAccountsV2Request{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return ListFundingAccountsResponse2
- */
-func (a *FundingManagerApiService) GetFundingAccountsV2Execute(r ApiGetFundingAccountsV2Request) (ListFundingAccountsResponse2, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return ListFundingAccountsResponse2
+func (a *FundingManagerApiService) GetFundingAccountsV2Execute(r ApiGetFundingAccountsV2Request) (*ListFundingAccountsResponse2, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ListFundingAccountsResponse2
+		formFiles            []formFile
+		localVarReturnValue  *ListFundingAccountsResponse2
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.GetFundingAccountsV2")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/fundingAccounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.payorId != nil {
 		localVarQueryParams.Add("payorId", parameterToString(*r.payorId, ""))
@@ -1042,7 +1053,7 @@ func (a *FundingManagerApiService) GetFundingAccountsV2Execute(r ApiGetFundingAc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1052,15 +1063,15 @@ func (a *FundingManagerApiService) GetFundingAccountsV2Execute(r ApiGetFundingAc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1088,7 +1099,7 @@ func (a *FundingManagerApiService) GetFundingAccountsV2Execute(r ApiGetFundingAc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1099,24 +1110,28 @@ func (a *FundingManagerApiService) GetFundingAccountsV2Execute(r ApiGetFundingAc
 }
 
 type ApiGetSourceAccountRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	sourceAccountId string
 }
 
 
-func (r ApiGetSourceAccountRequest) Execute() (SourceAccountResponse, *_nethttp.Response, error) {
+func (r ApiGetSourceAccountRequest) Execute() (*SourceAccountResponse, *http.Response, error) {
 	return r.ApiService.GetSourceAccountExecute(r)
 }
 
 /*
- * GetSourceAccount Get details about given source account.
- * Get details about given source account.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param sourceAccountId Source account id
- * @return ApiGetSourceAccountRequest
- */
-func (a *FundingManagerApiService) GetSourceAccount(ctx _context.Context, sourceAccountId string) ApiGetSourceAccountRequest {
+GetSourceAccount Get details about given source account.
+
+Get details about given source account.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sourceAccountId Source account id
+ @return ApiGetSourceAccountRequest
+
+Deprecated
+*/
+func (a *FundingManagerApiService) GetSourceAccount(ctx context.Context, sourceAccountId string) ApiGetSourceAccountRequest {
 	return ApiGetSourceAccountRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1124,31 +1139,28 @@ func (a *FundingManagerApiService) GetSourceAccount(ctx _context.Context, source
 	}
 }
 
-/*
- * Execute executes the request
- * @return SourceAccountResponse
- */
-func (a *FundingManagerApiService) GetSourceAccountExecute(r ApiGetSourceAccountRequest) (SourceAccountResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return SourceAccountResponse
+// Deprecated
+func (a *FundingManagerApiService) GetSourceAccountExecute(r ApiGetSourceAccountRequest) (*SourceAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SourceAccountResponse
+		formFiles            []formFile
+		localVarReturnValue  *SourceAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.GetSourceAccount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/sourceAccounts/{sourceAccountId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", _neturl.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", url.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1167,7 +1179,7 @@ func (a *FundingManagerApiService) GetSourceAccountExecute(r ApiGetSourceAccount
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1177,15 +1189,15 @@ func (a *FundingManagerApiService) GetSourceAccountExecute(r ApiGetSourceAccount
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1213,7 +1225,7 @@ func (a *FundingManagerApiService) GetSourceAccountExecute(r ApiGetSourceAccount
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1224,24 +1236,28 @@ func (a *FundingManagerApiService) GetSourceAccountExecute(r ApiGetSourceAccount
 }
 
 type ApiGetSourceAccountV2Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	sourceAccountId string
 }
 
 
-func (r ApiGetSourceAccountV2Request) Execute() (SourceAccountResponseV2, *_nethttp.Response, error) {
+func (r ApiGetSourceAccountV2Request) Execute() (*SourceAccountResponseV2, *http.Response, error) {
 	return r.ApiService.GetSourceAccountV2Execute(r)
 }
 
 /*
- * GetSourceAccountV2 Get details about given source account.
- * Get details about given source account.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param sourceAccountId Source account id
- * @return ApiGetSourceAccountV2Request
- */
-func (a *FundingManagerApiService) GetSourceAccountV2(ctx _context.Context, sourceAccountId string) ApiGetSourceAccountV2Request {
+GetSourceAccountV2 Get details about given source account.
+
+Get details about given source account.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sourceAccountId Source account id
+ @return ApiGetSourceAccountV2Request
+
+Deprecated
+*/
+func (a *FundingManagerApiService) GetSourceAccountV2(ctx context.Context, sourceAccountId string) ApiGetSourceAccountV2Request {
 	return ApiGetSourceAccountV2Request{
 		ApiService: a,
 		ctx: ctx,
@@ -1249,31 +1265,28 @@ func (a *FundingManagerApiService) GetSourceAccountV2(ctx _context.Context, sour
 	}
 }
 
-/*
- * Execute executes the request
- * @return SourceAccountResponseV2
- */
-func (a *FundingManagerApiService) GetSourceAccountV2Execute(r ApiGetSourceAccountV2Request) (SourceAccountResponseV2, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return SourceAccountResponseV2
+// Deprecated
+func (a *FundingManagerApiService) GetSourceAccountV2Execute(r ApiGetSourceAccountV2Request) (*SourceAccountResponseV2, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SourceAccountResponseV2
+		formFiles            []formFile
+		localVarReturnValue  *SourceAccountResponseV2
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.GetSourceAccountV2")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/sourceAccounts/{sourceAccountId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", _neturl.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", url.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1292,7 +1305,7 @@ func (a *FundingManagerApiService) GetSourceAccountV2Execute(r ApiGetSourceAccou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1302,15 +1315,15 @@ func (a *FundingManagerApiService) GetSourceAccountV2Execute(r ApiGetSourceAccou
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1358,7 +1371,7 @@ func (a *FundingManagerApiService) GetSourceAccountV2Execute(r ApiGetSourceAccou
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1369,24 +1382,26 @@ func (a *FundingManagerApiService) GetSourceAccountV2Execute(r ApiGetSourceAccou
 }
 
 type ApiGetSourceAccountV3Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	sourceAccountId string
 }
 
 
-func (r ApiGetSourceAccountV3Request) Execute() (SourceAccountResponseV3, *_nethttp.Response, error) {
+func (r ApiGetSourceAccountV3Request) Execute() (*SourceAccountResponseV3, *http.Response, error) {
 	return r.ApiService.GetSourceAccountV3Execute(r)
 }
 
 /*
- * GetSourceAccountV3 Get details about given source account.
- * Get details about given source account.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param sourceAccountId Source account id
- * @return ApiGetSourceAccountV3Request
- */
-func (a *FundingManagerApiService) GetSourceAccountV3(ctx _context.Context, sourceAccountId string) ApiGetSourceAccountV3Request {
+GetSourceAccountV3 Get details about given source account.
+
+Get details about given source account.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sourceAccountId Source account id
+ @return ApiGetSourceAccountV3Request
+*/
+func (a *FundingManagerApiService) GetSourceAccountV3(ctx context.Context, sourceAccountId string) ApiGetSourceAccountV3Request {
 	return ApiGetSourceAccountV3Request{
 		ApiService: a,
 		ctx: ctx,
@@ -1394,31 +1409,27 @@ func (a *FundingManagerApiService) GetSourceAccountV3(ctx _context.Context, sour
 	}
 }
 
-/*
- * Execute executes the request
- * @return SourceAccountResponseV3
- */
-func (a *FundingManagerApiService) GetSourceAccountV3Execute(r ApiGetSourceAccountV3Request) (SourceAccountResponseV3, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return SourceAccountResponseV3
+func (a *FundingManagerApiService) GetSourceAccountV3Execute(r ApiGetSourceAccountV3Request) (*SourceAccountResponseV3, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SourceAccountResponseV3
+		formFiles            []formFile
+		localVarReturnValue  *SourceAccountResponseV3
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.GetSourceAccountV3")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v3/sourceAccounts/{sourceAccountId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", _neturl.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", url.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1437,7 +1448,7 @@ func (a *FundingManagerApiService) GetSourceAccountV3Execute(r ApiGetSourceAccou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1447,15 +1458,15 @@ func (a *FundingManagerApiService) GetSourceAccountV3Execute(r ApiGetSourceAccou
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1503,7 +1514,7 @@ func (a *FundingManagerApiService) GetSourceAccountV3Execute(r ApiGetSourceAccou
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1514,7 +1525,7 @@ func (a *FundingManagerApiService) GetSourceAccountV3Execute(r ApiGetSourceAccou
 }
 
 type ApiGetSourceAccountsRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	physicalAccountName *string
 	payorId *string
@@ -1523,68 +1534,74 @@ type ApiGetSourceAccountsRequest struct {
 	sort *string
 }
 
+// Physical Account Name
 func (r ApiGetSourceAccountsRequest) PhysicalAccountName(physicalAccountName string) ApiGetSourceAccountsRequest {
 	r.physicalAccountName = &physicalAccountName
 	return r
 }
+// The account owner Payor ID
 func (r ApiGetSourceAccountsRequest) PayorId(payorId string) ApiGetSourceAccountsRequest {
 	r.payorId = &payorId
 	return r
 }
+// Page number. Default is 1.
 func (r ApiGetSourceAccountsRequest) Page(page int32) ApiGetSourceAccountsRequest {
 	r.page = &page
 	return r
 }
+// The number of results to return in a page
 func (r ApiGetSourceAccountsRequest) PageSize(pageSize int32) ApiGetSourceAccountsRequest {
 	r.pageSize = &pageSize
 	return r
 }
+// List of sort fields e.g. ?sort&#x3D;name:asc Default is name:asc The supported sort fields are - fundingRef 
 func (r ApiGetSourceAccountsRequest) Sort(sort string) ApiGetSourceAccountsRequest {
 	r.sort = &sort
 	return r
 }
 
-func (r ApiGetSourceAccountsRequest) Execute() (ListSourceAccountResponse, *_nethttp.Response, error) {
+func (r ApiGetSourceAccountsRequest) Execute() (*ListSourceAccountResponse, *http.Response, error) {
 	return r.ApiService.GetSourceAccountsExecute(r)
 }
 
 /*
- * GetSourceAccounts Get list of source accounts
- * List source accounts.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiGetSourceAccountsRequest
- */
-func (a *FundingManagerApiService) GetSourceAccounts(ctx _context.Context) ApiGetSourceAccountsRequest {
+GetSourceAccounts Get list of source accounts
+
+List source accounts.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetSourceAccountsRequest
+
+Deprecated
+*/
+func (a *FundingManagerApiService) GetSourceAccounts(ctx context.Context) ApiGetSourceAccountsRequest {
 	return ApiGetSourceAccountsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return ListSourceAccountResponse
- */
-func (a *FundingManagerApiService) GetSourceAccountsExecute(r ApiGetSourceAccountsRequest) (ListSourceAccountResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return ListSourceAccountResponse
+// Deprecated
+func (a *FundingManagerApiService) GetSourceAccountsExecute(r ApiGetSourceAccountsRequest) (*ListSourceAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ListSourceAccountResponse
+		formFiles            []formFile
+		localVarReturnValue  *ListSourceAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.GetSourceAccounts")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/sourceAccounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.physicalAccountName != nil {
 		localVarQueryParams.Add("physicalAccountName", parameterToString(*r.physicalAccountName, ""))
@@ -1618,7 +1635,7 @@ func (a *FundingManagerApiService) GetSourceAccountsExecute(r ApiGetSourceAccoun
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1628,15 +1645,15 @@ func (a *FundingManagerApiService) GetSourceAccountsExecute(r ApiGetSourceAccoun
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1655,7 +1672,7 @@ func (a *FundingManagerApiService) GetSourceAccountsExecute(r ApiGetSourceAccoun
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1666,7 +1683,7 @@ func (a *FundingManagerApiService) GetSourceAccountsExecute(r ApiGetSourceAccoun
 }
 
 type ApiGetSourceAccountsV2Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	physicalAccountName *string
 	physicalAccountId *string
@@ -1677,76 +1694,84 @@ type ApiGetSourceAccountsV2Request struct {
 	sort *string
 }
 
+// Physical Account Name
 func (r ApiGetSourceAccountsV2Request) PhysicalAccountName(physicalAccountName string) ApiGetSourceAccountsV2Request {
 	r.physicalAccountName = &physicalAccountName
 	return r
 }
+// The physical account ID
 func (r ApiGetSourceAccountsV2Request) PhysicalAccountId(physicalAccountId string) ApiGetSourceAccountsV2Request {
 	r.physicalAccountId = &physicalAccountId
 	return r
 }
+// The account owner Payor ID
 func (r ApiGetSourceAccountsV2Request) PayorId(payorId string) ApiGetSourceAccountsV2Request {
 	r.payorId = &payorId
 	return r
 }
+// The funding account ID
 func (r ApiGetSourceAccountsV2Request) FundingAccountId(fundingAccountId string) ApiGetSourceAccountsV2Request {
 	r.fundingAccountId = &fundingAccountId
 	return r
 }
+// Page number. Default is 1.
 func (r ApiGetSourceAccountsV2Request) Page(page int32) ApiGetSourceAccountsV2Request {
 	r.page = &page
 	return r
 }
+// The number of results to return in a page
 func (r ApiGetSourceAccountsV2Request) PageSize(pageSize int32) ApiGetSourceAccountsV2Request {
 	r.pageSize = &pageSize
 	return r
 }
+// List of sort fields e.g. ?sort&#x3D;name:asc Default is name:asc The supported sort fields are - fundingRef, name, balance 
 func (r ApiGetSourceAccountsV2Request) Sort(sort string) ApiGetSourceAccountsV2Request {
 	r.sort = &sort
 	return r
 }
 
-func (r ApiGetSourceAccountsV2Request) Execute() (ListSourceAccountResponseV2, *_nethttp.Response, error) {
+func (r ApiGetSourceAccountsV2Request) Execute() (*ListSourceAccountResponseV2, *http.Response, error) {
 	return r.ApiService.GetSourceAccountsV2Execute(r)
 }
 
 /*
- * GetSourceAccountsV2 Get list of source accounts
- * List source accounts.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiGetSourceAccountsV2Request
- */
-func (a *FundingManagerApiService) GetSourceAccountsV2(ctx _context.Context) ApiGetSourceAccountsV2Request {
+GetSourceAccountsV2 Get list of source accounts
+
+List source accounts.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetSourceAccountsV2Request
+
+Deprecated
+*/
+func (a *FundingManagerApiService) GetSourceAccountsV2(ctx context.Context) ApiGetSourceAccountsV2Request {
 	return ApiGetSourceAccountsV2Request{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return ListSourceAccountResponseV2
- */
-func (a *FundingManagerApiService) GetSourceAccountsV2Execute(r ApiGetSourceAccountsV2Request) (ListSourceAccountResponseV2, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return ListSourceAccountResponseV2
+// Deprecated
+func (a *FundingManagerApiService) GetSourceAccountsV2Execute(r ApiGetSourceAccountsV2Request) (*ListSourceAccountResponseV2, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ListSourceAccountResponseV2
+		formFiles            []formFile
+		localVarReturnValue  *ListSourceAccountResponseV2
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.GetSourceAccountsV2")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/sourceAccounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.physicalAccountName != nil {
 		localVarQueryParams.Add("physicalAccountName", parameterToString(*r.physicalAccountName, ""))
@@ -1786,7 +1811,7 @@ func (a *FundingManagerApiService) GetSourceAccountsV2Execute(r ApiGetSourceAcco
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1796,15 +1821,15 @@ func (a *FundingManagerApiService) GetSourceAccountsV2Execute(r ApiGetSourceAcco
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1852,7 +1877,7 @@ func (a *FundingManagerApiService) GetSourceAccountsV2Execute(r ApiGetSourceAcco
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1863,7 +1888,7 @@ func (a *FundingManagerApiService) GetSourceAccountsV2Execute(r ApiGetSourceAcco
 }
 
 type ApiGetSourceAccountsV3Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	physicalAccountName *string
 	physicalAccountId *string
@@ -1876,84 +1901,91 @@ type ApiGetSourceAccountsV3Request struct {
 	sort *string
 }
 
+// Physical Account Name
 func (r ApiGetSourceAccountsV3Request) PhysicalAccountName(physicalAccountName string) ApiGetSourceAccountsV3Request {
 	r.physicalAccountName = &physicalAccountName
 	return r
 }
+// The physical account ID
 func (r ApiGetSourceAccountsV3Request) PhysicalAccountId(physicalAccountId string) ApiGetSourceAccountsV3Request {
 	r.physicalAccountId = &physicalAccountId
 	return r
 }
+// The account owner Payor ID
 func (r ApiGetSourceAccountsV3Request) PayorId(payorId string) ApiGetSourceAccountsV3Request {
 	r.payorId = &payorId
 	return r
 }
+// The funding account ID
 func (r ApiGetSourceAccountsV3Request) FundingAccountId(fundingAccountId string) ApiGetSourceAccountsV3Request {
 	r.fundingAccountId = &fundingAccountId
 	return r
 }
+// A filter for retrieving both active accounts and user deleted ones
 func (r ApiGetSourceAccountsV3Request) IncludeUserDeleted(includeUserDeleted bool) ApiGetSourceAccountsV3Request {
 	r.includeUserDeleted = &includeUserDeleted
 	return r
 }
+// The type of source account.
 func (r ApiGetSourceAccountsV3Request) Type_(type_ SourceAccountType) ApiGetSourceAccountsV3Request {
 	r.type_ = &type_
 	return r
 }
+// Page number. Default is 1.
 func (r ApiGetSourceAccountsV3Request) Page(page int32) ApiGetSourceAccountsV3Request {
 	r.page = &page
 	return r
 }
+// The number of results to return in a page
 func (r ApiGetSourceAccountsV3Request) PageSize(pageSize int32) ApiGetSourceAccountsV3Request {
 	r.pageSize = &pageSize
 	return r
 }
+// List of sort fields e.g. ?sort&#x3D;name:asc Default is name:asc The supported sort fields are - fundingRef, name, balance 
 func (r ApiGetSourceAccountsV3Request) Sort(sort string) ApiGetSourceAccountsV3Request {
 	r.sort = &sort
 	return r
 }
 
-func (r ApiGetSourceAccountsV3Request) Execute() (ListSourceAccountResponseV3, *_nethttp.Response, error) {
+func (r ApiGetSourceAccountsV3Request) Execute() (*ListSourceAccountResponseV3, *http.Response, error) {
 	return r.ApiService.GetSourceAccountsV3Execute(r)
 }
 
 /*
- * GetSourceAccountsV3 Get list of source accounts
- * List source accounts.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiGetSourceAccountsV3Request
- */
-func (a *FundingManagerApiService) GetSourceAccountsV3(ctx _context.Context) ApiGetSourceAccountsV3Request {
+GetSourceAccountsV3 Get list of source accounts
+
+List source accounts.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetSourceAccountsV3Request
+*/
+func (a *FundingManagerApiService) GetSourceAccountsV3(ctx context.Context) ApiGetSourceAccountsV3Request {
 	return ApiGetSourceAccountsV3Request{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return ListSourceAccountResponseV3
- */
-func (a *FundingManagerApiService) GetSourceAccountsV3Execute(r ApiGetSourceAccountsV3Request) (ListSourceAccountResponseV3, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return ListSourceAccountResponseV3
+func (a *FundingManagerApiService) GetSourceAccountsV3Execute(r ApiGetSourceAccountsV3Request) (*ListSourceAccountResponseV3, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ListSourceAccountResponseV3
+		formFiles            []formFile
+		localVarReturnValue  *ListSourceAccountResponseV3
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.GetSourceAccountsV3")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v3/sourceAccounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.physicalAccountName != nil {
 		localVarQueryParams.Add("physicalAccountName", parameterToString(*r.physicalAccountName, ""))
@@ -1999,7 +2031,7 @@ func (a *FundingManagerApiService) GetSourceAccountsV3Execute(r ApiGetSourceAcco
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2009,15 +2041,15 @@ func (a *FundingManagerApiService) GetSourceAccountsV3Execute(r ApiGetSourceAcco
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2065,7 +2097,7 @@ func (a *FundingManagerApiService) GetSourceAccountsV3Execute(r ApiGetSourceAcco
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2076,7 +2108,7 @@ func (a *FundingManagerApiService) GetSourceAccountsV3Execute(r ApiGetSourceAcco
 }
 
 type ApiListFundingAuditDeltasRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	payorId *string
 	updatedSince *time.Time
@@ -2092,56 +2124,56 @@ func (r ApiListFundingAuditDeltasRequest) UpdatedSince(updatedSince time.Time) A
 	r.updatedSince = &updatedSince
 	return r
 }
+// Page number. Default is 1.
 func (r ApiListFundingAuditDeltasRequest) Page(page int32) ApiListFundingAuditDeltasRequest {
 	r.page = &page
 	return r
 }
+// The number of results to return in a page
 func (r ApiListFundingAuditDeltasRequest) PageSize(pageSize int32) ApiListFundingAuditDeltasRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiListFundingAuditDeltasRequest) Execute() (PageResourceFundingPayorStatusAuditResponseFundingPayorStatusAuditResponse, *_nethttp.Response, error) {
+func (r ApiListFundingAuditDeltasRequest) Execute() (*PageResourceFundingPayorStatusAuditResponseFundingPayorStatusAuditResponse, *http.Response, error) {
 	return r.ApiService.ListFundingAuditDeltasExecute(r)
 }
 
 /*
- * ListFundingAuditDeltas Get Funding Audit Delta
- * Get funding audit deltas for a payor
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiListFundingAuditDeltasRequest
- */
-func (a *FundingManagerApiService) ListFundingAuditDeltas(ctx _context.Context) ApiListFundingAuditDeltasRequest {
+ListFundingAuditDeltas Get Funding Audit Delta
+
+Get funding audit deltas for a payor
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListFundingAuditDeltasRequest
+*/
+func (a *FundingManagerApiService) ListFundingAuditDeltas(ctx context.Context) ApiListFundingAuditDeltasRequest {
 	return ApiListFundingAuditDeltasRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return PageResourceFundingPayorStatusAuditResponseFundingPayorStatusAuditResponse
- */
-func (a *FundingManagerApiService) ListFundingAuditDeltasExecute(r ApiListFundingAuditDeltasRequest) (PageResourceFundingPayorStatusAuditResponseFundingPayorStatusAuditResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PageResourceFundingPayorStatusAuditResponseFundingPayorStatusAuditResponse
+func (a *FundingManagerApiService) ListFundingAuditDeltasExecute(r ApiListFundingAuditDeltasRequest) (*PageResourceFundingPayorStatusAuditResponseFundingPayorStatusAuditResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PageResourceFundingPayorStatusAuditResponseFundingPayorStatusAuditResponse
+		formFiles            []formFile
+		localVarReturnValue  *PageResourceFundingPayorStatusAuditResponseFundingPayorStatusAuditResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.ListFundingAuditDeltas")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/deltas/fundings"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.payorId == nil {
 		return localVarReturnValue, nil, reportError("payorId is required and must be specified")
 	}
@@ -2174,7 +2206,7 @@ func (a *FundingManagerApiService) ListFundingAuditDeltasExecute(r ApiListFundin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2184,15 +2216,15 @@ func (a *FundingManagerApiService) ListFundingAuditDeltasExecute(r ApiListFundin
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2230,7 +2262,7 @@ func (a *FundingManagerApiService) ListFundingAuditDeltasExecute(r ApiListFundin
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2241,29 +2273,32 @@ func (a *FundingManagerApiService) ListFundingAuditDeltasExecute(r ApiListFundin
 }
 
 type ApiSetNotificationsRequestRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	sourceAccountId string
 	setNotificationsRequest *SetNotificationsRequest
 }
 
+// Body to included minimum balance to set
 func (r ApiSetNotificationsRequestRequest) SetNotificationsRequest(setNotificationsRequest SetNotificationsRequest) ApiSetNotificationsRequestRequest {
 	r.setNotificationsRequest = &setNotificationsRequest
 	return r
 }
 
-func (r ApiSetNotificationsRequestRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiSetNotificationsRequestRequest) Execute() (*http.Response, error) {
 	return r.ApiService.SetNotificationsRequestExecute(r)
 }
 
 /*
- * SetNotificationsRequest Set notifications
- * Set notifications for a given source account
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param sourceAccountId Source account id
- * @return ApiSetNotificationsRequestRequest
- */
-func (a *FundingManagerApiService) SetNotificationsRequest(ctx _context.Context, sourceAccountId string) ApiSetNotificationsRequestRequest {
+SetNotificationsRequest Set notifications
+
+Set notifications for a given source account
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sourceAccountId Source account id
+ @return ApiSetNotificationsRequestRequest
+*/
+func (a *FundingManagerApiService) SetNotificationsRequest(ctx context.Context, sourceAccountId string) ApiSetNotificationsRequestRequest {
 	return ApiSetNotificationsRequestRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2271,29 +2306,25 @@ func (a *FundingManagerApiService) SetNotificationsRequest(ctx _context.Context,
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *FundingManagerApiService) SetNotificationsRequestExecute(r ApiSetNotificationsRequestRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *FundingManagerApiService) SetNotificationsRequestExecute(r ApiSetNotificationsRequestRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.SetNotificationsRequest")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/sourceAccounts/{sourceAccountId}/notifications"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", _neturl.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", url.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.setNotificationsRequest == nil {
 		return nil, reportError("setNotificationsRequest is required and must be specified")
 	}
@@ -2317,7 +2348,7 @@ func (a *FundingManagerApiService) SetNotificationsRequestExecute(r ApiSetNotifi
 	}
 	// body params
 	localVarPostBody = r.setNotificationsRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -2327,15 +2358,15 @@ func (a *FundingManagerApiService) SetNotificationsRequestExecute(r ApiSetNotifi
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2385,29 +2416,34 @@ func (a *FundingManagerApiService) SetNotificationsRequestExecute(r ApiSetNotifi
 }
 
 type ApiTransferFundsRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	sourceAccountId string
 	transferRequest *TransferRequest
 }
 
+// Body
 func (r ApiTransferFundsRequest) TransferRequest(transferRequest TransferRequest) ApiTransferFundsRequest {
 	r.transferRequest = &transferRequest
 	return r
 }
 
-func (r ApiTransferFundsRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiTransferFundsRequest) Execute() (*http.Response, error) {
 	return r.ApiService.TransferFundsExecute(r)
 }
 
 /*
- * TransferFunds Transfer Funds between source accounts
- * Transfer funds between source accounts for a Payor. The 'from' source account is identified in the URL, and is the account which will be debited. The 'to' (destination) source account is in the body, and is the account which will be credited. Both source accounts must belong to the same Payor. There must be sufficient balance in the 'from' source account, otherwise the transfer attempt will fail.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param sourceAccountId The 'from' source account id, which will be debited
- * @return ApiTransferFundsRequest
- */
-func (a *FundingManagerApiService) TransferFunds(ctx _context.Context, sourceAccountId string) ApiTransferFundsRequest {
+TransferFunds Transfer Funds between source accounts
+
+Transfer funds between source accounts for a Payor. The 'from' source account is identified in the URL, and is the account which will be debited. The 'to' (destination) source account is in the body, and is the account which will be credited. Both source accounts must belong to the same Payor. There must be sufficient balance in the 'from' source account, otherwise the transfer attempt will fail.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sourceAccountId The 'from' source account id, which will be debited
+ @return ApiTransferFundsRequest
+
+Deprecated
+*/
+func (a *FundingManagerApiService) TransferFunds(ctx context.Context, sourceAccountId string) ApiTransferFundsRequest {
 	return ApiTransferFundsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2415,29 +2451,26 @@ func (a *FundingManagerApiService) TransferFunds(ctx _context.Context, sourceAcc
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *FundingManagerApiService) TransferFundsExecute(r ApiTransferFundsRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+// Deprecated
+func (a *FundingManagerApiService) TransferFundsExecute(r ApiTransferFundsRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.TransferFunds")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/sourceAccounts/{sourceAccountId}/transfers"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", _neturl.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", url.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.transferRequest == nil {
 		return nil, reportError("transferRequest is required and must be specified")
 	}
@@ -2461,7 +2494,7 @@ func (a *FundingManagerApiService) TransferFundsExecute(r ApiTransferFundsReques
 	}
 	// body params
 	localVarPostBody = r.transferRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -2471,15 +2504,15 @@ func (a *FundingManagerApiService) TransferFundsExecute(r ApiTransferFundsReques
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2529,29 +2562,32 @@ func (a *FundingManagerApiService) TransferFundsExecute(r ApiTransferFundsReques
 }
 
 type ApiTransferFundsV3Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *FundingManagerApiService
 	sourceAccountId string
 	transferRequest2 *TransferRequest2
 }
 
+// Body
 func (r ApiTransferFundsV3Request) TransferRequest2(transferRequest2 TransferRequest2) ApiTransferFundsV3Request {
 	r.transferRequest2 = &transferRequest2
 	return r
 }
 
-func (r ApiTransferFundsV3Request) Execute() (*_nethttp.Response, error) {
+func (r ApiTransferFundsV3Request) Execute() (*http.Response, error) {
 	return r.ApiService.TransferFundsV3Execute(r)
 }
 
 /*
- * TransferFundsV3 Transfer Funds between source accounts
- * Transfer funds between source accounts for a Payor. The 'from' source account is identified in the URL, and is the account which will be debited. The 'to' (destination) source account is in the body, and is the account which will be credited. Both source accounts must belong to the same Payor. There must be sufficient balance in the 'from' source account, otherwise the transfer attempt will fail.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param sourceAccountId The 'from' source account id, which will be debited
- * @return ApiTransferFundsV3Request
- */
-func (a *FundingManagerApiService) TransferFundsV3(ctx _context.Context, sourceAccountId string) ApiTransferFundsV3Request {
+TransferFundsV3 Transfer Funds between source accounts
+
+Transfer funds between source accounts for a Payor. The 'from' source account is identified in the URL, and is the account which will be debited. The 'to' (destination) source account is in the body, and is the account which will be credited. Both source accounts must belong to the same Payor. There must be sufficient balance in the 'from' source account, otherwise the transfer attempt will fail.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sourceAccountId The 'from' source account id, which will be debited
+ @return ApiTransferFundsV3Request
+*/
+func (a *FundingManagerApiService) TransferFundsV3(ctx context.Context, sourceAccountId string) ApiTransferFundsV3Request {
 	return ApiTransferFundsV3Request{
 		ApiService: a,
 		ctx: ctx,
@@ -2559,29 +2595,25 @@ func (a *FundingManagerApiService) TransferFundsV3(ctx _context.Context, sourceA
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *FundingManagerApiService) TransferFundsV3Execute(r ApiTransferFundsV3Request) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *FundingManagerApiService) TransferFundsV3Execute(r ApiTransferFundsV3Request) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FundingManagerApiService.TransferFundsV3")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v3/sourceAccounts/{sourceAccountId}/transfers"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", _neturl.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sourceAccountId"+"}", url.PathEscape(parameterToString(r.sourceAccountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.transferRequest2 == nil {
 		return nil, reportError("transferRequest2 is required and must be specified")
 	}
@@ -2605,7 +2637,7 @@ func (a *FundingManagerApiService) TransferFundsV3Execute(r ApiTransferFundsV3Re
 	}
 	// body params
 	localVarPostBody = r.transferRequest2
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -2615,15 +2647,15 @@ func (a *FundingManagerApiService) TransferFundsV3Execute(r ApiTransferFundsV3Re
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}

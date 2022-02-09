@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Individual** | Pointer to [**Individual**](Individual.md) |  | [optional] 
 **Company** | Pointer to [**NullableCompany**](Company.md) |  | [optional] 
 **Language** | Pointer to **string** | An IETF BCP 47 language code which has been configured for use within this Velo environment.&lt;BR&gt; See the /v1/supportedLanguages endpoint to list the available codes for an environment.  | [optional] 
-**PayeeType** | Pointer to [**PayeeType**](PayeeType.md) |  | [optional] 
+**PayeeType** | Pointer to [**PayeeType2**](PayeeType2.md) |  | [optional] 
 **Challenge** | Pointer to [**Challenge**](Challenge.md) |  | [optional] 
 **Email** | Pointer to **NullableString** |  | [optional] 
 
@@ -143,20 +143,20 @@ HasLanguage returns a boolean if a field has been set.
 
 ### GetPayeeType
 
-`func (o *UpdatePayeeDetailsRequest) GetPayeeType() PayeeType`
+`func (o *UpdatePayeeDetailsRequest) GetPayeeType() PayeeType2`
 
 GetPayeeType returns the PayeeType field if non-nil, zero value otherwise.
 
 ### GetPayeeTypeOk
 
-`func (o *UpdatePayeeDetailsRequest) GetPayeeTypeOk() (*PayeeType, bool)`
+`func (o *UpdatePayeeDetailsRequest) GetPayeeTypeOk() (*PayeeType2, bool)`
 
 GetPayeeTypeOk returns a tuple with the PayeeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayeeType
 
-`func (o *UpdatePayeeDetailsRequest) SetPayeeType(v PayeeType)`
+`func (o *UpdatePayeeDetailsRequest) SetPayeeType(v PayeeType2)`
 
 SetPayeeType sets PayeeType field to given value.
 

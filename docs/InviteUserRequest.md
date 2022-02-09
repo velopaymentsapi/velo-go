@@ -9,10 +9,11 @@ Name | Type | Description | Notes
 **SmsNumber** | **string** | The phone number of a device that the user can receive sms messages on  | 
 **PrimaryContactNumber** | **string** | The main contact number for the user  | 
 **SecondaryContactNumber** | Pointer to **NullableString** | The secondary contact number for the user  | [optional] 
-**Roles** | **[]string** | The role(s) for the user The role must exist The role can be a custom role or a system role but the invoker must have the permissions to assign the role System roles are: backoffice.admin, payor.master_admin, payor.admin, payor.support  | 
+**Roles** | **[]string** | The role(s) for the user The role must exist The role can be a custom role or a system role but the invoker must have the permissions to assign the role System roles are: velo.backoffice.admin, velo.payor.master_admin, velo.payor.admin, velo.payor.support, velo.payee.admin, velo.payee.support  | 
 **FirstName** | Pointer to **string** |  | [optional] 
 **LastName** | Pointer to **string** |  | [optional] 
-**EntityId** | Pointer to **NullableString** | The payorId or null if the user is not a payor user  | [optional] 
+**EntityId** | Pointer to **NullableString** | The payorId or payeeId or null if the user is a backoffice admin  | [optional] 
+**UserType** | Pointer to **string** | Will default to PAYOR if not provided but entityId is provided | [optional] 
 **VerificationCode** | Pointer to **NullableString** | Optional property that MUST be suppied when manually verifying a user The user&#39;s smsNumber is registered via a separate endpoint and an OTP sent to them  | [optional] 
 
 ## Methods
@@ -254,6 +255,31 @@ HasEntityId returns a boolean if a field has been set.
 `func (o *InviteUserRequest) UnsetEntityId()`
 
 UnsetEntityId ensures that no value is present for EntityId, not even an explicit nil
+### GetUserType
+
+`func (o *InviteUserRequest) GetUserType() string`
+
+GetUserType returns the UserType field if non-nil, zero value otherwise.
+
+### GetUserTypeOk
+
+`func (o *InviteUserRequest) GetUserTypeOk() (*string, bool)`
+
+GetUserTypeOk returns a tuple with the UserType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserType
+
+`func (o *InviteUserRequest) SetUserType(v string)`
+
+SetUserType sets UserType field to given value.
+
+### HasUserType
+
+`func (o *InviteUserRequest) HasUserType() bool`
+
+HasUserType returns a boolean if a field has been set.
+
 ### GetVerificationCode
 
 `func (o *InviteUserRequest) GetVerificationCode() string`

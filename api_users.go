@@ -1,10 +1,10 @@
 /*
- * Velo Payments APIs
- *
- * ## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
- *
- * API version: 2.26.124
- */
+Velo Payments APIs
+
+## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
+
+API version: 2.29.128
+*/
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
 
@@ -12,41 +12,43 @@ package velopayments
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // UsersApiService UsersApi service
 type UsersApiService service
 
 type ApiDeleteUserByIdV2Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	userId string
 }
 
 
-func (r ApiDeleteUserByIdV2Request) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteUserByIdV2Request) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteUserByIdV2Execute(r)
 }
 
 /*
- * DeleteUserByIdV2 Delete a User
- * Delete User by Id.
+DeleteUserByIdV2 Delete a User
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param userId The UUID of the User.
- * @return ApiDeleteUserByIdV2Request
- */
-func (a *UsersApiService) DeleteUserByIdV2(ctx _context.Context, userId string) ApiDeleteUserByIdV2Request {
+Delete User by Id.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The UUID of the User.
+ @return ApiDeleteUserByIdV2Request
+*/
+func (a *UsersApiService) DeleteUserByIdV2(ctx context.Context, userId string) ApiDeleteUserByIdV2Request {
 	return ApiDeleteUserByIdV2Request{
 		ApiService: a,
 		ctx: ctx,
@@ -54,29 +56,25 @@ func (a *UsersApiService) DeleteUserByIdV2(ctx _context.Context, userId string) 
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) DeleteUserByIdV2Execute(r ApiDeleteUserByIdV2Request) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) DeleteUserByIdV2Execute(r ApiDeleteUserByIdV2Request) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.DeleteUserByIdV2")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/{userId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -95,7 +93,7 @@ func (a *UsersApiService) DeleteUserByIdV2Execute(r ApiDeleteUserByIdV2Request) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -105,15 +103,15 @@ func (a *UsersApiService) DeleteUserByIdV2Execute(r ApiDeleteUserByIdV2Request) 
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -153,28 +151,30 @@ func (a *UsersApiService) DeleteUserByIdV2Execute(r ApiDeleteUserByIdV2Request) 
 }
 
 type ApiDisableUserV2Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	userId string
 }
 
 
-func (r ApiDisableUserV2Request) Execute() (*_nethttp.Response, error) {
+func (r ApiDisableUserV2Request) Execute() (*http.Response, error) {
 	return r.ApiService.DisableUserV2Execute(r)
 }
 
 /*
- * DisableUserV2 Disable a User
- * <p>If a user is enabled this endpoint will disable them </p>
+DisableUserV2 Disable a User
+
+<p>If a user is enabled this endpoint will disable them </p>
 <p>The invoker must have the appropriate permission </p>
 <p>A user cannot disable themself </p>
 <p>When a user is disabled any active access tokens will be revoked and the user will not be able to log in</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param userId The UUID of the User.
- * @return ApiDisableUserV2Request
- */
-func (a *UsersApiService) DisableUserV2(ctx _context.Context, userId string) ApiDisableUserV2Request {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The UUID of the User.
+ @return ApiDisableUserV2Request
+*/
+func (a *UsersApiService) DisableUserV2(ctx context.Context, userId string) ApiDisableUserV2Request {
 	return ApiDisableUserV2Request{
 		ApiService: a,
 		ctx: ctx,
@@ -182,29 +182,25 @@ func (a *UsersApiService) DisableUserV2(ctx _context.Context, userId string) Api
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) DisableUserV2Execute(r ApiDisableUserV2Request) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) DisableUserV2Execute(r ApiDisableUserV2Request) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.DisableUserV2")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/{userId}/disable"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -223,7 +219,7 @@ func (a *UsersApiService) DisableUserV2Execute(r ApiDisableUserV2Request) (*_net
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -233,15 +229,15 @@ func (a *UsersApiService) DisableUserV2Execute(r ApiDisableUserV2Request) (*_net
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -291,29 +287,31 @@ func (a *UsersApiService) DisableUserV2Execute(r ApiDisableUserV2Request) (*_net
 }
 
 type ApiEnableUserV2Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	userId string
 }
 
 
-func (r ApiEnableUserV2Request) Execute() (*_nethttp.Response, error) {
+func (r ApiEnableUserV2Request) Execute() (*http.Response, error) {
 	return r.ApiService.EnableUserV2Execute(r)
 }
 
 /*
- * EnableUserV2 Enable a User
- * <p>If a user has been disabled this endpoints will enable them </p>
+EnableUserV2 Enable a User
+
+<p>If a user has been disabled this endpoints will enable them </p>
 <p>The invoker must have the appropriate permission </p>
 <p>A user cannot enable themself </p>
 <p>If the user is a payor user and the payor is disabled this operation is not allowed</p>
 <p>If enabling a payor user would breach the limit for master admin payor users the request will be rejected </p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param userId The UUID of the User.
- * @return ApiEnableUserV2Request
- */
-func (a *UsersApiService) EnableUserV2(ctx _context.Context, userId string) ApiEnableUserV2Request {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The UUID of the User.
+ @return ApiEnableUserV2Request
+*/
+func (a *UsersApiService) EnableUserV2(ctx context.Context, userId string) ApiEnableUserV2Request {
 	return ApiEnableUserV2Request{
 		ApiService: a,
 		ctx: ctx,
@@ -321,29 +319,25 @@ func (a *UsersApiService) EnableUserV2(ctx _context.Context, userId string) ApiE
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) EnableUserV2Execute(r ApiEnableUserV2Request) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) EnableUserV2Execute(r ApiEnableUserV2Request) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.EnableUserV2")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/{userId}/enable"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -362,7 +356,7 @@ func (a *UsersApiService) EnableUserV2Execute(r ApiEnableUserV2Request) (*_netht
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -372,15 +366,15 @@ func (a *UsersApiService) EnableUserV2Execute(r ApiEnableUserV2Request) (*_netht
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -430,53 +424,51 @@ func (a *UsersApiService) EnableUserV2Execute(r ApiEnableUserV2Request) (*_netht
 }
 
 type ApiGetSelfRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 }
 
 
-func (r ApiGetSelfRequest) Execute() (UserResponse, *_nethttp.Response, error) {
+func (r ApiGetSelfRequest) Execute() (*UserResponse, *http.Response, error) {
 	return r.ApiService.GetSelfExecute(r)
 }
 
 /*
- * GetSelf Get Self
- * Get the user's details
+GetSelf Get Self
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiGetSelfRequest
- */
-func (a *UsersApiService) GetSelf(ctx _context.Context) ApiGetSelfRequest {
+Get the user's details
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetSelfRequest
+*/
+func (a *UsersApiService) GetSelf(ctx context.Context) ApiGetSelfRequest {
 	return ApiGetSelfRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return UserResponse
- */
-func (a *UsersApiService) GetSelfExecute(r ApiGetSelfRequest) (UserResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return UserResponse
+func (a *UsersApiService) GetSelfExecute(r ApiGetSelfRequest) (*UserResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  UserResponse
+		formFiles            []formFile
+		localVarReturnValue  *UserResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GetSelf")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/self"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -495,7 +487,7 @@ func (a *UsersApiService) GetSelfExecute(r ApiGetSelfRequest) (UserResponse, *_n
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -505,15 +497,15 @@ func (a *UsersApiService) GetSelfExecute(r ApiGetSelfRequest) (UserResponse, *_n
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -541,7 +533,7 @@ func (a *UsersApiService) GetSelfExecute(r ApiGetSelfRequest) (UserResponse, *_n
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -552,25 +544,27 @@ func (a *UsersApiService) GetSelfExecute(r ApiGetSelfRequest) (UserResponse, *_n
 }
 
 type ApiGetUserByIdV2Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	userId string
 }
 
 
-func (r ApiGetUserByIdV2Request) Execute() (UserResponse, *_nethttp.Response, error) {
+func (r ApiGetUserByIdV2Request) Execute() (*UserResponse, *http.Response, error) {
 	return r.ApiService.GetUserByIdV2Execute(r)
 }
 
 /*
- * GetUserByIdV2 Get User
- * Get a Single User by Id.
+GetUserByIdV2 Get User
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param userId The UUID of the User.
- * @return ApiGetUserByIdV2Request
- */
-func (a *UsersApiService) GetUserByIdV2(ctx _context.Context, userId string) ApiGetUserByIdV2Request {
+Get a Single User by Id.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The UUID of the User.
+ @return ApiGetUserByIdV2Request
+*/
+func (a *UsersApiService) GetUserByIdV2(ctx context.Context, userId string) ApiGetUserByIdV2Request {
 	return ApiGetUserByIdV2Request{
 		ApiService: a,
 		ctx: ctx,
@@ -578,31 +572,27 @@ func (a *UsersApiService) GetUserByIdV2(ctx _context.Context, userId string) Api
 	}
 }
 
-/*
- * Execute executes the request
- * @return UserResponse
- */
-func (a *UsersApiService) GetUserByIdV2Execute(r ApiGetUserByIdV2Request) (UserResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return UserResponse
+func (a *UsersApiService) GetUserByIdV2Execute(r ApiGetUserByIdV2Request) (*UserResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  UserResponse
+		formFiles            []formFile
+		localVarReturnValue  *UserResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GetUserByIdV2")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/{userId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -621,7 +611,7 @@ func (a *UsersApiService) GetUserByIdV2Execute(r ApiGetUserByIdV2Request) (UserR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -631,15 +621,15 @@ func (a *UsersApiService) GetUserByIdV2Execute(r ApiGetUserByIdV2Request) (UserR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -677,7 +667,7 @@ func (a *UsersApiService) GetUserByIdV2Execute(r ApiGetUserByIdV2Request) (UserR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -688,56 +678,55 @@ func (a *UsersApiService) GetUserByIdV2Execute(r ApiGetUserByIdV2Request) (UserR
 }
 
 type ApiInviteUserRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	inviteUserRequest *InviteUserRequest
 }
 
+// Details of User to invite
 func (r ApiInviteUserRequest) InviteUserRequest(inviteUserRequest InviteUserRequest) ApiInviteUserRequest {
 	r.inviteUserRequest = &inviteUserRequest
 	return r
 }
 
-func (r ApiInviteUserRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiInviteUserRequest) Execute() (*http.Response, error) {
 	return r.ApiService.InviteUserExecute(r)
 }
 
 /*
- * InviteUser Invite a User
- * Create a User and invite them to the system
+InviteUser Invite a User
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiInviteUserRequest
- */
-func (a *UsersApiService) InviteUser(ctx _context.Context) ApiInviteUserRequest {
+Create a User and invite them to the system
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiInviteUserRequest
+*/
+func (a *UsersApiService) InviteUser(ctx context.Context) ApiInviteUserRequest {
 	return ApiInviteUserRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) InviteUserExecute(r ApiInviteUserRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) InviteUserExecute(r ApiInviteUserRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.InviteUser")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/invite"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.inviteUserRequest == nil {
 		return nil, reportError("inviteUserRequest is required and must be specified")
 	}
@@ -761,7 +750,7 @@ func (a *UsersApiService) InviteUserExecute(r ApiInviteUserRequest) (*_nethttp.R
 	}
 	// body params
 	localVarPostBody = r.inviteUserRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -771,15 +760,15 @@ func (a *UsersApiService) InviteUserExecute(r ApiInviteUserRequest) (*_nethttp.R
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -839,82 +828,92 @@ func (a *UsersApiService) InviteUserExecute(r ApiInviteUserRequest) (*_nethttp.R
 }
 
 type ApiListUsersRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	type_ *UserType
 	status *UserStatus
 	entityId *string
+	payeeType *PayeeType
 	page *int32
 	pageSize *int32
 	sort *string
 }
 
+// The Type of the User.
 func (r ApiListUsersRequest) Type_(type_ UserType) ApiListUsersRequest {
 	r.type_ = &type_
 	return r
 }
+// The status of the User.
 func (r ApiListUsersRequest) Status(status UserStatus) ApiListUsersRequest {
 	r.status = &status
 	return r
 }
+// The entityId of the User.
 func (r ApiListUsersRequest) EntityId(entityId string) ApiListUsersRequest {
 	r.entityId = &entityId
 	return r
 }
+// The Type of the Payee entity. Either COMPANY or INDIVIDUAL.
+func (r ApiListUsersRequest) PayeeType(payeeType PayeeType) ApiListUsersRequest {
+	r.payeeType = &payeeType
+	return r
+}
+// Page number. Default is 1.
 func (r ApiListUsersRequest) Page(page int32) ApiListUsersRequest {
 	r.page = &page
 	return r
 }
+// The number of results to return in a page
 func (r ApiListUsersRequest) PageSize(pageSize int32) ApiListUsersRequest {
 	r.pageSize = &pageSize
 	return r
 }
+// List of sort fields (e.g. ?sort&#x3D;email:asc,lastName:asc) Default is email:asc &#39;name&#39; The supported sort fields are - email, lastNmae. 
 func (r ApiListUsersRequest) Sort(sort string) ApiListUsersRequest {
 	r.sort = &sort
 	return r
 }
 
-func (r ApiListUsersRequest) Execute() (PagedUserResponse, *_nethttp.Response, error) {
+func (r ApiListUsersRequest) Execute() (*PagedUserResponse, *http.Response, error) {
 	return r.ApiService.ListUsersExecute(r)
 }
 
 /*
- * ListUsers List Users
- * Get a paginated response listing the Users
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiListUsersRequest
- */
-func (a *UsersApiService) ListUsers(ctx _context.Context) ApiListUsersRequest {
+ListUsers List Users
+
+Get a paginated response listing the Users
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListUsersRequest
+*/
+func (a *UsersApiService) ListUsers(ctx context.Context) ApiListUsersRequest {
 	return ApiListUsersRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return PagedUserResponse
- */
-func (a *UsersApiService) ListUsersExecute(r ApiListUsersRequest) (PagedUserResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PagedUserResponse
+func (a *UsersApiService) ListUsersExecute(r ApiListUsersRequest) (*PagedUserResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PagedUserResponse
+		formFiles            []formFile
+		localVarReturnValue  *PagedUserResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.ListUsers")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.type_ != nil {
 		localVarQueryParams.Add("type", parameterToString(*r.type_, ""))
@@ -924,6 +923,9 @@ func (a *UsersApiService) ListUsersExecute(r ApiListUsersRequest) (PagedUserResp
 	}
 	if r.entityId != nil {
 		localVarQueryParams.Add("entityId", parameterToString(*r.entityId, ""))
+	}
+	if r.payeeType != nil {
+		localVarQueryParams.Add("payeeType", parameterToString(*r.payeeType, ""))
 	}
 	if r.page != nil {
 		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
@@ -951,7 +953,7 @@ func (a *UsersApiService) ListUsersExecute(r ApiListUsersRequest) (PagedUserResp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -961,15 +963,15 @@ func (a *UsersApiService) ListUsersExecute(r ApiListUsersRequest) (PagedUserResp
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1007,7 +1009,7 @@ func (a *UsersApiService) ListUsersExecute(r ApiListUsersRequest) (PagedUserResp
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1018,59 +1020,58 @@ func (a *UsersApiService) ListUsersExecute(r ApiListUsersRequest) (PagedUserResp
 }
 
 type ApiRegisterSmsRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	registerSmsRequest *RegisterSmsRequest
 }
 
+// a SMS Number to send an OTP to
 func (r ApiRegisterSmsRequest) RegisterSmsRequest(registerSmsRequest RegisterSmsRequest) ApiRegisterSmsRequest {
 	r.registerSmsRequest = &registerSmsRequest
 	return r
 }
 
-func (r ApiRegisterSmsRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiRegisterSmsRequest) Execute() (*http.Response, error) {
 	return r.ApiService.RegisterSmsExecute(r)
 }
 
 /*
- * RegisterSms Register SMS Number
- * <p>Register an Sms number and send an OTP to it </p>
+RegisterSms Register SMS Number
+
+<p>Register an Sms number and send an OTP to it </p>
 <p>Used for manual verification of a user </p>
 <p>The backoffice user initiates the request to send the OTP to the user's sms </p>
 <p>The user then reads back the OTP which the backoffice user enters in the verifactionCode property for requests that require it</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiRegisterSmsRequest
- */
-func (a *UsersApiService) RegisterSms(ctx _context.Context) ApiRegisterSmsRequest {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRegisterSmsRequest
+*/
+func (a *UsersApiService) RegisterSms(ctx context.Context) ApiRegisterSmsRequest {
 	return ApiRegisterSmsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) RegisterSmsExecute(r ApiRegisterSmsRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) RegisterSmsExecute(r ApiRegisterSmsRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.RegisterSms")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/registration/sms"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.registerSmsRequest == nil {
 		return nil, reportError("registerSmsRequest is required and must be specified")
 	}
@@ -1094,7 +1095,7 @@ func (a *UsersApiService) RegisterSmsExecute(r ApiRegisterSmsRequest) (*_nethttp
 	}
 	// body params
 	localVarPostBody = r.registerSmsRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1104,15 +1105,15 @@ func (a *UsersApiService) RegisterSmsExecute(r ApiRegisterSmsRequest) (*_nethttp
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1152,32 +1153,35 @@ func (a *UsersApiService) RegisterSmsExecute(r ApiRegisterSmsRequest) (*_nethttp
 }
 
 type ApiResendUserTokenRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	userId string
 	resendTokenRequest *ResendTokenRequest
 }
 
+// The type of token to resend
 func (r ApiResendUserTokenRequest) ResendTokenRequest(resendTokenRequest ResendTokenRequest) ApiResendUserTokenRequest {
 	r.resendTokenRequest = &resendTokenRequest
 	return r
 }
 
-func (r ApiResendUserTokenRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiResendUserTokenRequest) Execute() (*http.Response, error) {
 	return r.ApiService.ResendTokenExecute(r)
 }
 
 /*
- * ResendToken Resend a token
- * <p>Resend the specified token </p>
+ResendToken Resend a token
+
+<p>Resend the specified token </p>
 <p>The token to resend must already exist for the user </p>
 <p>It will be revoked and a new one issued</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param userId The UUID of the User.
- * @return ApiResendUserTokenRequest
- */
-func (a *UsersApiService) ResendToken(ctx _context.Context, userId string) ApiResendUserTokenRequest {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The UUID of the User.
+ @return ApiResendUserTokenRequest
+*/
+func (a *UsersApiService) ResendToken(ctx context.Context, userId string) ApiResendUserTokenRequest {
 	return ApiResendUserTokenRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1185,29 +1189,25 @@ func (a *UsersApiService) ResendToken(ctx _context.Context, userId string) ApiRe
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) ResendTokenExecute(r ApiResendUserTokenRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) ResendTokenExecute(r ApiResendUserTokenRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.ResendToken")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/{userId}/tokens"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resendTokenRequest == nil {
 		return nil, reportError("resendTokenRequest is required and must be specified")
 	}
@@ -1231,7 +1231,7 @@ func (a *UsersApiService) ResendTokenExecute(r ApiResendUserTokenRequest) (*_net
 	}
 	// body params
 	localVarPostBody = r.resendTokenRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1241,15 +1241,15 @@ func (a *UsersApiService) ResendTokenExecute(r ApiResendUserTokenRequest) (*_net
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1289,30 +1289,33 @@ func (a *UsersApiService) ResendTokenExecute(r ApiResendUserTokenRequest) (*_net
 }
 
 type ApiRoleUpdateRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	userId string
 	roleUpdateRequest *RoleUpdateRequest
 }
 
+// The Role to change to
 func (r ApiRoleUpdateRequest) RoleUpdateRequest(roleUpdateRequest RoleUpdateRequest) ApiRoleUpdateRequest {
 	r.roleUpdateRequest = &roleUpdateRequest
 	return r
 }
 
-func (r ApiRoleUpdateRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiRoleUpdateRequest) Execute() (*http.Response, error) {
 	return r.ApiService.RoleUpdateExecute(r)
 }
 
 /*
- * RoleUpdate Update User Role
- * <p>Update the user's Role</p>
+RoleUpdate Update User Role
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param userId The UUID of the User.
- * @return ApiRoleUpdateRequest
- */
-func (a *UsersApiService) RoleUpdate(ctx _context.Context, userId string) ApiRoleUpdateRequest {
+<p>Update the user's Role</p>
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The UUID of the User.
+ @return ApiRoleUpdateRequest
+*/
+func (a *UsersApiService) RoleUpdate(ctx context.Context, userId string) ApiRoleUpdateRequest {
 	return ApiRoleUpdateRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1320,29 +1323,25 @@ func (a *UsersApiService) RoleUpdate(ctx _context.Context, userId string) ApiRol
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) RoleUpdateExecute(r ApiRoleUpdateRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) RoleUpdateExecute(r ApiRoleUpdateRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.RoleUpdate")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/{userId}/roleUpdate"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.roleUpdateRequest == nil {
 		return nil, reportError("roleUpdateRequest is required and must be specified")
 	}
@@ -1366,7 +1365,7 @@ func (a *UsersApiService) RoleUpdateExecute(r ApiRoleUpdateRequest) (*_nethttp.R
 	}
 	// body params
 	localVarPostBody = r.roleUpdateRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1376,15 +1375,15 @@ func (a *UsersApiService) RoleUpdateExecute(r ApiRoleUpdateRequest) (*_nethttp.R
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1434,25 +1433,27 @@ func (a *UsersApiService) RoleUpdateExecute(r ApiRoleUpdateRequest) (*_nethttp.R
 }
 
 type ApiUnlockUserV2Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	userId string
 }
 
 
-func (r ApiUnlockUserV2Request) Execute() (*_nethttp.Response, error) {
+func (r ApiUnlockUserV2Request) Execute() (*http.Response, error) {
 	return r.ApiService.UnlockUserV2Execute(r)
 }
 
 /*
- * UnlockUserV2 Unlock a User
- * If a user is locked this endpoint will unlock them
+UnlockUserV2 Unlock a User
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param userId The UUID of the User.
- * @return ApiUnlockUserV2Request
- */
-func (a *UsersApiService) UnlockUserV2(ctx _context.Context, userId string) ApiUnlockUserV2Request {
+If a user is locked this endpoint will unlock them
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The UUID of the User.
+ @return ApiUnlockUserV2Request
+*/
+func (a *UsersApiService) UnlockUserV2(ctx context.Context, userId string) ApiUnlockUserV2Request {
 	return ApiUnlockUserV2Request{
 		ApiService: a,
 		ctx: ctx,
@@ -1460,29 +1461,25 @@ func (a *UsersApiService) UnlockUserV2(ctx _context.Context, userId string) ApiU
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) UnlockUserV2Execute(r ApiUnlockUserV2Request) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) UnlockUserV2Execute(r ApiUnlockUserV2Request) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.UnlockUserV2")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/{userId}/unlock"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1501,7 +1498,7 @@ func (a *UsersApiService) UnlockUserV2Execute(r ApiUnlockUserV2Request) (*_netht
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1511,15 +1508,15 @@ func (a *UsersApiService) UnlockUserV2Execute(r ApiUnlockUserV2Request) (*_netht
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1569,31 +1566,34 @@ func (a *UsersApiService) UnlockUserV2Execute(r ApiUnlockUserV2Request) (*_netht
 }
 
 type ApiUnregisterMFARequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	userId string
 	unregisterMFARequest *UnregisterMFARequest
 }
 
+// The MFA Type to unregister
 func (r ApiUnregisterMFARequest) UnregisterMFARequest(unregisterMFARequest UnregisterMFARequest) ApiUnregisterMFARequest {
 	r.unregisterMFARequest = &unregisterMFARequest
 	return r
 }
 
-func (r ApiUnregisterMFARequest) Execute() (*_nethttp.Response, error) {
+func (r ApiUnregisterMFARequest) Execute() (*http.Response, error) {
 	return r.ApiService.UnregisterMFAExecute(r)
 }
 
 /*
- * UnregisterMFA Unregister MFA for the user
- * <p>Unregister the MFA device for the user </p>
+UnregisterMFA Unregister MFA for the user
+
+<p>Unregister the MFA device for the user </p>
 <p>If the user does not require further verification then a register new MFA device token will be sent to them via their email address</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param userId The UUID of the User.
- * @return ApiUnregisterMFARequest
- */
-func (a *UsersApiService) UnregisterMFA(ctx _context.Context, userId string) ApiUnregisterMFARequest {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The UUID of the User.
+ @return ApiUnregisterMFARequest
+*/
+func (a *UsersApiService) UnregisterMFA(ctx context.Context, userId string) ApiUnregisterMFARequest {
 	return ApiUnregisterMFARequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1601,29 +1601,25 @@ func (a *UsersApiService) UnregisterMFA(ctx _context.Context, userId string) Api
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) UnregisterMFAExecute(r ApiUnregisterMFARequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) UnregisterMFAExecute(r ApiUnregisterMFARequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.UnregisterMFA")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/{userId}/mfa/unregister"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.unregisterMFARequest == nil {
 		return nil, reportError("unregisterMFARequest is required and must be specified")
 	}
@@ -1647,7 +1643,7 @@ func (a *UsersApiService) UnregisterMFAExecute(r ApiUnregisterMFARequest) (*_net
 	}
 	// body params
 	localVarPostBody = r.unregisterMFARequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1657,15 +1653,15 @@ func (a *UsersApiService) UnregisterMFAExecute(r ApiUnregisterMFARequest) (*_net
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1715,62 +1711,62 @@ func (a *UsersApiService) UnregisterMFAExecute(r ApiUnregisterMFARequest) (*_net
 }
 
 type ApiUnregisterMFAForSelfRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	selfMFATypeUnregisterRequest *SelfMFATypeUnregisterRequest
 	authorization *string
 }
 
+// The MFA Type to unregister
 func (r ApiUnregisterMFAForSelfRequest) SelfMFATypeUnregisterRequest(selfMFATypeUnregisterRequest SelfMFATypeUnregisterRequest) ApiUnregisterMFAForSelfRequest {
 	r.selfMFATypeUnregisterRequest = &selfMFATypeUnregisterRequest
 	return r
 }
+// Bearer token authorization leg of validate
 func (r ApiUnregisterMFAForSelfRequest) Authorization(authorization string) ApiUnregisterMFAForSelfRequest {
 	r.authorization = &authorization
 	return r
 }
 
-func (r ApiUnregisterMFAForSelfRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiUnregisterMFAForSelfRequest) Execute() (*http.Response, error) {
 	return r.ApiService.UnregisterMFAForSelfExecute(r)
 }
 
 /*
- * UnregisterMFAForSelf Unregister MFA for Self
- * <p>Unregister the MFA device for the user </p>
+UnregisterMFAForSelf Unregister MFA for Self
+
+<p>Unregister the MFA device for the user </p>
 <p>If the user does not require further verification then a register new MFA device token will be sent to them via their email address</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiUnregisterMFAForSelfRequest
- */
-func (a *UsersApiService) UnregisterMFAForSelf(ctx _context.Context) ApiUnregisterMFAForSelfRequest {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUnregisterMFAForSelfRequest
+*/
+func (a *UsersApiService) UnregisterMFAForSelf(ctx context.Context) ApiUnregisterMFAForSelfRequest {
 	return ApiUnregisterMFAForSelfRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) UnregisterMFAForSelfExecute(r ApiUnregisterMFAForSelfRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) UnregisterMFAForSelfExecute(r ApiUnregisterMFAForSelfRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.UnregisterMFAForSelf")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/self/mfa/unregister"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.selfMFATypeUnregisterRequest == nil {
 		return nil, reportError("selfMFATypeUnregisterRequest is required and must be specified")
 	}
@@ -1797,7 +1793,7 @@ func (a *UsersApiService) UnregisterMFAForSelfExecute(r ApiUnregisterMFAForSelfR
 	}
 	// body params
 	localVarPostBody = r.selfMFATypeUnregisterRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1807,15 +1803,15 @@ func (a *UsersApiService) UnregisterMFAForSelfExecute(r ApiUnregisterMFAForSelfR
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1855,56 +1851,55 @@ func (a *UsersApiService) UnregisterMFAForSelfExecute(r ApiUnregisterMFAForSelfR
 }
 
 type ApiUpdatePasswordSelfRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	selfUpdatePasswordRequest *SelfUpdatePasswordRequest
 }
 
+// The password
 func (r ApiUpdatePasswordSelfRequest) SelfUpdatePasswordRequest(selfUpdatePasswordRequest SelfUpdatePasswordRequest) ApiUpdatePasswordSelfRequest {
 	r.selfUpdatePasswordRequest = &selfUpdatePasswordRequest
 	return r
 }
 
-func (r ApiUpdatePasswordSelfRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiUpdatePasswordSelfRequest) Execute() (*http.Response, error) {
 	return r.ApiService.UpdatePasswordSelfExecute(r)
 }
 
 /*
- * UpdatePasswordSelf Update Password for self
- * Update password for self
+UpdatePasswordSelf Update Password for self
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiUpdatePasswordSelfRequest
- */
-func (a *UsersApiService) UpdatePasswordSelf(ctx _context.Context) ApiUpdatePasswordSelfRequest {
+Update password for self
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUpdatePasswordSelfRequest
+*/
+func (a *UsersApiService) UpdatePasswordSelf(ctx context.Context) ApiUpdatePasswordSelfRequest {
 	return ApiUpdatePasswordSelfRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) UpdatePasswordSelfExecute(r ApiUpdatePasswordSelfRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) UpdatePasswordSelfExecute(r ApiUpdatePasswordSelfRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.UpdatePasswordSelf")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/self/password"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.selfUpdatePasswordRequest == nil {
 		return nil, reportError("selfUpdatePasswordRequest is required and must be specified")
 	}
@@ -1928,7 +1923,7 @@ func (a *UsersApiService) UpdatePasswordSelfExecute(r ApiUpdatePasswordSelfReque
 	}
 	// body params
 	localVarPostBody = r.selfUpdatePasswordRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1938,15 +1933,15 @@ func (a *UsersApiService) UpdatePasswordSelfExecute(r ApiUpdatePasswordSelfReque
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1986,31 +1981,34 @@ func (a *UsersApiService) UpdatePasswordSelfExecute(r ApiUpdatePasswordSelfReque
 }
 
 type ApiUserDetailsUpdateRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	userId string
 	userDetailsUpdateRequest *UserDetailsUpdateRequest
 }
 
+// The details of the user to update
 func (r ApiUserDetailsUpdateRequest) UserDetailsUpdateRequest(userDetailsUpdateRequest UserDetailsUpdateRequest) ApiUserDetailsUpdateRequest {
 	r.userDetailsUpdateRequest = &userDetailsUpdateRequest
 	return r
 }
 
-func (r ApiUserDetailsUpdateRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiUserDetailsUpdateRequest) Execute() (*http.Response, error) {
 	return r.ApiService.UserDetailsUpdateExecute(r)
 }
 
 /*
- * UserDetailsUpdate Update User Details
- * <p>Update the profile details for the given user</p>
+UserDetailsUpdate Update User Details
+
+<p>Update the profile details for the given user</p>
 <p>When updating Payor users with the role of payor.master_admin a verificationCode is required</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param userId The UUID of the User.
- * @return ApiUserDetailsUpdateRequest
- */
-func (a *UsersApiService) UserDetailsUpdate(ctx _context.Context, userId string) ApiUserDetailsUpdateRequest {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The UUID of the User.
+ @return ApiUserDetailsUpdateRequest
+*/
+func (a *UsersApiService) UserDetailsUpdate(ctx context.Context, userId string) ApiUserDetailsUpdateRequest {
 	return ApiUserDetailsUpdateRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2018,29 +2016,25 @@ func (a *UsersApiService) UserDetailsUpdate(ctx _context.Context, userId string)
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) UserDetailsUpdateExecute(r ApiUserDetailsUpdateRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) UserDetailsUpdateExecute(r ApiUserDetailsUpdateRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.UserDetailsUpdate")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/{userId}/userDetailsUpdate"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.userDetailsUpdateRequest == nil {
 		return nil, reportError("userDetailsUpdateRequest is required and must be specified")
 	}
@@ -2064,7 +2058,7 @@ func (a *UsersApiService) UserDetailsUpdateExecute(r ApiUserDetailsUpdateRequest
 	}
 	// body params
 	localVarPostBody = r.userDetailsUpdateRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -2074,15 +2068,15 @@ func (a *UsersApiService) UserDetailsUpdateExecute(r ApiUserDetailsUpdateRequest
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2142,57 +2136,56 @@ func (a *UsersApiService) UserDetailsUpdateExecute(r ApiUserDetailsUpdateRequest
 }
 
 type ApiUserDetailsUpdateForSelfRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	payeeUserSelfUpdateRequest *PayeeUserSelfUpdateRequest
 }
 
+// The details of the user to update
 func (r ApiUserDetailsUpdateForSelfRequest) PayeeUserSelfUpdateRequest(payeeUserSelfUpdateRequest PayeeUserSelfUpdateRequest) ApiUserDetailsUpdateForSelfRequest {
 	r.payeeUserSelfUpdateRequest = &payeeUserSelfUpdateRequest
 	return r
 }
 
-func (r ApiUserDetailsUpdateForSelfRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiUserDetailsUpdateForSelfRequest) Execute() (*http.Response, error) {
 	return r.ApiService.UserDetailsUpdateForSelfExecute(r)
 }
 
 /*
- * UserDetailsUpdateForSelf Update User Details for self
- * <p>Update the profile details for the given user</p>
+UserDetailsUpdateForSelf Update User Details for self
+
+<p>Update the profile details for the given user</p>
 <p>Only Payee user types are supported</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiUserDetailsUpdateForSelfRequest
- */
-func (a *UsersApiService) UserDetailsUpdateForSelf(ctx _context.Context) ApiUserDetailsUpdateForSelfRequest {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUserDetailsUpdateForSelfRequest
+*/
+func (a *UsersApiService) UserDetailsUpdateForSelf(ctx context.Context) ApiUserDetailsUpdateForSelfRequest {
 	return ApiUserDetailsUpdateForSelfRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *UsersApiService) UserDetailsUpdateForSelfExecute(r ApiUserDetailsUpdateForSelfRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *UsersApiService) UserDetailsUpdateForSelfExecute(r ApiUserDetailsUpdateForSelfRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.UserDetailsUpdateForSelf")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/self/userDetailsUpdate"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.payeeUserSelfUpdateRequest == nil {
 		return nil, reportError("payeeUserSelfUpdateRequest is required and must be specified")
 	}
@@ -2216,7 +2209,7 @@ func (a *UsersApiService) UserDetailsUpdateForSelfExecute(r ApiUserDetailsUpdate
 	}
 	// body params
 	localVarPostBody = r.payeeUserSelfUpdateRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -2226,15 +2219,15 @@ func (a *UsersApiService) UserDetailsUpdateForSelfExecute(r ApiUserDetailsUpdate
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2284,58 +2277,57 @@ func (a *UsersApiService) UserDetailsUpdateForSelfExecute(r ApiUserDetailsUpdate
 }
 
 type ApiValidatePasswordSelfRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *UsersApiService
 	passwordRequest *PasswordRequest
 }
 
+// The password
 func (r ApiValidatePasswordSelfRequest) PasswordRequest(passwordRequest PasswordRequest) ApiValidatePasswordSelfRequest {
 	r.passwordRequest = &passwordRequest
 	return r
 }
 
-func (r ApiValidatePasswordSelfRequest) Execute() (ValidatePasswordResponse, *_nethttp.Response, error) {
+func (r ApiValidatePasswordSelfRequest) Execute() (*ValidatePasswordResponse, *http.Response, error) {
 	return r.ApiService.ValidatePasswordSelfExecute(r)
 }
 
 /*
- * ValidatePasswordSelf Validate the proposed password
- * validate the password and return a score
+ValidatePasswordSelf Validate the proposed password
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiValidatePasswordSelfRequest
- */
-func (a *UsersApiService) ValidatePasswordSelf(ctx _context.Context) ApiValidatePasswordSelfRequest {
+validate the password and return a score
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiValidatePasswordSelfRequest
+*/
+func (a *UsersApiService) ValidatePasswordSelf(ctx context.Context) ApiValidatePasswordSelfRequest {
 	return ApiValidatePasswordSelfRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return ValidatePasswordResponse
- */
-func (a *UsersApiService) ValidatePasswordSelfExecute(r ApiValidatePasswordSelfRequest) (ValidatePasswordResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return ValidatePasswordResponse
+func (a *UsersApiService) ValidatePasswordSelfExecute(r ApiValidatePasswordSelfRequest) (*ValidatePasswordResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ValidatePasswordResponse
+		formFiles            []formFile
+		localVarReturnValue  *ValidatePasswordResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.ValidatePasswordSelf")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/users/self/password/validate"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.passwordRequest == nil {
 		return localVarReturnValue, nil, reportError("passwordRequest is required and must be specified")
 	}
@@ -2359,7 +2351,7 @@ func (a *UsersApiService) ValidatePasswordSelfExecute(r ApiValidatePasswordSelfR
 	}
 	// body params
 	localVarPostBody = r.passwordRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2369,15 +2361,15 @@ func (a *UsersApiService) ValidatePasswordSelfExecute(r ApiValidatePasswordSelfR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2415,7 +2407,7 @@ func (a *UsersApiService) ValidatePasswordSelfExecute(r ApiValidatePasswordSelfR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

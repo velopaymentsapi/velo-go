@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **PayoutMemo** | Pointer to **string** |  | [optional] 
 **PayoutType** | [**PayoutType**](PayoutType.md) |  | 
 **PayorName** | **string** |  | 
+**Schedule** | Pointer to [**PayoutSchedule**](PayoutSchedule.md) |  | [optional] 
 
 ## Methods
 
@@ -419,6 +420,31 @@ and a boolean to check if the value has been set.
 
 SetPayorName sets PayorName field to given value.
 
+
+### GetSchedule
+
+`func (o *PayoutSummaryAudit) GetSchedule() PayoutSchedule`
+
+GetSchedule returns the Schedule field if non-nil, zero value otherwise.
+
+### GetScheduleOk
+
+`func (o *PayoutSummaryAudit) GetScheduleOk() (*PayoutSchedule, bool)`
+
+GetScheduleOk returns a tuple with the Schedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchedule
+
+`func (o *PayoutSummaryAudit) SetSchedule(v PayoutSchedule)`
+
+SetSchedule sets Schedule field to given value.
+
+### HasSchedule
+
+`func (o *PayoutSummaryAudit) HasSchedule() bool`
+
+HasSchedule returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

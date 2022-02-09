@@ -40,11 +40,11 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.DeletePayeeByIdV3(context.Background(), payeeId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.DeletePayeeByIdV3(context.Background(), payeeId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.DeletePayeeByIdV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -58,7 +58,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -108,11 +108,11 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.DeletePayeeByIdV4(context.Background(), payeeId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.DeletePayeeByIdV4(context.Background(), payeeId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.DeletePayeeByIdV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -126,7 +126,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -176,12 +176,12 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
     sensitive := true // bool | Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.GetPayeeByIdV3(context.Background(), payeeId).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.GetPayeeByIdV3(context.Background(), payeeId).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.GetPayeeByIdV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -197,7 +197,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -248,12 +248,12 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
     sensitive := true // bool | Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.GetPayeeByIdV4(context.Background(), payeeId).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.GetPayeeByIdV4(context.Background(), payeeId).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.GetPayeeByIdV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -269,7 +269,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -321,14 +321,14 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | The Payor ID to find associated Payees
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor ID to find associated Payees
     updatedSince := time.Now() // time.Time | The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm
     page := int32(1) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(100) // int32 | Page size. Default is 100. Max allowable is 1000. (optional) (default to 100)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.ListPayeeChangesV3(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.ListPayeeChangesV3(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.ListPayeeChangesV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -349,7 +349,7 @@ Other parameters are passed through a pointer to a apiListPayeeChangesV3Request 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The Payor ID to find associated Payees | 
+ **payorId** | **string** | The Payor ID to find associated Payees | 
  **updatedSince** | **time.Time** | The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | Page size. Default is 100. Max allowable is 1000. | [default to 100]
@@ -394,14 +394,14 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | The Payor ID to find associated Payees
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor ID to find associated Payees
     updatedSince := time.Now() // time.Time | The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm
     page := int32(1) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(100) // int32 | Page size. Default is 100. Max allowable is 1000. (optional) (default to 100)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.ListPayeeChangesV4(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.ListPayeeChangesV4(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.ListPayeeChangesV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -422,7 +422,7 @@ Other parameters are passed through a pointer to a apiListPayeeChangesV4Request 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The Payor ID to find associated Payees | 
+ **payorId** | **string** | The Payor ID to find associated Payees | 
  **updatedSince** | **time.Time** | The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | Page size. Default is 100. Max allowable is 1000. | [default to 100]
@@ -466,22 +466,22 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | The account owner Payor ID
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
     watchlistStatus := openapiclient.WatchlistStatus("NONE") // WatchlistStatus | The watchlistStatus of the payees. (optional)
     disabled := true // bool | Payee disabled (optional)
     onboardedStatus := openapiclient.OnboardedStatus("CREATED") // OnboardedStatus | The onboarded status of the payees. (optional)
     email := "bob@example.com" // string | Email address (optional)
     displayName := "Bob Smith" // string | The display name of the payees. (optional)
     remoteId := "remoteId123" // string | The remote id of the payees. (optional)
-    payeeType := openapiclient.PayeeType("Individual") // PayeeType | The onboarded status of the payees. (optional)
+    payeeType := openapiclient.PayeeType_2("Individual") // PayeeType2 | The onboarded status of the payees. (optional)
     payeeCountry := "US" // string | The country of the payee - 2 letter ISO 3166-1 country code (upper case) (optional)
     page := int32(1) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(25) // int32 | Page size. Default is 25. Max allowable is 100. (optional) (default to 25)
     sort := "displayName:asc" // string | List of sort fields (e.g. ?sort=onboardedStatus:asc,name:asc) Default is name:asc 'name' is treated as company name for companies - last name + ',' + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus.  (optional) (default to "displayName:asc")
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.ListPayeesV3(context.Background()).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.ListPayeesV3(context.Background()).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.ListPayeesV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -502,14 +502,14 @@ Other parameters are passed through a pointer to a apiListPayeesV3Request struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The account owner Payor ID | 
+ **payorId** | **string** | The account owner Payor ID | 
  **watchlistStatus** | [**WatchlistStatus**](WatchlistStatus.md) | The watchlistStatus of the payees. | 
  **disabled** | **bool** | Payee disabled | 
  **onboardedStatus** | [**OnboardedStatus**](OnboardedStatus.md) | The onboarded status of the payees. | 
- **email** | [**string**](string.md) | Email address | 
+ **email** | **string** | Email address | 
  **displayName** | **string** | The display name of the payees. | 
  **remoteId** | **string** | The remote id of the payees. | 
- **payeeType** | [**PayeeType**](PayeeType.md) | The onboarded status of the payees. | 
+ **payeeType** | [**PayeeType2**](PayeeType2.md) | The onboarded status of the payees. | 
  **payeeCountry** | **string** | The country of the payee - 2 letter ISO 3166-1 country code (upper case) | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | Page size. Default is 25. Max allowable is 100. | [default to 25]
@@ -554,14 +554,14 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | The account owner Payor ID
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
     watchlistStatus := openapiclient.WatchlistStatus("NONE") // WatchlistStatus | The watchlistStatus of the payees. (optional)
     disabled := true // bool | Payee disabled (optional)
     onboardedStatus := openapiclient.OnboardedStatus("CREATED") // OnboardedStatus | The onboarded status of the payees. (optional)
     email := "bob@example.com" // string | Email address (optional)
     displayName := "Bob Smith" // string | The display name of the payees. (optional)
     remoteId := "remoteId123" // string | The remote id of the payees. (optional)
-    payeeType := openapiclient.PayeeType("Individual") // PayeeType | The onboarded status of the payees. (optional)
+    payeeType := openapiclient.PayeeType_2("Individual") // PayeeType2 | The onboarded status of the payees. (optional)
     payeeCountry := "US" // string | The country of the payee - 2 letter ISO 3166-1 country code (upper case) (optional)
     ofacStatus := openapiclient.OfacStatus("PENDING") // OfacStatus | The ofacStatus of the payees. (optional)
     page := int32(1) // int32 | Page number. Default is 1. (optional) (default to 1)
@@ -569,8 +569,8 @@ func main() {
     sort := "displayName:asc" // string | List of sort fields (e.g. ?sort=onboardedStatus:asc,name:asc) Default is name:asc 'name' is treated as company name for companies - last name + ',' + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus.  (optional) (default to "displayName:asc")
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.ListPayeesV4(context.Background()).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).OfacStatus(ofacStatus).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.ListPayeesV4(context.Background()).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).OfacStatus(ofacStatus).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.ListPayeesV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -591,14 +591,14 @@ Other parameters are passed through a pointer to a apiListPayeesV4Request struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The account owner Payor ID | 
+ **payorId** | **string** | The account owner Payor ID | 
  **watchlistStatus** | [**WatchlistStatus**](WatchlistStatus.md) | The watchlistStatus of the payees. | 
  **disabled** | **bool** | Payee disabled | 
  **onboardedStatus** | [**OnboardedStatus**](OnboardedStatus.md) | The onboarded status of the payees. | 
- **email** | [**string**](string.md) | Email address | 
+ **email** | **string** | Email address | 
  **displayName** | **string** | The display name of the payees. | 
  **remoteId** | **string** | The remote id of the payees. | 
- **payeeType** | [**PayeeType**](PayeeType.md) | The onboarded status of the payees. | 
+ **payeeType** | [**PayeeType2**](PayeeType2.md) | The onboarded status of the payees. | 
  **payeeCountry** | **string** | The country of the payee - 2 letter ISO 3166-1 country code (upper case) | 
  **ofacStatus** | [**OfacStatus**](OfacStatus.md) | The ofacStatus of the payees. | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
@@ -644,12 +644,12 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
     updatePayeeDetailsRequest := *openapiclient.NewUpdatePayeeDetailsRequest() // UpdatePayeeDetailsRequest | Request to update payee details
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.PayeeDetailsUpdateV3(context.Background(), payeeId).UpdatePayeeDetailsRequest(updatePayeeDetailsRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.PayeeDetailsUpdateV3(context.Background(), payeeId).UpdatePayeeDetailsRequest(updatePayeeDetailsRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.PayeeDetailsUpdateV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -663,7 +663,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -714,12 +714,12 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
     updatePayeeDetailsRequest2 := *openapiclient.NewUpdatePayeeDetailsRequest2() // UpdatePayeeDetailsRequest2 | Request to update payee details
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.PayeeDetailsUpdateV4(context.Background(), payeeId).UpdatePayeeDetailsRequest2(updatePayeeDetailsRequest2).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.PayeeDetailsUpdateV4(context.Background(), payeeId).UpdatePayeeDetailsRequest2(updatePayeeDetailsRequest2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.PayeeDetailsUpdateV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -733,7 +733,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -784,12 +784,12 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
     updateRemoteIdRequest := *openapiclient.NewUpdateRemoteIdRequest("9ac75325-5dcd-42d5-b992-175d7e0a035e", "remoteId123") // UpdateRemoteIdRequest | Request to update payee remote id v3
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.V3PayeesPayeeIdRemoteIdUpdatePost(context.Background(), payeeId).UpdateRemoteIdRequest(updateRemoteIdRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.V3PayeesPayeeIdRemoteIdUpdatePost(context.Background(), payeeId).UpdateRemoteIdRequest(updateRemoteIdRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.V3PayeesPayeeIdRemoteIdUpdatePost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -803,7 +803,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -854,12 +854,12 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
     updateRemoteIdRequest2 := *openapiclient.NewUpdateRemoteIdRequest2("9ac75325-5dcd-42d5-b992-175d7e0a035e", "remoteId123") // UpdateRemoteIdRequest2 | Request to update payee remote id v4
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.V4PayeesPayeeIdRemoteIdUpdatePost(context.Background(), payeeId).UpdateRemoteIdRequest2(updateRemoteIdRequest2).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesApi.V4PayeesPayeeIdRemoteIdUpdatePost(context.Background(), payeeId).UpdateRemoteIdRequest2(updateRemoteIdRequest2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.V4PayeesPayeeIdRemoteIdUpdatePost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -873,7 +873,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 

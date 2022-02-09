@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Created** | Pointer to **time.Time** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
-**PayeeType** | Pointer to [**PayeeType**](PayeeType.md) |  | [optional] 
+**PayeeType** | Pointer to [**PayeeType2**](PayeeType2.md) |  | [optional] 
 **Disabled** | Pointer to **bool** |  | [optional] 
 **DisabledComment** | Pointer to **string** |  | [optional] 
 **DisabledUpdatedTimestamp** | Pointer to **time.Time** |  | [optional] 
@@ -360,20 +360,20 @@ HasDisplayName returns a boolean if a field has been set.
 
 ### GetPayeeType
 
-`func (o *PayeeDetailResponse2) GetPayeeType() PayeeType`
+`func (o *PayeeDetailResponse2) GetPayeeType() PayeeType2`
 
 GetPayeeType returns the PayeeType field if non-nil, zero value otherwise.
 
 ### GetPayeeTypeOk
 
-`func (o *PayeeDetailResponse2) GetPayeeTypeOk() (*PayeeType, bool)`
+`func (o *PayeeDetailResponse2) GetPayeeTypeOk() (*PayeeType2, bool)`
 
 GetPayeeTypeOk returns a tuple with the PayeeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayeeType
 
-`func (o *PayeeDetailResponse2) SetPayeeType(v PayeeType)`
+`func (o *PayeeDetailResponse2) SetPayeeType(v PayeeType2)`
 
 SetPayeeType sets PayeeType field to given value.
 

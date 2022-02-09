@@ -45,12 +45,12 @@ import (
 )
 
 func main() {
-    sourceAccountId := TODO // string | Source account id
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Source account id
     fundingRequestV1 := *openapiclient.NewFundingRequestV1(int64(123)) // FundingRequestV1 | Body to included amount to be funded
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.CreateAchFundingRequest(context.Background(), sourceAccountId).FundingRequestV1(fundingRequestV1).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.CreateAchFundingRequest(context.Background(), sourceAccountId).FundingRequestV1(fundingRequestV1).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.CreateAchFundingRequest``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,7 +64,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceAccountId** | [**string**](.md) | Source account id | 
+**sourceAccountId** | **string** | Source account id | 
 
 ### Other Parameters
 
@@ -115,12 +115,12 @@ import (
 )
 
 func main() {
-    sourceAccountId := TODO // string | Source account id
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Source account id
     fundingRequestV2 := *openapiclient.NewFundingRequestV2(int64(123)) // FundingRequestV2 | Body to included amount to be funded
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.CreateFundingRequest(context.Background(), sourceAccountId).FundingRequestV2(fundingRequestV2).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.CreateFundingRequest(context.Background(), sourceAccountId).FundingRequestV2(fundingRequestV2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.CreateFundingRequest``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -134,7 +134,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceAccountId** | [**string**](.md) | Source account id | 
+**sourceAccountId** | **string** | Source account id | 
 
 ### Other Parameters
 
@@ -185,12 +185,12 @@ import (
 )
 
 func main() {
-    sourceAccountId := TODO // string | Source account id
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Source account id
     fundingRequestV3 := *openapiclient.NewFundingRequestV3("FundingAccountId_example", int64(123)) // FundingRequestV3 | Body to included amount to be funded
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.CreateFundingRequestV3(context.Background(), sourceAccountId).FundingRequestV3(fundingRequestV3).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.CreateFundingRequestV3(context.Background(), sourceAccountId).FundingRequestV3(fundingRequestV3).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.CreateFundingRequestV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -204,7 +204,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceAccountId** | [**string**](.md) | Source account id | 
+**sourceAccountId** | **string** | Source account id | 
 
 ### Other Parameters
 
@@ -255,12 +255,12 @@ import (
 )
 
 func main() {
-    fundingAccountId := TODO // string | 
+    fundingAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
     sensitive := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetFundingAccount(context.Background(), fundingAccountId).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.GetFundingAccount(context.Background(), fundingAccountId).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetFundingAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -276,7 +276,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fundingAccountId** | [**string**](.md) |  | 
+**fundingAccountId** | **string** |  | 
 
 ### Other Parameters
 
@@ -327,12 +327,12 @@ import (
 )
 
 func main() {
-    fundingAccountId := TODO // string | 
+    fundingAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
     sensitive := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetFundingAccountV2(context.Background(), fundingAccountId).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.GetFundingAccountV2(context.Background(), fundingAccountId).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetFundingAccountV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -348,7 +348,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**fundingAccountId** | [**string**](.md) |  | 
+**fundingAccountId** | **string** |  | 
 
 ### Other Parameters
 
@@ -399,16 +399,16 @@ import (
 )
 
 func main() {
-    payorId := TODO // string |  (optional)
-    sourceAccountId := TODO // string |  (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields (e.g. ?sort=accountName:asc,name:asc) Default is accountName:asc The supported sort fields are - accountName, name and currency. (optional) (default to "accountName:asc")
     sensitive := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetFundingAccounts(context.Background()).PayorId(payorId).SourceAccountId(sourceAccountId).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.GetFundingAccounts(context.Background()).PayorId(payorId).SourceAccountId(sourceAccountId).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetFundingAccounts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -429,8 +429,8 @@ Other parameters are passed through a pointer to a apiGetFundingAccountsRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) |  | 
- **sourceAccountId** | [**string**](string.md) |  | 
+ **payorId** | **string** |  | 
+ **sourceAccountId** | **string** |  | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;accountName:asc,name:asc) Default is accountName:asc The supported sort fields are - accountName, name and currency. | [default to &quot;accountName:asc&quot;]
@@ -475,7 +475,7 @@ import (
 )
 
 func main() {
-    payorId := TODO // string |  (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
     name := "name_example" // string | The descriptive funding account name (optional)
     country := "US" // string | The 2 letter ISO 3166-1 country code (upper case) (optional)
     currency := "USD" // string | The ISO 4217 currency code (optional)
@@ -486,8 +486,8 @@ func main() {
     sensitive := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetFundingAccountsV2(context.Background()).PayorId(payorId).Name(name).Country(country).Currency(currency).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.GetFundingAccountsV2(context.Background()).PayorId(payorId).Name(name).Country(country).Currency(currency).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetFundingAccountsV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -508,7 +508,7 @@ Other parameters are passed through a pointer to a apiGetFundingAccountsV2Reques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) |  | 
+ **payorId** | **string** |  | 
  **name** | **string** | The descriptive funding account name | 
  **country** | **string** | The 2 letter ISO 3166-1 country code (upper case) | 
  **currency** | **string** | The ISO 4217 currency code | 
@@ -557,11 +557,11 @@ import (
 )
 
 func main() {
-    sourceAccountId := TODO // string | Source account id
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Source account id
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetSourceAccount(context.Background(), sourceAccountId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.GetSourceAccount(context.Background(), sourceAccountId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetSourceAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -577,7 +577,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceAccountId** | [**string**](.md) | Source account id | 
+**sourceAccountId** | **string** | Source account id | 
 
 ### Other Parameters
 
@@ -627,11 +627,11 @@ import (
 )
 
 func main() {
-    sourceAccountId := TODO // string | Source account id
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Source account id
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetSourceAccountV2(context.Background(), sourceAccountId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.GetSourceAccountV2(context.Background(), sourceAccountId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetSourceAccountV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -647,7 +647,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceAccountId** | [**string**](.md) | Source account id | 
+**sourceAccountId** | **string** | Source account id | 
 
 ### Other Parameters
 
@@ -697,11 +697,11 @@ import (
 )
 
 func main() {
-    sourceAccountId := TODO // string | Source account id
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Source account id
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetSourceAccountV3(context.Background(), sourceAccountId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.GetSourceAccountV3(context.Background(), sourceAccountId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetSourceAccountV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -717,7 +717,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceAccountId** | [**string**](.md) | Source account id | 
+**sourceAccountId** | **string** | Source account id | 
 
 ### Other Parameters
 
@@ -768,14 +768,14 @@ import (
 
 func main() {
     physicalAccountName := "physicalAccountName_example" // string | Physical Account Name (optional)
-    payorId := TODO // string | The account owner Payor ID (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID (optional)
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields e.g. ?sort=name:asc Default is name:asc The supported sort fields are - fundingRef  (optional) (default to "fundingRef:asc")
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetSourceAccounts(context.Background()).PhysicalAccountName(physicalAccountName).PayorId(payorId).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.GetSourceAccounts(context.Background()).PhysicalAccountName(physicalAccountName).PayorId(payorId).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetSourceAccounts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -797,7 +797,7 @@ Other parameters are passed through a pointer to a apiGetSourceAccountsRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **physicalAccountName** | **string** | Physical Account Name | 
- **payorId** | [**string**](string.md) | The account owner Payor ID | 
+ **payorId** | **string** | The account owner Payor ID | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields e.g. ?sort&#x3D;name:asc Default is name:asc The supported sort fields are - fundingRef  | [default to &quot;fundingRef:asc&quot;]
@@ -842,16 +842,16 @@ import (
 
 func main() {
     physicalAccountName := "physicalAccountName_example" // string | Physical Account Name (optional)
-    physicalAccountId := TODO // string | The physical account ID (optional)
-    payorId := TODO // string | The account owner Payor ID (optional)
-    fundingAccountId := TODO // string | The funding account ID (optional)
+    physicalAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The physical account ID (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID (optional)
+    fundingAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The funding account ID (optional)
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields e.g. ?sort=name:asc Default is name:asc The supported sort fields are - fundingRef, name, balance  (optional) (default to "fundingRef:asc")
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetSourceAccountsV2(context.Background()).PhysicalAccountName(physicalAccountName).PhysicalAccountId(physicalAccountId).PayorId(payorId).FundingAccountId(fundingAccountId).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.GetSourceAccountsV2(context.Background()).PhysicalAccountName(physicalAccountName).PhysicalAccountId(physicalAccountId).PayorId(payorId).FundingAccountId(fundingAccountId).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetSourceAccountsV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -873,9 +873,9 @@ Other parameters are passed through a pointer to a apiGetSourceAccountsV2Request
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **physicalAccountName** | **string** | Physical Account Name | 
- **physicalAccountId** | [**string**](string.md) | The physical account ID | 
- **payorId** | [**string**](string.md) | The account owner Payor ID | 
- **fundingAccountId** | [**string**](string.md) | The funding account ID | 
+ **physicalAccountId** | **string** | The physical account ID | 
+ **payorId** | **string** | The account owner Payor ID | 
+ **fundingAccountId** | **string** | The funding account ID | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields e.g. ?sort&#x3D;name:asc Default is name:asc The supported sort fields are - fundingRef, name, balance  | [default to &quot;fundingRef:asc&quot;]
@@ -920,9 +920,9 @@ import (
 
 func main() {
     physicalAccountName := "physicalAccountName_example" // string | Physical Account Name (optional)
-    physicalAccountId := TODO // string | The physical account ID (optional)
-    payorId := TODO // string | The account owner Payor ID (optional)
-    fundingAccountId := TODO // string | The funding account ID (optional)
+    physicalAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The physical account ID (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID (optional)
+    fundingAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The funding account ID (optional)
     includeUserDeleted := "includeUserDeleted_example" // bool | A filter for retrieving both active accounts and user deleted ones (optional)
     type_ := openapiclient.SourceAccountType("FBO") // SourceAccountType | The type of source account. (optional)
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
@@ -930,8 +930,8 @@ func main() {
     sort := "sort_example" // string | List of sort fields e.g. ?sort=name:asc Default is name:asc The supported sort fields are - fundingRef, name, balance  (optional) (default to "fundingRef:asc")
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.GetSourceAccountsV3(context.Background()).PhysicalAccountName(physicalAccountName).PhysicalAccountId(physicalAccountId).PayorId(payorId).FundingAccountId(fundingAccountId).IncludeUserDeleted(includeUserDeleted).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.GetSourceAccountsV3(context.Background()).PhysicalAccountName(physicalAccountName).PhysicalAccountId(physicalAccountId).PayorId(payorId).FundingAccountId(fundingAccountId).IncludeUserDeleted(includeUserDeleted).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.GetSourceAccountsV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -953,9 +953,9 @@ Other parameters are passed through a pointer to a apiGetSourceAccountsV3Request
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **physicalAccountName** | **string** | Physical Account Name | 
- **physicalAccountId** | [**string**](string.md) | The physical account ID | 
- **payorId** | [**string**](string.md) | The account owner Payor ID | 
- **fundingAccountId** | [**string**](string.md) | The funding account ID | 
+ **physicalAccountId** | **string** | The physical account ID | 
+ **payorId** | **string** | The account owner Payor ID | 
+ **fundingAccountId** | **string** | The funding account ID | 
  **includeUserDeleted** | **bool** | A filter for retrieving both active accounts and user deleted ones | 
  **type_** | [**SourceAccountType**](SourceAccountType.md) | The type of source account. | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
@@ -1002,14 +1002,14 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | 
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
     updatedSince := time.Now() // time.Time | 
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.ListFundingAuditDeltas(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.ListFundingAuditDeltas(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.ListFundingAuditDeltas``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1030,7 +1030,7 @@ Other parameters are passed through a pointer to a apiListFundingAuditDeltasRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) |  | 
+ **payorId** | **string** |  | 
  **updatedSince** | **time.Time** |  | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
@@ -1074,12 +1074,12 @@ import (
 )
 
 func main() {
-    sourceAccountId := TODO // string | Source account id
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Source account id
     setNotificationsRequest := *openapiclient.NewSetNotificationsRequest(int64(123)) // SetNotificationsRequest | Body to included minimum balance to set
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.SetNotificationsRequest(context.Background(), sourceAccountId).SetNotificationsRequest(setNotificationsRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.SetNotificationsRequest(context.Background(), sourceAccountId).SetNotificationsRequest(setNotificationsRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.SetNotificationsRequest``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1093,7 +1093,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceAccountId** | [**string**](.md) | Source account id | 
+**sourceAccountId** | **string** | Source account id | 
 
 ### Other Parameters
 
@@ -1144,12 +1144,12 @@ import (
 )
 
 func main() {
-    sourceAccountId := TODO // string | The 'from' source account id, which will be debited
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The 'from' source account id, which will be debited
     transferRequest := *openapiclient.NewTransferRequest("ToSourceAccountId_example", int64(123), "USD") // TransferRequest | Body
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.TransferFunds(context.Background(), sourceAccountId).TransferRequest(transferRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.TransferFunds(context.Background(), sourceAccountId).TransferRequest(transferRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.TransferFunds``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1163,7 +1163,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceAccountId** | [**string**](.md) | The &#39;from&#39; source account id, which will be debited | 
+**sourceAccountId** | **string** | The &#39;from&#39; source account id, which will be debited | 
 
 ### Other Parameters
 
@@ -1214,12 +1214,12 @@ import (
 )
 
 func main() {
-    sourceAccountId := TODO // string | The 'from' source account id, which will be debited
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The 'from' source account id, which will be debited
     transferRequest2 := *openapiclient.NewTransferRequest2("ToSourceAccountId_example", int64(123), "USD") // TransferRequest2 | Body
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerApi.TransferFundsV3(context.Background(), sourceAccountId).TransferRequest2(transferRequest2).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerApi.TransferFundsV3(context.Background(), sourceAccountId).TransferRequest2(transferRequest2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerApi.TransferFundsV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1233,7 +1233,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceAccountId** | [**string**](.md) | The &#39;from&#39; source account id, which will be debited | 
+**sourceAccountId** | **string** | The &#39;from&#39; source account id, which will be debited | 
 
 ### Other Parameters
 

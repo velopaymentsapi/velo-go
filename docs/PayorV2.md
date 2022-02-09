@@ -7,12 +7,14 @@ Name | Type | Description | Notes
 **PayorId** | **string** |  | [readonly] 
 **PayorName** | **string** | The name of the payor. | 
 **PayorXid** | Pointer to **string** | A unique identifier that an external system uses to reference the payor in their system | [optional] 
+**Provider** | Pointer to **string** | The source of the payorXid, default is null which means Velo | [optional] 
 **Address** | Pointer to [**PayorAddressV2**](PayorAddressV2.md) |  | [optional] 
 **PrimaryContactName** | Pointer to **string** | Name of primary contact for the payor. | [optional] 
 **PrimaryContactPhone** | Pointer to **string** | Primary contact phone number for the payor. | [optional] 
 **PrimaryContactEmail** | Pointer to **string** | Primary contact email for the payor. | [optional] 
 **KycState** | Pointer to [**KycState**](KycState.md) |  | [optional] 
 **ManualLockout** | Pointer to **bool** | Whether or not the payor has been manually locked by the backoffice. | [optional] 
+**OpenBankingEnabled** | Pointer to **bool** | Is Open Banking supported for this payor | [optional] 
 **PayeeGracePeriodProcessingEnabled** | Pointer to **bool** | Whether grace period processing is enabled. | [optional] [readonly] 
 **PayeeGracePeriodDays** | Pointer to **int32** | The grace period for paying payees in days. | [optional] [readonly] 
 **CollectiveAlias** | Pointer to **string** | How the payor has chosen to refer to payees. | [optional] 
@@ -111,6 +113,31 @@ SetPayorXid sets PayorXid field to given value.
 `func (o *PayorV2) HasPayorXid() bool`
 
 HasPayorXid returns a boolean if a field has been set.
+
+### GetProvider
+
+`func (o *PayorV2) GetProvider() string`
+
+GetProvider returns the Provider field if non-nil, zero value otherwise.
+
+### GetProviderOk
+
+`func (o *PayorV2) GetProviderOk() (*string, bool)`
+
+GetProviderOk returns a tuple with the Provider field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProvider
+
+`func (o *PayorV2) SetProvider(v string)`
+
+SetProvider sets Provider field to given value.
+
+### HasProvider
+
+`func (o *PayorV2) HasProvider() bool`
+
+HasProvider returns a boolean if a field has been set.
 
 ### GetAddress
 
@@ -261,6 +288,31 @@ SetManualLockout sets ManualLockout field to given value.
 `func (o *PayorV2) HasManualLockout() bool`
 
 HasManualLockout returns a boolean if a field has been set.
+
+### GetOpenBankingEnabled
+
+`func (o *PayorV2) GetOpenBankingEnabled() bool`
+
+GetOpenBankingEnabled returns the OpenBankingEnabled field if non-nil, zero value otherwise.
+
+### GetOpenBankingEnabledOk
+
+`func (o *PayorV2) GetOpenBankingEnabledOk() (*bool, bool)`
+
+GetOpenBankingEnabledOk returns a tuple with the OpenBankingEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenBankingEnabled
+
+`func (o *PayorV2) SetOpenBankingEnabled(v bool)`
+
+SetOpenBankingEnabled sets OpenBankingEnabled field to given value.
+
+### HasOpenBankingEnabled
+
+`func (o *PayorV2) HasOpenBankingEnabled() bool`
+
+HasOpenBankingEnabled returns a boolean if a field has been set.
 
 ### GetPayeeGracePeriodProcessingEnabled
 

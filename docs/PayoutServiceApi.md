@@ -5,9 +5,11 @@ All URIs are relative to *https://api.sandbox.velopayments.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateQuoteForPayoutV3**](PayoutServiceApi.md#CreateQuoteForPayoutV3) | **Post** /v3/payouts/{payoutId}/quote | Create a quote for the payout
+[**DeschedulePayout**](PayoutServiceApi.md#DeschedulePayout) | **Delete** /v3/payouts/{payoutId}/schedule | Deschedule a payout
 [**GetPaymentsForPayoutV3**](PayoutServiceApi.md#GetPaymentsForPayoutV3) | **Get** /v3/payouts/{payoutId}/payments | Retrieve payments for a payout
 [**GetPayoutSummaryV3**](PayoutServiceApi.md#GetPayoutSummaryV3) | **Get** /v3/payouts/{payoutId} | Get Payout Summary
 [**InstructPayoutV3**](PayoutServiceApi.md#InstructPayoutV3) | **Post** /v3/payouts/{payoutId} | Instruct Payout
+[**ScheduleForPayout**](PayoutServiceApi.md#ScheduleForPayout) | **Post** /v3/payouts/{payoutId}/schedule | Schedule a payout
 [**SubmitPayoutV3**](PayoutServiceApi.md#SubmitPayoutV3) | **Post** /v3/payouts | Submit Payout
 [**WithdrawPayment**](PayoutServiceApi.md#WithdrawPayment) | **Post** /v1/payments/{paymentId}/withdraw | Withdraw a Payment
 [**WithdrawPayoutV3**](PayoutServiceApi.md#WithdrawPayoutV3) | **Delete** /v3/payouts/{payoutId} | Withdraw Payout
@@ -35,11 +37,11 @@ import (
 )
 
 func main() {
-    payoutId := TODO // string | Id of the payout
+    payoutId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Id of the payout
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayoutServiceApi.CreateQuoteForPayoutV3(context.Background(), payoutId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayoutServiceApi.CreateQuoteForPayoutV3(context.Background(), payoutId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.CreateQuoteForPayoutV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -55,7 +57,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md) | Id of the payout | 
+**payoutId** | **string** | Id of the payout | 
 
 ### Other Parameters
 
@@ -69,6 +71,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**QuoteResponseV3**](QuoteResponseV3.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeschedulePayout
+
+> DeschedulePayout(ctx, payoutId).Execute()
+
+Deschedule a payout
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payoutId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Id of the payout
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayoutServiceApi.DeschedulePayout(context.Background(), payoutId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.DeschedulePayout``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**payoutId** | **string** | Id of the payout | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeschedulePayoutRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 
@@ -105,7 +175,7 @@ import (
 )
 
 func main() {
-    payoutId := TODO // string | Id of the payout
+    payoutId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Id of the payout
     status := "status_example" // string | Payment Status * ACCEPTED: any payment which was accepted at submission time (status may have changed since) * REJECTED: any payment rejected by initial submission processing * WITHDRAWN: any payment which has been withdrawn * WITHDRAWABLE: any payment eligible for withdrawal  (optional)
     remoteId := "remoteId_example" // string | The remote id of the payees. (optional)
     payorPaymentId := "payorPaymentId_example" // string | Payor's Id of the Payment (optional)
@@ -116,8 +186,8 @@ func main() {
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayoutServiceApi.GetPaymentsForPayoutV3(context.Background(), payoutId).Status(status).RemoteId(remoteId).PayorPaymentId(payorPaymentId).SourceAccountName(sourceAccountName).TransmissionType(transmissionType).PaymentMemo(paymentMemo).PageSize(pageSize).Page(page).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayoutServiceApi.GetPaymentsForPayoutV3(context.Background(), payoutId).Status(status).RemoteId(remoteId).PayorPaymentId(payorPaymentId).SourceAccountName(sourceAccountName).TransmissionType(transmissionType).PaymentMemo(paymentMemo).PageSize(pageSize).Page(page).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.GetPaymentsForPayoutV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -133,7 +203,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md) | Id of the payout | 
+**payoutId** | **string** | Id of the payout | 
 
 ### Other Parameters
 
@@ -191,11 +261,11 @@ import (
 )
 
 func main() {
-    payoutId := TODO // string | Id of the payout
+    payoutId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Id of the payout
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayoutServiceApi.GetPayoutSummaryV3(context.Background(), payoutId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayoutServiceApi.GetPayoutSummaryV3(context.Background(), payoutId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.GetPayoutSummaryV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -211,7 +281,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md) | Id of the payout | 
+**payoutId** | **string** | Id of the payout | 
 
 ### Other Parameters
 
@@ -242,7 +312,7 @@ Name | Type | Description  | Notes
 
 ## InstructPayoutV3
 
-> InstructPayoutV3(ctx, payoutId).Execute()
+> InstructPayoutV3(ctx, payoutId).InstructPayoutRequest(instructPayoutRequest).Execute()
 
 Instruct Payout
 
@@ -261,11 +331,12 @@ import (
 )
 
 func main() {
-    payoutId := TODO // string | Id of the payout
+    payoutId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Id of the payout
+    instructPayoutRequest := *openapiclient.NewInstructPayoutRequest() // InstructPayoutRequest | Additional instruct payout parameters (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayoutServiceApi.InstructPayoutV3(context.Background(), payoutId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayoutServiceApi.InstructPayoutV3(context.Background(), payoutId).InstructPayoutRequest(instructPayoutRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.InstructPayoutV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -279,7 +350,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md) | Id of the payout | 
+**payoutId** | **string** | Id of the payout | 
 
 ### Other Parameters
 
@@ -289,6 +360,7 @@ Other parameters are passed through a pointer to a apiInstructPayoutV3Request st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **instructPayoutRequest** | [**InstructPayoutRequest**](InstructPayoutRequest.md) | Additional instruct payout parameters | 
 
 ### Return type
 
@@ -300,7 +372,78 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ScheduleForPayout
+
+> ScheduleForPayout(ctx, payoutId).SchedulePayoutRequest(schedulePayoutRequest).Execute()
+
+Schedule a payout
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "time"
+    openapiclient "./openapi"
+)
+
+func main() {
+    payoutId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Id of the payout
+    schedulePayoutRequest := *openapiclient.NewSchedulePayoutRequest(time.Now(), false) // SchedulePayoutRequest | schedule payout parameters (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayoutServiceApi.ScheduleForPayout(context.Background(), payoutId).SchedulePayoutRequest(schedulePayoutRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.ScheduleForPayout``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**payoutId** | **string** | Id of the payout | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiScheduleForPayoutRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **schedulePayoutRequest** | [**SchedulePayoutRequest**](SchedulePayoutRequest.md) | schedule payout parameters | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -332,8 +475,8 @@ func main() {
     createPayoutRequestV3 := *openapiclient.NewCreatePayoutRequestV3([]openapiclient.PaymentInstructionV3{*openapiclient.NewPaymentInstructionV3("remoteId1234", "USD", int64(1299), "MyAccountName")}) // CreatePayoutRequestV3 | Post amount to transfer using stored funding account details.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayoutServiceApi.SubmitPayoutV3(context.Background()).CreatePayoutRequestV3(createPayoutRequestV3).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayoutServiceApi.SubmitPayoutV3(context.Background()).CreatePayoutRequestV3(createPayoutRequestV3).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.SubmitPayoutV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -393,12 +536,12 @@ import (
 )
 
 func main() {
-    paymentId := TODO // string | Id of the Payment
+    paymentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Id of the Payment
     withdrawPaymentRequest := *openapiclient.NewWithdrawPaymentRequest("Payment submitted in error") // WithdrawPaymentRequest | details for withdrawal
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayoutServiceApi.WithdrawPayment(context.Background(), paymentId).WithdrawPaymentRequest(withdrawPaymentRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayoutServiceApi.WithdrawPayment(context.Background(), paymentId).WithdrawPaymentRequest(withdrawPaymentRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.WithdrawPayment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -412,7 +555,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**paymentId** | [**string**](.md) | Id of the Payment | 
+**paymentId** | **string** | Id of the Payment | 
 
 ### Other Parameters
 
@@ -463,11 +606,11 @@ import (
 )
 
 func main() {
-    payoutId := TODO // string | Id of the payout
+    payoutId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Id of the payout
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayoutServiceApi.WithdrawPayoutV3(context.Background(), payoutId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayoutServiceApi.WithdrawPayoutV3(context.Background(), payoutId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayoutServiceApi.WithdrawPayoutV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -481,7 +624,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md) | Id of the payout | 
+**payoutId** | **string** | Id of the payout | 
 
 ### Other Parameters
 

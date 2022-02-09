@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | **string** |  | 
+**Value** | **string** | The value that the user will be asked to verify when they onboard | 
 **Description** | **string** |  | 
 
 ## Methods

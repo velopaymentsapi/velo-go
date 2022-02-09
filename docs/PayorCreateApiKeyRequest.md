@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | A name for the key. | 
 **Description** | Pointer to **NullableString** | Description of the key. | [optional] 
-**Roles** | **[]string** | A list of roles to assign to the key. | 
+**Roles** | **[]string** | &lt;p&gt;A list of roles to assign to the key.&lt;/p&gt; &lt;p&gt;Only the first role name will be used&lt;/p&gt; &lt;p&gt;A later version will change this from a list to string&lt;/p&gt;  | 
 
 ## Methods
 

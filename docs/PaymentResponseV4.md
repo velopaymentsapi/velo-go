@@ -45,9 +45,11 @@ Name | Type | Description | Notes
 **RejectionReason** | Pointer to **string** |  | [optional] 
 **WithdrawnReason** | Pointer to **string** |  | [optional] 
 **Withdrawable** | Pointer to **bool** |  | [optional] 
+**AutoWithdrawnReasonCode** | Pointer to **string** | Populated with rejection reason code if the payment was withdrawn automatically at instruct time | [optional] 
 **TransmissionType** | Pointer to **string** | The transmission type of the payment, e.g. ACH, SAME_DAY_ACH, WIRE | [optional] 
 **PaymentTrackingReference** | Pointer to **string** |  | [optional] 
 **PaymentMetadata** | Pointer to **string** | Metadata for the payment | [optional] 
+**Schedule** | Pointer to [**PayoutSchedule**](PayoutSchedule.md) |  | [optional] 
 **Payout** | Pointer to [**PaymentResponseV4Payout**](PaymentResponseV4Payout.md) |  | [optional] 
 
 ## Methods
@@ -1039,6 +1041,31 @@ SetWithdrawable sets Withdrawable field to given value.
 
 HasWithdrawable returns a boolean if a field has been set.
 
+### GetAutoWithdrawnReasonCode
+
+`func (o *PaymentResponseV4) GetAutoWithdrawnReasonCode() string`
+
+GetAutoWithdrawnReasonCode returns the AutoWithdrawnReasonCode field if non-nil, zero value otherwise.
+
+### GetAutoWithdrawnReasonCodeOk
+
+`func (o *PaymentResponseV4) GetAutoWithdrawnReasonCodeOk() (*string, bool)`
+
+GetAutoWithdrawnReasonCodeOk returns a tuple with the AutoWithdrawnReasonCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoWithdrawnReasonCode
+
+`func (o *PaymentResponseV4) SetAutoWithdrawnReasonCode(v string)`
+
+SetAutoWithdrawnReasonCode sets AutoWithdrawnReasonCode field to given value.
+
+### HasAutoWithdrawnReasonCode
+
+`func (o *PaymentResponseV4) HasAutoWithdrawnReasonCode() bool`
+
+HasAutoWithdrawnReasonCode returns a boolean if a field has been set.
+
 ### GetTransmissionType
 
 `func (o *PaymentResponseV4) GetTransmissionType() string`
@@ -1113,6 +1140,31 @@ SetPaymentMetadata sets PaymentMetadata field to given value.
 `func (o *PaymentResponseV4) HasPaymentMetadata() bool`
 
 HasPaymentMetadata returns a boolean if a field has been set.
+
+### GetSchedule
+
+`func (o *PaymentResponseV4) GetSchedule() PayoutSchedule`
+
+GetSchedule returns the Schedule field if non-nil, zero value otherwise.
+
+### GetScheduleOk
+
+`func (o *PaymentResponseV4) GetScheduleOk() (*PayoutSchedule, bool)`
+
+GetScheduleOk returns a tuple with the Schedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchedule
+
+`func (o *PaymentResponseV4) SetSchedule(v PayoutSchedule)`
+
+SetSchedule sets Schedule field to given value.
+
+### HasSchedule
+
+`func (o *PaymentResponseV4) HasSchedule() bool`
+
+HasSchedule returns a boolean if a field has been set.
 
 ### GetPayout
 

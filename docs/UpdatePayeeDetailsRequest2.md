@@ -8,9 +8,10 @@ Name | Type | Description | Notes
 **Individual** | Pointer to [**Individual2**](Individual2.md) |  | [optional] 
 **Company** | Pointer to [**NullableCompany2**](Company2.md) |  | [optional] 
 **Language** | Pointer to **string** | An IETF BCP 47 language code which has been configured for use within this Velo environment.&lt;BR&gt; See the /v1/supportedLanguages endpoint to list the available codes for an environment.  | [optional] 
-**PayeeType** | Pointer to [**PayeeType**](PayeeType.md) |  | [optional] 
+**PayeeType** | Pointer to [**PayeeType2**](PayeeType2.md) |  | [optional] 
 **Challenge** | Pointer to [**Challenge2**](Challenge2.md) |  | [optional] 
 **Email** | Pointer to **NullableString** |  | [optional] 
+**ContactSmsNumber** | Pointer to **string** | The phone number of a device that the payee wishes to receive sms messages on  | [optional] 
 
 ## Methods
 
@@ -143,20 +144,20 @@ HasLanguage returns a boolean if a field has been set.
 
 ### GetPayeeType
 
-`func (o *UpdatePayeeDetailsRequest2) GetPayeeType() PayeeType`
+`func (o *UpdatePayeeDetailsRequest2) GetPayeeType() PayeeType2`
 
 GetPayeeType returns the PayeeType field if non-nil, zero value otherwise.
 
 ### GetPayeeTypeOk
 
-`func (o *UpdatePayeeDetailsRequest2) GetPayeeTypeOk() (*PayeeType, bool)`
+`func (o *UpdatePayeeDetailsRequest2) GetPayeeTypeOk() (*PayeeType2, bool)`
 
 GetPayeeTypeOk returns a tuple with the PayeeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayeeType
 
-`func (o *UpdatePayeeDetailsRequest2) SetPayeeType(v PayeeType)`
+`func (o *UpdatePayeeDetailsRequest2) SetPayeeType(v PayeeType2)`
 
 SetPayeeType sets PayeeType field to given value.
 
@@ -226,6 +227,31 @@ HasEmail returns a boolean if a field has been set.
 `func (o *UpdatePayeeDetailsRequest2) UnsetEmail()`
 
 UnsetEmail ensures that no value is present for Email, not even an explicit nil
+### GetContactSmsNumber
+
+`func (o *UpdatePayeeDetailsRequest2) GetContactSmsNumber() string`
+
+GetContactSmsNumber returns the ContactSmsNumber field if non-nil, zero value otherwise.
+
+### GetContactSmsNumberOk
+
+`func (o *UpdatePayeeDetailsRequest2) GetContactSmsNumberOk() (*string, bool)`
+
+GetContactSmsNumberOk returns a tuple with the ContactSmsNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContactSmsNumber
+
+`func (o *UpdatePayeeDetailsRequest2) SetContactSmsNumber(v string)`
+
+SetContactSmsNumber sets ContactSmsNumber field to given value.
+
+### HasContactSmsNumber
+
+`func (o *UpdatePayeeDetailsRequest2) HasContactSmsNumber() bool`
+
+HasContactSmsNumber returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

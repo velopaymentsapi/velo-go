@@ -1,10 +1,10 @@
 /*
- * Velo Payments APIs
- *
- * ## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
- *
- * API version: 2.26.124
- */
+Velo Payments APIs
+
+## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
+
+API version: 2.29.128
+*/
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
 
@@ -12,42 +12,46 @@ package velopayments
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 	"os"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // PayorsApiService PayorsApi service
 type PayorsApiService service
 
 type ApiGetPayorByIdRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *PayorsApiService
 	payorId string
 }
 
 
-func (r ApiGetPayorByIdRequest) Execute() (PayorV1, *_nethttp.Response, error) {
+func (r ApiGetPayorByIdRequest) Execute() (*PayorV1, *http.Response, error) {
 	return r.ApiService.GetPayorByIdExecute(r)
 }
 
 /*
- * GetPayorById Get Payor
- * Get a Single Payor by Id.
+GetPayorById Get Payor
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payorId The Payor Id
- * @return ApiGetPayorByIdRequest
- */
-func (a *PayorsApiService) GetPayorById(ctx _context.Context, payorId string) ApiGetPayorByIdRequest {
+Get a Single Payor by Id.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payorId The Payor Id
+ @return ApiGetPayorByIdRequest
+
+Deprecated
+*/
+func (a *PayorsApiService) GetPayorById(ctx context.Context, payorId string) ApiGetPayorByIdRequest {
 	return ApiGetPayorByIdRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -55,31 +59,28 @@ func (a *PayorsApiService) GetPayorById(ctx _context.Context, payorId string) Ap
 	}
 }
 
-/*
- * Execute executes the request
- * @return PayorV1
- */
-func (a *PayorsApiService) GetPayorByIdExecute(r ApiGetPayorByIdRequest) (PayorV1, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PayorV1
+// Deprecated
+func (a *PayorsApiService) GetPayorByIdExecute(r ApiGetPayorByIdRequest) (*PayorV1, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PayorV1
+		formFiles            []formFile
+		localVarReturnValue  *PayorV1
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayorsApiService.GetPayorById")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/payors/{payorId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", _neturl.PathEscape(parameterToString(r.payorId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", url.PathEscape(parameterToString(r.payorId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -98,7 +99,7 @@ func (a *PayorsApiService) GetPayorByIdExecute(r ApiGetPayorByIdRequest) (PayorV
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -108,15 +109,15 @@ func (a *PayorsApiService) GetPayorByIdExecute(r ApiGetPayorByIdRequest) (PayorV
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -144,7 +145,7 @@ func (a *PayorsApiService) GetPayorByIdExecute(r ApiGetPayorByIdRequest) (PayorV
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -155,25 +156,27 @@ func (a *PayorsApiService) GetPayorByIdExecute(r ApiGetPayorByIdRequest) (PayorV
 }
 
 type ApiGetPayorByIdV2Request struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *PayorsApiService
 	payorId string
 }
 
 
-func (r ApiGetPayorByIdV2Request) Execute() (PayorV2, *_nethttp.Response, error) {
+func (r ApiGetPayorByIdV2Request) Execute() (*PayorV2, *http.Response, error) {
 	return r.ApiService.GetPayorByIdV2Execute(r)
 }
 
 /*
- * GetPayorByIdV2 Get Payor
- * Get a Single Payor by Id.
+GetPayorByIdV2 Get Payor
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payorId The Payor Id
- * @return ApiGetPayorByIdV2Request
- */
-func (a *PayorsApiService) GetPayorByIdV2(ctx _context.Context, payorId string) ApiGetPayorByIdV2Request {
+Get a Single Payor by Id.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payorId The Payor Id
+ @return ApiGetPayorByIdV2Request
+*/
+func (a *PayorsApiService) GetPayorByIdV2(ctx context.Context, payorId string) ApiGetPayorByIdV2Request {
 	return ApiGetPayorByIdV2Request{
 		ApiService: a,
 		ctx: ctx,
@@ -181,31 +184,27 @@ func (a *PayorsApiService) GetPayorByIdV2(ctx _context.Context, payorId string) 
 	}
 }
 
-/*
- * Execute executes the request
- * @return PayorV2
- */
-func (a *PayorsApiService) GetPayorByIdV2Execute(r ApiGetPayorByIdV2Request) (PayorV2, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PayorV2
+func (a *PayorsApiService) GetPayorByIdV2Execute(r ApiGetPayorByIdV2Request) (*PayorV2, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PayorV2
+		formFiles            []formFile
+		localVarReturnValue  *PayorV2
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayorsApiService.GetPayorByIdV2")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/payors/{payorId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", _neturl.PathEscape(parameterToString(r.payorId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", url.PathEscape(parameterToString(r.payorId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -224,7 +223,7 @@ func (a *PayorsApiService) GetPayorByIdV2Execute(r ApiGetPayorByIdV2Request) (Pa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -234,15 +233,15 @@ func (a *PayorsApiService) GetPayorByIdV2Execute(r ApiGetPayorByIdV2Request) (Pa
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -280,7 +279,7 @@ func (a *PayorsApiService) GetPayorByIdV2Execute(r ApiGetPayorByIdV2Request) (Pa
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -291,7 +290,7 @@ func (a *PayorsApiService) GetPayorByIdV2Execute(r ApiGetPayorByIdV2Request) (Pa
 }
 
 type ApiPayorAddPayorLogoRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *PayorsApiService
 	payorId string
 	logo **os.File
@@ -302,18 +301,20 @@ func (r ApiPayorAddPayorLogoRequest) Logo(logo *os.File) ApiPayorAddPayorLogoReq
 	return r
 }
 
-func (r ApiPayorAddPayorLogoRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPayorAddPayorLogoRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PayorAddPayorLogoExecute(r)
 }
 
 /*
- * PayorAddPayorLogo Add Logo
- * Add Payor Logo. Logo file is used in your branding, and emails sent to payees.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payorId The Payor Id
- * @return ApiPayorAddPayorLogoRequest
- */
-func (a *PayorsApiService) PayorAddPayorLogo(ctx _context.Context, payorId string) ApiPayorAddPayorLogoRequest {
+PayorAddPayorLogo Add Logo
+
+Add Payor Logo. Logo file is used in your branding, and emails sent to payees.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payorId The Payor Id
+ @return ApiPayorAddPayorLogoRequest
+*/
+func (a *PayorsApiService) PayorAddPayorLogo(ctx context.Context, payorId string) ApiPayorAddPayorLogoRequest {
 	return ApiPayorAddPayorLogoRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -321,29 +322,25 @@ func (a *PayorsApiService) PayorAddPayorLogo(ctx _context.Context, payorId strin
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *PayorsApiService) PayorAddPayorLogoExecute(r ApiPayorAddPayorLogoRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *PayorsApiService) PayorAddPayorLogoExecute(r ApiPayorAddPayorLogoRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayorsApiService.PayorAddPayorLogo")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/payors/{payorId}/branding/logos"
-	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", _neturl.PathEscape(parameterToString(r.payorId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", url.PathEscape(parameterToString(r.payorId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -362,18 +359,24 @@ func (a *PayorsApiService) PayorAddPayorLogoExecute(r ApiPayorAddPayorLogoReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarFormFileName = "logo"
-	var localVarFile *os.File
+	var logoLocalVarFormFileName string
+	var logoLocalVarFileName     string
+	var logoLocalVarFileBytes    []byte
+
+	logoLocalVarFormFileName = "logo"
+
+	var logoLocalVarFile *os.File
 	if r.logo != nil {
-		localVarFile = *r.logo
+		logoLocalVarFile = *r.logo
 	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
+	if logoLocalVarFile != nil {
+		fbs, _ := ioutil.ReadAll(logoLocalVarFile)
+		logoLocalVarFileBytes = fbs
+		logoLocalVarFileName = logoLocalVarFile.Name()
+		logoLocalVarFile.Close()
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	formFiles = append(formFiles, formFile{fileBytes: logoLocalVarFileBytes, fileName: logoLocalVarFileName, formFileName: logoLocalVarFormFileName})
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -383,15 +386,15 @@ func (a *PayorsApiService) PayorAddPayorLogoExecute(r ApiPayorAddPayorLogoReques
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -431,31 +434,34 @@ func (a *PayorsApiService) PayorAddPayorLogoExecute(r ApiPayorAddPayorLogoReques
 }
 
 type ApiPayorCreateApiKeyRequestRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *PayorsApiService
 	payorId string
 	applicationId string
 	payorCreateApiKeyRequest *PayorCreateApiKeyRequest
 }
 
+// Details of application API key to create
 func (r ApiPayorCreateApiKeyRequestRequest) PayorCreateApiKeyRequest(payorCreateApiKeyRequest PayorCreateApiKeyRequest) ApiPayorCreateApiKeyRequestRequest {
 	r.payorCreateApiKeyRequest = &payorCreateApiKeyRequest
 	return r
 }
 
-func (r ApiPayorCreateApiKeyRequestRequest) Execute() (PayorCreateApiKeyResponse, *_nethttp.Response, error) {
+func (r ApiPayorCreateApiKeyRequestRequest) Execute() (*PayorCreateApiKeyResponse, *http.Response, error) {
 	return r.ApiService.PayorCreateApiKeyRequestExecute(r)
 }
 
 /*
- * PayorCreateApiKeyRequest Create API Key
- * Create an an API key for the given payor Id and application Id
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payorId The Payor Id
- * @param applicationId Application ID
- * @return ApiPayorCreateApiKeyRequestRequest
- */
-func (a *PayorsApiService) PayorCreateApiKeyRequest(ctx _context.Context, payorId string, applicationId string) ApiPayorCreateApiKeyRequestRequest {
+PayorCreateApiKeyRequest Create API Key
+
+Create an an API key for the given payor Id and application Id
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payorId The Payor Id
+ @param applicationId Application ID
+ @return ApiPayorCreateApiKeyRequestRequest
+*/
+func (a *PayorsApiService) PayorCreateApiKeyRequest(ctx context.Context, payorId string, applicationId string) ApiPayorCreateApiKeyRequestRequest {
 	return ApiPayorCreateApiKeyRequestRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -464,32 +470,28 @@ func (a *PayorsApiService) PayorCreateApiKeyRequest(ctx _context.Context, payorI
 	}
 }
 
-/*
- * Execute executes the request
- * @return PayorCreateApiKeyResponse
- */
-func (a *PayorsApiService) PayorCreateApiKeyRequestExecute(r ApiPayorCreateApiKeyRequestRequest) (PayorCreateApiKeyResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PayorCreateApiKeyResponse
+func (a *PayorsApiService) PayorCreateApiKeyRequestExecute(r ApiPayorCreateApiKeyRequestRequest) (*PayorCreateApiKeyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PayorCreateApiKeyResponse
+		formFiles            []formFile
+		localVarReturnValue  *PayorCreateApiKeyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayorsApiService.PayorCreateApiKeyRequest")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/payors/{payorId}/applications/{applicationId}/keys"
-	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", _neturl.PathEscape(parameterToString(r.payorId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"applicationId"+"}", _neturl.PathEscape(parameterToString(r.applicationId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", url.PathEscape(parameterToString(r.payorId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"applicationId"+"}", url.PathEscape(parameterToString(r.applicationId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.payorCreateApiKeyRequest == nil {
 		return localVarReturnValue, nil, reportError("payorCreateApiKeyRequest is required and must be specified")
 	}
@@ -513,7 +515,7 @@ func (a *PayorsApiService) PayorCreateApiKeyRequestExecute(r ApiPayorCreateApiKe
 	}
 	// body params
 	localVarPostBody = r.payorCreateApiKeyRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -523,15 +525,15 @@ func (a *PayorsApiService) PayorCreateApiKeyRequestExecute(r ApiPayorCreateApiKe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -569,7 +571,7 @@ func (a *PayorsApiService) PayorCreateApiKeyRequestExecute(r ApiPayorCreateApiKe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -580,29 +582,32 @@ func (a *PayorsApiService) PayorCreateApiKeyRequestExecute(r ApiPayorCreateApiKe
 }
 
 type ApiPayorCreateApplicationRequestRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *PayorsApiService
 	payorId string
 	payorCreateApplicationRequest *PayorCreateApplicationRequest
 }
 
+// Details of application to create
 func (r ApiPayorCreateApplicationRequestRequest) PayorCreateApplicationRequest(payorCreateApplicationRequest PayorCreateApplicationRequest) ApiPayorCreateApplicationRequestRequest {
 	r.payorCreateApplicationRequest = &payorCreateApplicationRequest
 	return r
 }
 
-func (r ApiPayorCreateApplicationRequestRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPayorCreateApplicationRequestRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PayorCreateApplicationRequestExecute(r)
 }
 
 /*
- * PayorCreateApplicationRequest Create Application
- * Create an application for the given Payor ID. Applications are programatic users which can be assigned unique keys.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payorId The Payor Id
- * @return ApiPayorCreateApplicationRequestRequest
- */
-func (a *PayorsApiService) PayorCreateApplicationRequest(ctx _context.Context, payorId string) ApiPayorCreateApplicationRequestRequest {
+PayorCreateApplicationRequest Create Application
+
+Create an application for the given Payor ID. Applications are programatic users which can be assigned unique keys.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payorId The Payor Id
+ @return ApiPayorCreateApplicationRequestRequest
+*/
+func (a *PayorsApiService) PayorCreateApplicationRequest(ctx context.Context, payorId string) ApiPayorCreateApplicationRequestRequest {
 	return ApiPayorCreateApplicationRequestRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -610,29 +615,25 @@ func (a *PayorsApiService) PayorCreateApplicationRequest(ctx _context.Context, p
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *PayorsApiService) PayorCreateApplicationRequestExecute(r ApiPayorCreateApplicationRequestRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *PayorsApiService) PayorCreateApplicationRequestExecute(r ApiPayorCreateApplicationRequestRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayorsApiService.PayorCreateApplicationRequest")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/payors/{payorId}/applications"
-	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", _neturl.PathEscape(parameterToString(r.payorId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", url.PathEscape(parameterToString(r.payorId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.payorCreateApplicationRequest == nil {
 		return nil, reportError("payorCreateApplicationRequest is required and must be specified")
 	}
@@ -656,7 +657,7 @@ func (a *PayorsApiService) PayorCreateApplicationRequestExecute(r ApiPayorCreate
 	}
 	// body params
 	localVarPostBody = r.payorCreateApplicationRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -666,15 +667,15 @@ func (a *PayorsApiService) PayorCreateApplicationRequestExecute(r ApiPayorCreate
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -724,32 +725,35 @@ func (a *PayorsApiService) PayorCreateApplicationRequestExecute(r ApiPayorCreate
 }
 
 type ApiPayorEmailOptOutRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *PayorsApiService
 	payorId string
 	payorEmailOptOutRequest *PayorEmailOptOutRequest
 }
 
+// Reminder Emails Opt-Out Request
 func (r ApiPayorEmailOptOutRequest) PayorEmailOptOutRequest(payorEmailOptOutRequest PayorEmailOptOutRequest) ApiPayorEmailOptOutRequest {
 	r.payorEmailOptOutRequest = &payorEmailOptOutRequest
 	return r
 }
 
-func (r ApiPayorEmailOptOutRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPayorEmailOptOutRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PayorEmailOptOutExecute(r)
 }
 
 /*
- * PayorEmailOptOut Reminder Email Opt-Out
- * Update the emailRemindersOptOut field for a Payor. This API can be used to opt out
+PayorEmailOptOut Reminder Email Opt-Out
+
+Update the emailRemindersOptOut field for a Payor. This API can be used to opt out
 or opt into Payor Reminder emails. These emails are typically around payee events
 such as payees registering and onboarding.
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payorId The Payor Id
- * @return ApiPayorEmailOptOutRequest
- */
-func (a *PayorsApiService) PayorEmailOptOut(ctx _context.Context, payorId string) ApiPayorEmailOptOutRequest {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payorId The Payor Id
+ @return ApiPayorEmailOptOutRequest
+*/
+func (a *PayorsApiService) PayorEmailOptOut(ctx context.Context, payorId string) ApiPayorEmailOptOutRequest {
 	return ApiPayorEmailOptOutRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -757,29 +761,25 @@ func (a *PayorsApiService) PayorEmailOptOut(ctx _context.Context, payorId string
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *PayorsApiService) PayorEmailOptOutExecute(r ApiPayorEmailOptOutRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *PayorsApiService) PayorEmailOptOutExecute(r ApiPayorEmailOptOutRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayorsApiService.PayorEmailOptOut")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/payors/{payorId}/reminderEmailsUpdate"
-	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", _neturl.PathEscape(parameterToString(r.payorId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", url.PathEscape(parameterToString(r.payorId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.payorEmailOptOutRequest == nil {
 		return nil, reportError("payorEmailOptOutRequest is required and must be specified")
 	}
@@ -803,7 +803,7 @@ func (a *PayorsApiService) PayorEmailOptOutExecute(r ApiPayorEmailOptOutRequest)
 	}
 	// body params
 	localVarPostBody = r.payorEmailOptOutRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -813,15 +813,15 @@ func (a *PayorsApiService) PayorEmailOptOutExecute(r ApiPayorEmailOptOutRequest)
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -861,24 +861,26 @@ func (a *PayorsApiService) PayorEmailOptOutExecute(r ApiPayorEmailOptOutRequest)
 }
 
 type ApiPayorGetBrandingRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *PayorsApiService
 	payorId string
 }
 
 
-func (r ApiPayorGetBrandingRequest) Execute() (PayorBrandingResponse, *_nethttp.Response, error) {
+func (r ApiPayorGetBrandingRequest) Execute() (*PayorBrandingResponse, *http.Response, error) {
 	return r.ApiService.PayorGetBrandingExecute(r)
 }
 
 /*
- * PayorGetBranding Get Branding
- * Get the payor branding details.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payorId The Payor Id
- * @return ApiPayorGetBrandingRequest
- */
-func (a *PayorsApiService) PayorGetBranding(ctx _context.Context, payorId string) ApiPayorGetBrandingRequest {
+PayorGetBranding Get Branding
+
+Get the payor branding details.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payorId The Payor Id
+ @return ApiPayorGetBrandingRequest
+*/
+func (a *PayorsApiService) PayorGetBranding(ctx context.Context, payorId string) ApiPayorGetBrandingRequest {
 	return ApiPayorGetBrandingRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -886,31 +888,27 @@ func (a *PayorsApiService) PayorGetBranding(ctx _context.Context, payorId string
 	}
 }
 
-/*
- * Execute executes the request
- * @return PayorBrandingResponse
- */
-func (a *PayorsApiService) PayorGetBrandingExecute(r ApiPayorGetBrandingRequest) (PayorBrandingResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PayorBrandingResponse
+func (a *PayorsApiService) PayorGetBrandingExecute(r ApiPayorGetBrandingRequest) (*PayorBrandingResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PayorBrandingResponse
+		formFiles            []formFile
+		localVarReturnValue  *PayorBrandingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayorsApiService.PayorGetBranding")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/payors/{payorId}/branding"
-	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", _neturl.PathEscape(parameterToString(r.payorId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payorId"+"}", url.PathEscape(parameterToString(r.payorId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -929,7 +927,7 @@ func (a *PayorsApiService) PayorGetBrandingExecute(r ApiPayorGetBrandingRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -939,15 +937,15 @@ func (a *PayorsApiService) PayorGetBrandingExecute(r ApiPayorGetBrandingRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -985,7 +983,7 @@ func (a *PayorsApiService) PayorGetBrandingExecute(r ApiPayorGetBrandingRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -996,67 +994,68 @@ func (a *PayorsApiService) PayorGetBrandingExecute(r ApiPayorGetBrandingRequest)
 }
 
 type ApiPayorLinksRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *PayorsApiService
 	descendantsOfPayor *string
 	parentOfPayor *string
 	fields *string
 }
 
+// The Payor ID from which to start the query to show all descendants
 func (r ApiPayorLinksRequest) DescendantsOfPayor(descendantsOfPayor string) ApiPayorLinksRequest {
 	r.descendantsOfPayor = &descendantsOfPayor
 	return r
 }
+// Look for the parent payor details for this payor id
 func (r ApiPayorLinksRequest) ParentOfPayor(parentOfPayor string) ApiPayorLinksRequest {
 	r.parentOfPayor = &parentOfPayor
 	return r
 }
+// List of additional Payor fields to include in the response for each Payor. The values of payorId and payorName and always included for each Payor - &#39;fields&#39; allows you to add to this. Example: &#x60;&#x60;&#x60;fields&#x3D;primaryContactEmail,kycState&#x60;&#x60;&#x60; - will include payorId+payorName+primaryContactEmail+kycState for each Payor Default if not specified is to include only payorId and payorName. The supported fields are any combination of: primaryContactEmail,kycState 
 func (r ApiPayorLinksRequest) Fields(fields string) ApiPayorLinksRequest {
 	r.fields = &fields
 	return r
 }
 
-func (r ApiPayorLinksRequest) Execute() (PayorLinksResponse, *_nethttp.Response, error) {
+func (r ApiPayorLinksRequest) Execute() (*PayorLinksResponse, *http.Response, error) {
 	return r.ApiService.PayorLinksExecute(r)
 }
 
 /*
- * PayorLinks List Payor Links
- * This endpoint allows you to list payor links
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiPayorLinksRequest
- */
-func (a *PayorsApiService) PayorLinks(ctx _context.Context) ApiPayorLinksRequest {
+PayorLinks List Payor Links
+
+This endpoint allows you to list payor links
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiPayorLinksRequest
+*/
+func (a *PayorsApiService) PayorLinks(ctx context.Context) ApiPayorLinksRequest {
 	return ApiPayorLinksRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return PayorLinksResponse
- */
-func (a *PayorsApiService) PayorLinksExecute(r ApiPayorLinksRequest) (PayorLinksResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PayorLinksResponse
+func (a *PayorsApiService) PayorLinksExecute(r ApiPayorLinksRequest) (*PayorLinksResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PayorLinksResponse
+		formFiles            []formFile
+		localVarReturnValue  *PayorLinksResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayorsApiService.PayorLinks")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/payorLinks"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.descendantsOfPayor != nil {
 		localVarQueryParams.Add("descendantsOfPayor", parameterToString(*r.descendantsOfPayor, ""))
@@ -1084,7 +1083,7 @@ func (a *PayorsApiService) PayorLinksExecute(r ApiPayorLinksRequest) (PayorLinks
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1094,15 +1093,15 @@ func (a *PayorsApiService) PayorLinksExecute(r ApiPayorLinksRequest) (PayorLinks
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1140,7 +1139,7 @@ func (a *PayorsApiService) PayorLinksExecute(r ApiPayorLinksRequest) (PayorLinks
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

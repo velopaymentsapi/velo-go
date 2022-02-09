@@ -36,15 +36,15 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | The account owner Payor ID
-    payeeId := TODO // string | The UUID of the payee. (optional)
+    payorId := "9ac75325-5dcd-42d5-b992-175d7e0a035e" // string | The account owner Payor ID
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee. (optional)
     invitationStatus := openapiclient.InvitationStatus("ACCEPTED") // InvitationStatus | The invitation status of the payees. (optional)
     page := int32(1) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(25) // int32 | Page size. Default is 25. Max allowable is 100. (optional) (default to 25)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeeInvitationApi.GetPayeesInvitationStatusV3(context.Background(), payorId).PayeeId(payeeId).InvitationStatus(invitationStatus).Page(page).PageSize(pageSize).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeeInvitationApi.GetPayeesInvitationStatusV3(context.Background(), payorId).PayeeId(payeeId).InvitationStatus(invitationStatus).Page(page).PageSize(pageSize).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeeInvitationApi.GetPayeesInvitationStatusV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,7 +60,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md) | The account owner Payor ID | 
+**payorId** | **string** | The account owner Payor ID | 
 
 ### Other Parameters
 
@@ -70,7 +70,7 @@ Other parameters are passed through a pointer to a apiGetPayeesInvitationStatusV
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **payeeId** | [**string**](string.md) | The UUID of the payee. | 
+ **payeeId** | **string** | The UUID of the payee. | 
  **invitationStatus** | [**InvitationStatus**](InvitationStatus.md) | The invitation status of the payees. | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | Page size. Default is 25. Max allowable is 100. | [default to 25]
@@ -114,15 +114,15 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | The account owner Payor ID
-    payeeId := TODO // string | The UUID of the payee. (optional)
+    payorId := "9ac75325-5dcd-42d5-b992-175d7e0a035e" // string | The account owner Payor ID
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee. (optional)
     invitationStatus := openapiclient.InvitationStatus("ACCEPTED") // InvitationStatus | The invitation status of the payees. (optional)
     page := int32(1) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(25) // int32 | Page size. Default is 25. Max allowable is 100. (optional) (default to 25)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeeInvitationApi.GetPayeesInvitationStatusV4(context.Background(), payorId).PayeeId(payeeId).InvitationStatus(invitationStatus).Page(page).PageSize(pageSize).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeeInvitationApi.GetPayeesInvitationStatusV4(context.Background(), payorId).PayeeId(payeeId).InvitationStatus(invitationStatus).Page(page).PageSize(pageSize).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeeInvitationApi.GetPayeesInvitationStatusV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -138,7 +138,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md) | The account owner Payor ID | 
+**payorId** | **string** | The account owner Payor ID | 
 
 ### Other Parameters
 
@@ -148,7 +148,7 @@ Other parameters are passed through a pointer to a apiGetPayeesInvitationStatusV
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **payeeId** | [**string**](string.md) | The UUID of the payee. | 
+ **payeeId** | **string** | The UUID of the payee. | 
  **invitationStatus** | [**InvitationStatus**](InvitationStatus.md) | The invitation status of the payees. | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | Page size. Default is 25. Max allowable is 100. | [default to 25]
@@ -192,11 +192,11 @@ import (
 )
 
 func main() {
-    batchId := TODO // string | Batch Id
+    batchId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Batch Id
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeeInvitationApi.QueryBatchStatusV3(context.Background(), batchId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeeInvitationApi.QueryBatchStatusV3(context.Background(), batchId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeeInvitationApi.QueryBatchStatusV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -212,7 +212,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**batchId** | [**string**](.md) | Batch Id | 
+**batchId** | **string** | Batch Id | 
 
 ### Other Parameters
 
@@ -262,11 +262,11 @@ import (
 )
 
 func main() {
-    batchId := TODO // string | Batch Id
+    batchId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Batch Id
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeeInvitationApi.QueryBatchStatusV4(context.Background(), batchId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeeInvitationApi.QueryBatchStatusV4(context.Background(), batchId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeeInvitationApi.QueryBatchStatusV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -282,7 +282,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**batchId** | [**string**](.md) | Batch Id | 
+**batchId** | **string** | Batch Id | 
 
 ### Other Parameters
 
@@ -332,12 +332,12 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
     invitePayeeRequest := *openapiclient.NewInvitePayeeRequest("9ac75325-5dcd-42d5-b992-175d7e0a035e") // InvitePayeeRequest | Provide Payor Id in body of request
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeeInvitationApi.ResendPayeeInviteV3(context.Background(), payeeId).InvitePayeeRequest(invitePayeeRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeeInvitationApi.ResendPayeeInviteV3(context.Background(), payeeId).InvitePayeeRequest(invitePayeeRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeeInvitationApi.ResendPayeeInviteV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -351,7 +351,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -402,12 +402,12 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
     invitePayeeRequest2 := *openapiclient.NewInvitePayeeRequest2("9ac75325-5dcd-42d5-b992-175d7e0a035e") // InvitePayeeRequest2 | Provide Payor Id in body of request
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeeInvitationApi.ResendPayeeInviteV4(context.Background(), payeeId).InvitePayeeRequest2(invitePayeeRequest2).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeeInvitationApi.ResendPayeeInviteV4(context.Background(), payeeId).InvitePayeeRequest2(invitePayeeRequest2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeeInvitationApi.ResendPayeeInviteV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -421,7 +421,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -472,11 +472,11 @@ import (
 )
 
 func main() {
-    createPayeesRequest := *openapiclient.NewCreatePayeesRequest("9ac75325-5dcd-42d5-b992-175d7e0a035e", []openapiclient.CreatePayee{*openapiclient.NewCreatePayee("bob@example.com", "Remote ID", openapiclient.PayeeType("Individual"), *openapiclient.NewCreatePayeeAddress("500 Duval St", "Key West", "US"))}) // CreatePayeesRequest | Post payees to create. (optional)
+    createPayeesRequest := *openapiclient.NewCreatePayeesRequest("9ac75325-5dcd-42d5-b992-175d7e0a035e", []openapiclient.CreatePayee{*openapiclient.NewCreatePayee("bob@example.com", "Remote ID", openapiclient.PayeeType_2("Individual"), *openapiclient.NewCreatePayeeAddress("500 Duval St", "Key West", "US"))}) // CreatePayeesRequest | Post payees to create. (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeeInvitationApi.V3CreatePayee(context.Background()).CreatePayeesRequest(createPayeesRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeeInvitationApi.V3CreatePayee(context.Background()).CreatePayeesRequest(createPayeesRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeeInvitationApi.V3CreatePayee``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -538,11 +538,11 @@ import (
 )
 
 func main() {
-    createPayeesRequest2 := *openapiclient.NewCreatePayeesRequest2("9ac75325-5dcd-42d5-b992-175d7e0a035e", []openapiclient.CreatePayee2{*openapiclient.NewCreatePayee2("bob@example.com", "Remote ID", openapiclient.PayeeType("Individual"), *openapiclient.NewCreatePayeeAddress2("500 Duval St", "Key West", "US"))}) // CreatePayeesRequest2 | Post payees to create. (optional)
+    createPayeesRequest2 := *openapiclient.NewCreatePayeesRequest2("9ac75325-5dcd-42d5-b992-175d7e0a035e", []openapiclient.CreatePayee2{*openapiclient.NewCreatePayee2("bob@example.com", "Remote ID", openapiclient.PayeeType_2("Individual"), *openapiclient.NewCreatePayeeAddress2("500 Duval St", "Key West", "US"))}) // CreatePayeesRequest2 | Post payees to create. (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeeInvitationApi.V4CreatePayee(context.Background()).CreatePayeesRequest2(createPayeesRequest2).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeeInvitationApi.V4CreatePayee(context.Background()).CreatePayeesRequest2(createPayeesRequest2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayeeInvitationApi.V4CreatePayee``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

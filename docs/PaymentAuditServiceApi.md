@@ -37,14 +37,14 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | <p>The Payor ID for whom you wish to run the report.</p> <p>For a Payor requesting the report, this could be their exact Payor, or it could be a child/descendant Payor.</p>  (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | <p>The Payor ID for whom you wish to run the report.</p> <p>For a Payor requesting the report, this could be their exact Payor, or it could be a child/descendant Payor.</p>  (optional)
     startDate := time.Now() // string | Start date, inclusive. Format is YYYY-MM-DD (optional)
     endDate := time.Now() // string | End date, inclusive. Format is YYYY-MM-DD (optional)
     include := "include_example" // string | <p>Mode to determine whether to include other Payor's data in the results.</p> <p>May only be used if payorId is specified.</p> <p>Can be omitted or set to 'payorOnly' or 'payorAndDescendants'.</p> <p>payorOnly: Only include results for the specified Payor. This is the default if 'include' is omitted.</p> <p>payorAndDescendants: Aggregate results for all descendant Payors of the specified Payor. Should only be used if the Payor with the specified payorId has at least one child Payor.</p> <p>Note when a Payor requests the report and include=payorAndDescendants is used, the following additional columns are included in the CSV: Payor Name, Payor Id</p>  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentAuditServiceApi.ExportTransactionsCSVV4(context.Background()).PayorId(payorId).StartDate(startDate).EndDate(endDate).Include(include).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentAuditServiceApi.ExportTransactionsCSVV4(context.Background()).PayorId(payorId).StartDate(startDate).EndDate(endDate).Include(include).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentAuditServiceApi.ExportTransactionsCSVV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,7 +65,7 @@ Other parameters are passed through a pointer to a apiExportTransactionsCSVV4Req
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | &lt;p&gt;The Payor ID for whom you wish to run the report.&lt;/p&gt; &lt;p&gt;For a Payor requesting the report, this could be their exact Payor, or it could be a child/descendant Payor.&lt;/p&gt;  | 
+ **payorId** | **string** | &lt;p&gt;The Payor ID for whom you wish to run the report.&lt;/p&gt; &lt;p&gt;For a Payor requesting the report, this could be their exact Payor, or it could be a child/descendant Payor.&lt;/p&gt;  | 
  **startDate** | **string** | Start date, inclusive. Format is YYYY-MM-DD | 
  **endDate** | **string** | End date, inclusive. Format is YYYY-MM-DD | 
  **include** | **string** | &lt;p&gt;Mode to determine whether to include other Payor&#39;s data in the results.&lt;/p&gt; &lt;p&gt;May only be used if payorId is specified.&lt;/p&gt; &lt;p&gt;Can be omitted or set to &#39;payorOnly&#39; or &#39;payorAndDescendants&#39;.&lt;/p&gt; &lt;p&gt;payorOnly: Only include results for the specified Payor. This is the default if &#39;include&#39; is omitted.&lt;/p&gt; &lt;p&gt;payorAndDescendants: Aggregate results for all descendant Payors of the specified Payor. Should only be used if the Payor with the specified payorId has at least one child Payor.&lt;/p&gt; &lt;p&gt;Note when a Payor requests the report and include&#x3D;payorAndDescendants is used, the following additional columns are included in the CSV: Payor Name, Payor Id&lt;/p&gt;  | 
@@ -109,14 +109,14 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | The account owner Payor ID
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields. Example: ```?sort=destinationCurrency:asc,destinationAmount:asc``` Default is no sort. The supported sort fields are: dateTime and amount.  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentAuditServiceApi.GetFundingsV4(context.Background()).PayorId(payorId).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentAuditServiceApi.GetFundingsV4(context.Background()).PayorId(payorId).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentAuditServiceApi.GetFundingsV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -137,7 +137,7 @@ Other parameters are passed through a pointer to a apiGetFundingsV4Request struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The account owner Payor ID | 
+ **payorId** | **string** | The account owner Payor ID | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields. Example: &#x60;&#x60;&#x60;?sort&#x3D;destinationCurrency:asc,destinationAmount:asc&#x60;&#x60;&#x60; Default is no sort. The supported sort fields are: dateTime and amount.  | 
@@ -181,12 +181,12 @@ import (
 )
 
 func main() {
-    paymentId := TODO // string | Payment Id
+    paymentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Payment Id
     sensitive := true // bool | Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentAuditServiceApi.GetPaymentDetailsV4(context.Background(), paymentId).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentAuditServiceApi.GetPaymentDetailsV4(context.Background(), paymentId).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentAuditServiceApi.GetPaymentDetailsV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -202,7 +202,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**paymentId** | [**string**](.md) | Payment Id | 
+**paymentId** | **string** | Payment Id | 
 
 ### Other Parameters
 
@@ -254,7 +254,7 @@ import (
 )
 
 func main() {
-    payoutId := TODO // string | The id (UUID) of the payout.
+    payoutId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The id (UUID) of the payout.
     remoteId := "remoteId_example" // string | The remote id of the payees. (optional)
     remoteSystemId := "remoteSystemId_example" // string | The id of the remote system that is orchestrating payments (optional)
     status := "status_example" // string | Payment Status (optional)
@@ -271,8 +271,8 @@ func main() {
     sensitive := true // bool | Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentAuditServiceApi.GetPaymentsForPayoutV4(context.Background(), payoutId).RemoteId(remoteId).RemoteSystemId(remoteSystemId).Status(status).SourceAmountFrom(sourceAmountFrom).SourceAmountTo(sourceAmountTo).PaymentAmountFrom(paymentAmountFrom).PaymentAmountTo(paymentAmountTo).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).TransmissionType(transmissionType).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentAuditServiceApi.GetPaymentsForPayoutV4(context.Background(), payoutId).RemoteId(remoteId).RemoteSystemId(remoteSystemId).Status(status).SourceAmountFrom(sourceAmountFrom).SourceAmountTo(sourceAmountTo).PaymentAmountFrom(paymentAmountFrom).PaymentAmountTo(paymentAmountTo).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).TransmissionType(transmissionType).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentAuditServiceApi.GetPaymentsForPayoutV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -288,7 +288,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payoutId** | [**string**](.md) | The id (UUID) of the payout. | 
+**payoutId** | **string** | The id (UUID) of the payout. | 
 
 ### Other Parameters
 
@@ -352,11 +352,11 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | The account owner Payor ID. Required for external users. (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID. Required for external users. (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentAuditServiceApi.GetPayoutStatsV4(context.Background()).PayorId(payorId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentAuditServiceApi.GetPayoutStatsV4(context.Background()).PayorId(payorId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentAuditServiceApi.GetPayoutStatsV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -377,7 +377,7 @@ Other parameters are passed through a pointer to a apiGetPayoutStatsV4Request st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The account owner Payor ID. Required for external users. | 
+ **payorId** | **string** | The account owner Payor ID. Required for external users. | 
 
 ### Return type
 
@@ -399,7 +399,7 @@ Name | Type | Description  | Notes
 
 ## GetPayoutsForPayorV4
 
-> GetPayoutsResponse GetPayoutsForPayorV4(ctx).PayorId(payorId).PayoutMemo(payoutMemo).Status(status).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).FromPayorName(fromPayorName).Page(page).PageSize(pageSize).Sort(sort).Execute()
+> GetPayoutsResponse GetPayoutsForPayorV4(ctx).PayorId(payorId).PayoutMemo(payoutMemo).Status(status).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).FromPayorName(fromPayorName).ScheduledForDateFrom(scheduledForDateFrom).ScheduledForDateTo(scheduledForDateTo).ScheduleStatus(scheduleStatus).Page(page).PageSize(pageSize).Sort(sort).Execute()
 
 Get Payouts for Payor
 
@@ -419,19 +419,22 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | The id (UUID) of the payor funding the payout or the payor whose payees are being paid. (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The id (UUID) of the payor funding the payout or the payor whose payees are being paid. (optional)
     payoutMemo := "payoutMemo_example" // string | Payout Memo filter - case insensitive sub-string match (optional)
     status := "status_example" // string | Payout Status (optional)
     submittedDateFrom := time.Now() // string | The submitted date from range filter. Format is yyyy-MM-dd. (optional)
     submittedDateTo := time.Now() // string | The submitted date to range filter. Format is yyyy-MM-dd. (optional)
     fromPayorName := "fromPayorName_example" // string | The name of the payor whose payees are being paid. This filters via a case insensitive substring match. (optional)
+    scheduledForDateFrom := time.Now() // string | Filter payouts scheduled to run on or after the given date. Format is yyyy-MM-dd. (optional)
+    scheduledForDateTo := time.Now() // string | Filter payouts scheduled to run on or before the given date. Format is yyyy-MM-dd. (optional)
+    scheduleStatus := "scheduleStatus_example" // string | Payout Schedule Status (optional)
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
-    sort := "sort_example" // string | List of sort fields (e.g. ?sort=submittedDateTime:asc,instructedDateTime:asc,status:asc) Default is submittedDateTime:asc The supported sort fields are: submittedDateTime, instructedDateTime, status, totalPayments, payoutId  (optional)
+    sort := "sort_example" // string | List of sort fields (e.g. ?sort=submittedDateTime:asc,instructedDateTime:asc,status:asc) Default is submittedDateTime:asc The supported sort fields are: submittedDateTime, instructedDateTime, status, totalPayments, payoutId, scheduledFor  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentAuditServiceApi.GetPayoutsForPayorV4(context.Background()).PayorId(payorId).PayoutMemo(payoutMemo).Status(status).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).FromPayorName(fromPayorName).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentAuditServiceApi.GetPayoutsForPayorV4(context.Background()).PayorId(payorId).PayoutMemo(payoutMemo).Status(status).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).FromPayorName(fromPayorName).ScheduledForDateFrom(scheduledForDateFrom).ScheduledForDateTo(scheduledForDateTo).ScheduleStatus(scheduleStatus).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentAuditServiceApi.GetPayoutsForPayorV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -452,15 +455,18 @@ Other parameters are passed through a pointer to a apiGetPayoutsForPayorV4Reques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The id (UUID) of the payor funding the payout or the payor whose payees are being paid. | 
+ **payorId** | **string** | The id (UUID) of the payor funding the payout or the payor whose payees are being paid. | 
  **payoutMemo** | **string** | Payout Memo filter - case insensitive sub-string match | 
  **status** | **string** | Payout Status | 
  **submittedDateFrom** | **string** | The submitted date from range filter. Format is yyyy-MM-dd. | 
  **submittedDateTo** | **string** | The submitted date to range filter. Format is yyyy-MM-dd. | 
  **fromPayorName** | **string** | The name of the payor whose payees are being paid. This filters via a case insensitive substring match. | 
+ **scheduledForDateFrom** | **string** | Filter payouts scheduled to run on or after the given date. Format is yyyy-MM-dd. | 
+ **scheduledForDateTo** | **string** | Filter payouts scheduled to run on or before the given date. Format is yyyy-MM-dd. | 
+ **scheduleStatus** | **string** | Payout Schedule Status | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
- **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,instructedDateTime:asc,status:asc) Default is submittedDateTime:asc The supported sort fields are: submittedDateTime, instructedDateTime, status, totalPayments, payoutId  | 
+ **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,instructedDateTime:asc,status:asc) Default is submittedDateTime:asc The supported sort fields are: submittedDateTime, instructedDateTime, status, totalPayments, payoutId, scheduledFor  | 
 
 ### Return type
 
@@ -502,14 +508,14 @@ import (
 )
 
 func main() {
-    payorId := TODO // string | The Payor ID to find associated Payments
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor ID to find associated Payments
     updatedSince := time.Now() // time.Time | The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 100)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentAuditServiceApi.ListPaymentChangesV4(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentAuditServiceApi.ListPaymentChangesV4(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentAuditServiceApi.ListPaymentChangesV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -530,7 +536,7 @@ Other parameters are passed through a pointer to a apiListPaymentChangesV4Reques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The Payor ID to find associated Payments | 
+ **payorId** | **string** | The Payor ID to find associated Payments | 
  **updatedSince** | **time.Time** | The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 100]
@@ -555,7 +561,7 @@ Name | Type | Description  | Notes
 
 ## ListPaymentsAuditV4
 
-> ListPaymentsResponseV4 ListPaymentsAuditV4(ctx).PayeeId(payeeId).PayorId(payorId).PayorName(payorName).RemoteId(remoteId).RemoteSystemId(remoteSystemId).Status(status).TransmissionType(transmissionType).SourceAccountName(sourceAccountName).SourceAmountFrom(sourceAmountFrom).SourceAmountTo(sourceAmountTo).SourceCurrency(sourceCurrency).PaymentAmountFrom(paymentAmountFrom).PaymentAmountTo(paymentAmountTo).PaymentCurrency(paymentCurrency).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).PaymentMemo(paymentMemo).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
+> ListPaymentsResponseV4 ListPaymentsAuditV4(ctx).PayeeId(payeeId).PayorId(payorId).PayorName(payorName).RemoteId(remoteId).RemoteSystemId(remoteSystemId).Status(status).TransmissionType(transmissionType).SourceAccountName(sourceAccountName).SourceAmountFrom(sourceAmountFrom).SourceAmountTo(sourceAmountTo).SourceCurrency(sourceCurrency).PaymentAmountFrom(paymentAmountFrom).PaymentAmountTo(paymentAmountTo).PaymentCurrency(paymentCurrency).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).PaymentMemo(paymentMemo).ScheduledForDateFrom(scheduledForDateFrom).ScheduledForDateTo(scheduledForDateTo).ScheduleStatus(scheduleStatus).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
 
 Get List of Payments
 
@@ -575,8 +581,8 @@ import (
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee. (optional)
-    payorId := TODO // string | The account owner Payor Id. Required for external users. (optional)
+    payeeId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the payee. (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor Id. Required for external users. (optional)
     payorName := "payorName_example" // string | The payor’s name. This filters via a case insensitive substring match. (optional)
     remoteId := "remoteId_example" // string | The remote id of the payees. (optional)
     remoteSystemId := "remoteSystemId_example" // string | The id of the remote system that is orchestrating payments (optional)
@@ -592,14 +598,17 @@ func main() {
     submittedDateFrom := time.Now() // string | The submitted date from range filter. Format is yyyy-MM-dd. (optional)
     submittedDateTo := time.Now() // string | The submitted date to range filter. Format is yyyy-MM-dd. (optional)
     paymentMemo := "paymentMemo_example" // string | The payment memo filter. This filters via a case insensitive substring match. (optional)
+    scheduledForDateFrom := time.Now() // string | Filter payouts scheduled to run on or after the given date. Format is yyyy-MM-dd. (optional)
+    scheduledForDateTo := time.Now() // string | Filter payouts scheduled to run on or before the given date. Format is yyyy-MM-dd. (optional)
+    scheduleStatus := "scheduleStatus_example" // string | Payout Schedule Status (optional)
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields (e.g. ?sort=submittedDateTime:asc,status:asc). Default is sort by submittedDateTime:desc,paymentId:asc The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency, routingNumber, accountNumber, remoteId, submittedDateTime, status and paymentId  (optional)
     sensitive := true // bool | Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentAuditServiceApi.ListPaymentsAuditV4(context.Background()).PayeeId(payeeId).PayorId(payorId).PayorName(payorName).RemoteId(remoteId).RemoteSystemId(remoteSystemId).Status(status).TransmissionType(transmissionType).SourceAccountName(sourceAccountName).SourceAmountFrom(sourceAmountFrom).SourceAmountTo(sourceAmountTo).SourceCurrency(sourceCurrency).PaymentAmountFrom(paymentAmountFrom).PaymentAmountTo(paymentAmountTo).PaymentCurrency(paymentCurrency).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).PaymentMemo(paymentMemo).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentAuditServiceApi.ListPaymentsAuditV4(context.Background()).PayeeId(payeeId).PayorId(payorId).PayorName(payorName).RemoteId(remoteId).RemoteSystemId(remoteSystemId).Status(status).TransmissionType(transmissionType).SourceAccountName(sourceAccountName).SourceAmountFrom(sourceAmountFrom).SourceAmountTo(sourceAmountTo).SourceCurrency(sourceCurrency).PaymentAmountFrom(paymentAmountFrom).PaymentAmountTo(paymentAmountTo).PaymentCurrency(paymentCurrency).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).PaymentMemo(paymentMemo).ScheduledForDateFrom(scheduledForDateFrom).ScheduledForDateTo(scheduledForDateTo).ScheduleStatus(scheduleStatus).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentAuditServiceApi.ListPaymentsAuditV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -620,8 +629,8 @@ Other parameters are passed through a pointer to a apiListPaymentsAuditV4Request
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payeeId** | [**string**](string.md) | The UUID of the payee. | 
- **payorId** | [**string**](string.md) | The account owner Payor Id. Required for external users. | 
+ **payeeId** | **string** | The UUID of the payee. | 
+ **payorId** | **string** | The account owner Payor Id. Required for external users. | 
  **payorName** | **string** | The payor’s name. This filters via a case insensitive substring match. | 
  **remoteId** | **string** | The remote id of the payees. | 
  **remoteSystemId** | **string** | The id of the remote system that is orchestrating payments | 
@@ -637,6 +646,9 @@ Name | Type | Description  | Notes
  **submittedDateFrom** | **string** | The submitted date from range filter. Format is yyyy-MM-dd. | 
  **submittedDateTo** | **string** | The submitted date to range filter. Format is yyyy-MM-dd. | 
  **paymentMemo** | **string** | The payment memo filter. This filters via a case insensitive substring match. | 
+ **scheduledForDateFrom** | **string** | Filter payouts scheduled to run on or after the given date. Format is yyyy-MM-dd. | 
+ **scheduledForDateTo** | **string** | Filter payouts scheduled to run on or before the given date. Format is yyyy-MM-dd. | 
+ **scheduleStatus** | **string** | Payout Schedule Status | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,status:asc). Default is sort by submittedDateTime:desc,paymentId:asc The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency, routingNumber, accountNumber, remoteId, submittedDateTime, status and paymentId  | 

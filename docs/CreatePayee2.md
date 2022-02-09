@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **PayorRefs** | Pointer to [**[]PayeePayorRef**](PayeePayorRef.md) |  | [optional] [readonly] 
 **Email** | **string** |  | 
 **RemoteId** | **string** |  | 
-**Type** | [**PayeeType**](PayeeType.md) |  | 
+**Type** | [**PayeeType2**](PayeeType2.md) |  | 
 **Address** | [**CreatePayeeAddress2**](CreatePayeeAddress2.md) |  | 
 **PaymentChannel** | Pointer to [**CreatePaymentChannel2**](CreatePaymentChannel2.md) |  | [optional] 
 **Challenge** | Pointer to [**Challenge2**](Challenge2.md) |  | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewCreatePayee2
 
-`func NewCreatePayee2(email string, remoteId string, type_ PayeeType, address CreatePayeeAddress2, ) *CreatePayee2`
+`func NewCreatePayee2(email string, remoteId string, type_ PayeeType2, address CreatePayeeAddress2, ) *CreatePayee2`
 
 NewCreatePayee2 instantiates a new CreatePayee2 object
 This constructor will assign default values to properties that have it defined,
@@ -137,20 +137,20 @@ SetRemoteId sets RemoteId field to given value.
 
 ### GetType
 
-`func (o *CreatePayee2) GetType() PayeeType`
+`func (o *CreatePayee2) GetType() PayeeType2`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *CreatePayee2) GetTypeOk() (*PayeeType, bool)`
+`func (o *CreatePayee2) GetTypeOk() (*PayeeType2, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *CreatePayee2) SetType(v PayeeType)`
+`func (o *CreatePayee2) SetType(v PayeeType2)`
 
 SetType sets Type field to given value.
 

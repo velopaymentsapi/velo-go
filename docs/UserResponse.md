@@ -13,7 +13,9 @@ Name | Type | Description | Notes
 **FirstName** | Pointer to **string** |  | [optional] 
 **LastName** | Pointer to **string** |  | [optional] 
 **EntityId** | Pointer to **string** | The payorId or payeeId or null if the user is not a payor or payee user  | [optional] 
+**CompanyName** | Pointer to **string** | The payor or payee company name or null if the user is not a payor or payee user  | [optional] 
 **Roles** | Pointer to [**[]Role**](Role.md) | The role(s) for the user  | [optional] 
+**UserType** | Pointer to **string** | Indicates the type of user. Could be BACKOFFICE, PAYOR or PAYEE. | [optional] 
 **MfaType** | Pointer to **string** | The type of the MFA device | [optional] 
 **MfaStatus** | Pointer to **string** | The status of the MFA device | [optional] 
 **LockedOut** | Pointer to **bool** | If true the user is currently locked out and unable to log in | [optional] 
@@ -263,6 +265,31 @@ SetEntityId sets EntityId field to given value.
 
 HasEntityId returns a boolean if a field has been set.
 
+### GetCompanyName
+
+`func (o *UserResponse) GetCompanyName() string`
+
+GetCompanyName returns the CompanyName field if non-nil, zero value otherwise.
+
+### GetCompanyNameOk
+
+`func (o *UserResponse) GetCompanyNameOk() (*string, bool)`
+
+GetCompanyNameOk returns a tuple with the CompanyName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompanyName
+
+`func (o *UserResponse) SetCompanyName(v string)`
+
+SetCompanyName sets CompanyName field to given value.
+
+### HasCompanyName
+
+`func (o *UserResponse) HasCompanyName() bool`
+
+HasCompanyName returns a boolean if a field has been set.
+
 ### GetRoles
 
 `func (o *UserResponse) GetRoles() []Role`
@@ -287,6 +314,31 @@ SetRoles sets Roles field to given value.
 `func (o *UserResponse) HasRoles() bool`
 
 HasRoles returns a boolean if a field has been set.
+
+### GetUserType
+
+`func (o *UserResponse) GetUserType() string`
+
+GetUserType returns the UserType field if non-nil, zero value otherwise.
+
+### GetUserTypeOk
+
+`func (o *UserResponse) GetUserTypeOk() (*string, bool)`
+
+GetUserTypeOk returns a tuple with the UserType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserType
+
+`func (o *UserResponse) SetUserType(v string)`
+
+SetUserType sets UserType field to given value.
+
+### HasUserType
+
+`func (o *UserResponse) HasUserType() bool`
+
+HasUserType returns a boolean if a field has been set.
 
 ### GetMfaType
 

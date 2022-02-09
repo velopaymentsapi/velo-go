@@ -34,8 +34,8 @@ import (
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LoginApi.Logout(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.LoginApi.Logout(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.Logout``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -94,8 +94,8 @@ func main() {
     resetPasswordRequest := *openapiclient.NewResetPasswordRequest("foo@example.com") // ResetPasswordRequest | An Email address to send the reset password link to
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LoginApi.ResetPassword(context.Background()).ResetPasswordRequest(resetPasswordRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.LoginApi.ResetPassword(context.Background()).ResetPasswordRequest(resetPasswordRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.ResetPassword``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -159,8 +159,8 @@ func main() {
     authorization := "authorization_example" // string | Bearer token authorization leg of validate (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LoginApi.ValidateAccessToken(context.Background()).AccessTokenValidationRequest(accessTokenValidationRequest).Authorization(authorization).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.LoginApi.ValidateAccessToken(context.Background()).AccessTokenValidationRequest(accessTokenValidationRequest).Authorization(authorization).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.ValidateAccessToken``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -226,8 +226,8 @@ func main() {
     grantType := "grantType_example" // string | OAuth grant type. Should use 'client_credentials' (optional) (default to "client_credentials")
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LoginApi.VeloAuth(context.Background()).GrantType(grantType).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.LoginApi.VeloAuth(context.Background()).GrantType(grantType).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.VeloAuth``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

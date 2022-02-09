@@ -32,8 +32,8 @@ func main() {
     createPayorLinkRequest := *openapiclient.NewCreatePayorLinkRequest("FromPayorId_example", "LinkType_example", "ToPayorId_example") // CreatePayorLinkRequest | Request to create a payor link
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayorsPrivateApi.CreatePayorLinks(context.Background()).CreatePayorLinkRequest(createPayorLinkRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayorsPrivateApi.CreatePayorLinks(context.Background()).CreatePayorLinkRequest(createPayorLinkRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PayorsPrivateApi.CreatePayorLinks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

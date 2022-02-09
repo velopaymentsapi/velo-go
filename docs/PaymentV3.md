@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **TransmissionType** | Pointer to [**TransmissionType**](TransmissionType.md) |  | [optional] 
 **RemoteSystemId** | Pointer to **string** |  | [optional] 
 **PaymentMetadata** | Pointer to **string** |  | [optional] 
+**AutoWithdrawnReasonCode** | Pointer to **string** | Populated only if the payment was automatically withdrawn during instruction for being invalid | [optional] 
 
 ## Methods
 
@@ -356,6 +357,31 @@ SetPaymentMetadata sets PaymentMetadata field to given value.
 `func (o *PaymentV3) HasPaymentMetadata() bool`
 
 HasPaymentMetadata returns a boolean if a field has been set.
+
+### GetAutoWithdrawnReasonCode
+
+`func (o *PaymentV3) GetAutoWithdrawnReasonCode() string`
+
+GetAutoWithdrawnReasonCode returns the AutoWithdrawnReasonCode field if non-nil, zero value otherwise.
+
+### GetAutoWithdrawnReasonCodeOk
+
+`func (o *PaymentV3) GetAutoWithdrawnReasonCodeOk() (*string, bool)`
+
+GetAutoWithdrawnReasonCodeOk returns a tuple with the AutoWithdrawnReasonCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoWithdrawnReasonCode
+
+`func (o *PaymentV3) SetAutoWithdrawnReasonCode(v string)`
+
+SetAutoWithdrawnReasonCode sets AutoWithdrawnReasonCode field to given value.
+
+### HasAutoWithdrawnReasonCode
+
+`func (o *PaymentV3) HasAutoWithdrawnReasonCode() bool`
+
+HasAutoWithdrawnReasonCode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

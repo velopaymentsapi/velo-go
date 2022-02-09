@@ -33,8 +33,8 @@ func main() {
     createFundingAccountRequestV2 := *openapiclient.NewCreateFundingAccountRequestV2("Type_example", "Name_example", "PayorId_example") // CreateFundingAccountRequestV2 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerPrivateApi.CreateFundingAccountV2(context.Background()).CreateFundingAccountRequestV2(createFundingAccountRequestV2).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerPrivateApi.CreateFundingAccountV2(context.Background()).CreateFundingAccountRequestV2(createFundingAccountRequestV2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerPrivateApi.CreateFundingAccountV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -94,11 +94,11 @@ import (
 )
 
 func main() {
-    sourceAccountId := TODO // string | Source account id
+    sourceAccountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Source account id
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FundingManagerPrivateApi.DeleteSourceAccountV3(context.Background(), sourceAccountId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FundingManagerPrivateApi.DeleteSourceAccountV3(context.Background(), sourceAccountId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingManagerPrivateApi.DeleteSourceAccountV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -112,7 +112,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceAccountId** | [**string**](.md) | Source account id | 
+**sourceAccountId** | **string** | Source account id | 
 
 ### Other Parameters
 

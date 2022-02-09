@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **Quoted** | Pointer to [**PayoutPrincipal**](PayoutPrincipal.md) |  | [optional] 
 **Instructed** | Pointer to [**PayoutPrincipal**](PayoutPrincipal.md) |  | [optional] 
 **Withdrawn** | Pointer to [**PayoutPrincipal**](PayoutPrincipal.md) |  | [optional] 
+**Schedule** | Pointer to [**PayoutSchedule**](PayoutSchedule.md) |  | [optional] 
 
 ## Methods
 
@@ -517,6 +518,31 @@ SetWithdrawn sets Withdrawn field to given value.
 `func (o *GetPaymentsForPayoutResponseV4Summary) HasWithdrawn() bool`
 
 HasWithdrawn returns a boolean if a field has been set.
+
+### GetSchedule
+
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetSchedule() PayoutSchedule`
+
+GetSchedule returns the Schedule field if non-nil, zero value otherwise.
+
+### GetScheduleOk
+
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetScheduleOk() (*PayoutSchedule, bool)`
+
+GetScheduleOk returns a tuple with the Schedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchedule
+
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetSchedule(v PayoutSchedule)`
+
+SetSchedule sets Schedule field to given value.
+
+### HasSchedule
+
+`func (o *GetPaymentsForPayoutResponseV4Summary) HasSchedule() bool`
+
+HasSchedule returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

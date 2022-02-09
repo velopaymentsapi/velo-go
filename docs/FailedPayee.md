@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **PayorRefs** | Pointer to [**[]PayeePayorRefV3**](PayeePayorRefV3.md) |  | [optional] [readonly] 
 **Email** | Pointer to **string** |  | [optional] 
 **RemoteId** | Pointer to **string** |  | [optional] 
-**Type** | Pointer to [**PayeeType**](PayeeType.md) |  | [optional] 
+**Type** | Pointer to [**PayeeType2**](PayeeType2.md) |  | [optional] 
 **Address** | Pointer to [**CreatePayeeAddress**](CreatePayeeAddress.md) |  | [optional] 
 **PaymentChannel** | Pointer to [**CreatePaymentChannel**](CreatePaymentChannel.md) |  | [optional] 
 **Challenge** | Pointer to [**Challenge**](Challenge.md) |  | [optional] 
@@ -147,20 +147,20 @@ HasRemoteId returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *FailedPayee) GetType() PayeeType`
+`func (o *FailedPayee) GetType() PayeeType2`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *FailedPayee) GetTypeOk() (*PayeeType, bool)`
+`func (o *FailedPayee) GetTypeOk() (*PayeeType2, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *FailedPayee) SetType(v PayeeType)`
+`func (o *FailedPayee) SetType(v PayeeType2)`
 
 SetType sets Type field to given value.
 
