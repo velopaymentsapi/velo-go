@@ -1,10 +1,10 @@
 /*
- * Velo Payments APIs
- *
- * ## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
- *
- * API version: 2.26.124
- */
+Velo Payments APIs
+
+## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
+
+API version: 2.35.58
+*/
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
 
@@ -15,12 +15,16 @@ import (
 	"time"
 )
 
+// checks if the SourceAccountResponseV3 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SourceAccountResponseV3{}
+
 // SourceAccountResponseV3 struct for SourceAccountResponseV3
 type SourceAccountResponseV3 struct {
 	// Source Account Id
 	Id string `json:"id"`
 	// Decimal implied
 	Balance *int64 `json:"balance,omitempty"`
+	// Valid ISO 4217 3 letter currency code. See the <a href=\"https://www.iso.org/iso-4217-currency-codes.html\" target=\"_blank\" a>ISO specification</a> for details.
 	Currency *string `json:"currency,omitempty"`
 	// The funding reference (will not be set for DECOUPLED accounts).
 	FundingRef *string `json:"fundingRef,omitempty"`
@@ -34,10 +38,10 @@ type SourceAccountResponseV3 struct {
 	CustomerId NullableString `json:"customerId,omitempty"`
 	// The physical account id (will not be set for DECOUPLED accounts).
 	PhysicalAccountId *string `json:"physicalAccountId,omitempty"`
-	Notifications *Notifications2 `json:"notifications,omitempty"`
-	AutoTopUpConfig *AutoTopUpConfig2 `json:"autoTopUpConfig,omitempty"`
+	Notifications *NotificationsV3 `json:"notifications,omitempty"`
+	AutoTopUpConfig *AutoTopUpConfigV3 `json:"autoTopUpConfig,omitempty"`
 	Type string `json:"type"`
-	// The two character ISO country code for the associated account
+	// Valid ISO 3166 2 character country code. See the <a href=\"https://www.iso.org/iso-3166-country-codes.html\" target=\"_blank\" a>ISO specification</a> for details.
 	Country *string `json:"country,omitempty"`
 	// An optional flag for whether the source account has been deleted. Only present in the response if true.
 	Deleted *bool `json:"deleted,omitempty"`
@@ -80,7 +84,7 @@ func (o *SourceAccountResponseV3) GetId() string {
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Id, true
@@ -93,7 +97,7 @@ func (o *SourceAccountResponseV3) SetId(v string) {
 
 // GetBalance returns the Balance field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetBalance() int64 {
-	if o == nil || o.Balance == nil {
+	if o == nil || IsNil(o.Balance) {
 		var ret int64
 		return ret
 	}
@@ -103,7 +107,7 @@ func (o *SourceAccountResponseV3) GetBalance() int64 {
 // GetBalanceOk returns a tuple with the Balance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetBalanceOk() (*int64, bool) {
-	if o == nil || o.Balance == nil {
+	if o == nil || IsNil(o.Balance) {
 		return nil, false
 	}
 	return o.Balance, true
@@ -111,7 +115,7 @@ func (o *SourceAccountResponseV3) GetBalanceOk() (*int64, bool) {
 
 // HasBalance returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasBalance() bool {
-	if o != nil && o.Balance != nil {
+	if o != nil && !IsNil(o.Balance) {
 		return true
 	}
 
@@ -125,7 +129,7 @@ func (o *SourceAccountResponseV3) SetBalance(v int64) {
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetCurrency() string {
-	if o == nil || o.Currency == nil {
+	if o == nil || IsNil(o.Currency) {
 		var ret string
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *SourceAccountResponseV3) GetCurrency() string {
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetCurrencyOk() (*string, bool) {
-	if o == nil || o.Currency == nil {
+	if o == nil || IsNil(o.Currency) {
 		return nil, false
 	}
 	return o.Currency, true
@@ -143,7 +147,7 @@ func (o *SourceAccountResponseV3) GetCurrencyOk() (*string, bool) {
 
 // HasCurrency returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasCurrency() bool {
-	if o != nil && o.Currency != nil {
+	if o != nil && !IsNil(o.Currency) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *SourceAccountResponseV3) SetCurrency(v string) {
 
 // GetFundingRef returns the FundingRef field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetFundingRef() string {
-	if o == nil || o.FundingRef == nil {
+	if o == nil || IsNil(o.FundingRef) {
 		var ret string
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *SourceAccountResponseV3) GetFundingRef() string {
 // GetFundingRefOk returns a tuple with the FundingRef field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetFundingRefOk() (*string, bool) {
-	if o == nil || o.FundingRef == nil {
+	if o == nil || IsNil(o.FundingRef) {
 		return nil, false
 	}
 	return o.FundingRef, true
@@ -175,7 +179,7 @@ func (o *SourceAccountResponseV3) GetFundingRefOk() (*string, bool) {
 
 // HasFundingRef returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasFundingRef() bool {
-	if o != nil && o.FundingRef != nil {
+	if o != nil && !IsNil(o.FundingRef) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *SourceAccountResponseV3) SetFundingRef(v string) {
 
 // GetPhysicalAccountName returns the PhysicalAccountName field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetPhysicalAccountName() string {
-	if o == nil || o.PhysicalAccountName == nil {
+	if o == nil || IsNil(o.PhysicalAccountName) {
 		var ret string
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *SourceAccountResponseV3) GetPhysicalAccountName() string {
 // GetPhysicalAccountNameOk returns a tuple with the PhysicalAccountName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetPhysicalAccountNameOk() (*string, bool) {
-	if o == nil || o.PhysicalAccountName == nil {
+	if o == nil || IsNil(o.PhysicalAccountName) {
 		return nil, false
 	}
 	return o.PhysicalAccountName, true
@@ -207,7 +211,7 @@ func (o *SourceAccountResponseV3) GetPhysicalAccountNameOk() (*string, bool) {
 
 // HasPhysicalAccountName returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasPhysicalAccountName() bool {
-	if o != nil && o.PhysicalAccountName != nil {
+	if o != nil && !IsNil(o.PhysicalAccountName) {
 		return true
 	}
 
@@ -232,7 +236,7 @@ func (o *SourceAccountResponseV3) GetRailsId() string {
 // GetRailsIdOk returns a tuple with the RailsId field value
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetRailsIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.RailsId, true
@@ -245,7 +249,7 @@ func (o *SourceAccountResponseV3) SetRailsId(v string) {
 
 // GetPayorId returns the PayorId field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetPayorId() string {
-	if o == nil || o.PayorId == nil {
+	if o == nil || IsNil(o.PayorId) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *SourceAccountResponseV3) GetPayorId() string {
 // GetPayorIdOk returns a tuple with the PayorId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetPayorIdOk() (*string, bool) {
-	if o == nil || o.PayorId == nil {
+	if o == nil || IsNil(o.PayorId) {
 		return nil, false
 	}
 	return o.PayorId, true
@@ -263,7 +267,7 @@ func (o *SourceAccountResponseV3) GetPayorIdOk() (*string, bool) {
 
 // HasPayorId returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasPayorId() bool {
-	if o != nil && o.PayorId != nil {
+	if o != nil && !IsNil(o.PayorId) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *SourceAccountResponseV3) SetPayorId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *SourceAccountResponseV3) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -295,7 +299,7 @@ func (o *SourceAccountResponseV3) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *SourceAccountResponseV3) SetName(v string) {
 
 // GetPooled returns the Pooled field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetPooled() bool {
-	if o == nil || o.Pooled == nil {
+	if o == nil || IsNil(o.Pooled) {
 		var ret bool
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *SourceAccountResponseV3) GetPooled() bool {
 // GetPooledOk returns a tuple with the Pooled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetPooledOk() (*bool, bool) {
-	if o == nil || o.Pooled == nil {
+	if o == nil || IsNil(o.Pooled) {
 		return nil, false
 	}
 	return o.Pooled, true
@@ -327,7 +331,7 @@ func (o *SourceAccountResponseV3) GetPooledOk() (*bool, bool) {
 
 // HasPooled returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasPooled() bool {
-	if o != nil && o.Pooled != nil {
+	if o != nil && !IsNil(o.Pooled) {
 		return true
 	}
 
@@ -341,7 +345,7 @@ func (o *SourceAccountResponseV3) SetPooled(v bool) {
 
 // GetCustomerId returns the CustomerId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SourceAccountResponseV3) GetCustomerId() string {
-	if o == nil || o.CustomerId.Get() == nil {
+	if o == nil || IsNil(o.CustomerId.Get()) {
 		var ret string
 		return ret
 	}
@@ -352,7 +356,7 @@ func (o *SourceAccountResponseV3) GetCustomerId() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SourceAccountResponseV3) GetCustomerIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.CustomerId.Get(), o.CustomerId.IsSet()
@@ -383,7 +387,7 @@ func (o *SourceAccountResponseV3) UnsetCustomerId() {
 
 // GetPhysicalAccountId returns the PhysicalAccountId field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetPhysicalAccountId() string {
-	if o == nil || o.PhysicalAccountId == nil {
+	if o == nil || IsNil(o.PhysicalAccountId) {
 		var ret string
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *SourceAccountResponseV3) GetPhysicalAccountId() string {
 // GetPhysicalAccountIdOk returns a tuple with the PhysicalAccountId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetPhysicalAccountIdOk() (*string, bool) {
-	if o == nil || o.PhysicalAccountId == nil {
+	if o == nil || IsNil(o.PhysicalAccountId) {
 		return nil, false
 	}
 	return o.PhysicalAccountId, true
@@ -401,7 +405,7 @@ func (o *SourceAccountResponseV3) GetPhysicalAccountIdOk() (*string, bool) {
 
 // HasPhysicalAccountId returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasPhysicalAccountId() bool {
-	if o != nil && o.PhysicalAccountId != nil {
+	if o != nil && !IsNil(o.PhysicalAccountId) {
 		return true
 	}
 
@@ -414,9 +418,9 @@ func (o *SourceAccountResponseV3) SetPhysicalAccountId(v string) {
 }
 
 // GetNotifications returns the Notifications field value if set, zero value otherwise.
-func (o *SourceAccountResponseV3) GetNotifications() Notifications2 {
-	if o == nil || o.Notifications == nil {
-		var ret Notifications2
+func (o *SourceAccountResponseV3) GetNotifications() NotificationsV3 {
+	if o == nil || IsNil(o.Notifications) {
+		var ret NotificationsV3
 		return ret
 	}
 	return *o.Notifications
@@ -424,8 +428,8 @@ func (o *SourceAccountResponseV3) GetNotifications() Notifications2 {
 
 // GetNotificationsOk returns a tuple with the Notifications field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SourceAccountResponseV3) GetNotificationsOk() (*Notifications2, bool) {
-	if o == nil || o.Notifications == nil {
+func (o *SourceAccountResponseV3) GetNotificationsOk() (*NotificationsV3, bool) {
+	if o == nil || IsNil(o.Notifications) {
 		return nil, false
 	}
 	return o.Notifications, true
@@ -433,22 +437,22 @@ func (o *SourceAccountResponseV3) GetNotificationsOk() (*Notifications2, bool) {
 
 // HasNotifications returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasNotifications() bool {
-	if o != nil && o.Notifications != nil {
+	if o != nil && !IsNil(o.Notifications) {
 		return true
 	}
 
 	return false
 }
 
-// SetNotifications gets a reference to the given Notifications2 and assigns it to the Notifications field.
-func (o *SourceAccountResponseV3) SetNotifications(v Notifications2) {
+// SetNotifications gets a reference to the given NotificationsV3 and assigns it to the Notifications field.
+func (o *SourceAccountResponseV3) SetNotifications(v NotificationsV3) {
 	o.Notifications = &v
 }
 
 // GetAutoTopUpConfig returns the AutoTopUpConfig field value if set, zero value otherwise.
-func (o *SourceAccountResponseV3) GetAutoTopUpConfig() AutoTopUpConfig2 {
-	if o == nil || o.AutoTopUpConfig == nil {
-		var ret AutoTopUpConfig2
+func (o *SourceAccountResponseV3) GetAutoTopUpConfig() AutoTopUpConfigV3 {
+	if o == nil || IsNil(o.AutoTopUpConfig) {
+		var ret AutoTopUpConfigV3
 		return ret
 	}
 	return *o.AutoTopUpConfig
@@ -456,8 +460,8 @@ func (o *SourceAccountResponseV3) GetAutoTopUpConfig() AutoTopUpConfig2 {
 
 // GetAutoTopUpConfigOk returns a tuple with the AutoTopUpConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SourceAccountResponseV3) GetAutoTopUpConfigOk() (*AutoTopUpConfig2, bool) {
-	if o == nil || o.AutoTopUpConfig == nil {
+func (o *SourceAccountResponseV3) GetAutoTopUpConfigOk() (*AutoTopUpConfigV3, bool) {
+	if o == nil || IsNil(o.AutoTopUpConfig) {
 		return nil, false
 	}
 	return o.AutoTopUpConfig, true
@@ -465,15 +469,15 @@ func (o *SourceAccountResponseV3) GetAutoTopUpConfigOk() (*AutoTopUpConfig2, boo
 
 // HasAutoTopUpConfig returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasAutoTopUpConfig() bool {
-	if o != nil && o.AutoTopUpConfig != nil {
+	if o != nil && !IsNil(o.AutoTopUpConfig) {
 		return true
 	}
 
 	return false
 }
 
-// SetAutoTopUpConfig gets a reference to the given AutoTopUpConfig2 and assigns it to the AutoTopUpConfig field.
-func (o *SourceAccountResponseV3) SetAutoTopUpConfig(v AutoTopUpConfig2) {
+// SetAutoTopUpConfig gets a reference to the given AutoTopUpConfigV3 and assigns it to the AutoTopUpConfig field.
+func (o *SourceAccountResponseV3) SetAutoTopUpConfig(v AutoTopUpConfigV3) {
 	o.AutoTopUpConfig = &v
 }
 
@@ -490,7 +494,7 @@ func (o *SourceAccountResponseV3) GetType() string {
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Type, true
@@ -503,7 +507,7 @@ func (o *SourceAccountResponseV3) SetType(v string) {
 
 // GetCountry returns the Country field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetCountry() string {
-	if o == nil || o.Country == nil {
+	if o == nil || IsNil(o.Country) {
 		var ret string
 		return ret
 	}
@@ -513,7 +517,7 @@ func (o *SourceAccountResponseV3) GetCountry() string {
 // GetCountryOk returns a tuple with the Country field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetCountryOk() (*string, bool) {
-	if o == nil || o.Country == nil {
+	if o == nil || IsNil(o.Country) {
 		return nil, false
 	}
 	return o.Country, true
@@ -521,7 +525,7 @@ func (o *SourceAccountResponseV3) GetCountryOk() (*string, bool) {
 
 // HasCountry returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasCountry() bool {
-	if o != nil && o.Country != nil {
+	if o != nil && !IsNil(o.Country) {
 		return true
 	}
 
@@ -535,7 +539,7 @@ func (o *SourceAccountResponseV3) SetCountry(v string) {
 
 // GetDeleted returns the Deleted field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetDeleted() bool {
-	if o == nil || o.Deleted == nil {
+	if o == nil || IsNil(o.Deleted) {
 		var ret bool
 		return ret
 	}
@@ -545,7 +549,7 @@ func (o *SourceAccountResponseV3) GetDeleted() bool {
 // GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetDeletedOk() (*bool, bool) {
-	if o == nil || o.Deleted == nil {
+	if o == nil || IsNil(o.Deleted) {
 		return nil, false
 	}
 	return o.Deleted, true
@@ -553,7 +557,7 @@ func (o *SourceAccountResponseV3) GetDeletedOk() (*bool, bool) {
 
 // HasDeleted returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasDeleted() bool {
-	if o != nil && o.Deleted != nil {
+	if o != nil && !IsNil(o.Deleted) {
 		return true
 	}
 
@@ -567,7 +571,7 @@ func (o *SourceAccountResponseV3) SetDeleted(v bool) {
 
 // GetUserDeleted returns the UserDeleted field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetUserDeleted() bool {
-	if o == nil || o.UserDeleted == nil {
+	if o == nil || IsNil(o.UserDeleted) {
 		var ret bool
 		return ret
 	}
@@ -577,7 +581,7 @@ func (o *SourceAccountResponseV3) GetUserDeleted() bool {
 // GetUserDeletedOk returns a tuple with the UserDeleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetUserDeletedOk() (*bool, bool) {
-	if o == nil || o.UserDeleted == nil {
+	if o == nil || IsNil(o.UserDeleted) {
 		return nil, false
 	}
 	return o.UserDeleted, true
@@ -585,7 +589,7 @@ func (o *SourceAccountResponseV3) GetUserDeletedOk() (*bool, bool) {
 
 // HasUserDeleted returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasUserDeleted() bool {
-	if o != nil && o.UserDeleted != nil {
+	if o != nil && !IsNil(o.UserDeleted) {
 		return true
 	}
 
@@ -599,7 +603,7 @@ func (o *SourceAccountResponseV3) SetUserDeleted(v bool) {
 
 // GetDeletedAt returns the DeletedAt field value if set, zero value otherwise.
 func (o *SourceAccountResponseV3) GetDeletedAt() time.Time {
-	if o == nil || o.DeletedAt == nil {
+	if o == nil || IsNil(o.DeletedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -609,7 +613,7 @@ func (o *SourceAccountResponseV3) GetDeletedAt() time.Time {
 // GetDeletedAtOk returns a tuple with the DeletedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceAccountResponseV3) GetDeletedAtOk() (*time.Time, bool) {
-	if o == nil || o.DeletedAt == nil {
+	if o == nil || IsNil(o.DeletedAt) {
 		return nil, false
 	}
 	return o.DeletedAt, true
@@ -617,7 +621,7 @@ func (o *SourceAccountResponseV3) GetDeletedAtOk() (*time.Time, bool) {
 
 // HasDeletedAt returns a boolean if a field has been set.
 func (o *SourceAccountResponseV3) HasDeletedAt() bool {
-	if o != nil && o.DeletedAt != nil {
+	if o != nil && !IsNil(o.DeletedAt) {
 		return true
 	}
 
@@ -630,62 +634,64 @@ func (o *SourceAccountResponseV3) SetDeletedAt(v time.Time) {
 }
 
 func (o SourceAccountResponseV3) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
-	if o.Balance != nil {
+	return json.Marshal(toSerialize)
+}
+
+func (o SourceAccountResponseV3) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	if !IsNil(o.Balance) {
 		toSerialize["balance"] = o.Balance
 	}
-	if o.Currency != nil {
+	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
-	if o.FundingRef != nil {
+	if !IsNil(o.FundingRef) {
 		toSerialize["fundingRef"] = o.FundingRef
 	}
-	if o.PhysicalAccountName != nil {
+	if !IsNil(o.PhysicalAccountName) {
 		toSerialize["physicalAccountName"] = o.PhysicalAccountName
 	}
-	if true {
-		toSerialize["railsId"] = o.RailsId
-	}
-	if o.PayorId != nil {
+	toSerialize["railsId"] = o.RailsId
+	if !IsNil(o.PayorId) {
 		toSerialize["payorId"] = o.PayorId
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.Pooled != nil {
+	if !IsNil(o.Pooled) {
 		toSerialize["pooled"] = o.Pooled
 	}
 	if o.CustomerId.IsSet() {
 		toSerialize["customerId"] = o.CustomerId.Get()
 	}
-	if o.PhysicalAccountId != nil {
+	if !IsNil(o.PhysicalAccountId) {
 		toSerialize["physicalAccountId"] = o.PhysicalAccountId
 	}
-	if o.Notifications != nil {
+	if !IsNil(o.Notifications) {
 		toSerialize["notifications"] = o.Notifications
 	}
-	if o.AutoTopUpConfig != nil {
+	if !IsNil(o.AutoTopUpConfig) {
 		toSerialize["autoTopUpConfig"] = o.AutoTopUpConfig
 	}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if o.Country != nil {
+	toSerialize["type"] = o.Type
+	if !IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}
-	if o.Deleted != nil {
+	if !IsNil(o.Deleted) {
 		toSerialize["deleted"] = o.Deleted
 	}
-	if o.UserDeleted != nil {
+	if !IsNil(o.UserDeleted) {
 		toSerialize["userDeleted"] = o.UserDeleted
 	}
-	if o.DeletedAt != nil {
+	if !IsNil(o.DeletedAt) {
 		toSerialize["deletedAt"] = o.DeletedAt
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableSourceAccountResponseV3 struct {

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **MaxLength** | Pointer to **int32** | maximum length of the element data | [optional] 
 **Validation** | **string** | a regex to validate the element data | 
 **DisplayOrder** | Pointer to **int32** |  | [optional] 
+**Description** | Pointer to **string** | An optional description, or hint, as to how the user should enter the field value. | [optional] 
 
 ## Methods
 
@@ -185,6 +186,31 @@ SetDisplayOrder sets DisplayOrder field to given value.
 `func (o *PaymentChannelRule) HasDisplayOrder() bool`
 
 HasDisplayOrder returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *PaymentChannelRule) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *PaymentChannelRule) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *PaymentChannelRule) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *PaymentChannelRule) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

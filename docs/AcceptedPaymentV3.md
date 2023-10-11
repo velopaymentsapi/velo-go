@@ -4,20 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RemoteId** | **string** |  | 
+**RemoteId** | **string** | Your identifier for the payee | 
 **CurrencyType** | **string** | Valid ISO 4217 3 letter currency code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-4217-currency-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | 
-**Amount** | **int32** |  | 
-**SourceAccountName** | **string** |  | 
-**PayorPaymentId** | **string** |  | 
-**PaymentMemo** | Pointer to **string** |  | [optional] 
-**RemoteSystemId** | Pointer to **string** |  | [optional] 
-**PaymentMetadata** | Pointer to **string** |  | [optional] 
+**Amount** | **int32** | The amount of the payment in minor units | 
+**SourceAccountName** | **string** | The identifier of the source account to debit the payment from | 
+**PayorPaymentId** | **string** | A reference identifier for the payor for the given payee payment | 
+**PaymentMemo** | Pointer to **string** | &lt;p&gt;Any value here will override the memo value in the parent payout&lt;/p&gt; &lt;p&gt;This should be the reference field on the statement seen by the payee (but not via ACH)&lt;/p&gt;  | [optional] 
+**RemoteSystemId** | Pointer to **string** | &lt;p&gt;The identifier for the remote payments system if not Velo&lt;/p&gt;  | [optional] 
+**PaymentMetadata** | Pointer to **string** | &lt;p&gt;Metadata about the payment that may be relevant to the specific rails or remote system making the payout&lt;/p&gt; &lt;p&gt;The structure of the data will be dictated by the requirements of the payment rails&lt;/p&gt;  | [optional] 
+**RailsId** | **string** | Indicates the 3rd party system involved in making this payment | 
 
 ## Methods
 
 ### NewAcceptedPaymentV3
 
-`func NewAcceptedPaymentV3(remoteId string, currencyType string, amount int32, sourceAccountName string, payorPaymentId string, ) *AcceptedPaymentV3`
+`func NewAcceptedPaymentV3(remoteId string, currencyType string, amount int32, sourceAccountName string, payorPaymentId string, railsId string, ) *AcceptedPaymentV3`
 
 NewAcceptedPaymentV3 instantiates a new AcceptedPaymentV3 object
 This constructor will assign default values to properties that have it defined,
@@ -206,6 +207,26 @@ SetPaymentMetadata sets PaymentMetadata field to given value.
 `func (o *AcceptedPaymentV3) HasPaymentMetadata() bool`
 
 HasPaymentMetadata returns a boolean if a field has been set.
+
+### GetRailsId
+
+`func (o *AcceptedPaymentV3) GetRailsId() string`
+
+GetRailsId returns the RailsId field if non-nil, zero value otherwise.
+
+### GetRailsIdOk
+
+`func (o *AcceptedPaymentV3) GetRailsIdOk() (*string, bool)`
+
+GetRailsIdOk returns a tuple with the RailsId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRailsId
+
+`func (o *AcceptedPaymentV3) SetRailsId(v string)`
+
+SetRailsId sets RailsId field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

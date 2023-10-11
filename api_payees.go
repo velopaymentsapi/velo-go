@@ -1,10 +1,10 @@
 /*
- * Velo Payments APIs
- *
- * ## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
- *
- * API version: 2.26.124
- */
+Velo Payments APIs
+
+## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
+
+API version: 2.35.58
+*/
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
 
@@ -12,47 +12,46 @@ package velopayments
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io"
+	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
 
-// Linger please
-var (
-	_ _context.Context
-)
 
-// PayeesApiService PayeesApi service
-type PayeesApiService service
+// PayeesAPIService PayeesAPI service
+type PayeesAPIService service
 
 type ApiDeletePayeeByIdV3Request struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payeeId string
 }
 
-
-func (r ApiDeletePayeeByIdV3Request) Execute() (*_nethttp.Response, error) {
+func (r ApiDeletePayeeByIdV3Request) Execute() (*http.Response, error) {
 	return r.ApiService.DeletePayeeByIdV3Execute(r)
 }
 
 /*
- * DeletePayeeByIdV3 Delete Payee by Id
- * <p>Use v4 instead</p>
+DeletePayeeByIdV3 Delete Payee by Id
+
+<p>Use v4 instead</p>
 <p>This API will delete Payee by Id (UUID). Deletion by ID is not allowed if:</p>
 <p>* Payee ID is not found</p>
 <p>* If Payee has not been on-boarded</p>
 <p>* If Payee is in grace period</p>
 <p>* If Payee has existing payments</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payeeId The UUID of the payee.
- * @return ApiDeletePayeeByIdV3Request
- */
-func (a *PayeesApiService) DeletePayeeByIdV3(ctx _context.Context, payeeId string) ApiDeletePayeeByIdV3Request {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payeeId The UUID of the payee.
+ @return ApiDeletePayeeByIdV3Request
+
+Deprecated
+*/
+func (a *PayeesAPIService) DeletePayeeByIdV3(ctx context.Context, payeeId string) ApiDeletePayeeByIdV3Request {
 	return ApiDeletePayeeByIdV3Request{
 		ApiService: a,
 		ctx: ctx,
@@ -60,29 +59,26 @@ func (a *PayeesApiService) DeletePayeeByIdV3(ctx _context.Context, payeeId strin
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *PayeesApiService) DeletePayeeByIdV3Execute(r ApiDeletePayeeByIdV3Request) (*_nethttp.Response, error) {
+// Execute executes the request
+// Deprecated
+func (a *PayeesAPIService) DeletePayeeByIdV3Execute(r ApiDeletePayeeByIdV3Request) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.DeletePayeeByIdV3")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.DeletePayeeByIdV3")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v3/payees/{payeeId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", _neturl.PathEscape(parameterToString(r.payeeId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", url.PathEscape(parameterValueToString(r.payeeId, "payeeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -101,7 +97,7 @@ func (a *PayeesApiService) DeletePayeeByIdV3Execute(r ApiDeletePayeeByIdV3Reques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -111,15 +107,15 @@ func (a *PayeesApiService) DeletePayeeByIdV3Execute(r ApiDeletePayeeByIdV3Reques
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -130,29 +126,30 @@ func (a *PayeesApiService) DeletePayeeByIdV3Execute(r ApiDeletePayeeByIdV3Reques
 }
 
 type ApiDeletePayeeByIdV4Request struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payeeId string
 }
 
-
-func (r ApiDeletePayeeByIdV4Request) Execute() (*_nethttp.Response, error) {
+func (r ApiDeletePayeeByIdV4Request) Execute() (*http.Response, error) {
 	return r.ApiService.DeletePayeeByIdV4Execute(r)
 }
 
 /*
- * DeletePayeeByIdV4 Delete Payee by Id
- * <p>This API will delete Payee by Id (UUID). Deletion by ID is not allowed if:</p>
+DeletePayeeByIdV4 Delete Payee by Id
+
+<p>This API will delete Payee by Id (UUID). Deletion by ID is not allowed if:</p>
 <p>* Payee ID is not found</p>
 <p>* If Payee has not been on-boarded</p>
 <p>* If Payee is in grace period</p>
 <p>* If Payee has existing payments</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payeeId The UUID of the payee.
- * @return ApiDeletePayeeByIdV4Request
- */
-func (a *PayeesApiService) DeletePayeeByIdV4(ctx _context.Context, payeeId string) ApiDeletePayeeByIdV4Request {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payeeId The UUID of the payee.
+ @return ApiDeletePayeeByIdV4Request
+*/
+func (a *PayeesAPIService) DeletePayeeByIdV4(ctx context.Context, payeeId string) ApiDeletePayeeByIdV4Request {
 	return ApiDeletePayeeByIdV4Request{
 		ApiService: a,
 		ctx: ctx,
@@ -160,29 +157,25 @@ func (a *PayeesApiService) DeletePayeeByIdV4(ctx _context.Context, payeeId strin
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *PayeesApiService) DeletePayeeByIdV4Execute(r ApiDeletePayeeByIdV4Request) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *PayeesAPIService) DeletePayeeByIdV4Execute(r ApiDeletePayeeByIdV4Request) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.DeletePayeeByIdV4")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.DeletePayeeByIdV4")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v4/payees/{payeeId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", _neturl.PathEscape(parameterToString(r.payeeId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", url.PathEscape(parameterValueToString(r.payeeId, "payeeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -201,7 +194,7 @@ func (a *PayeesApiService) DeletePayeeByIdV4Execute(r ApiDeletePayeeByIdV4Reques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -211,15 +204,15 @@ func (a *PayeesApiService) DeletePayeeByIdV4Execute(r ApiDeletePayeeByIdV4Reques
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -230,31 +223,36 @@ func (a *PayeesApiService) DeletePayeeByIdV4Execute(r ApiDeletePayeeByIdV4Reques
 }
 
 type ApiGetPayeeByIdV3Request struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payeeId string
 	sensitive *bool
 }
 
+// Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values. 
 func (r ApiGetPayeeByIdV3Request) Sensitive(sensitive bool) ApiGetPayeeByIdV3Request {
 	r.sensitive = &sensitive
 	return r
 }
 
-func (r ApiGetPayeeByIdV3Request) Execute() (PayeeDetailResponse, *_nethttp.Response, error) {
+func (r ApiGetPayeeByIdV3Request) Execute() (*PayeeDetailResponseV3, *http.Response, error) {
 	return r.ApiService.GetPayeeByIdV3Execute(r)
 }
 
 /*
- * GetPayeeByIdV3 Get Payee by Id
- * <p>Use v4 instead</p>
+GetPayeeByIdV3 Get Payee by Id
+
+<p>Use v4 instead</p>
 <p>Get Payee by Id</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payeeId The UUID of the payee.
- * @return ApiGetPayeeByIdV3Request
- */
-func (a *PayeesApiService) GetPayeeByIdV3(ctx _context.Context, payeeId string) ApiGetPayeeByIdV3Request {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payeeId The UUID of the payee.
+ @return ApiGetPayeeByIdV3Request
+
+Deprecated
+*/
+func (a *PayeesAPIService) GetPayeeByIdV3(ctx context.Context, payeeId string) ApiGetPayeeByIdV3Request {
 	return ApiGetPayeeByIdV3Request{
 		ApiService: a,
 		ctx: ctx,
@@ -262,34 +260,31 @@ func (a *PayeesApiService) GetPayeeByIdV3(ctx _context.Context, payeeId string) 
 	}
 }
 
-/*
- * Execute executes the request
- * @return PayeeDetailResponse
- */
-func (a *PayeesApiService) GetPayeeByIdV3Execute(r ApiGetPayeeByIdV3Request) (PayeeDetailResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PayeeDetailResponseV3
+// Deprecated
+func (a *PayeesAPIService) GetPayeeByIdV3Execute(r ApiGetPayeeByIdV3Request) (*PayeeDetailResponseV3, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PayeeDetailResponse
+		formFiles            []formFile
+		localVarReturnValue  *PayeeDetailResponseV3
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.GetPayeeByIdV3")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.GetPayeeByIdV3")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v3/payees/{payeeId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", _neturl.PathEscape(parameterToString(r.payeeId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", url.PathEscape(parameterValueToString(r.payeeId, "payeeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.sensitive != nil {
-		localVarQueryParams.Add("sensitive", parameterToString(*r.sensitive, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sensitive", r.sensitive, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -308,7 +303,7 @@ func (a *PayeesApiService) GetPayeeByIdV3Execute(r ApiGetPayeeByIdV3Request) (Pa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -318,15 +313,15 @@ func (a *PayeesApiService) GetPayeeByIdV3Execute(r ApiGetPayeeByIdV3Request) (Pa
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -335,7 +330,7 @@ func (a *PayeesApiService) GetPayeeByIdV3Execute(r ApiGetPayeeByIdV3Request) (Pa
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -346,29 +341,32 @@ func (a *PayeesApiService) GetPayeeByIdV3Execute(r ApiGetPayeeByIdV3Request) (Pa
 }
 
 type ApiGetPayeeByIdV4Request struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payeeId string
 	sensitive *bool
 }
 
+// Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values. 
 func (r ApiGetPayeeByIdV4Request) Sensitive(sensitive bool) ApiGetPayeeByIdV4Request {
 	r.sensitive = &sensitive
 	return r
 }
 
-func (r ApiGetPayeeByIdV4Request) Execute() (PayeeDetailResponse2, *_nethttp.Response, error) {
+func (r ApiGetPayeeByIdV4Request) Execute() (*PayeeDetailResponseV4, *http.Response, error) {
 	return r.ApiService.GetPayeeByIdV4Execute(r)
 }
 
 /*
- * GetPayeeByIdV4 Get Payee by Id
- * Get Payee by Id
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payeeId The UUID of the payee.
- * @return ApiGetPayeeByIdV4Request
- */
-func (a *PayeesApiService) GetPayeeByIdV4(ctx _context.Context, payeeId string) ApiGetPayeeByIdV4Request {
+GetPayeeByIdV4 Get Payee by Id
+
+Get Payee by Id
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payeeId The UUID of the payee.
+ @return ApiGetPayeeByIdV4Request
+*/
+func (a *PayeesAPIService) GetPayeeByIdV4(ctx context.Context, payeeId string) ApiGetPayeeByIdV4Request {
 	return ApiGetPayeeByIdV4Request{
 		ApiService: a,
 		ctx: ctx,
@@ -376,34 +374,30 @@ func (a *PayeesApiService) GetPayeeByIdV4(ctx _context.Context, payeeId string) 
 	}
 }
 
-/*
- * Execute executes the request
- * @return PayeeDetailResponse2
- */
-func (a *PayeesApiService) GetPayeeByIdV4Execute(r ApiGetPayeeByIdV4Request) (PayeeDetailResponse2, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PayeeDetailResponseV4
+func (a *PayeesAPIService) GetPayeeByIdV4Execute(r ApiGetPayeeByIdV4Request) (*PayeeDetailResponseV4, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PayeeDetailResponse2
+		formFiles            []formFile
+		localVarReturnValue  *PayeeDetailResponseV4
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.GetPayeeByIdV4")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.GetPayeeByIdV4")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v4/payees/{payeeId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", _neturl.PathEscape(parameterToString(r.payeeId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", url.PathEscape(parameterValueToString(r.payeeId, "payeeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.sensitive != nil {
-		localVarQueryParams.Add("sensitive", parameterToString(*r.sensitive, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sensitive", r.sensitive, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -422,7 +416,7 @@ func (a *PayeesApiService) GetPayeeByIdV4Execute(r ApiGetPayeeByIdV4Request) (Pa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -432,15 +426,15 @@ func (a *PayeesApiService) GetPayeeByIdV4Execute(r ApiGetPayeeByIdV4Request) (Pa
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -449,7 +443,7 @@ func (a *PayeesApiService) GetPayeeByIdV4Execute(r ApiGetPayeeByIdV4Request) (Pa
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -460,74 +454,82 @@ func (a *PayeesApiService) GetPayeeByIdV4Execute(r ApiGetPayeeByIdV4Request) (Pa
 }
 
 type ApiListPayeeChangesV3Request struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payorId *string
 	updatedSince *time.Time
 	page *int32
 	pageSize *int32
 }
 
+// The Payor ID to find associated Payees
 func (r ApiListPayeeChangesV3Request) PayorId(payorId string) ApiListPayeeChangesV3Request {
 	r.payorId = &payorId
 	return r
 }
+
+// The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm
 func (r ApiListPayeeChangesV3Request) UpdatedSince(updatedSince time.Time) ApiListPayeeChangesV3Request {
 	r.updatedSince = &updatedSince
 	return r
 }
+
+// Page number. Default is 1.
 func (r ApiListPayeeChangesV3Request) Page(page int32) ApiListPayeeChangesV3Request {
 	r.page = &page
 	return r
 }
+
+// Page size. Default is 100. Max allowable is 1000.
 func (r ApiListPayeeChangesV3Request) PageSize(pageSize int32) ApiListPayeeChangesV3Request {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiListPayeeChangesV3Request) Execute() (PayeeDeltaResponse, *_nethttp.Response, error) {
+func (r ApiListPayeeChangesV3Request) Execute() (*PayeeDeltaResponseV3, *http.Response, error) {
 	return r.ApiService.ListPayeeChangesV3Execute(r)
 }
 
 /*
- * ListPayeeChangesV3 List Payee Changes
- * <p>Use v4 instead</p>
+ListPayeeChangesV3 List Payee Changes
+
+<p>Use v4 instead</p>
 <p>Get a paginated response listing payee changes.</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiListPayeeChangesV3Request
- */
-func (a *PayeesApiService) ListPayeeChangesV3(ctx _context.Context) ApiListPayeeChangesV3Request {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListPayeeChangesV3Request
+
+Deprecated
+*/
+func (a *PayeesAPIService) ListPayeeChangesV3(ctx context.Context) ApiListPayeeChangesV3Request {
 	return ApiListPayeeChangesV3Request{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return PayeeDeltaResponse
- */
-func (a *PayeesApiService) ListPayeeChangesV3Execute(r ApiListPayeeChangesV3Request) (PayeeDeltaResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PayeeDeltaResponseV3
+// Deprecated
+func (a *PayeesAPIService) ListPayeeChangesV3Execute(r ApiListPayeeChangesV3Request) (*PayeeDeltaResponseV3, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PayeeDeltaResponse
+		formFiles            []formFile
+		localVarReturnValue  *PayeeDeltaResponseV3
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.ListPayeeChangesV3")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.ListPayeeChangesV3")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v3/payees/deltas"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.payorId == nil {
 		return localVarReturnValue, nil, reportError("payorId is required and must be specified")
 	}
@@ -535,13 +537,19 @@ func (a *PayeesApiService) ListPayeeChangesV3Execute(r ApiListPayeeChangesV3Requ
 		return localVarReturnValue, nil, reportError("updatedSince is required and must be specified")
 	}
 
-	localVarQueryParams.Add("payorId", parameterToString(*r.payorId, ""))
-	localVarQueryParams.Add("updatedSince", parameterToString(*r.updatedSince, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "payorId", r.payorId, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "updatedSince", r.updatedSince, "")
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
+	} else {
+		var defaultValue int32 = 100
+		r.pageSize = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -560,7 +568,7 @@ func (a *PayeesApiService) ListPayeeChangesV3Execute(r ApiListPayeeChangesV3Requ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -570,15 +578,15 @@ func (a *PayeesApiService) ListPayeeChangesV3Execute(r ApiListPayeeChangesV3Requ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -587,7 +595,7 @@ func (a *PayeesApiService) ListPayeeChangesV3Execute(r ApiListPayeeChangesV3Requ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -598,38 +606,46 @@ func (a *PayeesApiService) ListPayeeChangesV3Execute(r ApiListPayeeChangesV3Requ
 }
 
 type ApiListPayeeChangesV4Request struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payorId *string
 	updatedSince *time.Time
 	page *int32
 	pageSize *int32
 }
 
+// The Payor ID to find associated Payees
 func (r ApiListPayeeChangesV4Request) PayorId(payorId string) ApiListPayeeChangesV4Request {
 	r.payorId = &payorId
 	return r
 }
+
+// The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm
 func (r ApiListPayeeChangesV4Request) UpdatedSince(updatedSince time.Time) ApiListPayeeChangesV4Request {
 	r.updatedSince = &updatedSince
 	return r
 }
+
+// Page number. Default is 1.
 func (r ApiListPayeeChangesV4Request) Page(page int32) ApiListPayeeChangesV4Request {
 	r.page = &page
 	return r
 }
+
+// Page size. Default is 100. Max allowable is 1000.
 func (r ApiListPayeeChangesV4Request) PageSize(pageSize int32) ApiListPayeeChangesV4Request {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiListPayeeChangesV4Request) Execute() (PayeeDeltaResponse2, *_nethttp.Response, error) {
+func (r ApiListPayeeChangesV4Request) Execute() (*PayeeDeltaResponseV4, *http.Response, error) {
 	return r.ApiService.ListPayeeChangesV4Execute(r)
 }
 
 /*
- * ListPayeeChangesV4 List Payee Changes
- * Get a paginated response listing payee changes (updated since a particular time) to a limited set of fields:
+ListPayeeChangesV4 List Payee Changes
+
+Get a paginated response listing payee changes (updated since a particular time) to a limited set of fields:
 - dbaName
 - displayName
 - email
@@ -638,40 +654,37 @@ func (r ApiListPayeeChangesV4Request) Execute() (PayeeDeltaResponse2, *_nethttp.
 - payeeId
 - remoteId
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiListPayeeChangesV4Request
- */
-func (a *PayeesApiService) ListPayeeChangesV4(ctx _context.Context) ApiListPayeeChangesV4Request {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListPayeeChangesV4Request
+*/
+func (a *PayeesAPIService) ListPayeeChangesV4(ctx context.Context) ApiListPayeeChangesV4Request {
 	return ApiListPayeeChangesV4Request{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return PayeeDeltaResponse2
- */
-func (a *PayeesApiService) ListPayeeChangesV4Execute(r ApiListPayeeChangesV4Request) (PayeeDeltaResponse2, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PayeeDeltaResponseV4
+func (a *PayeesAPIService) ListPayeeChangesV4Execute(r ApiListPayeeChangesV4Request) (*PayeeDeltaResponseV4, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PayeeDeltaResponse2
+		formFiles            []formFile
+		localVarReturnValue  *PayeeDeltaResponseV4
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.ListPayeeChangesV4")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.ListPayeeChangesV4")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v4/payees/deltas"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.payorId == nil {
 		return localVarReturnValue, nil, reportError("payorId is required and must be specified")
 	}
@@ -679,13 +692,19 @@ func (a *PayeesApiService) ListPayeeChangesV4Execute(r ApiListPayeeChangesV4Requ
 		return localVarReturnValue, nil, reportError("updatedSince is required and must be specified")
 	}
 
-	localVarQueryParams.Add("payorId", parameterToString(*r.payorId, ""))
-	localVarQueryParams.Add("updatedSince", parameterToString(*r.updatedSince, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "payorId", r.payorId, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "updatedSince", r.updatedSince, "")
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
+	} else {
+		var defaultValue int32 = 100
+		r.pageSize = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -704,7 +723,7 @@ func (a *PayeesApiService) ListPayeeChangesV4Execute(r ApiListPayeeChangesV4Requ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -714,15 +733,15 @@ func (a *PayeesApiService) ListPayeeChangesV4Execute(r ApiListPayeeChangesV4Requ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -731,7 +750,7 @@ func (a *PayeesApiService) ListPayeeChangesV4Execute(r ApiListPayeeChangesV4Requ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -742,151 +761,184 @@ func (a *PayeesApiService) ListPayeeChangesV4Execute(r ApiListPayeeChangesV4Requ
 }
 
 type ApiListPayeesV3Request struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payorId *string
-	watchlistStatus *WatchlistStatus
+	watchlistStatus *string
 	disabled *bool
-	onboardedStatus *OnboardedStatus
+	onboardedStatus *string
 	email *string
 	displayName *string
 	remoteId *string
-	payeeType *PayeeType
+	payeeType *string
 	payeeCountry *string
 	page *int32
 	pageSize *int32
 	sort *string
 }
 
+// The account owner Payor ID
 func (r ApiListPayeesV3Request) PayorId(payorId string) ApiListPayeesV3Request {
 	r.payorId = &payorId
 	return r
 }
-func (r ApiListPayeesV3Request) WatchlistStatus(watchlistStatus WatchlistStatus) ApiListPayeesV3Request {
+
+// The watchlistStatus of the payees.
+func (r ApiListPayeesV3Request) WatchlistStatus(watchlistStatus string) ApiListPayeesV3Request {
 	r.watchlistStatus = &watchlistStatus
 	return r
 }
+
+// Payee disabled
 func (r ApiListPayeesV3Request) Disabled(disabled bool) ApiListPayeesV3Request {
 	r.disabled = &disabled
 	return r
 }
-func (r ApiListPayeesV3Request) OnboardedStatus(onboardedStatus OnboardedStatus) ApiListPayeesV3Request {
+
+// The onboarded status of the payees.
+func (r ApiListPayeesV3Request) OnboardedStatus(onboardedStatus string) ApiListPayeesV3Request {
 	r.onboardedStatus = &onboardedStatus
 	return r
 }
+
+// Email address
 func (r ApiListPayeesV3Request) Email(email string) ApiListPayeesV3Request {
 	r.email = &email
 	return r
 }
+
+// The display name of the payees.
 func (r ApiListPayeesV3Request) DisplayName(displayName string) ApiListPayeesV3Request {
 	r.displayName = &displayName
 	return r
 }
+
+// The remote id of the payees.
 func (r ApiListPayeesV3Request) RemoteId(remoteId string) ApiListPayeesV3Request {
 	r.remoteId = &remoteId
 	return r
 }
-func (r ApiListPayeesV3Request) PayeeType(payeeType PayeeType) ApiListPayeesV3Request {
+
+// The onboarded status of the payees.
+func (r ApiListPayeesV3Request) PayeeType(payeeType string) ApiListPayeesV3Request {
 	r.payeeType = &payeeType
 	return r
 }
+
+// The country of the payee - 2 letter ISO 3166-1 country code (upper case)
 func (r ApiListPayeesV3Request) PayeeCountry(payeeCountry string) ApiListPayeesV3Request {
 	r.payeeCountry = &payeeCountry
 	return r
 }
+
+// Page number. Default is 1.
 func (r ApiListPayeesV3Request) Page(page int32) ApiListPayeesV3Request {
 	r.page = &page
 	return r
 }
+
+// Page size. Default is 25. Max allowable is 100.
 func (r ApiListPayeesV3Request) PageSize(pageSize int32) ApiListPayeesV3Request {
 	r.pageSize = &pageSize
 	return r
 }
+
+// List of sort fields (e.g. ?sort&#x3D;onboardedStatus:asc,name:asc) Default is name:asc &#39;name&#39; is treated as company name for companies - last name + &#39;,&#39; + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus. 
 func (r ApiListPayeesV3Request) Sort(sort string) ApiListPayeesV3Request {
 	r.sort = &sort
 	return r
 }
 
-func (r ApiListPayeesV3Request) Execute() (PagedPayeeResponse, *_nethttp.Response, error) {
+func (r ApiListPayeesV3Request) Execute() (*PagedPayeeResponseV3, *http.Response, error) {
 	return r.ApiService.ListPayeesV3Execute(r)
 }
 
 /*
- * ListPayeesV3 List Payees
- * <p>Use v4 instead</p>
+ListPayeesV3 List Payees
+
+<p>Use v4 instead</p>
 Get a paginated response listing the payees for a payor.
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiListPayeesV3Request
- */
-func (a *PayeesApiService) ListPayeesV3(ctx _context.Context) ApiListPayeesV3Request {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListPayeesV3Request
+
+Deprecated
+*/
+func (a *PayeesAPIService) ListPayeesV3(ctx context.Context) ApiListPayeesV3Request {
 	return ApiListPayeesV3Request{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return PagedPayeeResponse
- */
-func (a *PayeesApiService) ListPayeesV3Execute(r ApiListPayeesV3Request) (PagedPayeeResponse, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PagedPayeeResponseV3
+// Deprecated
+func (a *PayeesAPIService) ListPayeesV3Execute(r ApiListPayeesV3Request) (*PagedPayeeResponseV3, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PagedPayeeResponse
+		formFiles            []formFile
+		localVarReturnValue  *PagedPayeeResponseV3
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.ListPayeesV3")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.ListPayeesV3")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v3/payees"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.payorId == nil {
 		return localVarReturnValue, nil, reportError("payorId is required and must be specified")
 	}
 
-	localVarQueryParams.Add("payorId", parameterToString(*r.payorId, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "payorId", r.payorId, "")
 	if r.watchlistStatus != nil {
-		localVarQueryParams.Add("watchlistStatus", parameterToString(*r.watchlistStatus, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "watchlistStatus", r.watchlistStatus, "")
 	}
 	if r.disabled != nil {
-		localVarQueryParams.Add("disabled", parameterToString(*r.disabled, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "disabled", r.disabled, "")
 	}
 	if r.onboardedStatus != nil {
-		localVarQueryParams.Add("onboardedStatus", parameterToString(*r.onboardedStatus, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onboardedStatus", r.onboardedStatus, "")
 	}
 	if r.email != nil {
-		localVarQueryParams.Add("email", parameterToString(*r.email, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "email", r.email, "")
 	}
 	if r.displayName != nil {
-		localVarQueryParams.Add("displayName", parameterToString(*r.displayName, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "displayName", r.displayName, "")
 	}
 	if r.remoteId != nil {
-		localVarQueryParams.Add("remoteId", parameterToString(*r.remoteId, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "remoteId", r.remoteId, "")
 	}
 	if r.payeeType != nil {
-		localVarQueryParams.Add("payeeType", parameterToString(*r.payeeType, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "payeeType", r.payeeType, "")
 	}
 	if r.payeeCountry != nil {
-		localVarQueryParams.Add("payeeCountry", parameterToString(*r.payeeCountry, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "payeeCountry", r.payeeCountry, "")
 	}
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
+	} else {
+		var defaultValue int32 = 25
+		r.pageSize = &defaultValue
 	}
 	if r.sort != nil {
-		localVarQueryParams.Add("sort", parameterToString(*r.sort, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "")
+	} else {
+		var defaultValue string = "displayName:asc"
+		r.sort = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -905,7 +957,7 @@ func (a *PayeesApiService) ListPayeesV3Execute(r ApiListPayeesV3Request) (PagedP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -915,15 +967,15 @@ func (a *PayeesApiService) ListPayeesV3Execute(r ApiListPayeesV3Request) (PagedP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -934,7 +986,8 @@ func (a *PayeesApiService) ListPayeesV3Execute(r ApiListPayeesV3Request) (PagedP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
@@ -944,7 +997,8 @@ func (a *PayeesApiService) ListPayeesV3Execute(r ApiListPayeesV3Request) (PagedP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -954,7 +1008,8 @@ func (a *PayeesApiService) ListPayeesV3Execute(r ApiListPayeesV3Request) (PagedP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -964,14 +1019,15 @@ func (a *PayeesApiService) ListPayeesV3Execute(r ApiListPayeesV3Request) (PagedP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -982,157 +1038,189 @@ func (a *PayeesApiService) ListPayeesV3Execute(r ApiListPayeesV3Request) (PagedP
 }
 
 type ApiListPayeesV4Request struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payorId *string
-	watchlistStatus *WatchlistStatus
+	watchlistStatus *string
 	disabled *bool
-	onboardedStatus *OnboardedStatus
+	onboardedStatus *string
 	email *string
 	displayName *string
 	remoteId *string
-	payeeType *PayeeType
+	payeeType *string
 	payeeCountry *string
-	ofacStatus *OfacStatus
+	ofacStatus *string
 	page *int32
 	pageSize *int32
 	sort *string
 }
 
+// The account owner Payor ID
 func (r ApiListPayeesV4Request) PayorId(payorId string) ApiListPayeesV4Request {
 	r.payorId = &payorId
 	return r
 }
-func (r ApiListPayeesV4Request) WatchlistStatus(watchlistStatus WatchlistStatus) ApiListPayeesV4Request {
+
+// The watchlistStatus of the payees.
+func (r ApiListPayeesV4Request) WatchlistStatus(watchlistStatus string) ApiListPayeesV4Request {
 	r.watchlistStatus = &watchlistStatus
 	return r
 }
+
+// Payee disabled
 func (r ApiListPayeesV4Request) Disabled(disabled bool) ApiListPayeesV4Request {
 	r.disabled = &disabled
 	return r
 }
-func (r ApiListPayeesV4Request) OnboardedStatus(onboardedStatus OnboardedStatus) ApiListPayeesV4Request {
+
+// The onboarded status of the payees.
+func (r ApiListPayeesV4Request) OnboardedStatus(onboardedStatus string) ApiListPayeesV4Request {
 	r.onboardedStatus = &onboardedStatus
 	return r
 }
+
+// Email address
 func (r ApiListPayeesV4Request) Email(email string) ApiListPayeesV4Request {
 	r.email = &email
 	return r
 }
+
+// The display name of the payees.
 func (r ApiListPayeesV4Request) DisplayName(displayName string) ApiListPayeesV4Request {
 	r.displayName = &displayName
 	return r
 }
+
+// The remote id of the payees.
 func (r ApiListPayeesV4Request) RemoteId(remoteId string) ApiListPayeesV4Request {
 	r.remoteId = &remoteId
 	return r
 }
-func (r ApiListPayeesV4Request) PayeeType(payeeType PayeeType) ApiListPayeesV4Request {
+
+// The onboarded status of the payees.
+func (r ApiListPayeesV4Request) PayeeType(payeeType string) ApiListPayeesV4Request {
 	r.payeeType = &payeeType
 	return r
 }
+
+// The country of the payee - 2 letter ISO 3166-1 country code (upper case)
 func (r ApiListPayeesV4Request) PayeeCountry(payeeCountry string) ApiListPayeesV4Request {
 	r.payeeCountry = &payeeCountry
 	return r
 }
-func (r ApiListPayeesV4Request) OfacStatus(ofacStatus OfacStatus) ApiListPayeesV4Request {
+
+// The ofacStatus of the payees.
+func (r ApiListPayeesV4Request) OfacStatus(ofacStatus string) ApiListPayeesV4Request {
 	r.ofacStatus = &ofacStatus
 	return r
 }
+
+// Page number. Default is 1.
 func (r ApiListPayeesV4Request) Page(page int32) ApiListPayeesV4Request {
 	r.page = &page
 	return r
 }
+
+// Page size. Default is 25. Max allowable is 100.
 func (r ApiListPayeesV4Request) PageSize(pageSize int32) ApiListPayeesV4Request {
 	r.pageSize = &pageSize
 	return r
 }
+
+// List of sort fields (e.g. ?sort&#x3D;onboardedStatus:asc,name:asc) Default is name:asc &#39;name&#39; is treated as company name for companies - last name + &#39;,&#39; + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus. 
 func (r ApiListPayeesV4Request) Sort(sort string) ApiListPayeesV4Request {
 	r.sort = &sort
 	return r
 }
 
-func (r ApiListPayeesV4Request) Execute() (PagedPayeeResponse2, *_nethttp.Response, error) {
+func (r ApiListPayeesV4Request) Execute() (*PagedPayeeResponseV4, *http.Response, error) {
 	return r.ApiService.ListPayeesV4Execute(r)
 }
 
 /*
- * ListPayeesV4 List Payees
- * Get a paginated response listing the payees for a payor.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiListPayeesV4Request
- */
-func (a *PayeesApiService) ListPayeesV4(ctx _context.Context) ApiListPayeesV4Request {
+ListPayeesV4 List Payees
+
+Get a paginated response listing the payees for a payor.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListPayeesV4Request
+*/
+func (a *PayeesAPIService) ListPayeesV4(ctx context.Context) ApiListPayeesV4Request {
 	return ApiListPayeesV4Request{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
-/*
- * Execute executes the request
- * @return PagedPayeeResponse2
- */
-func (a *PayeesApiService) ListPayeesV4Execute(r ApiListPayeesV4Request) (PagedPayeeResponse2, *_nethttp.Response, error) {
+// Execute executes the request
+//  @return PagedPayeeResponseV4
+func (a *PayeesAPIService) ListPayeesV4Execute(r ApiListPayeesV4Request) (*PagedPayeeResponseV4, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PagedPayeeResponse2
+		formFiles            []formFile
+		localVarReturnValue  *PagedPayeeResponseV4
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.ListPayeesV4")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.ListPayeesV4")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v4/payees"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.payorId == nil {
 		return localVarReturnValue, nil, reportError("payorId is required and must be specified")
 	}
 
-	localVarQueryParams.Add("payorId", parameterToString(*r.payorId, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "payorId", r.payorId, "")
 	if r.watchlistStatus != nil {
-		localVarQueryParams.Add("watchlistStatus", parameterToString(*r.watchlistStatus, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "watchlistStatus", r.watchlistStatus, "")
 	}
 	if r.disabled != nil {
-		localVarQueryParams.Add("disabled", parameterToString(*r.disabled, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "disabled", r.disabled, "")
 	}
 	if r.onboardedStatus != nil {
-		localVarQueryParams.Add("onboardedStatus", parameterToString(*r.onboardedStatus, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onboardedStatus", r.onboardedStatus, "")
 	}
 	if r.email != nil {
-		localVarQueryParams.Add("email", parameterToString(*r.email, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "email", r.email, "")
 	}
 	if r.displayName != nil {
-		localVarQueryParams.Add("displayName", parameterToString(*r.displayName, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "displayName", r.displayName, "")
 	}
 	if r.remoteId != nil {
-		localVarQueryParams.Add("remoteId", parameterToString(*r.remoteId, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "remoteId", r.remoteId, "")
 	}
 	if r.payeeType != nil {
-		localVarQueryParams.Add("payeeType", parameterToString(*r.payeeType, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "payeeType", r.payeeType, "")
 	}
 	if r.payeeCountry != nil {
-		localVarQueryParams.Add("payeeCountry", parameterToString(*r.payeeCountry, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "payeeCountry", r.payeeCountry, "")
 	}
 	if r.ofacStatus != nil {
-		localVarQueryParams.Add("ofacStatus", parameterToString(*r.ofacStatus, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ofacStatus", r.ofacStatus, "")
 	}
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
+	} else {
+		var defaultValue int32 = 25
+		r.pageSize = &defaultValue
 	}
 	if r.sort != nil {
-		localVarQueryParams.Add("sort", parameterToString(*r.sort, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "")
+	} else {
+		var defaultValue string = "displayName:asc"
+		r.sort = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1151,7 +1239,7 @@ func (a *PayeesApiService) ListPayeesV4Execute(r ApiListPayeesV4Request) (PagedP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1161,15 +1249,15 @@ func (a *PayeesApiService) ListPayeesV4Execute(r ApiListPayeesV4Request) (PagedP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1180,7 +1268,8 @@ func (a *PayeesApiService) ListPayeesV4Execute(r ApiListPayeesV4Request) (PagedP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
@@ -1190,7 +1279,8 @@ func (a *PayeesApiService) ListPayeesV4Execute(r ApiListPayeesV4Request) (PagedP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1200,7 +1290,8 @@ func (a *PayeesApiService) ListPayeesV4Execute(r ApiListPayeesV4Request) (PagedP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1210,14 +1301,15 @@ func (a *PayeesApiService) ListPayeesV4Execute(r ApiListPayeesV4Request) (PagedP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1228,31 +1320,36 @@ func (a *PayeesApiService) ListPayeesV4Execute(r ApiListPayeesV4Request) (PagedP
 }
 
 type ApiPayeeDetailsUpdateV3Request struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payeeId string
-	updatePayeeDetailsRequest *UpdatePayeeDetailsRequest
+	updatePayeeDetailsRequestV3 *UpdatePayeeDetailsRequestV3
 }
 
-func (r ApiPayeeDetailsUpdateV3Request) UpdatePayeeDetailsRequest(updatePayeeDetailsRequest UpdatePayeeDetailsRequest) ApiPayeeDetailsUpdateV3Request {
-	r.updatePayeeDetailsRequest = &updatePayeeDetailsRequest
+// Request to update payee details
+func (r ApiPayeeDetailsUpdateV3Request) UpdatePayeeDetailsRequestV3(updatePayeeDetailsRequestV3 UpdatePayeeDetailsRequestV3) ApiPayeeDetailsUpdateV3Request {
+	r.updatePayeeDetailsRequestV3 = &updatePayeeDetailsRequestV3
 	return r
 }
 
-func (r ApiPayeeDetailsUpdateV3Request) Execute() (*_nethttp.Response, error) {
+func (r ApiPayeeDetailsUpdateV3Request) Execute() (*http.Response, error) {
 	return r.ApiService.PayeeDetailsUpdateV3Execute(r)
 }
 
 /*
- * PayeeDetailsUpdateV3 Update Payee Details
- * <p>Use v4 instead</p>
+PayeeDetailsUpdateV3 Update Payee Details
+
+<p>Use v4 instead</p>
 <p>Update payee details for the given Payee Id.<p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payeeId The UUID of the payee.
- * @return ApiPayeeDetailsUpdateV3Request
- */
-func (a *PayeesApiService) PayeeDetailsUpdateV3(ctx _context.Context, payeeId string) ApiPayeeDetailsUpdateV3Request {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payeeId The UUID of the payee.
+ @return ApiPayeeDetailsUpdateV3Request
+
+Deprecated
+*/
+func (a *PayeesAPIService) PayeeDetailsUpdateV3(ctx context.Context, payeeId string) ApiPayeeDetailsUpdateV3Request {
 	return ApiPayeeDetailsUpdateV3Request{
 		ApiService: a,
 		ctx: ctx,
@@ -1260,31 +1357,28 @@ func (a *PayeesApiService) PayeeDetailsUpdateV3(ctx _context.Context, payeeId st
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *PayeesApiService) PayeeDetailsUpdateV3Execute(r ApiPayeeDetailsUpdateV3Request) (*_nethttp.Response, error) {
+// Execute executes the request
+// Deprecated
+func (a *PayeesAPIService) PayeeDetailsUpdateV3Execute(r ApiPayeeDetailsUpdateV3Request) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.PayeeDetailsUpdateV3")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.PayeeDetailsUpdateV3")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v3/payees/{payeeId}/payeeDetailsUpdate"
-	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", _neturl.PathEscape(parameterToString(r.payeeId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", url.PathEscape(parameterValueToString(r.payeeId, "payeeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.updatePayeeDetailsRequest == nil {
-		return nil, reportError("updatePayeeDetailsRequest is required and must be specified")
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updatePayeeDetailsRequestV3 == nil {
+		return nil, reportError("updatePayeeDetailsRequestV3 is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1305,8 +1399,8 @@ func (a *PayeesApiService) PayeeDetailsUpdateV3Execute(r ApiPayeeDetailsUpdateV3
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updatePayeeDetailsRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	localVarPostBody = r.updatePayeeDetailsRequestV3
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1316,15 +1410,15 @@ func (a *PayeesApiService) PayeeDetailsUpdateV3Execute(r ApiPayeeDetailsUpdateV3
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1335,7 +1429,8 @@ func (a *PayeesApiService) PayeeDetailsUpdateV3Execute(r ApiPayeeDetailsUpdateV3
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
@@ -1345,7 +1440,8 @@ func (a *PayeesApiService) PayeeDetailsUpdateV3Execute(r ApiPayeeDetailsUpdateV3
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1355,7 +1451,8 @@ func (a *PayeesApiService) PayeeDetailsUpdateV3Execute(r ApiPayeeDetailsUpdateV3
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1365,7 +1462,8 @@ func (a *PayeesApiService) PayeeDetailsUpdateV3Execute(r ApiPayeeDetailsUpdateV3
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -1374,30 +1472,34 @@ func (a *PayeesApiService) PayeeDetailsUpdateV3Execute(r ApiPayeeDetailsUpdateV3
 }
 
 type ApiPayeeDetailsUpdateV4Request struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payeeId string
-	updatePayeeDetailsRequest2 *UpdatePayeeDetailsRequest2
+	updatePayeeDetailsRequestV4 *UpdatePayeeDetailsRequestV4
 }
 
-func (r ApiPayeeDetailsUpdateV4Request) UpdatePayeeDetailsRequest2(updatePayeeDetailsRequest2 UpdatePayeeDetailsRequest2) ApiPayeeDetailsUpdateV4Request {
-	r.updatePayeeDetailsRequest2 = &updatePayeeDetailsRequest2
+// Request to update payee details
+func (r ApiPayeeDetailsUpdateV4Request) UpdatePayeeDetailsRequestV4(updatePayeeDetailsRequestV4 UpdatePayeeDetailsRequestV4) ApiPayeeDetailsUpdateV4Request {
+	r.updatePayeeDetailsRequestV4 = &updatePayeeDetailsRequestV4
 	return r
 }
 
-func (r ApiPayeeDetailsUpdateV4Request) Execute() (*_nethttp.Response, error) {
+func (r ApiPayeeDetailsUpdateV4Request) Execute() (*http.Response, error) {
 	return r.ApiService.PayeeDetailsUpdateV4Execute(r)
 }
 
 /*
- * PayeeDetailsUpdateV4 Update Payee Details
- * <p>Update payee details for the given Payee Id.<p>
+PayeeDetailsUpdateV4 Update Payee Details
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payeeId The UUID of the payee.
- * @return ApiPayeeDetailsUpdateV4Request
- */
-func (a *PayeesApiService) PayeeDetailsUpdateV4(ctx _context.Context, payeeId string) ApiPayeeDetailsUpdateV4Request {
+<p>Update payee details for the given Payee Id.</p>
+<p>Payors may only update the payee details if the payee has not yet onboarded</p>
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payeeId The UUID of the payee.
+ @return ApiPayeeDetailsUpdateV4Request
+*/
+func (a *PayeesAPIService) PayeeDetailsUpdateV4(ctx context.Context, payeeId string) ApiPayeeDetailsUpdateV4Request {
 	return ApiPayeeDetailsUpdateV4Request{
 		ApiService: a,
 		ctx: ctx,
@@ -1405,31 +1507,27 @@ func (a *PayeesApiService) PayeeDetailsUpdateV4(ctx _context.Context, payeeId st
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *PayeesApiService) PayeeDetailsUpdateV4Execute(r ApiPayeeDetailsUpdateV4Request) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *PayeesAPIService) PayeeDetailsUpdateV4Execute(r ApiPayeeDetailsUpdateV4Request) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.PayeeDetailsUpdateV4")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.PayeeDetailsUpdateV4")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v4/payees/{payeeId}/payeeDetailsUpdate"
-	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", _neturl.PathEscape(parameterToString(r.payeeId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", url.PathEscape(parameterValueToString(r.payeeId, "payeeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.updatePayeeDetailsRequest2 == nil {
-		return nil, reportError("updatePayeeDetailsRequest2 is required and must be specified")
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updatePayeeDetailsRequestV4 == nil {
+		return nil, reportError("updatePayeeDetailsRequestV4 is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1450,8 +1548,8 @@ func (a *PayeesApiService) PayeeDetailsUpdateV4Execute(r ApiPayeeDetailsUpdateV4
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updatePayeeDetailsRequest2
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	localVarPostBody = r.updatePayeeDetailsRequestV4
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1461,15 +1559,15 @@ func (a *PayeesApiService) PayeeDetailsUpdateV4Execute(r ApiPayeeDetailsUpdateV4
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1480,7 +1578,8 @@ func (a *PayeesApiService) PayeeDetailsUpdateV4Execute(r ApiPayeeDetailsUpdateV4
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
@@ -1490,7 +1589,8 @@ func (a *PayeesApiService) PayeeDetailsUpdateV4Execute(r ApiPayeeDetailsUpdateV4
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1500,7 +1600,8 @@ func (a *PayeesApiService) PayeeDetailsUpdateV4Execute(r ApiPayeeDetailsUpdateV4
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1510,7 +1611,8 @@ func (a *PayeesApiService) PayeeDetailsUpdateV4Execute(r ApiPayeeDetailsUpdateV4
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -1519,31 +1621,36 @@ func (a *PayeesApiService) PayeeDetailsUpdateV4Execute(r ApiPayeeDetailsUpdateV4
 }
 
 type ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payeeId string
-	updateRemoteIdRequest *UpdateRemoteIdRequest
+	updateRemoteIdRequestV3 *UpdateRemoteIdRequestV3
 }
 
-func (r ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest) UpdateRemoteIdRequest(updateRemoteIdRequest UpdateRemoteIdRequest) ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest {
-	r.updateRemoteIdRequest = &updateRemoteIdRequest
+// Request to update payee remote id v3
+func (r ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest) UpdateRemoteIdRequestV3(updateRemoteIdRequestV3 UpdateRemoteIdRequestV3) ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest {
+	r.updateRemoteIdRequestV3 = &updateRemoteIdRequestV3
 	return r
 }
 
-func (r ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest) Execute() (*http.Response, error) {
 	return r.ApiService.V3PayeesPayeeIdRemoteIdUpdatePostExecute(r)
 }
 
 /*
- * V3PayeesPayeeIdRemoteIdUpdatePost Update Payee Remote Id
- * <p>Use v4 instead</p>
+V3PayeesPayeeIdRemoteIdUpdatePost Update Payee Remote Id
+
+<p>Use v4 instead</p>
 <p>Update the remote Id for the given Payee Id.</p>
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payeeId The UUID of the payee.
- * @return ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest
- */
-func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePost(ctx _context.Context, payeeId string) ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest {
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payeeId The UUID of the payee.
+ @return ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest
+
+Deprecated
+*/
+func (a *PayeesAPIService) V3PayeesPayeeIdRemoteIdUpdatePost(ctx context.Context, payeeId string) ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest {
 	return ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1551,31 +1658,28 @@ func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePost(ctx _context.Contex
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+// Deprecated
+func (a *PayeesAPIService) V3PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV3PayeesPayeeIdRemoteIdUpdatePostRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.V3PayeesPayeeIdRemoteIdUpdatePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.V3PayeesPayeeIdRemoteIdUpdatePost")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v3/payees/{payeeId}/remoteIdUpdate"
-	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", _neturl.PathEscape(parameterToString(r.payeeId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", url.PathEscape(parameterValueToString(r.payeeId, "payeeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.updateRemoteIdRequest == nil {
-		return nil, reportError("updateRemoteIdRequest is required and must be specified")
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateRemoteIdRequestV3 == nil {
+		return nil, reportError("updateRemoteIdRequestV3 is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1596,8 +1700,8 @@ func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV3Payee
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateRemoteIdRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	localVarPostBody = r.updateRemoteIdRequestV3
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1607,15 +1711,15 @@ func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV3Payee
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1626,7 +1730,8 @@ func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV3Payee
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1636,7 +1741,8 @@ func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV3Payee
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1646,7 +1752,8 @@ func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV3Payee
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1656,7 +1763,8 @@ func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV3Payee
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -1666,7 +1774,8 @@ func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV3Payee
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -1675,30 +1784,33 @@ func (a *PayeesApiService) V3PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV3Payee
 }
 
 type ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest struct {
-	ctx _context.Context
-	ApiService *PayeesApiService
+	ctx context.Context
+	ApiService *PayeesAPIService
 	payeeId string
-	updateRemoteIdRequest2 *UpdateRemoteIdRequest2
+	updateRemoteIdRequestV4 *UpdateRemoteIdRequestV4
 }
 
-func (r ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest) UpdateRemoteIdRequest2(updateRemoteIdRequest2 UpdateRemoteIdRequest2) ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest {
-	r.updateRemoteIdRequest2 = &updateRemoteIdRequest2
+// Request to update payee remote id v4
+func (r ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest) UpdateRemoteIdRequestV4(updateRemoteIdRequestV4 UpdateRemoteIdRequestV4) ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest {
+	r.updateRemoteIdRequestV4 = &updateRemoteIdRequestV4
 	return r
 }
 
-func (r ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest) Execute() (*http.Response, error) {
 	return r.ApiService.V4PayeesPayeeIdRemoteIdUpdatePostExecute(r)
 }
 
 /*
- * V4PayeesPayeeIdRemoteIdUpdatePost Update Payee Remote Id
- * <p>Update the remote Id for the given Payee Id.</p>
+V4PayeesPayeeIdRemoteIdUpdatePost Update Payee Remote Id
 
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param payeeId The UUID of the payee.
- * @return ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest
- */
-func (a *PayeesApiService) V4PayeesPayeeIdRemoteIdUpdatePost(ctx _context.Context, payeeId string) ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest {
+<p>Update the remote Id for the given Payee Id.</p>
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param payeeId The UUID of the payee.
+ @return ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest
+*/
+func (a *PayeesAPIService) V4PayeesPayeeIdRemoteIdUpdatePost(ctx context.Context, payeeId string) ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest {
 	return ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1706,31 +1818,27 @@ func (a *PayeesApiService) V4PayeesPayeeIdRemoteIdUpdatePost(ctx _context.Contex
 	}
 }
 
-/*
- * Execute executes the request
- */
-func (a *PayeesApiService) V4PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest) (*_nethttp.Response, error) {
+// Execute executes the request
+func (a *PayeesAPIService) V4PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV4PayeesPayeeIdRemoteIdUpdatePostRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesApiService.V4PayeesPayeeIdRemoteIdUpdatePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayeesAPIService.V4PayeesPayeeIdRemoteIdUpdatePost")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v4/payees/{payeeId}/remoteIdUpdate"
-	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", _neturl.PathEscape(parameterToString(r.payeeId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"payeeId"+"}", url.PathEscape(parameterValueToString(r.payeeId, "payeeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.updateRemoteIdRequest2 == nil {
-		return nil, reportError("updateRemoteIdRequest2 is required and must be specified")
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateRemoteIdRequestV4 == nil {
+		return nil, reportError("updateRemoteIdRequestV4 is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1751,8 +1859,8 @@ func (a *PayeesApiService) V4PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV4Payee
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateRemoteIdRequest2
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	localVarPostBody = r.updateRemoteIdRequestV4
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1762,15 +1870,15 @@ func (a *PayeesApiService) V4PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV4Payee
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1781,7 +1889,8 @@ func (a *PayeesApiService) V4PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV4Payee
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1791,7 +1900,8 @@ func (a *PayeesApiService) V4PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV4Payee
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1801,7 +1911,8 @@ func (a *PayeesApiService) V4PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV4Payee
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1811,7 +1922,8 @@ func (a *PayeesApiService) V4PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV4Payee
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -1821,7 +1933,8 @@ func (a *PayeesApiService) V4PayeesPayeeIdRemoteIdUpdatePostExecute(r ApiV4Payee
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}

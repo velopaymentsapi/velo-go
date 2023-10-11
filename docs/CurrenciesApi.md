@@ -1,10 +1,10 @@
-# \CurrenciesApi
+# \CurrenciesAPI
 
 All URIs are relative to *https://api.sandbox.velopayments.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListSupportedCurrenciesV2**](CurrenciesApi.md#ListSupportedCurrenciesV2) | **Get** /v2/currencies | List Supported Currencies
+[**ListSupportedCurrenciesV2**](CurrenciesAPI.md#ListSupportedCurrenciesV2) | **Get** /v2/currencies | List Supported Currencies
 
 
 
@@ -25,20 +25,20 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CurrenciesApi.ListSupportedCurrenciesV2(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CurrenciesAPI.ListSupportedCurrenciesV2(context.Background()).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CurrenciesApi.ListSupportedCurrenciesV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CurrenciesAPI.ListSupportedCurrenciesV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListSupportedCurrenciesV2`: SupportedCurrencyResponseV2
-    fmt.Fprintf(os.Stdout, "Response from `CurrenciesApi.ListSupportedCurrenciesV2`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CurrenciesAPI.ListSupportedCurrenciesV2`: %v\n", resp)
 }
 ```
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayoutStatus** | Pointer to [**PayoutStatus**](PayoutStatus.md) |  | [optional] 
+**PayoutStatus** | Pointer to **string** | Current status of the Payout. One of the following values: ACCEPTED, REJECTED, SUBMITTED, QUOTED, INSTRUCTED, COMPLETED, INCOMPLETE, CONFIRMED, WITHDRAWN | [optional] 
 **SubmittedDateTime** | Pointer to **time.Time** | The date/time at which the payout was submitted. | [optional] 
 **InstructedDateTime** | Pointer to **time.Time** | The date/time at which the payout was instructed. | [optional] 
 **WithdrawnDateTime** | Pointer to **time.Time** |  | [optional] 
@@ -16,13 +16,14 @@ Name | Type | Description | Notes
 **IncompletePayments** | Pointer to **int32** | The count of payments within the payout which are incomplete. | [optional] 
 **ReturnedPayments** | Pointer to **int32** | The count of payments within the payout which have been returned. | [optional] 
 **WithdrawnPayments** | Pointer to **int32** | The count of payments within the payout which have been withdrawn. | [optional] 
-**PayoutType** | Pointer to [**PayoutType**](PayoutType.md) |  | [optional] 
+**PayoutType** | Pointer to **string** | The type of payout. One of the following values: STANDARD, AS, ON_BEHALF_OF | [optional] 
 **Submitting** | Pointer to [**PayoutPayor**](PayoutPayor.md) |  | [optional] 
 **PayoutFrom** | Pointer to [**PayoutPayor**](PayoutPayor.md) |  | [optional] 
 **PayoutTo** | Pointer to [**PayoutPayor**](PayoutPayor.md) |  | [optional] 
 **Quoted** | Pointer to [**PayoutPrincipal**](PayoutPrincipal.md) |  | [optional] 
 **Instructed** | Pointer to [**PayoutPrincipal**](PayoutPrincipal.md) |  | [optional] 
 **Withdrawn** | Pointer to [**PayoutPrincipal**](PayoutPrincipal.md) |  | [optional] 
+**Schedule** | Pointer to [**PayoutSchedule**](PayoutSchedule.md) |  | [optional] 
 
 ## Methods
 
@@ -45,20 +46,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPayoutStatus
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutStatus() PayoutStatus`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutStatus() string`
 
 GetPayoutStatus returns the PayoutStatus field if non-nil, zero value otherwise.
 
 ### GetPayoutStatusOk
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutStatusOk() (*PayoutStatus, bool)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutStatusOk() (*string, bool)`
 
 GetPayoutStatusOk returns a tuple with the PayoutStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayoutStatus
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutStatus(v PayoutStatus)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutStatus(v string)`
 
 SetPayoutStatus sets PayoutStatus field to given value.
 
@@ -345,20 +346,20 @@ HasWithdrawnPayments returns a boolean if a field has been set.
 
 ### GetPayoutType
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutType() PayoutType`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutType() string`
 
 GetPayoutType returns the PayoutType field if non-nil, zero value otherwise.
 
 ### GetPayoutTypeOk
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutTypeOk() (*PayoutType, bool)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetPayoutTypeOk() (*string, bool)`
 
 GetPayoutTypeOk returns a tuple with the PayoutType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayoutType
 
-`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutType(v PayoutType)`
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetPayoutType(v string)`
 
 SetPayoutType sets PayoutType field to given value.
 
@@ -517,6 +518,31 @@ SetWithdrawn sets Withdrawn field to given value.
 `func (o *GetPaymentsForPayoutResponseV4Summary) HasWithdrawn() bool`
 
 HasWithdrawn returns a boolean if a field has been set.
+
+### GetSchedule
+
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetSchedule() PayoutSchedule`
+
+GetSchedule returns the Schedule field if non-nil, zero value otherwise.
+
+### GetScheduleOk
+
+`func (o *GetPaymentsForPayoutResponseV4Summary) GetScheduleOk() (*PayoutSchedule, bool)`
+
+GetScheduleOk returns a tuple with the Schedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchedule
+
+`func (o *GetPaymentsForPayoutResponseV4Summary) SetSchedule(v PayoutSchedule)`
+
+SetSchedule sets Schedule field to given value.
+
+### HasSchedule
+
+`func (o *GetPaymentsForPayoutResponseV4Summary) HasSchedule() bool`
+
+HasSchedule returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

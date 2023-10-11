@@ -1,10 +1,10 @@
-# \PayorsPrivateApi
+# \PayorsPrivateAPI
 
 All URIs are relative to *https://api.sandbox.velopayments.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreatePayorLinks**](PayorsPrivateApi.md#CreatePayorLinks) | **Post** /v1/payorLinks | Create a Payor Link
+[**CreatePayorLinks**](PayorsPrivateAPI.md#CreatePayorLinks) | **Post** /v1/payorLinks | Create a Payor Link
 
 
 
@@ -25,17 +25,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     createPayorLinkRequest := *openapiclient.NewCreatePayorLinkRequest("FromPayorId_example", "LinkType_example", "ToPayorId_example") // CreatePayorLinkRequest | Request to create a payor link
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayorsPrivateApi.CreatePayorLinks(context.Background()).CreatePayorLinkRequest(createPayorLinkRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PayorsPrivateAPI.CreatePayorLinks(context.Background()).CreatePayorLinkRequest(createPayorLinkRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayorsPrivateApi.CreatePayorLinks``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsPrivateAPI.CreatePayorLinks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }

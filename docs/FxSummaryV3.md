@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **InvertedRate** | **float32** |  | 
 **TotalCost** | **int32** |  | 
 **TotalPaymentAmount** | **int32** |  | 
-**SourceCurrency** | Pointer to [**PaymentAuditCurrencyV3**](PaymentAuditCurrencyV3.md) |  | [optional] 
-**PaymentCurrency** | Pointer to [**PaymentAuditCurrencyV3**](PaymentAuditCurrencyV3.md) |  | [optional] 
-**Status** | **string** |  | 
-**FundingStatus** | **string** |  | 
+**SourceCurrency** | Pointer to **string** | ISO 3 character currency code | [optional] 
+**PaymentCurrency** | Pointer to **string** | ISO 3 character currency code | [optional] 
+**Status** | **string** | Current status of the FX Summary. One of the following values: UNQUOTED, QUOTED, EXPIRED, EXECUTED | 
+**FundingStatus** | **string** | Current status of the funding. One of the following values: FUNDED, INSTRUCTED, UNFUNDED | 
 
 ## Methods
 
@@ -156,20 +156,20 @@ SetTotalPaymentAmount sets TotalPaymentAmount field to given value.
 
 ### GetSourceCurrency
 
-`func (o *FxSummaryV3) GetSourceCurrency() PaymentAuditCurrencyV3`
+`func (o *FxSummaryV3) GetSourceCurrency() string`
 
 GetSourceCurrency returns the SourceCurrency field if non-nil, zero value otherwise.
 
 ### GetSourceCurrencyOk
 
-`func (o *FxSummaryV3) GetSourceCurrencyOk() (*PaymentAuditCurrencyV3, bool)`
+`func (o *FxSummaryV3) GetSourceCurrencyOk() (*string, bool)`
 
 GetSourceCurrencyOk returns a tuple with the SourceCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceCurrency
 
-`func (o *FxSummaryV3) SetSourceCurrency(v PaymentAuditCurrencyV3)`
+`func (o *FxSummaryV3) SetSourceCurrency(v string)`
 
 SetSourceCurrency sets SourceCurrency field to given value.
 
@@ -181,20 +181,20 @@ HasSourceCurrency returns a boolean if a field has been set.
 
 ### GetPaymentCurrency
 
-`func (o *FxSummaryV3) GetPaymentCurrency() PaymentAuditCurrencyV3`
+`func (o *FxSummaryV3) GetPaymentCurrency() string`
 
 GetPaymentCurrency returns the PaymentCurrency field if non-nil, zero value otherwise.
 
 ### GetPaymentCurrencyOk
 
-`func (o *FxSummaryV3) GetPaymentCurrencyOk() (*PaymentAuditCurrencyV3, bool)`
+`func (o *FxSummaryV3) GetPaymentCurrencyOk() (*string, bool)`
 
 GetPaymentCurrencyOk returns a tuple with the PaymentCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentCurrency
 
-`func (o *FxSummaryV3) SetPaymentCurrency(v PaymentAuditCurrencyV3)`
+`func (o *FxSummaryV3) SetPaymentCurrency(v string)`
 
 SetPaymentCurrency sets PaymentCurrency field to given value.
 

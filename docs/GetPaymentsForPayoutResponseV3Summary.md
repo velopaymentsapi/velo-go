@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayoutStatus** | Pointer to **string** | The current status of the payout. | [optional] 
+**PayoutStatus** | Pointer to **string** | The current status of the payout. One of the following values: ACCEPTED, REJECTED, SUBMITTED, QUOTED, INSTRUCTED, COMPLETED, INCOMPLETE, CONFIRMED, WITHDRAWN | [optional] 
 **SubmittedDateTime** | Pointer to **time.Time** | The date/time at which the payout was submitted. | [optional] 
 **InstructedDateTime** | Pointer to **time.Time** | The date/time at which the payout was instructed. | [optional] 
 **WithdrawnDateTime** | Pointer to **time.Time** | The date/time at which the payout was withdrawn. | [optional] 

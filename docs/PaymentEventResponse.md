@@ -6,16 +6,19 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EventId** | **string** | The id of the event. | 
 **EventDateTime** | **time.Time** | The date/time at which the event occurred. | 
-**EventType** | **string** | The type of the event. | 
-**SourceCurrency** | Pointer to [**PaymentAuditCurrency**](PaymentAuditCurrency.md) |  | [optional] 
+**EventType** | **string** | One of the following values: PAYOUT_SUBMITTED, PAYOUT_COMPLETED, PAYOUT_INSTRUCTED_V3, BANK_PAYMENT_REQUESTED, SOURCE_AMOUNT_CONFIRMED, PAYMENT_SUBMITTED, PAYMENT_SUBMITTED_ACCEPTED, PAYMENT_SUBMITTED_REJECTED, PAYMENT_CONFIRMED, PAYMENT_AWAITING_FUNDS, PAYMENT_FUNDED, PAYMENT_UNFUNDED, PAYMENT_FAILED, PAYMENT_TRACKING_DETAILS_UPDATED, ACH_SUBMITTED_TO_ODFI, PAYMENT_ACCEPTED_BY_RAILS, ACH_RETURN_RECEIVED, RETURN_PAYMENT_FUNDING_REQUESTED, PAYOUT_BATCH_EXECUTED, PAYOUT_BATCH_QUOTE_EXPIRED, PAYOUT_BATCH_FUNDED, PAYOUT_BATCH_FUNDS_RETURN_REQUEST, PAYOUT_BATCH_FUNDS_RETURNED, PAYOUT_FUNDS_REQUEST, PAYOUT_FUNDS_GRANTED, PAYOUT_FUNDS_DENIED, PAYOUT_BATCH_QUOTED, PAYOUT_QUOTED, ACH_PAYMENT_RETURN_CANCELLED, RETURN_PAYMENT_CANCELLATION_REQUESTED, PAYOUT_WITHDRAWN, ORCHESTRATED_PAYMENT_BATCH_REQUESTED, ORCHESTRATED_PAYMENT_BATCH_CONFIRMED, ORCHESTRATED_PAYMENT_REQUESTED | 
+**SourceCurrency** | Pointer to **string** | ISO-4217 3 character currency code | [optional] 
 **SourceAmount** | Pointer to **int64** | The source amount exposed by the event. | [optional] 
-**PaymentCurrency** | Pointer to [**PaymentAuditCurrency**](PaymentAuditCurrency.md) |  | [optional] 
+**PaymentCurrency** | Pointer to **string** | ISO-4217 3 character currency code | [optional] 
 **PaymentAmount** | Pointer to **int64** | The destination amount exposed by the event. | [optional] 
 **AccountNumber** | Pointer to **string** | The account number attached to the event. | [optional] 
 **RoutingNumber** | Pointer to **string** | The routing number attached to the event. | [optional] 
 **Iban** | Pointer to **string** |  | [optional] 
 **AccountName** | Pointer to **string** |  | [optional] 
 **Principal** | Pointer to **string** |  | [optional] 
+**ScheduledAt** | Pointer to **time.Time** |  | [optional] 
+**ScheduledFor** | Pointer to **time.Time** |  | [optional] 
+**ScheduledBy** | Pointer to **string** | Optional display name as a hint for who scheduled the payout. Not populated if payout was scheduled by an application. | [optional] 
 
 ## Methods
 
@@ -98,20 +101,20 @@ SetEventType sets EventType field to given value.
 
 ### GetSourceCurrency
 
-`func (o *PaymentEventResponse) GetSourceCurrency() PaymentAuditCurrency`
+`func (o *PaymentEventResponse) GetSourceCurrency() string`
 
 GetSourceCurrency returns the SourceCurrency field if non-nil, zero value otherwise.
 
 ### GetSourceCurrencyOk
 
-`func (o *PaymentEventResponse) GetSourceCurrencyOk() (*PaymentAuditCurrency, bool)`
+`func (o *PaymentEventResponse) GetSourceCurrencyOk() (*string, bool)`
 
 GetSourceCurrencyOk returns a tuple with the SourceCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceCurrency
 
-`func (o *PaymentEventResponse) SetSourceCurrency(v PaymentAuditCurrency)`
+`func (o *PaymentEventResponse) SetSourceCurrency(v string)`
 
 SetSourceCurrency sets SourceCurrency field to given value.
 
@@ -148,20 +151,20 @@ HasSourceAmount returns a boolean if a field has been set.
 
 ### GetPaymentCurrency
 
-`func (o *PaymentEventResponse) GetPaymentCurrency() PaymentAuditCurrency`
+`func (o *PaymentEventResponse) GetPaymentCurrency() string`
 
 GetPaymentCurrency returns the PaymentCurrency field if non-nil, zero value otherwise.
 
 ### GetPaymentCurrencyOk
 
-`func (o *PaymentEventResponse) GetPaymentCurrencyOk() (*PaymentAuditCurrency, bool)`
+`func (o *PaymentEventResponse) GetPaymentCurrencyOk() (*string, bool)`
 
 GetPaymentCurrencyOk returns a tuple with the PaymentCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentCurrency
 
-`func (o *PaymentEventResponse) SetPaymentCurrency(v PaymentAuditCurrency)`
+`func (o *PaymentEventResponse) SetPaymentCurrency(v string)`
 
 SetPaymentCurrency sets PaymentCurrency field to given value.
 
@@ -320,6 +323,81 @@ SetPrincipal sets Principal field to given value.
 `func (o *PaymentEventResponse) HasPrincipal() bool`
 
 HasPrincipal returns a boolean if a field has been set.
+
+### GetScheduledAt
+
+`func (o *PaymentEventResponse) GetScheduledAt() time.Time`
+
+GetScheduledAt returns the ScheduledAt field if non-nil, zero value otherwise.
+
+### GetScheduledAtOk
+
+`func (o *PaymentEventResponse) GetScheduledAtOk() (*time.Time, bool)`
+
+GetScheduledAtOk returns a tuple with the ScheduledAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduledAt
+
+`func (o *PaymentEventResponse) SetScheduledAt(v time.Time)`
+
+SetScheduledAt sets ScheduledAt field to given value.
+
+### HasScheduledAt
+
+`func (o *PaymentEventResponse) HasScheduledAt() bool`
+
+HasScheduledAt returns a boolean if a field has been set.
+
+### GetScheduledFor
+
+`func (o *PaymentEventResponse) GetScheduledFor() time.Time`
+
+GetScheduledFor returns the ScheduledFor field if non-nil, zero value otherwise.
+
+### GetScheduledForOk
+
+`func (o *PaymentEventResponse) GetScheduledForOk() (*time.Time, bool)`
+
+GetScheduledForOk returns a tuple with the ScheduledFor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduledFor
+
+`func (o *PaymentEventResponse) SetScheduledFor(v time.Time)`
+
+SetScheduledFor sets ScheduledFor field to given value.
+
+### HasScheduledFor
+
+`func (o *PaymentEventResponse) HasScheduledFor() bool`
+
+HasScheduledFor returns a boolean if a field has been set.
+
+### GetScheduledBy
+
+`func (o *PaymentEventResponse) GetScheduledBy() string`
+
+GetScheduledBy returns the ScheduledBy field if non-nil, zero value otherwise.
+
+### GetScheduledByOk
+
+`func (o *PaymentEventResponse) GetScheduledByOk() (*string, bool)`
+
+GetScheduledByOk returns a tuple with the ScheduledBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduledBy
+
+`func (o *PaymentEventResponse) SetScheduledBy(v string)`
+
+SetScheduledBy sets ScheduledBy field to given value.
+
+### HasScheduledBy
+
+`func (o *PaymentEventResponse) HasScheduledBy() bool`
+
+HasScheduledBy returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

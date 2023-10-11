@@ -1,10 +1,10 @@
 /*
- * Velo Payments APIs
- *
- * ## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
- *
- * API version: 2.26.124
- */
+Velo Payments APIs
+
+## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
+
+API version: 2.35.58
+*/
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
 
@@ -15,18 +15,23 @@ import (
 	"time"
 )
 
+// checks if the PaymentEventResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PaymentEventResponse{}
+
 // PaymentEventResponse struct for PaymentEventResponse
 type PaymentEventResponse struct {
 	// The id of the event.
 	EventId string `json:"eventId"`
 	// The date/time at which the event occurred.
 	EventDateTime time.Time `json:"eventDateTime"`
-	// The type of the event.
+	// One of the following values: PAYOUT_SUBMITTED, PAYOUT_COMPLETED, PAYOUT_INSTRUCTED_V3, BANK_PAYMENT_REQUESTED, SOURCE_AMOUNT_CONFIRMED, PAYMENT_SUBMITTED, PAYMENT_SUBMITTED_ACCEPTED, PAYMENT_SUBMITTED_REJECTED, PAYMENT_CONFIRMED, PAYMENT_AWAITING_FUNDS, PAYMENT_FUNDED, PAYMENT_UNFUNDED, PAYMENT_FAILED, PAYMENT_TRACKING_DETAILS_UPDATED, ACH_SUBMITTED_TO_ODFI, PAYMENT_ACCEPTED_BY_RAILS, ACH_RETURN_RECEIVED, RETURN_PAYMENT_FUNDING_REQUESTED, PAYOUT_BATCH_EXECUTED, PAYOUT_BATCH_QUOTE_EXPIRED, PAYOUT_BATCH_FUNDED, PAYOUT_BATCH_FUNDS_RETURN_REQUEST, PAYOUT_BATCH_FUNDS_RETURNED, PAYOUT_FUNDS_REQUEST, PAYOUT_FUNDS_GRANTED, PAYOUT_FUNDS_DENIED, PAYOUT_BATCH_QUOTED, PAYOUT_QUOTED, ACH_PAYMENT_RETURN_CANCELLED, RETURN_PAYMENT_CANCELLATION_REQUESTED, PAYOUT_WITHDRAWN, ORCHESTRATED_PAYMENT_BATCH_REQUESTED, ORCHESTRATED_PAYMENT_BATCH_CONFIRMED, ORCHESTRATED_PAYMENT_REQUESTED
 	EventType string `json:"eventType"`
-	SourceCurrency *PaymentAuditCurrency `json:"sourceCurrency,omitempty"`
+	// ISO-4217 3 character currency code
+	SourceCurrency *string `json:"sourceCurrency,omitempty"`
 	// The source amount exposed by the event.
 	SourceAmount *int64 `json:"sourceAmount,omitempty"`
-	PaymentCurrency *PaymentAuditCurrency `json:"paymentCurrency,omitempty"`
+	// ISO-4217 3 character currency code
+	PaymentCurrency *string `json:"paymentCurrency,omitempty"`
 	// The destination amount exposed by the event.
 	PaymentAmount *int64 `json:"paymentAmount,omitempty"`
 	// The account number attached to the event.
@@ -36,6 +41,10 @@ type PaymentEventResponse struct {
 	Iban *string `json:"iban,omitempty"`
 	AccountName *string `json:"accountName,omitempty"`
 	Principal *string `json:"principal,omitempty"`
+	ScheduledAt *time.Time `json:"scheduledAt,omitempty"`
+	ScheduledFor *time.Time `json:"scheduledFor,omitempty"`
+	// Optional display name as a hint for who scheduled the payout. Not populated if payout was scheduled by an application.
+	ScheduledBy *string `json:"scheduledBy,omitempty"`
 }
 
 // NewPaymentEventResponse instantiates a new PaymentEventResponse object
@@ -71,7 +80,7 @@ func (o *PaymentEventResponse) GetEventId() string {
 // GetEventIdOk returns a tuple with the EventId field value
 // and a boolean to check if the value has been set.
 func (o *PaymentEventResponse) GetEventIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventId, true
@@ -95,7 +104,7 @@ func (o *PaymentEventResponse) GetEventDateTime() time.Time {
 // GetEventDateTimeOk returns a tuple with the EventDateTime field value
 // and a boolean to check if the value has been set.
 func (o *PaymentEventResponse) GetEventDateTimeOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventDateTime, true
@@ -119,7 +128,7 @@ func (o *PaymentEventResponse) GetEventType() string {
 // GetEventTypeOk returns a tuple with the EventType field value
 // and a boolean to check if the value has been set.
 func (o *PaymentEventResponse) GetEventTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventType, true
@@ -131,9 +140,9 @@ func (o *PaymentEventResponse) SetEventType(v string) {
 }
 
 // GetSourceCurrency returns the SourceCurrency field value if set, zero value otherwise.
-func (o *PaymentEventResponse) GetSourceCurrency() PaymentAuditCurrency {
-	if o == nil || o.SourceCurrency == nil {
-		var ret PaymentAuditCurrency
+func (o *PaymentEventResponse) GetSourceCurrency() string {
+	if o == nil || IsNil(o.SourceCurrency) {
+		var ret string
 		return ret
 	}
 	return *o.SourceCurrency
@@ -141,8 +150,8 @@ func (o *PaymentEventResponse) GetSourceCurrency() PaymentAuditCurrency {
 
 // GetSourceCurrencyOk returns a tuple with the SourceCurrency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentEventResponse) GetSourceCurrencyOk() (*PaymentAuditCurrency, bool) {
-	if o == nil || o.SourceCurrency == nil {
+func (o *PaymentEventResponse) GetSourceCurrencyOk() (*string, bool) {
+	if o == nil || IsNil(o.SourceCurrency) {
 		return nil, false
 	}
 	return o.SourceCurrency, true
@@ -150,21 +159,21 @@ func (o *PaymentEventResponse) GetSourceCurrencyOk() (*PaymentAuditCurrency, boo
 
 // HasSourceCurrency returns a boolean if a field has been set.
 func (o *PaymentEventResponse) HasSourceCurrency() bool {
-	if o != nil && o.SourceCurrency != nil {
+	if o != nil && !IsNil(o.SourceCurrency) {
 		return true
 	}
 
 	return false
 }
 
-// SetSourceCurrency gets a reference to the given PaymentAuditCurrency and assigns it to the SourceCurrency field.
-func (o *PaymentEventResponse) SetSourceCurrency(v PaymentAuditCurrency) {
+// SetSourceCurrency gets a reference to the given string and assigns it to the SourceCurrency field.
+func (o *PaymentEventResponse) SetSourceCurrency(v string) {
 	o.SourceCurrency = &v
 }
 
 // GetSourceAmount returns the SourceAmount field value if set, zero value otherwise.
 func (o *PaymentEventResponse) GetSourceAmount() int64 {
-	if o == nil || o.SourceAmount == nil {
+	if o == nil || IsNil(o.SourceAmount) {
 		var ret int64
 		return ret
 	}
@@ -174,7 +183,7 @@ func (o *PaymentEventResponse) GetSourceAmount() int64 {
 // GetSourceAmountOk returns a tuple with the SourceAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaymentEventResponse) GetSourceAmountOk() (*int64, bool) {
-	if o == nil || o.SourceAmount == nil {
+	if o == nil || IsNil(o.SourceAmount) {
 		return nil, false
 	}
 	return o.SourceAmount, true
@@ -182,7 +191,7 @@ func (o *PaymentEventResponse) GetSourceAmountOk() (*int64, bool) {
 
 // HasSourceAmount returns a boolean if a field has been set.
 func (o *PaymentEventResponse) HasSourceAmount() bool {
-	if o != nil && o.SourceAmount != nil {
+	if o != nil && !IsNil(o.SourceAmount) {
 		return true
 	}
 
@@ -195,9 +204,9 @@ func (o *PaymentEventResponse) SetSourceAmount(v int64) {
 }
 
 // GetPaymentCurrency returns the PaymentCurrency field value if set, zero value otherwise.
-func (o *PaymentEventResponse) GetPaymentCurrency() PaymentAuditCurrency {
-	if o == nil || o.PaymentCurrency == nil {
-		var ret PaymentAuditCurrency
+func (o *PaymentEventResponse) GetPaymentCurrency() string {
+	if o == nil || IsNil(o.PaymentCurrency) {
+		var ret string
 		return ret
 	}
 	return *o.PaymentCurrency
@@ -205,8 +214,8 @@ func (o *PaymentEventResponse) GetPaymentCurrency() PaymentAuditCurrency {
 
 // GetPaymentCurrencyOk returns a tuple with the PaymentCurrency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentEventResponse) GetPaymentCurrencyOk() (*PaymentAuditCurrency, bool) {
-	if o == nil || o.PaymentCurrency == nil {
+func (o *PaymentEventResponse) GetPaymentCurrencyOk() (*string, bool) {
+	if o == nil || IsNil(o.PaymentCurrency) {
 		return nil, false
 	}
 	return o.PaymentCurrency, true
@@ -214,21 +223,21 @@ func (o *PaymentEventResponse) GetPaymentCurrencyOk() (*PaymentAuditCurrency, bo
 
 // HasPaymentCurrency returns a boolean if a field has been set.
 func (o *PaymentEventResponse) HasPaymentCurrency() bool {
-	if o != nil && o.PaymentCurrency != nil {
+	if o != nil && !IsNil(o.PaymentCurrency) {
 		return true
 	}
 
 	return false
 }
 
-// SetPaymentCurrency gets a reference to the given PaymentAuditCurrency and assigns it to the PaymentCurrency field.
-func (o *PaymentEventResponse) SetPaymentCurrency(v PaymentAuditCurrency) {
+// SetPaymentCurrency gets a reference to the given string and assigns it to the PaymentCurrency field.
+func (o *PaymentEventResponse) SetPaymentCurrency(v string) {
 	o.PaymentCurrency = &v
 }
 
 // GetPaymentAmount returns the PaymentAmount field value if set, zero value otherwise.
 func (o *PaymentEventResponse) GetPaymentAmount() int64 {
-	if o == nil || o.PaymentAmount == nil {
+	if o == nil || IsNil(o.PaymentAmount) {
 		var ret int64
 		return ret
 	}
@@ -238,7 +247,7 @@ func (o *PaymentEventResponse) GetPaymentAmount() int64 {
 // GetPaymentAmountOk returns a tuple with the PaymentAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaymentEventResponse) GetPaymentAmountOk() (*int64, bool) {
-	if o == nil || o.PaymentAmount == nil {
+	if o == nil || IsNil(o.PaymentAmount) {
 		return nil, false
 	}
 	return o.PaymentAmount, true
@@ -246,7 +255,7 @@ func (o *PaymentEventResponse) GetPaymentAmountOk() (*int64, bool) {
 
 // HasPaymentAmount returns a boolean if a field has been set.
 func (o *PaymentEventResponse) HasPaymentAmount() bool {
-	if o != nil && o.PaymentAmount != nil {
+	if o != nil && !IsNil(o.PaymentAmount) {
 		return true
 	}
 
@@ -260,7 +269,7 @@ func (o *PaymentEventResponse) SetPaymentAmount(v int64) {
 
 // GetAccountNumber returns the AccountNumber field value if set, zero value otherwise.
 func (o *PaymentEventResponse) GetAccountNumber() string {
-	if o == nil || o.AccountNumber == nil {
+	if o == nil || IsNil(o.AccountNumber) {
 		var ret string
 		return ret
 	}
@@ -270,7 +279,7 @@ func (o *PaymentEventResponse) GetAccountNumber() string {
 // GetAccountNumberOk returns a tuple with the AccountNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaymentEventResponse) GetAccountNumberOk() (*string, bool) {
-	if o == nil || o.AccountNumber == nil {
+	if o == nil || IsNil(o.AccountNumber) {
 		return nil, false
 	}
 	return o.AccountNumber, true
@@ -278,7 +287,7 @@ func (o *PaymentEventResponse) GetAccountNumberOk() (*string, bool) {
 
 // HasAccountNumber returns a boolean if a field has been set.
 func (o *PaymentEventResponse) HasAccountNumber() bool {
-	if o != nil && o.AccountNumber != nil {
+	if o != nil && !IsNil(o.AccountNumber) {
 		return true
 	}
 
@@ -292,7 +301,7 @@ func (o *PaymentEventResponse) SetAccountNumber(v string) {
 
 // GetRoutingNumber returns the RoutingNumber field value if set, zero value otherwise.
 func (o *PaymentEventResponse) GetRoutingNumber() string {
-	if o == nil || o.RoutingNumber == nil {
+	if o == nil || IsNil(o.RoutingNumber) {
 		var ret string
 		return ret
 	}
@@ -302,7 +311,7 @@ func (o *PaymentEventResponse) GetRoutingNumber() string {
 // GetRoutingNumberOk returns a tuple with the RoutingNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaymentEventResponse) GetRoutingNumberOk() (*string, bool) {
-	if o == nil || o.RoutingNumber == nil {
+	if o == nil || IsNil(o.RoutingNumber) {
 		return nil, false
 	}
 	return o.RoutingNumber, true
@@ -310,7 +319,7 @@ func (o *PaymentEventResponse) GetRoutingNumberOk() (*string, bool) {
 
 // HasRoutingNumber returns a boolean if a field has been set.
 func (o *PaymentEventResponse) HasRoutingNumber() bool {
-	if o != nil && o.RoutingNumber != nil {
+	if o != nil && !IsNil(o.RoutingNumber) {
 		return true
 	}
 
@@ -324,7 +333,7 @@ func (o *PaymentEventResponse) SetRoutingNumber(v string) {
 
 // GetIban returns the Iban field value if set, zero value otherwise.
 func (o *PaymentEventResponse) GetIban() string {
-	if o == nil || o.Iban == nil {
+	if o == nil || IsNil(o.Iban) {
 		var ret string
 		return ret
 	}
@@ -334,7 +343,7 @@ func (o *PaymentEventResponse) GetIban() string {
 // GetIbanOk returns a tuple with the Iban field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaymentEventResponse) GetIbanOk() (*string, bool) {
-	if o == nil || o.Iban == nil {
+	if o == nil || IsNil(o.Iban) {
 		return nil, false
 	}
 	return o.Iban, true
@@ -342,7 +351,7 @@ func (o *PaymentEventResponse) GetIbanOk() (*string, bool) {
 
 // HasIban returns a boolean if a field has been set.
 func (o *PaymentEventResponse) HasIban() bool {
-	if o != nil && o.Iban != nil {
+	if o != nil && !IsNil(o.Iban) {
 		return true
 	}
 
@@ -356,7 +365,7 @@ func (o *PaymentEventResponse) SetIban(v string) {
 
 // GetAccountName returns the AccountName field value if set, zero value otherwise.
 func (o *PaymentEventResponse) GetAccountName() string {
-	if o == nil || o.AccountName == nil {
+	if o == nil || IsNil(o.AccountName) {
 		var ret string
 		return ret
 	}
@@ -366,7 +375,7 @@ func (o *PaymentEventResponse) GetAccountName() string {
 // GetAccountNameOk returns a tuple with the AccountName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaymentEventResponse) GetAccountNameOk() (*string, bool) {
-	if o == nil || o.AccountName == nil {
+	if o == nil || IsNil(o.AccountName) {
 		return nil, false
 	}
 	return o.AccountName, true
@@ -374,7 +383,7 @@ func (o *PaymentEventResponse) GetAccountNameOk() (*string, bool) {
 
 // HasAccountName returns a boolean if a field has been set.
 func (o *PaymentEventResponse) HasAccountName() bool {
-	if o != nil && o.AccountName != nil {
+	if o != nil && !IsNil(o.AccountName) {
 		return true
 	}
 
@@ -388,7 +397,7 @@ func (o *PaymentEventResponse) SetAccountName(v string) {
 
 // GetPrincipal returns the Principal field value if set, zero value otherwise.
 func (o *PaymentEventResponse) GetPrincipal() string {
-	if o == nil || o.Principal == nil {
+	if o == nil || IsNil(o.Principal) {
 		var ret string
 		return ret
 	}
@@ -398,7 +407,7 @@ func (o *PaymentEventResponse) GetPrincipal() string {
 // GetPrincipalOk returns a tuple with the Principal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaymentEventResponse) GetPrincipalOk() (*string, bool) {
-	if o == nil || o.Principal == nil {
+	if o == nil || IsNil(o.Principal) {
 		return nil, false
 	}
 	return o.Principal, true
@@ -406,7 +415,7 @@ func (o *PaymentEventResponse) GetPrincipalOk() (*string, bool) {
 
 // HasPrincipal returns a boolean if a field has been set.
 func (o *PaymentEventResponse) HasPrincipal() bool {
-	if o != nil && o.Principal != nil {
+	if o != nil && !IsNil(o.Principal) {
 		return true
 	}
 
@@ -418,45 +427,152 @@ func (o *PaymentEventResponse) SetPrincipal(v string) {
 	o.Principal = &v
 }
 
+// GetScheduledAt returns the ScheduledAt field value if set, zero value otherwise.
+func (o *PaymentEventResponse) GetScheduledAt() time.Time {
+	if o == nil || IsNil(o.ScheduledAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.ScheduledAt
+}
+
+// GetScheduledAtOk returns a tuple with the ScheduledAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentEventResponse) GetScheduledAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.ScheduledAt) {
+		return nil, false
+	}
+	return o.ScheduledAt, true
+}
+
+// HasScheduledAt returns a boolean if a field has been set.
+func (o *PaymentEventResponse) HasScheduledAt() bool {
+	if o != nil && !IsNil(o.ScheduledAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduledAt gets a reference to the given time.Time and assigns it to the ScheduledAt field.
+func (o *PaymentEventResponse) SetScheduledAt(v time.Time) {
+	o.ScheduledAt = &v
+}
+
+// GetScheduledFor returns the ScheduledFor field value if set, zero value otherwise.
+func (o *PaymentEventResponse) GetScheduledFor() time.Time {
+	if o == nil || IsNil(o.ScheduledFor) {
+		var ret time.Time
+		return ret
+	}
+	return *o.ScheduledFor
+}
+
+// GetScheduledForOk returns a tuple with the ScheduledFor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentEventResponse) GetScheduledForOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.ScheduledFor) {
+		return nil, false
+	}
+	return o.ScheduledFor, true
+}
+
+// HasScheduledFor returns a boolean if a field has been set.
+func (o *PaymentEventResponse) HasScheduledFor() bool {
+	if o != nil && !IsNil(o.ScheduledFor) {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduledFor gets a reference to the given time.Time and assigns it to the ScheduledFor field.
+func (o *PaymentEventResponse) SetScheduledFor(v time.Time) {
+	o.ScheduledFor = &v
+}
+
+// GetScheduledBy returns the ScheduledBy field value if set, zero value otherwise.
+func (o *PaymentEventResponse) GetScheduledBy() string {
+	if o == nil || IsNil(o.ScheduledBy) {
+		var ret string
+		return ret
+	}
+	return *o.ScheduledBy
+}
+
+// GetScheduledByOk returns a tuple with the ScheduledBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentEventResponse) GetScheduledByOk() (*string, bool) {
+	if o == nil || IsNil(o.ScheduledBy) {
+		return nil, false
+	}
+	return o.ScheduledBy, true
+}
+
+// HasScheduledBy returns a boolean if a field has been set.
+func (o *PaymentEventResponse) HasScheduledBy() bool {
+	if o != nil && !IsNil(o.ScheduledBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduledBy gets a reference to the given string and assigns it to the ScheduledBy field.
+func (o *PaymentEventResponse) SetScheduledBy(v string) {
+	o.ScheduledBy = &v
+}
+
 func (o PaymentEventResponse) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["eventId"] = o.EventId
-	}
-	if true {
-		toSerialize["eventDateTime"] = o.EventDateTime
-	}
-	if true {
-		toSerialize["eventType"] = o.EventType
-	}
-	if o.SourceCurrency != nil {
-		toSerialize["sourceCurrency"] = o.SourceCurrency
-	}
-	if o.SourceAmount != nil {
-		toSerialize["sourceAmount"] = o.SourceAmount
-	}
-	if o.PaymentCurrency != nil {
-		toSerialize["paymentCurrency"] = o.PaymentCurrency
-	}
-	if o.PaymentAmount != nil {
-		toSerialize["paymentAmount"] = o.PaymentAmount
-	}
-	if o.AccountNumber != nil {
-		toSerialize["accountNumber"] = o.AccountNumber
-	}
-	if o.RoutingNumber != nil {
-		toSerialize["routingNumber"] = o.RoutingNumber
-	}
-	if o.Iban != nil {
-		toSerialize["iban"] = o.Iban
-	}
-	if o.AccountName != nil {
-		toSerialize["accountName"] = o.AccountName
-	}
-	if o.Principal != nil {
-		toSerialize["principal"] = o.Principal
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PaymentEventResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["eventId"] = o.EventId
+	toSerialize["eventDateTime"] = o.EventDateTime
+	toSerialize["eventType"] = o.EventType
+	if !IsNil(o.SourceCurrency) {
+		toSerialize["sourceCurrency"] = o.SourceCurrency
+	}
+	if !IsNil(o.SourceAmount) {
+		toSerialize["sourceAmount"] = o.SourceAmount
+	}
+	if !IsNil(o.PaymentCurrency) {
+		toSerialize["paymentCurrency"] = o.PaymentCurrency
+	}
+	if !IsNil(o.PaymentAmount) {
+		toSerialize["paymentAmount"] = o.PaymentAmount
+	}
+	if !IsNil(o.AccountNumber) {
+		toSerialize["accountNumber"] = o.AccountNumber
+	}
+	if !IsNil(o.RoutingNumber) {
+		toSerialize["routingNumber"] = o.RoutingNumber
+	}
+	if !IsNil(o.Iban) {
+		toSerialize["iban"] = o.Iban
+	}
+	if !IsNil(o.AccountName) {
+		toSerialize["accountName"] = o.AccountName
+	}
+	if !IsNil(o.Principal) {
+		toSerialize["principal"] = o.Principal
+	}
+	if !IsNil(o.ScheduledAt) {
+		toSerialize["scheduledAt"] = o.ScheduledAt
+	}
+	if !IsNil(o.ScheduledFor) {
+		toSerialize["scheduledFor"] = o.ScheduledFor
+	}
+	if !IsNil(o.ScheduledBy) {
+		toSerialize["scheduledBy"] = o.ScheduledBy
+	}
+	return toSerialize, nil
 }
 
 type NullablePaymentEventResponse struct {

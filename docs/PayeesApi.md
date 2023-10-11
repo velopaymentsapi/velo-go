@@ -1,21 +1,21 @@
-# \PayeesApi
+# \PayeesAPI
 
 All URIs are relative to *https://api.sandbox.velopayments.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeletePayeeByIdV3**](PayeesApi.md#DeletePayeeByIdV3) | **Delete** /v3/payees/{payeeId} | Delete Payee by Id
-[**DeletePayeeByIdV4**](PayeesApi.md#DeletePayeeByIdV4) | **Delete** /v4/payees/{payeeId} | Delete Payee by Id
-[**GetPayeeByIdV3**](PayeesApi.md#GetPayeeByIdV3) | **Get** /v3/payees/{payeeId} | Get Payee by Id
-[**GetPayeeByIdV4**](PayeesApi.md#GetPayeeByIdV4) | **Get** /v4/payees/{payeeId} | Get Payee by Id
-[**ListPayeeChangesV3**](PayeesApi.md#ListPayeeChangesV3) | **Get** /v3/payees/deltas | List Payee Changes
-[**ListPayeeChangesV4**](PayeesApi.md#ListPayeeChangesV4) | **Get** /v4/payees/deltas | List Payee Changes
-[**ListPayeesV3**](PayeesApi.md#ListPayeesV3) | **Get** /v3/payees | List Payees
-[**ListPayeesV4**](PayeesApi.md#ListPayeesV4) | **Get** /v4/payees | List Payees
-[**PayeeDetailsUpdateV3**](PayeesApi.md#PayeeDetailsUpdateV3) | **Post** /v3/payees/{payeeId}/payeeDetailsUpdate | Update Payee Details
-[**PayeeDetailsUpdateV4**](PayeesApi.md#PayeeDetailsUpdateV4) | **Post** /v4/payees/{payeeId}/payeeDetailsUpdate | Update Payee Details
-[**V3PayeesPayeeIdRemoteIdUpdatePost**](PayeesApi.md#V3PayeesPayeeIdRemoteIdUpdatePost) | **Post** /v3/payees/{payeeId}/remoteIdUpdate | Update Payee Remote Id
-[**V4PayeesPayeeIdRemoteIdUpdatePost**](PayeesApi.md#V4PayeesPayeeIdRemoteIdUpdatePost) | **Post** /v4/payees/{payeeId}/remoteIdUpdate | Update Payee Remote Id
+[**DeletePayeeByIdV3**](PayeesAPI.md#DeletePayeeByIdV3) | **Delete** /v3/payees/{payeeId} | Delete Payee by Id
+[**DeletePayeeByIdV4**](PayeesAPI.md#DeletePayeeByIdV4) | **Delete** /v4/payees/{payeeId} | Delete Payee by Id
+[**GetPayeeByIdV3**](PayeesAPI.md#GetPayeeByIdV3) | **Get** /v3/payees/{payeeId} | Get Payee by Id
+[**GetPayeeByIdV4**](PayeesAPI.md#GetPayeeByIdV4) | **Get** /v4/payees/{payeeId} | Get Payee by Id
+[**ListPayeeChangesV3**](PayeesAPI.md#ListPayeeChangesV3) | **Get** /v3/payees/deltas | List Payee Changes
+[**ListPayeeChangesV4**](PayeesAPI.md#ListPayeeChangesV4) | **Get** /v4/payees/deltas | List Payee Changes
+[**ListPayeesV3**](PayeesAPI.md#ListPayeesV3) | **Get** /v3/payees | List Payees
+[**ListPayeesV4**](PayeesAPI.md#ListPayeesV4) | **Get** /v4/payees | List Payees
+[**PayeeDetailsUpdateV3**](PayeesAPI.md#PayeeDetailsUpdateV3) | **Post** /v3/payees/{payeeId}/payeeDetailsUpdate | Update Payee Details
+[**PayeeDetailsUpdateV4**](PayeesAPI.md#PayeeDetailsUpdateV4) | **Post** /v4/payees/{payeeId}/payeeDetailsUpdate | Update Payee Details
+[**V3PayeesPayeeIdRemoteIdUpdatePost**](PayeesAPI.md#V3PayeesPayeeIdRemoteIdUpdatePost) | **Post** /v3/payees/{payeeId}/remoteIdUpdate | Update Payee Remote Id
+[**V4PayeesPayeeIdRemoteIdUpdatePost**](PayeesAPI.md#V4PayeesPayeeIdRemoteIdUpdatePost) | **Post** /v4/payees/{payeeId}/remoteIdUpdate | Update Payee Remote Id
 
 
 
@@ -36,17 +36,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.DeletePayeeByIdV3(context.Background(), payeeId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PayeesAPI.DeletePayeeByIdV3(context.Background(), payeeId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.DeletePayeeByIdV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.DeletePayeeByIdV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -58,7 +58,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -104,17 +104,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.DeletePayeeByIdV4(context.Background(), payeeId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PayeesAPI.DeletePayeeByIdV4(context.Background(), payeeId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.DeletePayeeByIdV4``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.DeletePayeeByIdV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -126,7 +126,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ## GetPayeeByIdV3
 
-> PayeeDetailResponse GetPayeeByIdV3(ctx, payeeId).Sensitive(sensitive).Execute()
+> PayeeDetailResponseV3 GetPayeeByIdV3(ctx, payeeId).Sensitive(sensitive).Execute()
 
 Get Payee by Id
 
@@ -172,22 +172,22 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
     sensitive := true // bool | Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.GetPayeeByIdV3(context.Background(), payeeId).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesAPI.GetPayeeByIdV3(context.Background(), payeeId).Sensitive(sensitive).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.GetPayeeByIdV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.GetPayeeByIdV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetPayeeByIdV3`: PayeeDetailResponse
-    fmt.Fprintf(os.Stdout, "Response from `PayeesApi.GetPayeeByIdV3`: %v\n", resp)
+    // response from `GetPayeeByIdV3`: PayeeDetailResponseV3
+    fmt.Fprintf(os.Stdout, "Response from `PayeesAPI.GetPayeeByIdV3`: %v\n", resp)
 }
 ```
 
@@ -197,7 +197,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PayeeDetailResponse**](PayeeDetailResponse.md)
+[**PayeeDetailResponseV3**](PayeeDetailResponseV3.md)
 
 ### Authorization
 
@@ -229,7 +229,7 @@ Name | Type | Description  | Notes
 
 ## GetPayeeByIdV4
 
-> PayeeDetailResponse2 GetPayeeByIdV4(ctx, payeeId).Sensitive(sensitive).Execute()
+> PayeeDetailResponseV4 GetPayeeByIdV4(ctx, payeeId).Sensitive(sensitive).Execute()
 
 Get Payee by Id
 
@@ -244,22 +244,22 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
     sensitive := true // bool | Optional. If omitted or set to false, any Personal Identifiable Information (PII) values are returned masked. If set to true, and you have permission, the PII values will be returned as their original unmasked values.  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.GetPayeeByIdV4(context.Background(), payeeId).Sensitive(sensitive).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesAPI.GetPayeeByIdV4(context.Background(), payeeId).Sensitive(sensitive).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.GetPayeeByIdV4``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.GetPayeeByIdV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetPayeeByIdV4`: PayeeDetailResponse2
-    fmt.Fprintf(os.Stdout, "Response from `PayeesApi.GetPayeeByIdV4`: %v\n", resp)
+    // response from `GetPayeeByIdV4`: PayeeDetailResponseV4
+    fmt.Fprintf(os.Stdout, "Response from `PayeesAPI.GetPayeeByIdV4`: %v\n", resp)
 }
 ```
 
@@ -269,7 +269,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PayeeDetailResponse2**](PayeeDetailResponse2.md)
+[**PayeeDetailResponseV4**](PayeeDetailResponseV4.md)
 
 ### Authorization
 
@@ -301,7 +301,7 @@ Name | Type | Description  | Notes
 
 ## ListPayeeChangesV3
 
-> PayeeDeltaResponse ListPayeeChangesV3(ctx).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
+> PayeeDeltaResponseV3 ListPayeeChangesV3(ctx).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
 
 List Payee Changes
 
@@ -317,24 +317,24 @@ import (
     "fmt"
     "os"
     "time"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The Payor ID to find associated Payees
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor ID to find associated Payees
     updatedSince := time.Now() // time.Time | The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm
     page := int32(1) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(100) // int32 | Page size. Default is 100. Max allowable is 1000. (optional) (default to 100)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.ListPayeeChangesV3(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesAPI.ListPayeeChangesV3(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.ListPayeeChangesV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.ListPayeeChangesV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListPayeeChangesV3`: PayeeDeltaResponse
-    fmt.Fprintf(os.Stdout, "Response from `PayeesApi.ListPayeeChangesV3`: %v\n", resp)
+    // response from `ListPayeeChangesV3`: PayeeDeltaResponseV3
+    fmt.Fprintf(os.Stdout, "Response from `PayeesAPI.ListPayeeChangesV3`: %v\n", resp)
 }
 ```
 
@@ -349,14 +349,14 @@ Other parameters are passed through a pointer to a apiListPayeeChangesV3Request 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The Payor ID to find associated Payees | 
+ **payorId** | **string** | The Payor ID to find associated Payees | 
  **updatedSince** | **time.Time** | The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | Page size. Default is 100. Max allowable is 1000. | [default to 100]
 
 ### Return type
 
-[**PayeeDeltaResponse**](PayeeDeltaResponse.md)
+[**PayeeDeltaResponseV3**](PayeeDeltaResponseV3.md)
 
 ### Authorization
 
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 
 ## ListPayeeChangesV4
 
-> PayeeDeltaResponse2 ListPayeeChangesV4(ctx).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
+> PayeeDeltaResponseV4 ListPayeeChangesV4(ctx).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
 
 List Payee Changes
 
@@ -390,24 +390,24 @@ import (
     "fmt"
     "os"
     "time"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The Payor ID to find associated Payees
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor ID to find associated Payees
     updatedSince := time.Now() // time.Time | The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm
     page := int32(1) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(100) // int32 | Page size. Default is 100. Max allowable is 1000. (optional) (default to 100)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.ListPayeeChangesV4(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesAPI.ListPayeeChangesV4(context.Background()).PayorId(payorId).UpdatedSince(updatedSince).Page(page).PageSize(pageSize).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.ListPayeeChangesV4``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.ListPayeeChangesV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListPayeeChangesV4`: PayeeDeltaResponse2
-    fmt.Fprintf(os.Stdout, "Response from `PayeesApi.ListPayeeChangesV4`: %v\n", resp)
+    // response from `ListPayeeChangesV4`: PayeeDeltaResponseV4
+    fmt.Fprintf(os.Stdout, "Response from `PayeesAPI.ListPayeeChangesV4`: %v\n", resp)
 }
 ```
 
@@ -422,14 +422,14 @@ Other parameters are passed through a pointer to a apiListPayeeChangesV4Request 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The Payor ID to find associated Payees | 
+ **payorId** | **string** | The Payor ID to find associated Payees | 
  **updatedSince** | **time.Time** | The updatedSince filter in the format YYYY-MM-DDThh:mm:ss+hh:mm | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | Page size. Default is 100. Max allowable is 1000. | [default to 100]
 
 ### Return type
 
-[**PayeeDeltaResponse2**](PayeeDeltaResponse2.md)
+[**PayeeDeltaResponseV4**](PayeeDeltaResponseV4.md)
 
 ### Authorization
 
@@ -447,7 +447,7 @@ Name | Type | Description  | Notes
 
 ## ListPayeesV3
 
-> PagedPayeeResponse ListPayeesV3(ctx).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).Page(page).PageSize(pageSize).Sort(sort).Execute()
+> PagedPayeeResponseV3 ListPayeesV3(ctx).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).Page(page).PageSize(pageSize).Sort(sort).Execute()
 
 List Payees
 
@@ -462,32 +462,32 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The account owner Payor ID
-    watchlistStatus := openapiclient.WatchlistStatus("NONE") // WatchlistStatus | The watchlistStatus of the payees. (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
+    watchlistStatus := "watchlistStatus_example" // string | The watchlistStatus of the payees. (optional)
     disabled := true // bool | Payee disabled (optional)
-    onboardedStatus := openapiclient.OnboardedStatus("CREATED") // OnboardedStatus | The onboarded status of the payees. (optional)
+    onboardedStatus := "onboardedStatus_example" // string | The onboarded status of the payees. (optional)
     email := "bob@example.com" // string | Email address (optional)
     displayName := "Bob Smith" // string | The display name of the payees. (optional)
     remoteId := "remoteId123" // string | The remote id of the payees. (optional)
-    payeeType := openapiclient.PayeeType("Individual") // PayeeType | The onboarded status of the payees. (optional)
+    payeeType := "payeeType_example" // string | The onboarded status of the payees. (optional)
     payeeCountry := "US" // string | The country of the payee - 2 letter ISO 3166-1 country code (upper case) (optional)
     page := int32(1) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(25) // int32 | Page size. Default is 25. Max allowable is 100. (optional) (default to 25)
     sort := "displayName:asc" // string | List of sort fields (e.g. ?sort=onboardedStatus:asc,name:asc) Default is name:asc 'name' is treated as company name for companies - last name + ',' + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus.  (optional) (default to "displayName:asc")
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.ListPayeesV3(context.Background()).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesAPI.ListPayeesV3(context.Background()).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.ListPayeesV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.ListPayeesV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListPayeesV3`: PagedPayeeResponse
-    fmt.Fprintf(os.Stdout, "Response from `PayeesApi.ListPayeesV3`: %v\n", resp)
+    // response from `ListPayeesV3`: PagedPayeeResponseV3
+    fmt.Fprintf(os.Stdout, "Response from `PayeesAPI.ListPayeesV3`: %v\n", resp)
 }
 ```
 
@@ -502,14 +502,14 @@ Other parameters are passed through a pointer to a apiListPayeesV3Request struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The account owner Payor ID | 
- **watchlistStatus** | [**WatchlistStatus**](WatchlistStatus.md) | The watchlistStatus of the payees. | 
+ **payorId** | **string** | The account owner Payor ID | 
+ **watchlistStatus** | **string** | The watchlistStatus of the payees. | 
  **disabled** | **bool** | Payee disabled | 
- **onboardedStatus** | [**OnboardedStatus**](OnboardedStatus.md) | The onboarded status of the payees. | 
- **email** | [**string**](string.md) | Email address | 
+ **onboardedStatus** | **string** | The onboarded status of the payees. | 
+ **email** | **string** | Email address | 
  **displayName** | **string** | The display name of the payees. | 
  **remoteId** | **string** | The remote id of the payees. | 
- **payeeType** | [**PayeeType**](PayeeType.md) | The onboarded status of the payees. | 
+ **payeeType** | **string** | The onboarded status of the payees. | 
  **payeeCountry** | **string** | The country of the payee - 2 letter ISO 3166-1 country code (upper case) | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | Page size. Default is 25. Max allowable is 100. | [default to 25]
@@ -517,7 +517,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PagedPayeeResponse**](PagedPayeeResponse.md)
+[**PagedPayeeResponseV3**](PagedPayeeResponseV3.md)
 
 ### Authorization
 
@@ -535,7 +535,7 @@ Name | Type | Description  | Notes
 
 ## ListPayeesV4
 
-> PagedPayeeResponse2 ListPayeesV4(ctx).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).OfacStatus(ofacStatus).Page(page).PageSize(pageSize).Sort(sort).Execute()
+> PagedPayeeResponseV4 ListPayeesV4(ctx).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).OfacStatus(ofacStatus).Page(page).PageSize(pageSize).Sort(sort).Execute()
 
 List Payees
 
@@ -550,33 +550,33 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The account owner Payor ID
-    watchlistStatus := openapiclient.WatchlistStatus("NONE") // WatchlistStatus | The watchlistStatus of the payees. (optional)
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
+    watchlistStatus := "watchlistStatus_example" // string | The watchlistStatus of the payees. (optional)
     disabled := true // bool | Payee disabled (optional)
-    onboardedStatus := openapiclient.OnboardedStatus("CREATED") // OnboardedStatus | The onboarded status of the payees. (optional)
+    onboardedStatus := "onboardedStatus_example" // string | The onboarded status of the payees. (optional)
     email := "bob@example.com" // string | Email address (optional)
     displayName := "Bob Smith" // string | The display name of the payees. (optional)
     remoteId := "remoteId123" // string | The remote id of the payees. (optional)
-    payeeType := openapiclient.PayeeType("Individual") // PayeeType | The onboarded status of the payees. (optional)
+    payeeType := "payeeType_example" // string | The onboarded status of the payees. (optional)
     payeeCountry := "US" // string | The country of the payee - 2 letter ISO 3166-1 country code (upper case) (optional)
-    ofacStatus := openapiclient.OfacStatus("PENDING") // OfacStatus | The ofacStatus of the payees. (optional)
+    ofacStatus := "ofacStatus_example" // string | The ofacStatus of the payees. (optional)
     page := int32(1) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(25) // int32 | Page size. Default is 25. Max allowable is 100. (optional) (default to 25)
     sort := "displayName:asc" // string | List of sort fields (e.g. ?sort=onboardedStatus:asc,name:asc) Default is name:asc 'name' is treated as company name for companies - last name + ',' + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus.  (optional) (default to "displayName:asc")
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.ListPayeesV4(context.Background()).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).OfacStatus(ofacStatus).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayeesAPI.ListPayeesV4(context.Background()).PayorId(payorId).WatchlistStatus(watchlistStatus).Disabled(disabled).OnboardedStatus(onboardedStatus).Email(email).DisplayName(displayName).RemoteId(remoteId).PayeeType(payeeType).PayeeCountry(payeeCountry).OfacStatus(ofacStatus).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.ListPayeesV4``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.ListPayeesV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListPayeesV4`: PagedPayeeResponse2
-    fmt.Fprintf(os.Stdout, "Response from `PayeesApi.ListPayeesV4`: %v\n", resp)
+    // response from `ListPayeesV4`: PagedPayeeResponseV4
+    fmt.Fprintf(os.Stdout, "Response from `PayeesAPI.ListPayeesV4`: %v\n", resp)
 }
 ```
 
@@ -591,23 +591,23 @@ Other parameters are passed through a pointer to a apiListPayeesV4Request struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payorId** | [**string**](string.md) | The account owner Payor ID | 
- **watchlistStatus** | [**WatchlistStatus**](WatchlistStatus.md) | The watchlistStatus of the payees. | 
+ **payorId** | **string** | The account owner Payor ID | 
+ **watchlistStatus** | **string** | The watchlistStatus of the payees. | 
  **disabled** | **bool** | Payee disabled | 
- **onboardedStatus** | [**OnboardedStatus**](OnboardedStatus.md) | The onboarded status of the payees. | 
- **email** | [**string**](string.md) | Email address | 
+ **onboardedStatus** | **string** | The onboarded status of the payees. | 
+ **email** | **string** | Email address | 
  **displayName** | **string** | The display name of the payees. | 
  **remoteId** | **string** | The remote id of the payees. | 
- **payeeType** | [**PayeeType**](PayeeType.md) | The onboarded status of the payees. | 
+ **payeeType** | **string** | The onboarded status of the payees. | 
  **payeeCountry** | **string** | The country of the payee - 2 letter ISO 3166-1 country code (upper case) | 
- **ofacStatus** | [**OfacStatus**](OfacStatus.md) | The ofacStatus of the payees. | 
+ **ofacStatus** | **string** | The ofacStatus of the payees. | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | Page size. Default is 25. Max allowable is 100. | [default to 25]
  **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;onboardedStatus:asc,name:asc) Default is name:asc &#39;name&#39; is treated as company name for companies - last name + &#39;,&#39; + firstName for individuals The supported sort fields are - payeeId, displayName, payoutStatus, onboardedStatus.  | [default to &quot;displayName:asc&quot;]
 
 ### Return type
 
-[**PagedPayeeResponse2**](PagedPayeeResponse2.md)
+[**PagedPayeeResponseV4**](PagedPayeeResponseV4.md)
 
 ### Authorization
 
@@ -625,7 +625,7 @@ Name | Type | Description  | Notes
 
 ## PayeeDetailsUpdateV3
 
-> PayeeDetailsUpdateV3(ctx, payeeId).UpdatePayeeDetailsRequest(updatePayeeDetailsRequest).Execute()
+> PayeeDetailsUpdateV3(ctx, payeeId).UpdatePayeeDetailsRequestV3(updatePayeeDetailsRequestV3).Execute()
 
 Update Payee Details
 
@@ -640,18 +640,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
-    updatePayeeDetailsRequest := *openapiclient.NewUpdatePayeeDetailsRequest() // UpdatePayeeDetailsRequest | Request to update payee details
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
+    updatePayeeDetailsRequestV3 := *openapiclient.NewUpdatePayeeDetailsRequestV3() // UpdatePayeeDetailsRequestV3 | Request to update payee details
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.PayeeDetailsUpdateV3(context.Background(), payeeId).UpdatePayeeDetailsRequest(updatePayeeDetailsRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PayeesAPI.PayeeDetailsUpdateV3(context.Background(), payeeId).UpdatePayeeDetailsRequestV3(updatePayeeDetailsRequestV3).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.PayeeDetailsUpdateV3``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.PayeeDetailsUpdateV3``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -663,7 +663,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -673,7 +673,7 @@ Other parameters are passed through a pointer to a apiPayeeDetailsUpdateV3Reques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updatePayeeDetailsRequest** | [**UpdatePayeeDetailsRequest**](UpdatePayeeDetailsRequest.md) | Request to update payee details | 
+ **updatePayeeDetailsRequestV3** | [**UpdatePayeeDetailsRequestV3**](UpdatePayeeDetailsRequestV3.md) | Request to update payee details | 
 
 ### Return type
 
@@ -695,7 +695,7 @@ Name | Type | Description  | Notes
 
 ## PayeeDetailsUpdateV4
 
-> PayeeDetailsUpdateV4(ctx, payeeId).UpdatePayeeDetailsRequest2(updatePayeeDetailsRequest2).Execute()
+> PayeeDetailsUpdateV4(ctx, payeeId).UpdatePayeeDetailsRequestV4(updatePayeeDetailsRequestV4).Execute()
 
 Update Payee Details
 
@@ -710,18 +710,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
-    updatePayeeDetailsRequest2 := *openapiclient.NewUpdatePayeeDetailsRequest2() // UpdatePayeeDetailsRequest2 | Request to update payee details
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
+    updatePayeeDetailsRequestV4 := *openapiclient.NewUpdatePayeeDetailsRequestV4() // UpdatePayeeDetailsRequestV4 | Request to update payee details
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.PayeeDetailsUpdateV4(context.Background(), payeeId).UpdatePayeeDetailsRequest2(updatePayeeDetailsRequest2).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PayeesAPI.PayeeDetailsUpdateV4(context.Background(), payeeId).UpdatePayeeDetailsRequestV4(updatePayeeDetailsRequestV4).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.PayeeDetailsUpdateV4``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.PayeeDetailsUpdateV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -733,7 +733,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -743,7 +743,7 @@ Other parameters are passed through a pointer to a apiPayeeDetailsUpdateV4Reques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updatePayeeDetailsRequest2** | [**UpdatePayeeDetailsRequest2**](UpdatePayeeDetailsRequest2.md) | Request to update payee details | 
+ **updatePayeeDetailsRequestV4** | [**UpdatePayeeDetailsRequestV4**](UpdatePayeeDetailsRequestV4.md) | Request to update payee details | 
 
 ### Return type
 
@@ -765,7 +765,7 @@ Name | Type | Description  | Notes
 
 ## V3PayeesPayeeIdRemoteIdUpdatePost
 
-> V3PayeesPayeeIdRemoteIdUpdatePost(ctx, payeeId).UpdateRemoteIdRequest(updateRemoteIdRequest).Execute()
+> V3PayeesPayeeIdRemoteIdUpdatePost(ctx, payeeId).UpdateRemoteIdRequestV3(updateRemoteIdRequestV3).Execute()
 
 Update Payee Remote Id
 
@@ -780,18 +780,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
-    updateRemoteIdRequest := *openapiclient.NewUpdateRemoteIdRequest("9ac75325-5dcd-42d5-b992-175d7e0a035e", "remoteId123") // UpdateRemoteIdRequest | Request to update payee remote id v3
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
+    updateRemoteIdRequestV3 := *openapiclient.NewUpdateRemoteIdRequestV3("9ac75325-5dcd-42d5-b992-175d7e0a035e", "remoteId123") // UpdateRemoteIdRequestV3 | Request to update payee remote id v3
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.V3PayeesPayeeIdRemoteIdUpdatePost(context.Background(), payeeId).UpdateRemoteIdRequest(updateRemoteIdRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PayeesAPI.V3PayeesPayeeIdRemoteIdUpdatePost(context.Background(), payeeId).UpdateRemoteIdRequestV3(updateRemoteIdRequestV3).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.V3PayeesPayeeIdRemoteIdUpdatePost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.V3PayeesPayeeIdRemoteIdUpdatePost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -803,7 +803,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -813,7 +813,7 @@ Other parameters are passed through a pointer to a apiV3PayeesPayeeIdRemoteIdUpd
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateRemoteIdRequest** | [**UpdateRemoteIdRequest**](UpdateRemoteIdRequest.md) | Request to update payee remote id v3 | 
+ **updateRemoteIdRequestV3** | [**UpdateRemoteIdRequestV3**](UpdateRemoteIdRequestV3.md) | Request to update payee remote id v3 | 
 
 ### Return type
 
@@ -835,7 +835,7 @@ Name | Type | Description  | Notes
 
 ## V4PayeesPayeeIdRemoteIdUpdatePost
 
-> V4PayeesPayeeIdRemoteIdUpdatePost(ctx, payeeId).UpdateRemoteIdRequest2(updateRemoteIdRequest2).Execute()
+> V4PayeesPayeeIdRemoteIdUpdatePost(ctx, payeeId).UpdateRemoteIdRequestV4(updateRemoteIdRequestV4).Execute()
 
 Update Payee Remote Id
 
@@ -850,18 +850,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payeeId := TODO // string | The UUID of the payee.
-    updateRemoteIdRequest2 := *openapiclient.NewUpdateRemoteIdRequest2("9ac75325-5dcd-42d5-b992-175d7e0a035e", "remoteId123") // UpdateRemoteIdRequest2 | Request to update payee remote id v4
+    payeeId := "2aa5d7e0-2ecb-403f-8494-1865ed0454e9" // string | The UUID of the payee.
+    updateRemoteIdRequestV4 := *openapiclient.NewUpdateRemoteIdRequestV4("9ac75325-5dcd-42d5-b992-175d7e0a035e", "remoteId123") // UpdateRemoteIdRequestV4 | Request to update payee remote id v4
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayeesApi.V4PayeesPayeeIdRemoteIdUpdatePost(context.Background(), payeeId).UpdateRemoteIdRequest2(updateRemoteIdRequest2).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PayeesAPI.V4PayeesPayeeIdRemoteIdUpdatePost(context.Background(), payeeId).UpdateRemoteIdRequestV4(updateRemoteIdRequestV4).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayeesApi.V4PayeesPayeeIdRemoteIdUpdatePost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayeesAPI.V4PayeesPayeeIdRemoteIdUpdatePost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -873,7 +873,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payeeId** | [**string**](.md) | The UUID of the payee. | 
+**payeeId** | **string** | The UUID of the payee. | 
 
 ### Other Parameters
 
@@ -883,7 +883,7 @@ Other parameters are passed through a pointer to a apiV4PayeesPayeeIdRemoteIdUpd
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateRemoteIdRequest2** | [**UpdateRemoteIdRequest2**](UpdateRemoteIdRequest2.md) | Request to update payee remote id v4 | 
+ **updateRemoteIdRequestV4** | [**UpdateRemoteIdRequestV4**](UpdateRemoteIdRequestV4.md) | Request to update payee remote id v4 | 
 
 ### Return type
 

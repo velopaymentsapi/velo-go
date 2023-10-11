@@ -1,10 +1,10 @@
-# \TokensApi
+# \TokensAPI
 
 All URIs are relative to *https://api.sandbox.velopayments.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ResendToken**](TokensApi.md#ResendToken) | **Post** /v2/users/{userId}/tokens | Resend a token
+[**ResendToken**](TokensAPI.md#ResendToken) | **Post** /v2/users/{userId}/tokens | Resend a token
 
 
 
@@ -25,18 +25,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    userId := TODO // string | The UUID of the User.
+    userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the User.
     resendTokenRequest := *openapiclient.NewResendTokenRequest("INVITE_MFA_USER") // ResendTokenRequest | The type of token to resend
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TokensApi.ResendToken(context.Background(), userId).ResendTokenRequest(resendTokenRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.TokensAPI.ResendToken(context.Background(), userId).ResendTokenRequest(resendTokenRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TokensApi.ResendToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `TokensAPI.ResendToken``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -48,7 +48,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md) | The UUID of the User. | 
+**userId** | **string** | The UUID of the User. | 
 
 ### Other Parameters
 

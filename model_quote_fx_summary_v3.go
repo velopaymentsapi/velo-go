@@ -1,10 +1,10 @@
 /*
- * Velo Payments APIs
- *
- * ## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
- *
- * API version: 2.26.124
- */
+Velo Payments APIs
+
+## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
+
+API version: 2.35.58
+*/
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
 
@@ -15,20 +15,32 @@ import (
 	"time"
 )
 
+// checks if the QuoteFxSummaryV3 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &QuoteFxSummaryV3{}
+
 // QuoteFxSummaryV3 struct for QuoteFxSummaryV3
 type QuoteFxSummaryV3 struct {
+	// The conversion rate (from the source currency to the payment currency)
 	Rate float32 `json:"rate"`
+	// The inverse conversion rate (from paymnent currency to source currency)
 	InvertedRate *float32 `json:"invertedRate,omitempty"`
+	// Timestamp of when the quote was created
 	CreationTime time.Time `json:"creationTime"`
+	// The timestamp for when the quote will expire
 	ExpiryTime *time.Time `json:"expiryTime,omitempty"`
+	// The id of the created quote
 	QuoteId string `json:"quoteId"`
+	// The amount (in minor units) that will be paid from the source account
 	TotalSourceAmount int32 `json:"totalSourceAmount"`
+	// The amount (in minor units) that the payee will receive
 	TotalPaymentAmount int32 `json:"totalPaymentAmount"`
 	// Valid ISO 4217 3 letter currency code. See the <a href=\"https://www.iso.org/iso-4217-currency-codes.html\" target=\"_blank\" a>ISO specification</a> for details.
 	SourceCurrency string `json:"sourceCurrency"`
 	// Valid ISO 4217 3 letter currency code. See the <a href=\"https://www.iso.org/iso-4217-currency-codes.html\" target=\"_blank\" a>ISO specification</a> for details.
 	PaymentCurrency string `json:"paymentCurrency"`
+	// Current status of the funding associated with this quote. One of the following values: UNFUNDED, INSTRUCTED, FUNDED
 	FundingStatus string `json:"fundingStatus"`
+	// Current status of the fx quote. One of the following values: UNQUOTED, QUOTED, EXPIRED, EXECUTED, REJECTED
 	Status string `json:"status"`
 }
 
@@ -71,7 +83,7 @@ func (o *QuoteFxSummaryV3) GetRate() float32 {
 // GetRateOk returns a tuple with the Rate field value
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetRateOk() (*float32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Rate, true
@@ -84,7 +96,7 @@ func (o *QuoteFxSummaryV3) SetRate(v float32) {
 
 // GetInvertedRate returns the InvertedRate field value if set, zero value otherwise.
 func (o *QuoteFxSummaryV3) GetInvertedRate() float32 {
-	if o == nil || o.InvertedRate == nil {
+	if o == nil || IsNil(o.InvertedRate) {
 		var ret float32
 		return ret
 	}
@@ -94,7 +106,7 @@ func (o *QuoteFxSummaryV3) GetInvertedRate() float32 {
 // GetInvertedRateOk returns a tuple with the InvertedRate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetInvertedRateOk() (*float32, bool) {
-	if o == nil || o.InvertedRate == nil {
+	if o == nil || IsNil(o.InvertedRate) {
 		return nil, false
 	}
 	return o.InvertedRate, true
@@ -102,7 +114,7 @@ func (o *QuoteFxSummaryV3) GetInvertedRateOk() (*float32, bool) {
 
 // HasInvertedRate returns a boolean if a field has been set.
 func (o *QuoteFxSummaryV3) HasInvertedRate() bool {
-	if o != nil && o.InvertedRate != nil {
+	if o != nil && !IsNil(o.InvertedRate) {
 		return true
 	}
 
@@ -127,7 +139,7 @@ func (o *QuoteFxSummaryV3) GetCreationTime() time.Time {
 // GetCreationTimeOk returns a tuple with the CreationTime field value
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetCreationTimeOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.CreationTime, true
@@ -140,7 +152,7 @@ func (o *QuoteFxSummaryV3) SetCreationTime(v time.Time) {
 
 // GetExpiryTime returns the ExpiryTime field value if set, zero value otherwise.
 func (o *QuoteFxSummaryV3) GetExpiryTime() time.Time {
-	if o == nil || o.ExpiryTime == nil {
+	if o == nil || IsNil(o.ExpiryTime) {
 		var ret time.Time
 		return ret
 	}
@@ -150,7 +162,7 @@ func (o *QuoteFxSummaryV3) GetExpiryTime() time.Time {
 // GetExpiryTimeOk returns a tuple with the ExpiryTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetExpiryTimeOk() (*time.Time, bool) {
-	if o == nil || o.ExpiryTime == nil {
+	if o == nil || IsNil(o.ExpiryTime) {
 		return nil, false
 	}
 	return o.ExpiryTime, true
@@ -158,7 +170,7 @@ func (o *QuoteFxSummaryV3) GetExpiryTimeOk() (*time.Time, bool) {
 
 // HasExpiryTime returns a boolean if a field has been set.
 func (o *QuoteFxSummaryV3) HasExpiryTime() bool {
-	if o != nil && o.ExpiryTime != nil {
+	if o != nil && !IsNil(o.ExpiryTime) {
 		return true
 	}
 
@@ -183,7 +195,7 @@ func (o *QuoteFxSummaryV3) GetQuoteId() string {
 // GetQuoteIdOk returns a tuple with the QuoteId field value
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetQuoteIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.QuoteId, true
@@ -207,7 +219,7 @@ func (o *QuoteFxSummaryV3) GetTotalSourceAmount() int32 {
 // GetTotalSourceAmountOk returns a tuple with the TotalSourceAmount field value
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetTotalSourceAmountOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TotalSourceAmount, true
@@ -231,7 +243,7 @@ func (o *QuoteFxSummaryV3) GetTotalPaymentAmount() int32 {
 // GetTotalPaymentAmountOk returns a tuple with the TotalPaymentAmount field value
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetTotalPaymentAmountOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TotalPaymentAmount, true
@@ -255,7 +267,7 @@ func (o *QuoteFxSummaryV3) GetSourceCurrency() string {
 // GetSourceCurrencyOk returns a tuple with the SourceCurrency field value
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetSourceCurrencyOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SourceCurrency, true
@@ -279,7 +291,7 @@ func (o *QuoteFxSummaryV3) GetPaymentCurrency() string {
 // GetPaymentCurrencyOk returns a tuple with the PaymentCurrency field value
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetPaymentCurrencyOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PaymentCurrency, true
@@ -303,7 +315,7 @@ func (o *QuoteFxSummaryV3) GetFundingStatus() string {
 // GetFundingStatusOk returns a tuple with the FundingStatus field value
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetFundingStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.FundingStatus, true
@@ -327,7 +339,7 @@ func (o *QuoteFxSummaryV3) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *QuoteFxSummaryV3) GetStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Status, true
@@ -339,41 +351,31 @@ func (o *QuoteFxSummaryV3) SetStatus(v string) {
 }
 
 func (o QuoteFxSummaryV3) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["rate"] = o.Rate
-	}
-	if o.InvertedRate != nil {
-		toSerialize["invertedRate"] = o.InvertedRate
-	}
-	if true {
-		toSerialize["creationTime"] = o.CreationTime
-	}
-	if o.ExpiryTime != nil {
-		toSerialize["expiryTime"] = o.ExpiryTime
-	}
-	if true {
-		toSerialize["quoteId"] = o.QuoteId
-	}
-	if true {
-		toSerialize["totalSourceAmount"] = o.TotalSourceAmount
-	}
-	if true {
-		toSerialize["totalPaymentAmount"] = o.TotalPaymentAmount
-	}
-	if true {
-		toSerialize["sourceCurrency"] = o.SourceCurrency
-	}
-	if true {
-		toSerialize["paymentCurrency"] = o.PaymentCurrency
-	}
-	if true {
-		toSerialize["fundingStatus"] = o.FundingStatus
-	}
-	if true {
-		toSerialize["status"] = o.Status
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o QuoteFxSummaryV3) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["rate"] = o.Rate
+	if !IsNil(o.InvertedRate) {
+		toSerialize["invertedRate"] = o.InvertedRate
+	}
+	toSerialize["creationTime"] = o.CreationTime
+	if !IsNil(o.ExpiryTime) {
+		toSerialize["expiryTime"] = o.ExpiryTime
+	}
+	toSerialize["quoteId"] = o.QuoteId
+	toSerialize["totalSourceAmount"] = o.TotalSourceAmount
+	toSerialize["totalPaymentAmount"] = o.TotalPaymentAmount
+	toSerialize["sourceCurrency"] = o.SourceCurrency
+	toSerialize["paymentCurrency"] = o.PaymentCurrency
+	toSerialize["fundingStatus"] = o.FundingStatus
+	toSerialize["status"] = o.Status
+	return toSerialize, nil
 }
 
 type NullableQuoteFxSummaryV3 struct {

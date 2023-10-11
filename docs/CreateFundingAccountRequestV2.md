@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **Type** | **string** |  | 
 **Name** | **string** |  | 
 **PayorId** | **string** |  | 
-**AccountName** | Pointer to **string** | Required if type is FBO | [optional] 
-**AccountNumber** | Pointer to **string** | Required if type is FBO | [optional] 
-**RoutingNumber** | Pointer to **string** | Required if type is FBO | [optional] 
-**Currency** | Pointer to **string** | ISO 4217 currency code, Required if type is WUBS_DECOUPLED | [optional] 
+**AccountName** | Pointer to **string** | Required if type is either FBO or PRIVATE | [optional] 
+**AccountNumber** | Pointer to **string** | Required if type is either FBO or PRIVATE | [optional] 
+**RoutingNumber** | Pointer to **string** | Required if type is either FBO or PRIVATE | [optional] 
+**Currency** | Pointer to **string** | ISO 4217 currency code, Required if type is either WUBS_DECOUPLED or PRIVATE | [optional] 
 
 ## Methods
 

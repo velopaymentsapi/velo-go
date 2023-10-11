@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayoutId** | Pointer to **string** |  | [optional] 
 **PayorId** | Pointer to **string** |  | [optional] 
-**Status** | [**PayoutStatus**](PayoutStatus.md) |  | 
+**Status** | **string** | Current status of the Payout. One of the following values: ACCEPTED, REJECTED, SUBMITTED, QUOTED, INSTRUCTED, COMPLETED, INCOMPLETE, CONFIRMED, WITHDRAWN | 
 **DateTime** | Pointer to **time.Time** |  | [optional] 
 **SubmittedDateTime** | **string** |  | 
 **InstructedDateTime** | Pointer to **string** |  | [optional] 
@@ -18,14 +18,15 @@ Name | Type | Description | Notes
 **SourceAccountSummary** | Pointer to [**[]SourceAccountSummary**](SourceAccountSummary.md) |  | [optional] 
 **FxSummaries** | Pointer to [**[]FxSummary**](FxSummary.md) |  | [optional] 
 **PayoutMemo** | Pointer to **string** |  | [optional] 
-**PayoutType** | [**PayoutType**](PayoutType.md) |  | 
+**PayoutType** | **string** | The type of payout. One of the following values: STANDARD, AS, ON_BEHALF_OF | 
 **PayorName** | **string** |  | 
+**Schedule** | Pointer to [**PayoutSchedule**](PayoutSchedule.md) |  | [optional] 
 
 ## Methods
 
 ### NewPayoutSummaryAudit
 
-`func NewPayoutSummaryAudit(status PayoutStatus, submittedDateTime string, payoutType PayoutType, payorName string, ) *PayoutSummaryAudit`
+`func NewPayoutSummaryAudit(status string, submittedDateTime string, payoutType string, payorName string, ) *PayoutSummaryAudit`
 
 NewPayoutSummaryAudit instantiates a new PayoutSummaryAudit object
 This constructor will assign default values to properties that have it defined,
@@ -92,20 +93,20 @@ HasPayorId returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *PayoutSummaryAudit) GetStatus() PayoutStatus`
+`func (o *PayoutSummaryAudit) GetStatus() string`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *PayoutSummaryAudit) GetStatusOk() (*PayoutStatus, bool)`
+`func (o *PayoutSummaryAudit) GetStatusOk() (*string, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *PayoutSummaryAudit) SetStatus(v PayoutStatus)`
+`func (o *PayoutSummaryAudit) SetStatus(v string)`
 
 SetStatus sets Status field to given value.
 
@@ -382,20 +383,20 @@ HasPayoutMemo returns a boolean if a field has been set.
 
 ### GetPayoutType
 
-`func (o *PayoutSummaryAudit) GetPayoutType() PayoutType`
+`func (o *PayoutSummaryAudit) GetPayoutType() string`
 
 GetPayoutType returns the PayoutType field if non-nil, zero value otherwise.
 
 ### GetPayoutTypeOk
 
-`func (o *PayoutSummaryAudit) GetPayoutTypeOk() (*PayoutType, bool)`
+`func (o *PayoutSummaryAudit) GetPayoutTypeOk() (*string, bool)`
 
 GetPayoutTypeOk returns a tuple with the PayoutType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPayoutType
 
-`func (o *PayoutSummaryAudit) SetPayoutType(v PayoutType)`
+`func (o *PayoutSummaryAudit) SetPayoutType(v string)`
 
 SetPayoutType sets PayoutType field to given value.
 
@@ -419,6 +420,31 @@ and a boolean to check if the value has been set.
 
 SetPayorName sets PayorName field to given value.
 
+
+### GetSchedule
+
+`func (o *PayoutSummaryAudit) GetSchedule() PayoutSchedule`
+
+GetSchedule returns the Schedule field if non-nil, zero value otherwise.
+
+### GetScheduleOk
+
+`func (o *PayoutSummaryAudit) GetScheduleOk() (*PayoutSchedule, bool)`
+
+GetScheduleOk returns a tuple with the Schedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchedule
+
+`func (o *PayoutSummaryAudit) SetSchedule(v PayoutSchedule)`
+
+SetSchedule sets Schedule field to given value.
+
+### HasSchedule
+
+`func (o *PayoutSummaryAudit) HasSchedule() bool`
+
+HasSchedule returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

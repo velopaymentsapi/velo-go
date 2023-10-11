@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | A name for the key. | 
 **Description** | Pointer to **NullableString** | Description of the key. | [optional] 
-**Roles** | **[]string** | A list of roles to assign to the key. | 
+**Roles** | **[]string** | &lt;p&gt;A role to assign to the key.&lt;/p&gt; &lt;p&gt;If you want your API key to have write access then assign the role velo.payor.admin&lt;/p&gt; &lt;p&gt;A later version will change this property from a list to string&lt;/p&gt;  | 
 
 ## Methods
 

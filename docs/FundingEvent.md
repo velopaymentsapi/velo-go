@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EventId** | Pointer to **string** |  | [optional] 
 **EventDateTime** | Pointer to **time.Time** |  | [optional] 
-**FundingEventType** | Pointer to [**FundingEventType**](FundingEventType.md) |  | [optional] 
+**FundingEventType** | Pointer to **string** | Funding event type. One of the following values: PAYOR_FUNDING_DETECTED, PAYOR_FUNDING_REQUESTED, PAYOR_FUNDING_RETURN_RECEIVED, FUNDING_RETURN_DETECTED, PAYOR_FUNDING_REQUEST_SUBMITTED, PAYOR_FUNDING_ENTRY_DETAIL_RECEIVED, FUNDING_DEALLOCATED | [optional] 
 **Principal** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -80,20 +80,20 @@ HasEventDateTime returns a boolean if a field has been set.
 
 ### GetFundingEventType
 
-`func (o *FundingEvent) GetFundingEventType() FundingEventType`
+`func (o *FundingEvent) GetFundingEventType() string`
 
 GetFundingEventType returns the FundingEventType field if non-nil, zero value otherwise.
 
 ### GetFundingEventTypeOk
 
-`func (o *FundingEvent) GetFundingEventTypeOk() (*FundingEventType, bool)`
+`func (o *FundingEvent) GetFundingEventTypeOk() (*string, bool)`
 
 GetFundingEventTypeOk returns a tuple with the FundingEventType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFundingEventType
 
-`func (o *FundingEvent) SetFundingEventType(v FundingEventType)`
+`func (o *FundingEvent) SetFundingEventType(v string)`
 
 SetFundingEventType sets FundingEventType field to given value.
 

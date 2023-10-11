@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **LinkId** | **string** |  | 
 **FromPayorId** | **string** |  | 
-**LinkType** | **string** |  | 
+**LinkType** | **string** | The type of the link. One of the following values: PARENT_OF | 
 **ToPayorId** | **string** |  | 
 
 ## Methods

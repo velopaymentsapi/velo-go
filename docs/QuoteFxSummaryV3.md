@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Rate** | **float32** |  | 
-**InvertedRate** | Pointer to **float32** |  | [optional] 
-**CreationTime** | **time.Time** |  | 
-**ExpiryTime** | Pointer to **time.Time** |  | [optional] 
-**QuoteId** | **string** |  | 
-**TotalSourceAmount** | **int32** |  | 
-**TotalPaymentAmount** | **int32** |  | 
+**Rate** | **float32** | The conversion rate (from the source currency to the payment currency) | 
+**InvertedRate** | Pointer to **float32** | The inverse conversion rate (from paymnent currency to source currency) | [optional] 
+**CreationTime** | **time.Time** | Timestamp of when the quote was created | 
+**ExpiryTime** | Pointer to **time.Time** | The timestamp for when the quote will expire | [optional] 
+**QuoteId** | **string** | The id of the created quote | 
+**TotalSourceAmount** | **int32** | The amount (in minor units) that will be paid from the source account | 
+**TotalPaymentAmount** | **int32** | The amount (in minor units) that the payee will receive | 
 **SourceCurrency** | **string** | Valid ISO 4217 3 letter currency code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-4217-currency-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | 
 **PaymentCurrency** | **string** | Valid ISO 4217 3 letter currency code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-4217-currency-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | 
-**FundingStatus** | **string** |  | 
-**Status** | **string** |  | 
+**FundingStatus** | **string** | Current status of the funding associated with this quote. One of the following values: UNFUNDED, INSTRUCTED, FUNDED | 
+**Status** | **string** | Current status of the fx quote. One of the following values: UNQUOTED, QUOTED, EXPIRED, EXECUTED, REJECTED | 
 
 ## Methods
 

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**PagedPayeeInvitationStatusResponsePage**](PagedPayeeInvitationStatusResponsePage.md) |  | [optional] 
-**Links** | Pointer to [**[]PagedPayeeResponseLinks**](PagedPayeeResponseLinks.md) |  | [optional] 
+**Page** | Pointer to [**PagedPayeeInvitationStatusResponseV3Page**](PagedPayeeInvitationStatusResponseV3Page.md) |  | [optional] 
+**Links** | Pointer to [**[]PagedPayeeResponseV3Links**](PagedPayeeResponseV3Links.md) |  | [optional] 
 **Content** | Pointer to [**[]PayoutSummaryAudit**](PayoutSummaryAudit.md) |  | [optional] 
 
 ## Methods
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPage
 
-`func (o *GetPayoutsResponse) GetPage() PagedPayeeInvitationStatusResponsePage`
+`func (o *GetPayoutsResponse) GetPage() PagedPayeeInvitationStatusResponseV3Page`
 
 GetPage returns the Page field if non-nil, zero value otherwise.
 
 ### GetPageOk
 
-`func (o *GetPayoutsResponse) GetPageOk() (*PagedPayeeInvitationStatusResponsePage, bool)`
+`func (o *GetPayoutsResponse) GetPageOk() (*PagedPayeeInvitationStatusResponseV3Page, bool)`
 
 GetPageOk returns a tuple with the Page field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPage
 
-`func (o *GetPayoutsResponse) SetPage(v PagedPayeeInvitationStatusResponsePage)`
+`func (o *GetPayoutsResponse) SetPage(v PagedPayeeInvitationStatusResponseV3Page)`
 
 SetPage sets Page field to given value.
 
@@ -54,20 +54,20 @@ HasPage returns a boolean if a field has been set.
 
 ### GetLinks
 
-`func (o *GetPayoutsResponse) GetLinks() []PagedPayeeResponseLinks`
+`func (o *GetPayoutsResponse) GetLinks() []PagedPayeeResponseV3Links`
 
 GetLinks returns the Links field if non-nil, zero value otherwise.
 
 ### GetLinksOk
 
-`func (o *GetPayoutsResponse) GetLinksOk() (*[]PagedPayeeResponseLinks, bool)`
+`func (o *GetPayoutsResponse) GetLinksOk() (*[]PagedPayeeResponseV3Links, bool)`
 
 GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinks
 
-`func (o *GetPayoutsResponse) SetLinks(v []PagedPayeeResponseLinks)`
+`func (o *GetPayoutsResponse) SetLinks(v []PagedPayeeResponseV3Links)`
 
 SetLinks sets Links field to given value.
 

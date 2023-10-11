@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Source Account Id | 
 **Balance** | Pointer to **int64** | Decimal implied | [optional] 
-**Currency** | Pointer to **string** |  | [optional] 
+**Currency** | Pointer to **string** | Valid ISO 4217 3 letter currency code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-4217-currency-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | [optional] 
 **FundingRef** | Pointer to **string** | The funding reference (will not be set for DECOUPLED accounts). | [optional] 
 **PhysicalAccountName** | Pointer to **string** | The physical account name (will not be set for DECOUPLED accounts). | [optional] 
 **RailsId** | **string** |  | 
@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **Pooled** | Pointer to **bool** | The pooled account flag (will not be set for DECOUPLED accounts). | [optional] 
 **CustomerId** | Pointer to **NullableString** |  | [optional] 
 **PhysicalAccountId** | Pointer to **string** | The physical account id (will not be set for DECOUPLED accounts). | [optional] 
-**Notifications** | Pointer to [**Notifications2**](Notifications2.md) |  | [optional] 
-**AutoTopUpConfig** | Pointer to [**AutoTopUpConfig2**](AutoTopUpConfig2.md) |  | [optional] 
+**Notifications** | Pointer to [**NotificationsV3**](NotificationsV3.md) |  | [optional] 
+**AutoTopUpConfig** | Pointer to [**AutoTopUpConfigV3**](AutoTopUpConfigV3.md) |  | [optional] 
 **Type** | **string** |  | 
-**Country** | Pointer to **string** | The two character ISO country code for the associated account | [optional] 
+**Country** | Pointer to **string** | Valid ISO 3166 2 character country code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-3166-country-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | [optional] 
 **Deleted** | Pointer to **bool** | An optional flag for whether the source account has been deleted. Only present in the response if true. | [optional] 
 **UserDeleted** | Pointer to **bool** | An optional flag for whether the source account has been deleted by a user. Only present in the response if true. | [optional] 
 **DeletedAt** | Pointer to **time.Time** | An optional timestamp when the source account has been deleted. Only present in the response if deleted. | [optional] 
@@ -319,20 +319,20 @@ HasPhysicalAccountId returns a boolean if a field has been set.
 
 ### GetNotifications
 
-`func (o *SourceAccountResponseV3) GetNotifications() Notifications2`
+`func (o *SourceAccountResponseV3) GetNotifications() NotificationsV3`
 
 GetNotifications returns the Notifications field if non-nil, zero value otherwise.
 
 ### GetNotificationsOk
 
-`func (o *SourceAccountResponseV3) GetNotificationsOk() (*Notifications2, bool)`
+`func (o *SourceAccountResponseV3) GetNotificationsOk() (*NotificationsV3, bool)`
 
 GetNotificationsOk returns a tuple with the Notifications field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotifications
 
-`func (o *SourceAccountResponseV3) SetNotifications(v Notifications2)`
+`func (o *SourceAccountResponseV3) SetNotifications(v NotificationsV3)`
 
 SetNotifications sets Notifications field to given value.
 
@@ -344,20 +344,20 @@ HasNotifications returns a boolean if a field has been set.
 
 ### GetAutoTopUpConfig
 
-`func (o *SourceAccountResponseV3) GetAutoTopUpConfig() AutoTopUpConfig2`
+`func (o *SourceAccountResponseV3) GetAutoTopUpConfig() AutoTopUpConfigV3`
 
 GetAutoTopUpConfig returns the AutoTopUpConfig field if non-nil, zero value otherwise.
 
 ### GetAutoTopUpConfigOk
 
-`func (o *SourceAccountResponseV3) GetAutoTopUpConfigOk() (*AutoTopUpConfig2, bool)`
+`func (o *SourceAccountResponseV3) GetAutoTopUpConfigOk() (*AutoTopUpConfigV3, bool)`
 
 GetAutoTopUpConfigOk returns a tuple with the AutoTopUpConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAutoTopUpConfig
 
-`func (o *SourceAccountResponseV3) SetAutoTopUpConfig(v AutoTopUpConfig2)`
+`func (o *SourceAccountResponseV3) SetAutoTopUpConfig(v AutoTopUpConfigV3)`
 
 SetAutoTopUpConfig sets AutoTopUpConfig field to given value.
 

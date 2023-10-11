@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SourceAccountName** | **string** |  | 
-**SourceAccountId** | **string** |  | 
+**SourceAccountName** | **string** | The name of the source account as referencec in the payout | 
+**SourceAccountId** | **string** | The id of the payout | 
 **Currency** | **string** | Valid ISO 4217 3 letter currency code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-4217-currency-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | 
-**TotalPayoutCost** | **int32** |  | 
+**TotalPayoutCost** | **int32** | The total amount (in mnor units) that will be debited from the source account for the payout | 
 
 ## Methods
 

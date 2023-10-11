@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RemoteId** | **string** |  | 
+**RemoteId** | **string** | The remoteId supplied by the payor that identifies the payee | 
 **CurrencyType** | **string** | Valid ISO 4217 3 letter currency code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-4217-currency-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | 
-**Amount** | **int32** |  | 
-**SourceAccountName** | **string** |  | 
-**PayorPaymentId** | **string** |  | 
-**RemoteSystemId** | Pointer to **string** |  | [optional] 
-**PaymentMetadata** | Pointer to **string** |  | [optional] 
-**Reason** | **string** |  | 
-**ReasonCode** | Pointer to **string** |  | [optional] 
-**LineNumber** | Pointer to **int32** |  | [optional] 
-**Message** | Pointer to **string** |  | [optional] 
+**Amount** | **int32** | The amount of the payment in minor units | 
+**SourceAccountName** | **string** | The identifier of the source account to debit the payment from | 
+**PayorPaymentId** | **string** | A reference identifier for the payor for the given payee payment | 
+**RemoteSystemId** | Pointer to **string** | &lt;p&gt;The identifier for the remote payments system if not Velo&lt;/p&gt;  | [optional] 
+**PaymentMetadata** | Pointer to **string** | &lt;p&gt;Metadata about the payment that may be relevant to the specific rails or remote system making the payout&lt;/p&gt; &lt;p&gt;The structure of the data will be dictated by the requirements of the payment rails&lt;/p&gt;  | [optional] 
+**Reason** | **string** | The reason for the payment being rejected | 
+**ReasonCode** | Pointer to **string** | The reason code as determined by Velo | [optional] 
+**LineNumber** | Pointer to **int32** | If the payment was submitted in a csv payout then this will be the line number of the payment in the file | [optional] 
+**Message** | Pointer to **string** | A more general rejection message than the reason property | [optional] 
 
 ## Methods
 

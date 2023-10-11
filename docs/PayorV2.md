@@ -7,12 +7,14 @@ Name | Type | Description | Notes
 **PayorId** | **string** |  | [readonly] 
 **PayorName** | **string** | The name of the payor. | 
 **PayorXid** | Pointer to **string** | A unique identifier that an external system uses to reference the payor in their system | [optional] 
+**Provider** | Pointer to **string** | The source of the payorXid, default is null which means Velo | [optional] 
 **Address** | Pointer to [**PayorAddressV2**](PayorAddressV2.md) |  | [optional] 
 **PrimaryContactName** | Pointer to **string** | Name of primary contact for the payor. | [optional] 
 **PrimaryContactPhone** | Pointer to **string** | Primary contact phone number for the payor. | [optional] 
 **PrimaryContactEmail** | Pointer to **string** | Primary contact email for the payor. | [optional] 
-**KycState** | Pointer to [**KycState**](KycState.md) |  | [optional] 
+**KycState** | Pointer to **string** | The kyc state of the payor. One of the following values: FAILED_KYC, PASSED_KYC, REQUIRES_KYC | [optional] [readonly] 
 **ManualLockout** | Pointer to **bool** | Whether or not the payor has been manually locked by the backoffice. | [optional] 
+**OpenBankingEnabled** | Pointer to **bool** | Is Open Banking supported for this payor | [optional] 
 **PayeeGracePeriodProcessingEnabled** | Pointer to **bool** | Whether grace period processing is enabled. | [optional] [readonly] 
 **PayeeGracePeriodDays** | Pointer to **int32** | The grace period for paying payees in days. | [optional] [readonly] 
 **CollectiveAlias** | Pointer to **string** | How the payor has chosen to refer to payees. | [optional] 
@@ -20,13 +22,15 @@ Name | Type | Description | Notes
 **DbaName** | Pointer to **string** | The payor’s &#39;Doing Business As&#39; name. | [optional] 
 **AllowsLanguageChoice** | Pointer to **bool** | Whether or not the payor allows language choice in the UI. | [optional] 
 **ReminderEmailsOptOut** | Pointer to **bool** | Whether or not the payor has opted-out of reminder emails being sent. | [optional] [readonly] 
-**Language** | Pointer to **string** | The payor’s language preference. Must be one of [EN, FR]. | [optional] 
+**Language** | Pointer to **string** | The payor’s language preference. Must be one of [EN, FR] | [optional] 
 **IncludesReports** | Pointer to **bool** |  | [optional] 
 **WuCustomerId** | Pointer to **string** |  | [optional] 
 **MaxMasterPayorAdmins** | Pointer to **int32** |  | [optional] 
-**PaymentRails** | Pointer to [**PaymentRails**](PaymentRails.md) |  | [optional] 
+**PaymentRails** | Pointer to **string** | The id of the payment rails | [optional] 
 **TransmissionTypes** | Pointer to [**TransmissionTypes2**](TransmissionTypes2.md) |  | [optional] 
 **RemoteSystemIds** | Pointer to **[]string** | The payor’s supported remote systems by id | [optional] 
+**UsdTxnValueReportingThreshold** | Pointer to **int32** | USD in minor units | [optional] 
+**ManagingPayees** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -111,6 +115,31 @@ SetPayorXid sets PayorXid field to given value.
 `func (o *PayorV2) HasPayorXid() bool`
 
 HasPayorXid returns a boolean if a field has been set.
+
+### GetProvider
+
+`func (o *PayorV2) GetProvider() string`
+
+GetProvider returns the Provider field if non-nil, zero value otherwise.
+
+### GetProviderOk
+
+`func (o *PayorV2) GetProviderOk() (*string, bool)`
+
+GetProviderOk returns a tuple with the Provider field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProvider
+
+`func (o *PayorV2) SetProvider(v string)`
+
+SetProvider sets Provider field to given value.
+
+### HasProvider
+
+`func (o *PayorV2) HasProvider() bool`
+
+HasProvider returns a boolean if a field has been set.
 
 ### GetAddress
 
@@ -214,20 +243,20 @@ HasPrimaryContactEmail returns a boolean if a field has been set.
 
 ### GetKycState
 
-`func (o *PayorV2) GetKycState() KycState`
+`func (o *PayorV2) GetKycState() string`
 
 GetKycState returns the KycState field if non-nil, zero value otherwise.
 
 ### GetKycStateOk
 
-`func (o *PayorV2) GetKycStateOk() (*KycState, bool)`
+`func (o *PayorV2) GetKycStateOk() (*string, bool)`
 
 GetKycStateOk returns a tuple with the KycState field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKycState
 
-`func (o *PayorV2) SetKycState(v KycState)`
+`func (o *PayorV2) SetKycState(v string)`
 
 SetKycState sets KycState field to given value.
 
@@ -261,6 +290,31 @@ SetManualLockout sets ManualLockout field to given value.
 `func (o *PayorV2) HasManualLockout() bool`
 
 HasManualLockout returns a boolean if a field has been set.
+
+### GetOpenBankingEnabled
+
+`func (o *PayorV2) GetOpenBankingEnabled() bool`
+
+GetOpenBankingEnabled returns the OpenBankingEnabled field if non-nil, zero value otherwise.
+
+### GetOpenBankingEnabledOk
+
+`func (o *PayorV2) GetOpenBankingEnabledOk() (*bool, bool)`
+
+GetOpenBankingEnabledOk returns a tuple with the OpenBankingEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenBankingEnabled
+
+`func (o *PayorV2) SetOpenBankingEnabled(v bool)`
+
+SetOpenBankingEnabled sets OpenBankingEnabled field to given value.
+
+### HasOpenBankingEnabled
+
+`func (o *PayorV2) HasOpenBankingEnabled() bool`
+
+HasOpenBankingEnabled returns a boolean if a field has been set.
 
 ### GetPayeeGracePeriodProcessingEnabled
 
@@ -539,20 +593,20 @@ HasMaxMasterPayorAdmins returns a boolean if a field has been set.
 
 ### GetPaymentRails
 
-`func (o *PayorV2) GetPaymentRails() PaymentRails`
+`func (o *PayorV2) GetPaymentRails() string`
 
 GetPaymentRails returns the PaymentRails field if non-nil, zero value otherwise.
 
 ### GetPaymentRailsOk
 
-`func (o *PayorV2) GetPaymentRailsOk() (*PaymentRails, bool)`
+`func (o *PayorV2) GetPaymentRailsOk() (*string, bool)`
 
 GetPaymentRailsOk returns a tuple with the PaymentRails field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentRails
 
-`func (o *PayorV2) SetPaymentRails(v PaymentRails)`
+`func (o *PayorV2) SetPaymentRails(v string)`
 
 SetPaymentRails sets PaymentRails field to given value.
 
@@ -611,6 +665,56 @@ SetRemoteSystemIds sets RemoteSystemIds field to given value.
 `func (o *PayorV2) HasRemoteSystemIds() bool`
 
 HasRemoteSystemIds returns a boolean if a field has been set.
+
+### GetUsdTxnValueReportingThreshold
+
+`func (o *PayorV2) GetUsdTxnValueReportingThreshold() int32`
+
+GetUsdTxnValueReportingThreshold returns the UsdTxnValueReportingThreshold field if non-nil, zero value otherwise.
+
+### GetUsdTxnValueReportingThresholdOk
+
+`func (o *PayorV2) GetUsdTxnValueReportingThresholdOk() (*int32, bool)`
+
+GetUsdTxnValueReportingThresholdOk returns a tuple with the UsdTxnValueReportingThreshold field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsdTxnValueReportingThreshold
+
+`func (o *PayorV2) SetUsdTxnValueReportingThreshold(v int32)`
+
+SetUsdTxnValueReportingThreshold sets UsdTxnValueReportingThreshold field to given value.
+
+### HasUsdTxnValueReportingThreshold
+
+`func (o *PayorV2) HasUsdTxnValueReportingThreshold() bool`
+
+HasUsdTxnValueReportingThreshold returns a boolean if a field has been set.
+
+### GetManagingPayees
+
+`func (o *PayorV2) GetManagingPayees() bool`
+
+GetManagingPayees returns the ManagingPayees field if non-nil, zero value otherwise.
+
+### GetManagingPayeesOk
+
+`func (o *PayorV2) GetManagingPayeesOk() (*bool, bool)`
+
+GetManagingPayeesOk returns a tuple with the ManagingPayees field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagingPayees
+
+`func (o *PayorV2) SetManagingPayees(v bool)`
+
+SetManagingPayees sets ManagingPayees field to given value.
+
+### HasManagingPayees
+
+`func (o *PayorV2) HasManagingPayees() bool`
+
+HasManagingPayees returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

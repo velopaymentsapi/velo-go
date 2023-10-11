@@ -4,19 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PaymentId** | **string** |  | 
-**RemoteId** | Pointer to **string** |  | [optional] 
-**Currency** | Pointer to **string** |  | [optional] 
-**Amount** | Pointer to **int32** |  | [optional] 
-**SourceAccountName** | Pointer to **string** |  | [optional] 
-**PayorPaymentId** | Pointer to **string** |  | [optional] 
-**PaymentMemo** | Pointer to **string** |  | [optional] 
+**PaymentId** | **string** | The id of the payment | 
+**RemoteId** | Pointer to **string** | The remoteId supplied by the payor that identifies the payee | [optional] 
+**Currency** | Pointer to **string** | The currency that the payment was made in | [optional] 
+**Amount** | Pointer to **int32** | The amount of the payment in minor units | [optional] 
+**SourceAccountName** | Pointer to **string** | The identifier of the source account to debit the payment from | [optional] 
+**PayorPaymentId** | Pointer to **string** | A reference identifier for the payor for the given payee payment | [optional] 
+**PaymentMemo** | Pointer to **string** | &lt;p&gt;Any value here will override the memo value in the parent payout&lt;/p&gt; &lt;p&gt;This should be the reference field on the statement seen by the payee (but not via ACH)&lt;/p&gt;  | [optional] 
 **Payee** | Pointer to [**PayoutPayeeV3**](PayoutPayeeV3.md) |  | [optional] 
-**Withdrawable** | Pointer to **bool** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**TransmissionType** | Pointer to [**TransmissionType**](TransmissionType.md) |  | [optional] 
-**RemoteSystemId** | Pointer to **string** |  | [optional] 
-**PaymentMetadata** | Pointer to **string** |  | [optional] 
+**Withdrawable** | Pointer to **bool** | Can this paynent be withdrawn | [optional] 
+**Status** | Pointer to **string** | Current status of payment. One of the following values: SUBMITTED, ACCEPTED, REJECTED, WITHDRAWN, RETURNED, AWAITING_FUNDS, FUNDED, UNFUNDED, CANCELLED, BANK_PAYMENT_REQUESTED | [optional] 
+**TransmissionType** | Pointer to **string** | The transmission method of the payment. One of the following values: ACH, SAME_DAY_ACH, WIRE, LOCAL, SWIFT | [optional] 
+**RemoteSystemId** | Pointer to **string** | &lt;p&gt;The identifier for the remote payments system if not Velo&lt;/p&gt;  | [optional] 
+**PaymentMetadata** | Pointer to **string** | &lt;p&gt;Metadata about the payment that may be relevant to the specific rails or remote system making the payout&lt;/p&gt; &lt;p&gt;The structure of the data will be dictated by the requirements of the payment rails&lt;/p&gt;  | [optional] 
+**AutoWithdrawnReasonCode** | Pointer to **string** | Populated only if the payment was automatically withdrawn during instruction for being invalid | [optional] 
+**RailsId** | Pointer to **string** | Indicates the 3rd party system involved in making this payment | [optional] 
 
 ## Methods
 
@@ -284,20 +286,20 @@ HasStatus returns a boolean if a field has been set.
 
 ### GetTransmissionType
 
-`func (o *PaymentV3) GetTransmissionType() TransmissionType`
+`func (o *PaymentV3) GetTransmissionType() string`
 
 GetTransmissionType returns the TransmissionType field if non-nil, zero value otherwise.
 
 ### GetTransmissionTypeOk
 
-`func (o *PaymentV3) GetTransmissionTypeOk() (*TransmissionType, bool)`
+`func (o *PaymentV3) GetTransmissionTypeOk() (*string, bool)`
 
 GetTransmissionTypeOk returns a tuple with the TransmissionType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTransmissionType
 
-`func (o *PaymentV3) SetTransmissionType(v TransmissionType)`
+`func (o *PaymentV3) SetTransmissionType(v string)`
 
 SetTransmissionType sets TransmissionType field to given value.
 
@@ -356,6 +358,56 @@ SetPaymentMetadata sets PaymentMetadata field to given value.
 `func (o *PaymentV3) HasPaymentMetadata() bool`
 
 HasPaymentMetadata returns a boolean if a field has been set.
+
+### GetAutoWithdrawnReasonCode
+
+`func (o *PaymentV3) GetAutoWithdrawnReasonCode() string`
+
+GetAutoWithdrawnReasonCode returns the AutoWithdrawnReasonCode field if non-nil, zero value otherwise.
+
+### GetAutoWithdrawnReasonCodeOk
+
+`func (o *PaymentV3) GetAutoWithdrawnReasonCodeOk() (*string, bool)`
+
+GetAutoWithdrawnReasonCodeOk returns a tuple with the AutoWithdrawnReasonCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoWithdrawnReasonCode
+
+`func (o *PaymentV3) SetAutoWithdrawnReasonCode(v string)`
+
+SetAutoWithdrawnReasonCode sets AutoWithdrawnReasonCode field to given value.
+
+### HasAutoWithdrawnReasonCode
+
+`func (o *PaymentV3) HasAutoWithdrawnReasonCode() bool`
+
+HasAutoWithdrawnReasonCode returns a boolean if a field has been set.
+
+### GetRailsId
+
+`func (o *PaymentV3) GetRailsId() string`
+
+GetRailsId returns the RailsId field if non-nil, zero value otherwise.
+
+### GetRailsIdOk
+
+`func (o *PaymentV3) GetRailsIdOk() (*string, bool)`
+
+GetRailsIdOk returns a tuple with the RailsId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRailsId
+
+`func (o *PaymentV3) SetRailsId(v string)`
+
+SetRailsId sets RailsId field to given value.
+
+### HasRailsId
+
+`func (o *PaymentV3) HasRailsId() bool`
+
+HasRailsId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

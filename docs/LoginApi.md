@@ -1,13 +1,13 @@
-# \LoginApi
+# \LoginAPI
 
 All URIs are relative to *https://api.sandbox.velopayments.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Logout**](LoginApi.md#Logout) | **Post** /v1/logout | Logout
-[**ResetPassword**](LoginApi.md#ResetPassword) | **Post** /v1/password/reset | Reset password
-[**ValidateAccessToken**](LoginApi.md#ValidateAccessToken) | **Post** /v1/validate | validate
-[**VeloAuth**](LoginApi.md#VeloAuth) | **Post** /v1/authenticate | Authentication endpoint
+[**Logout**](LoginAPI.md#Logout) | **Post** /v1/logout | Logout
+[**ResetPassword**](LoginAPI.md#ResetPassword) | **Post** /v1/password/reset | Reset password
+[**ValidateAccessToken**](LoginAPI.md#ValidateAccessToken) | **Post** /v1/validate | validate
+[**VeloAuth**](LoginAPI.md#VeloAuth) | **Post** /v1/authenticate | Authentication endpoint
 
 
 
@@ -28,16 +28,16 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LoginApi.Logout(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.LoginAPI.Logout(context.Background()).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.Logout``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LoginAPI.Logout``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -87,17 +87,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     resetPasswordRequest := *openapiclient.NewResetPasswordRequest("foo@example.com") // ResetPasswordRequest | An Email address to send the reset password link to
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LoginApi.ResetPassword(context.Background()).ResetPasswordRequest(resetPasswordRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.LoginAPI.ResetPassword(context.Background()).ResetPasswordRequest(resetPasswordRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.ResetPassword``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LoginAPI.ResetPassword``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -151,7 +151,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -159,14 +159,14 @@ func main() {
     authorization := "authorization_example" // string | Bearer token authorization leg of validate (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LoginApi.ValidateAccessToken(context.Background()).AccessTokenValidationRequest(accessTokenValidationRequest).Authorization(authorization).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.LoginAPI.ValidateAccessToken(context.Background()).AccessTokenValidationRequest(accessTokenValidationRequest).Authorization(authorization).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.ValidateAccessToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LoginAPI.ValidateAccessToken``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ValidateAccessToken`: AccessTokenResponse
-    fmt.Fprintf(os.Stdout, "Response from `LoginApi.ValidateAccessToken`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `LoginAPI.ValidateAccessToken`: %v\n", resp)
 }
 ```
 
@@ -219,21 +219,21 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     grantType := "grantType_example" // string | OAuth grant type. Should use 'client_credentials' (optional) (default to "client_credentials")
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LoginApi.VeloAuth(context.Background()).GrantType(grantType).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.LoginAPI.VeloAuth(context.Background()).GrantType(grantType).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LoginApi.VeloAuth``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LoginAPI.VeloAuth``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `VeloAuth`: AuthResponse
-    fmt.Fprintf(os.Stdout, "Response from `LoginApi.VeloAuth`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `LoginAPI.VeloAuth`: %v\n", resp)
 }
 ```
 

@@ -1,23 +1,22 @@
-# \PayorsApi
+# \PayorsAPI
 
 All URIs are relative to *https://api.sandbox.velopayments.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetPayorById**](PayorsApi.md#GetPayorById) | **Get** /v1/payors/{payorId} | Get Payor
-[**GetPayorByIdV2**](PayorsApi.md#GetPayorByIdV2) | **Get** /v2/payors/{payorId} | Get Payor
-[**PayorAddPayorLogo**](PayorsApi.md#PayorAddPayorLogo) | **Post** /v1/payors/{payorId}/branding/logos | Add Logo
-[**PayorCreateApiKeyRequest**](PayorsApi.md#PayorCreateApiKeyRequest) | **Post** /v1/payors/{payorId}/applications/{applicationId}/keys | Create API Key
-[**PayorCreateApplicationRequest**](PayorsApi.md#PayorCreateApplicationRequest) | **Post** /v1/payors/{payorId}/applications | Create Application
-[**PayorEmailOptOut**](PayorsApi.md#PayorEmailOptOut) | **Post** /v1/payors/{payorId}/reminderEmailsUpdate | Reminder Email Opt-Out
-[**PayorGetBranding**](PayorsApi.md#PayorGetBranding) | **Get** /v1/payors/{payorId}/branding | Get Branding
-[**PayorLinks**](PayorsApi.md#PayorLinks) | **Get** /v1/payorLinks | List Payor Links
+[**GetPayorByIdV1**](PayorsAPI.md#GetPayorByIdV1) | **Get** /v1/payors/{payorId} | Get Payor
+[**GetPayorByIdV2**](PayorsAPI.md#GetPayorByIdV2) | **Get** /v2/payors/{payorId} | Get Payor
+[**PayorAddPayorLogoV1**](PayorsAPI.md#PayorAddPayorLogoV1) | **Post** /v1/payors/{payorId}/branding/logos | Add Logo
+[**PayorCreateApiKeyV1**](PayorsAPI.md#PayorCreateApiKeyV1) | **Post** /v1/payors/{payorId}/applications/{applicationId}/keys | Create API Key
+[**PayorCreateApplicationV1**](PayorsAPI.md#PayorCreateApplicationV1) | **Post** /v1/payors/{payorId}/applications | Create Application
+[**PayorEmailOptOut**](PayorsAPI.md#PayorEmailOptOut) | **Post** /v1/payors/{payorId}/reminderEmailsUpdate | Reminder Email Opt-Out
+[**PayorGetBranding**](PayorsAPI.md#PayorGetBranding) | **Get** /v1/payors/{payorId}/branding | Get Branding
 
 
 
-## GetPayorById
+## GetPayorByIdV1
 
-> PayorV1 GetPayorById(ctx, payorId).Execute()
+> PayorV1 GetPayorByIdV1(ctx, payorId).Execute()
 
 Get Payor
 
@@ -32,21 +31,21 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayorsApi.GetPayorById(context.Background(), payorId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayorsAPI.GetPayorByIdV1(context.Background(), payorId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.GetPayorById``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsAPI.GetPayorByIdV1``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetPayorById`: PayorV1
-    fmt.Fprintf(os.Stdout, "Response from `PayorsApi.GetPayorById`: %v\n", resp)
+    // response from `GetPayorByIdV1`: PayorV1
+    fmt.Fprintf(os.Stdout, "Response from `PayorsAPI.GetPayorByIdV1`: %v\n", resp)
 }
 ```
 
@@ -56,11 +55,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md) | The Payor Id | 
+**payorId** | **string** | The Payor Id | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetPayorByIdRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetPayorByIdV1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -102,21 +101,21 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayorsApi.GetPayorByIdV2(context.Background(), payorId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayorsAPI.GetPayorByIdV2(context.Background(), payorId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.GetPayorByIdV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsAPI.GetPayorByIdV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetPayorByIdV2`: PayorV2
-    fmt.Fprintf(os.Stdout, "Response from `PayorsApi.GetPayorByIdV2`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `PayorsAPI.GetPayorByIdV2`: %v\n", resp)
 }
 ```
 
@@ -126,7 +125,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md) | The Payor Id | 
+**payorId** | **string** | The Payor Id | 
 
 ### Other Parameters
 
@@ -155,9 +154,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PayorAddPayorLogo
+## PayorAddPayorLogoV1
 
-> PayorAddPayorLogo(ctx, payorId).Logo(logo).Execute()
+> PayorAddPayorLogoV1(ctx, payorId).Logo(logo).Execute()
 
 Add Logo
 
@@ -172,18 +171,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
     logo := os.NewFile(1234, "some_file") // *os.File |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayorsApi.PayorAddPayorLogo(context.Background(), payorId).Logo(logo).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PayorsAPI.PayorAddPayorLogoV1(context.Background(), payorId).Logo(logo).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorAddPayorLogo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsAPI.PayorAddPayorLogoV1``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -195,11 +194,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md) | The Payor Id | 
+**payorId** | **string** | The Payor Id | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPayorAddPayorLogoRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPayorAddPayorLogoV1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -225,9 +224,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PayorCreateApiKeyRequest
+## PayorCreateApiKeyV1
 
-> PayorCreateApiKeyResponse PayorCreateApiKeyRequest(ctx, payorId, applicationId).PayorCreateApiKeyRequest(payorCreateApiKeyRequest).Execute()
+> PayorCreateApiKeyResponse PayorCreateApiKeyV1(ctx, payorId, applicationId).PayorCreateApiKeyRequest(payorCreateApiKeyRequest).Execute()
 
 Create API Key
 
@@ -242,23 +241,23 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The Payor Id
-    applicationId := TODO // string | Application ID
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
+    applicationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Application ID
     payorCreateApiKeyRequest := *openapiclient.NewPayorCreateApiKeyRequest("iOS Key", []string{"Roles_example"}) // PayorCreateApiKeyRequest | Details of application API key to create
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayorsApi.PayorCreateApiKeyRequest(context.Background(), payorId, applicationId).PayorCreateApiKeyRequest(payorCreateApiKeyRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayorsAPI.PayorCreateApiKeyV1(context.Background(), payorId, applicationId).PayorCreateApiKeyRequest(payorCreateApiKeyRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorCreateApiKeyRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsAPI.PayorCreateApiKeyV1``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PayorCreateApiKeyRequest`: PayorCreateApiKeyResponse
-    fmt.Fprintf(os.Stdout, "Response from `PayorsApi.PayorCreateApiKeyRequest`: %v\n", resp)
+    // response from `PayorCreateApiKeyV1`: PayorCreateApiKeyResponse
+    fmt.Fprintf(os.Stdout, "Response from `PayorsAPI.PayorCreateApiKeyV1`: %v\n", resp)
 }
 ```
 
@@ -268,12 +267,12 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md) | The Payor Id | 
-**applicationId** | [**string**](.md) | Application ID | 
+**payorId** | **string** | The Payor Id | 
+**applicationId** | **string** | Application ID | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPayorCreateApiKeyRequestRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPayorCreateApiKeyV1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -300,9 +299,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PayorCreateApplicationRequest
+## PayorCreateApplicationV1
 
-> PayorCreateApplicationRequest(ctx, payorId).PayorCreateApplicationRequest(payorCreateApplicationRequest).Execute()
+> PayorCreateApplicationV1(ctx, payorId).PayorCreateApplicationRequest(payorCreateApplicationRequest).Execute()
 
 Create Application
 
@@ -317,18 +316,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
     payorCreateApplicationRequest := *openapiclient.NewPayorCreateApplicationRequest("SAP") // PayorCreateApplicationRequest | Details of application to create
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayorsApi.PayorCreateApplicationRequest(context.Background(), payorId).PayorCreateApplicationRequest(payorCreateApplicationRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PayorsAPI.PayorCreateApplicationV1(context.Background(), payorId).PayorCreateApplicationRequest(payorCreateApplicationRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorCreateApplicationRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsAPI.PayorCreateApplicationV1``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -340,11 +339,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md) | The Payor Id | 
+**payorId** | **string** | The Payor Id | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPayorCreateApplicationRequestRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPayorCreateApplicationV1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -387,18 +386,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
     payorEmailOptOutRequest := *openapiclient.NewPayorEmailOptOutRequest(false) // PayorEmailOptOutRequest | Reminder Emails Opt-Out Request
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayorsApi.PayorEmailOptOut(context.Background(), payorId).PayorEmailOptOutRequest(payorEmailOptOutRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PayorsAPI.PayorEmailOptOut(context.Background(), payorId).PayorEmailOptOutRequest(payorEmailOptOutRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorEmailOptOut``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsAPI.PayorEmailOptOut``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -410,7 +409,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md) | The Payor Id | 
+**payorId** | **string** | The Payor Id | 
 
 ### Other Parameters
 
@@ -457,21 +456,21 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    payorId := TODO // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayorsApi.PayorGetBranding(context.Background(), payorId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PayorsAPI.PayorGetBranding(context.Background(), payorId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorGetBranding``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PayorsAPI.PayorGetBranding``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `PayorGetBranding`: PayorBrandingResponse
-    fmt.Fprintf(os.Stdout, "Response from `PayorsApi.PayorGetBranding`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `PayorsAPI.PayorGetBranding`: %v\n", resp)
 }
 ```
 
@@ -481,7 +480,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | [**string**](.md) | The Payor Id | 
+**payorId** | **string** | The Payor Id | 
 
 ### Other Parameters
 
@@ -495,76 +494,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PayorBrandingResponse**](PayorBrandingResponse.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PayorLinks
-
-> PayorLinksResponse PayorLinks(ctx).DescendantsOfPayor(descendantsOfPayor).ParentOfPayor(parentOfPayor).Fields(fields).Execute()
-
-List Payor Links
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    descendantsOfPayor := TODO // string | The Payor ID from which to start the query to show all descendants (optional)
-    parentOfPayor := TODO // string | Look for the parent payor details for this payor id (optional)
-    fields := "fields_example" // string | List of additional Payor fields to include in the response for each Payor. The values of payorId and payorName and always included for each Payor - 'fields' allows you to add to this. Example: ```fields=primaryContactEmail,kycState``` - will include payorId+payorName+primaryContactEmail+kycState for each Payor Default if not specified is to include only payorId and payorName. The supported fields are any combination of: primaryContactEmail,kycState  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PayorsApi.PayorLinks(context.Background()).DescendantsOfPayor(descendantsOfPayor).ParentOfPayor(parentOfPayor).Fields(fields).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayorsApi.PayorLinks``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PayorLinks`: PayorLinksResponse
-    fmt.Fprintf(os.Stdout, "Response from `PayorsApi.PayorLinks`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPayorLinksRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **descendantsOfPayor** | [**string**](string.md) | The Payor ID from which to start the query to show all descendants | 
- **parentOfPayor** | [**string**](string.md) | Look for the parent payor details for this payor id | 
- **fields** | **string** | List of additional Payor fields to include in the response for each Payor. The values of payorId and payorName and always included for each Payor - &#39;fields&#39; allows you to add to this. Example: &#x60;&#x60;&#x60;fields&#x3D;primaryContactEmail,kycState&#x60;&#x60;&#x60; - will include payorId+payorName+primaryContactEmail+kycState for each Payor Default if not specified is to include only payorId and payorName. The supported fields are any combination of: primaryContactEmail,kycState  | 
-
-### Return type
-
-[**PayorLinksResponse**](PayorLinksResponse.md)
 
 ### Authorization
 

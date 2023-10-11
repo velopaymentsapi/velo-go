@@ -4,16 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayoutId** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**PaymentsSubmitted** | Pointer to **int32** |  | [optional] 
-**PaymentsAccepted** | Pointer to **int32** |  | [optional] 
-**PaymentsRejected** | Pointer to **int32** |  | [optional] 
-**PaymentsWithdrawn** | **int32** |  | 
+**PayoutId** | Pointer to **string** | The id of the payout | [optional] 
+**Status** | Pointer to **string** | The status of the payout (one of SUBMITTED, ACCEPTED, REJECTED, QUOTED, INSTRUCTED, COMPLETED, INCOMPLETE, WITHDRAWN) | [optional] 
+**PaymentsSubmitted** | Pointer to **int32** | The number of payments that were submitted in the payout | [optional] 
+**PaymentsAccepted** | Pointer to **int32** | The number of payments that were accepted in the payout | [optional] 
+**PaymentsRejected** | Pointer to **int32** | The number of payments that were rejected in the payout | [optional] 
+**PaymentsWithdrawn** | **int32** | The number of payments that were withdrawn in the payout | 
 **FxSummaries** | [**[]QuoteFxSummaryV3**](QuoteFxSummaryV3.md) |  | 
 **Accounts** | [**[]SourceAccountV3**](SourceAccountV3.md) |  | 
 **AcceptedPayments** | [**[]AcceptedPaymentV3**](AcceptedPaymentV3.md) |  | 
 **RejectedPayments** | [**[]RejectedPaymentV3**](RejectedPaymentV3.md) |  | 
+**Schedule** | Pointer to [**PayoutScheduleV3**](PayoutScheduleV3.md) |  | [optional] 
 
 ## Methods
 
@@ -258,6 +259,31 @@ and a boolean to check if the value has been set.
 
 SetRejectedPayments sets RejectedPayments field to given value.
 
+
+### GetSchedule
+
+`func (o *PayoutSummaryResponseV3) GetSchedule() PayoutScheduleV3`
+
+GetSchedule returns the Schedule field if non-nil, zero value otherwise.
+
+### GetScheduleOk
+
+`func (o *PayoutSummaryResponseV3) GetScheduleOk() (*PayoutScheduleV3, bool)`
+
+GetScheduleOk returns a tuple with the Schedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchedule
+
+`func (o *PayoutSummaryResponseV3) SetSchedule(v PayoutScheduleV3)`
+
+SetSchedule sets Schedule field to given value.
+
+### HasSchedule
+
+`func (o *PayoutSummaryResponseV3) HasSchedule() bool`
+
+HasSchedule returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

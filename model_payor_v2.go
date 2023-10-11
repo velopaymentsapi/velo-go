@@ -1,10 +1,10 @@
 /*
- * Velo Payments APIs
- *
- * ## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
- *
- * API version: 2.26.124
- */
+Velo Payments APIs
+
+## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
+
+API version: 2.35.58
+*/
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
 
@@ -14,6 +14,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the PayorV2 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PayorV2{}
+
 // PayorV2 struct for PayorV2
 type PayorV2 struct {
 	PayorId string `json:"payorId"`
@@ -21,6 +24,8 @@ type PayorV2 struct {
 	PayorName string `json:"payorName"`
 	// A unique identifier that an external system uses to reference the payor in their system
 	PayorXid *string `json:"payorXid,omitempty"`
+	// The source of the payorXid, default is null which means Velo
+	Provider *string `json:"provider,omitempty"`
 	Address *PayorAddressV2 `json:"address,omitempty"`
 	// Name of primary contact for the payor.
 	PrimaryContactName *string `json:"primaryContactName,omitempty"`
@@ -28,9 +33,12 @@ type PayorV2 struct {
 	PrimaryContactPhone *string `json:"primaryContactPhone,omitempty"`
 	// Primary contact email for the payor.
 	PrimaryContactEmail *string `json:"primaryContactEmail,omitempty"`
-	KycState *KycState `json:"kycState,omitempty"`
+	// The kyc state of the payor. One of the following values: FAILED_KYC, PASSED_KYC, REQUIRES_KYC
+	KycState *string `json:"kycState,omitempty"`
 	// Whether or not the payor has been manually locked by the backoffice.
 	ManualLockout *bool `json:"manualLockout,omitempty"`
+	// Is Open Banking supported for this payor
+	OpenBankingEnabled *bool `json:"openBankingEnabled,omitempty"`
 	// Whether grace period processing is enabled.
 	PayeeGracePeriodProcessingEnabled *bool `json:"payeeGracePeriodProcessingEnabled,omitempty"`
 	// The grace period for paying payees in days.
@@ -45,15 +53,19 @@ type PayorV2 struct {
 	AllowsLanguageChoice *bool `json:"allowsLanguageChoice,omitempty"`
 	// Whether or not the payor has opted-out of reminder emails being sent.
 	ReminderEmailsOptOut *bool `json:"reminderEmailsOptOut,omitempty"`
-	// The payor’s language preference. Must be one of [EN, FR].
+	// The payor’s language preference. Must be one of [EN, FR]
 	Language *string `json:"language,omitempty"`
 	IncludesReports *bool `json:"includesReports,omitempty"`
 	WuCustomerId *string `json:"wuCustomerId,omitempty"`
 	MaxMasterPayorAdmins *int32 `json:"maxMasterPayorAdmins,omitempty"`
-	PaymentRails *PaymentRails `json:"paymentRails,omitempty"`
+	// The id of the payment rails
+	PaymentRails *string `json:"paymentRails,omitempty"`
 	TransmissionTypes *TransmissionTypes2 `json:"transmissionTypes,omitempty"`
 	// The payor’s supported remote systems by id
-	RemoteSystemIds *[]string `json:"remoteSystemIds,omitempty"`
+	RemoteSystemIds []string `json:"remoteSystemIds,omitempty"`
+	// USD in minor units
+	UsdTxnValueReportingThreshold *int32 `json:"usdTxnValueReportingThreshold,omitempty"`
+	ManagingPayees *bool `json:"managingPayees,omitempty"`
 }
 
 // NewPayorV2 instantiates a new PayorV2 object
@@ -88,7 +100,7 @@ func (o *PayorV2) GetPayorId() string {
 // GetPayorIdOk returns a tuple with the PayorId field value
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetPayorIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PayorId, true
@@ -112,7 +124,7 @@ func (o *PayorV2) GetPayorName() string {
 // GetPayorNameOk returns a tuple with the PayorName field value
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetPayorNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PayorName, true
@@ -125,7 +137,7 @@ func (o *PayorV2) SetPayorName(v string) {
 
 // GetPayorXid returns the PayorXid field value if set, zero value otherwise.
 func (o *PayorV2) GetPayorXid() string {
-	if o == nil || o.PayorXid == nil {
+	if o == nil || IsNil(o.PayorXid) {
 		var ret string
 		return ret
 	}
@@ -135,7 +147,7 @@ func (o *PayorV2) GetPayorXid() string {
 // GetPayorXidOk returns a tuple with the PayorXid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetPayorXidOk() (*string, bool) {
-	if o == nil || o.PayorXid == nil {
+	if o == nil || IsNil(o.PayorXid) {
 		return nil, false
 	}
 	return o.PayorXid, true
@@ -143,7 +155,7 @@ func (o *PayorV2) GetPayorXidOk() (*string, bool) {
 
 // HasPayorXid returns a boolean if a field has been set.
 func (o *PayorV2) HasPayorXid() bool {
-	if o != nil && o.PayorXid != nil {
+	if o != nil && !IsNil(o.PayorXid) {
 		return true
 	}
 
@@ -155,9 +167,41 @@ func (o *PayorV2) SetPayorXid(v string) {
 	o.PayorXid = &v
 }
 
+// GetProvider returns the Provider field value if set, zero value otherwise.
+func (o *PayorV2) GetProvider() string {
+	if o == nil || IsNil(o.Provider) {
+		var ret string
+		return ret
+	}
+	return *o.Provider
+}
+
+// GetProviderOk returns a tuple with the Provider field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PayorV2) GetProviderOk() (*string, bool) {
+	if o == nil || IsNil(o.Provider) {
+		return nil, false
+	}
+	return o.Provider, true
+}
+
+// HasProvider returns a boolean if a field has been set.
+func (o *PayorV2) HasProvider() bool {
+	if o != nil && !IsNil(o.Provider) {
+		return true
+	}
+
+	return false
+}
+
+// SetProvider gets a reference to the given string and assigns it to the Provider field.
+func (o *PayorV2) SetProvider(v string) {
+	o.Provider = &v
+}
+
 // GetAddress returns the Address field value if set, zero value otherwise.
 func (o *PayorV2) GetAddress() PayorAddressV2 {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		var ret PayorAddressV2
 		return ret
 	}
@@ -167,7 +211,7 @@ func (o *PayorV2) GetAddress() PayorAddressV2 {
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetAddressOk() (*PayorAddressV2, bool) {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		return nil, false
 	}
 	return o.Address, true
@@ -175,7 +219,7 @@ func (o *PayorV2) GetAddressOk() (*PayorAddressV2, bool) {
 
 // HasAddress returns a boolean if a field has been set.
 func (o *PayorV2) HasAddress() bool {
-	if o != nil && o.Address != nil {
+	if o != nil && !IsNil(o.Address) {
 		return true
 	}
 
@@ -189,7 +233,7 @@ func (o *PayorV2) SetAddress(v PayorAddressV2) {
 
 // GetPrimaryContactName returns the PrimaryContactName field value if set, zero value otherwise.
 func (o *PayorV2) GetPrimaryContactName() string {
-	if o == nil || o.PrimaryContactName == nil {
+	if o == nil || IsNil(o.PrimaryContactName) {
 		var ret string
 		return ret
 	}
@@ -199,7 +243,7 @@ func (o *PayorV2) GetPrimaryContactName() string {
 // GetPrimaryContactNameOk returns a tuple with the PrimaryContactName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetPrimaryContactNameOk() (*string, bool) {
-	if o == nil || o.PrimaryContactName == nil {
+	if o == nil || IsNil(o.PrimaryContactName) {
 		return nil, false
 	}
 	return o.PrimaryContactName, true
@@ -207,7 +251,7 @@ func (o *PayorV2) GetPrimaryContactNameOk() (*string, bool) {
 
 // HasPrimaryContactName returns a boolean if a field has been set.
 func (o *PayorV2) HasPrimaryContactName() bool {
-	if o != nil && o.PrimaryContactName != nil {
+	if o != nil && !IsNil(o.PrimaryContactName) {
 		return true
 	}
 
@@ -221,7 +265,7 @@ func (o *PayorV2) SetPrimaryContactName(v string) {
 
 // GetPrimaryContactPhone returns the PrimaryContactPhone field value if set, zero value otherwise.
 func (o *PayorV2) GetPrimaryContactPhone() string {
-	if o == nil || o.PrimaryContactPhone == nil {
+	if o == nil || IsNil(o.PrimaryContactPhone) {
 		var ret string
 		return ret
 	}
@@ -231,7 +275,7 @@ func (o *PayorV2) GetPrimaryContactPhone() string {
 // GetPrimaryContactPhoneOk returns a tuple with the PrimaryContactPhone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetPrimaryContactPhoneOk() (*string, bool) {
-	if o == nil || o.PrimaryContactPhone == nil {
+	if o == nil || IsNil(o.PrimaryContactPhone) {
 		return nil, false
 	}
 	return o.PrimaryContactPhone, true
@@ -239,7 +283,7 @@ func (o *PayorV2) GetPrimaryContactPhoneOk() (*string, bool) {
 
 // HasPrimaryContactPhone returns a boolean if a field has been set.
 func (o *PayorV2) HasPrimaryContactPhone() bool {
-	if o != nil && o.PrimaryContactPhone != nil {
+	if o != nil && !IsNil(o.PrimaryContactPhone) {
 		return true
 	}
 
@@ -253,7 +297,7 @@ func (o *PayorV2) SetPrimaryContactPhone(v string) {
 
 // GetPrimaryContactEmail returns the PrimaryContactEmail field value if set, zero value otherwise.
 func (o *PayorV2) GetPrimaryContactEmail() string {
-	if o == nil || o.PrimaryContactEmail == nil {
+	if o == nil || IsNil(o.PrimaryContactEmail) {
 		var ret string
 		return ret
 	}
@@ -263,7 +307,7 @@ func (o *PayorV2) GetPrimaryContactEmail() string {
 // GetPrimaryContactEmailOk returns a tuple with the PrimaryContactEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetPrimaryContactEmailOk() (*string, bool) {
-	if o == nil || o.PrimaryContactEmail == nil {
+	if o == nil || IsNil(o.PrimaryContactEmail) {
 		return nil, false
 	}
 	return o.PrimaryContactEmail, true
@@ -271,7 +315,7 @@ func (o *PayorV2) GetPrimaryContactEmailOk() (*string, bool) {
 
 // HasPrimaryContactEmail returns a boolean if a field has been set.
 func (o *PayorV2) HasPrimaryContactEmail() bool {
-	if o != nil && o.PrimaryContactEmail != nil {
+	if o != nil && !IsNil(o.PrimaryContactEmail) {
 		return true
 	}
 
@@ -284,9 +328,9 @@ func (o *PayorV2) SetPrimaryContactEmail(v string) {
 }
 
 // GetKycState returns the KycState field value if set, zero value otherwise.
-func (o *PayorV2) GetKycState() KycState {
-	if o == nil || o.KycState == nil {
-		var ret KycState
+func (o *PayorV2) GetKycState() string {
+	if o == nil || IsNil(o.KycState) {
+		var ret string
 		return ret
 	}
 	return *o.KycState
@@ -294,8 +338,8 @@ func (o *PayorV2) GetKycState() KycState {
 
 // GetKycStateOk returns a tuple with the KycState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PayorV2) GetKycStateOk() (*KycState, bool) {
-	if o == nil || o.KycState == nil {
+func (o *PayorV2) GetKycStateOk() (*string, bool) {
+	if o == nil || IsNil(o.KycState) {
 		return nil, false
 	}
 	return o.KycState, true
@@ -303,21 +347,21 @@ func (o *PayorV2) GetKycStateOk() (*KycState, bool) {
 
 // HasKycState returns a boolean if a field has been set.
 func (o *PayorV2) HasKycState() bool {
-	if o != nil && o.KycState != nil {
+	if o != nil && !IsNil(o.KycState) {
 		return true
 	}
 
 	return false
 }
 
-// SetKycState gets a reference to the given KycState and assigns it to the KycState field.
-func (o *PayorV2) SetKycState(v KycState) {
+// SetKycState gets a reference to the given string and assigns it to the KycState field.
+func (o *PayorV2) SetKycState(v string) {
 	o.KycState = &v
 }
 
 // GetManualLockout returns the ManualLockout field value if set, zero value otherwise.
 func (o *PayorV2) GetManualLockout() bool {
-	if o == nil || o.ManualLockout == nil {
+	if o == nil || IsNil(o.ManualLockout) {
 		var ret bool
 		return ret
 	}
@@ -327,7 +371,7 @@ func (o *PayorV2) GetManualLockout() bool {
 // GetManualLockoutOk returns a tuple with the ManualLockout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetManualLockoutOk() (*bool, bool) {
-	if o == nil || o.ManualLockout == nil {
+	if o == nil || IsNil(o.ManualLockout) {
 		return nil, false
 	}
 	return o.ManualLockout, true
@@ -335,7 +379,7 @@ func (o *PayorV2) GetManualLockoutOk() (*bool, bool) {
 
 // HasManualLockout returns a boolean if a field has been set.
 func (o *PayorV2) HasManualLockout() bool {
-	if o != nil && o.ManualLockout != nil {
+	if o != nil && !IsNil(o.ManualLockout) {
 		return true
 	}
 
@@ -347,9 +391,41 @@ func (o *PayorV2) SetManualLockout(v bool) {
 	o.ManualLockout = &v
 }
 
+// GetOpenBankingEnabled returns the OpenBankingEnabled field value if set, zero value otherwise.
+func (o *PayorV2) GetOpenBankingEnabled() bool {
+	if o == nil || IsNil(o.OpenBankingEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.OpenBankingEnabled
+}
+
+// GetOpenBankingEnabledOk returns a tuple with the OpenBankingEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PayorV2) GetOpenBankingEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.OpenBankingEnabled) {
+		return nil, false
+	}
+	return o.OpenBankingEnabled, true
+}
+
+// HasOpenBankingEnabled returns a boolean if a field has been set.
+func (o *PayorV2) HasOpenBankingEnabled() bool {
+	if o != nil && !IsNil(o.OpenBankingEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenBankingEnabled gets a reference to the given bool and assigns it to the OpenBankingEnabled field.
+func (o *PayorV2) SetOpenBankingEnabled(v bool) {
+	o.OpenBankingEnabled = &v
+}
+
 // GetPayeeGracePeriodProcessingEnabled returns the PayeeGracePeriodProcessingEnabled field value if set, zero value otherwise.
 func (o *PayorV2) GetPayeeGracePeriodProcessingEnabled() bool {
-	if o == nil || o.PayeeGracePeriodProcessingEnabled == nil {
+	if o == nil || IsNil(o.PayeeGracePeriodProcessingEnabled) {
 		var ret bool
 		return ret
 	}
@@ -359,7 +435,7 @@ func (o *PayorV2) GetPayeeGracePeriodProcessingEnabled() bool {
 // GetPayeeGracePeriodProcessingEnabledOk returns a tuple with the PayeeGracePeriodProcessingEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetPayeeGracePeriodProcessingEnabledOk() (*bool, bool) {
-	if o == nil || o.PayeeGracePeriodProcessingEnabled == nil {
+	if o == nil || IsNil(o.PayeeGracePeriodProcessingEnabled) {
 		return nil, false
 	}
 	return o.PayeeGracePeriodProcessingEnabled, true
@@ -367,7 +443,7 @@ func (o *PayorV2) GetPayeeGracePeriodProcessingEnabledOk() (*bool, bool) {
 
 // HasPayeeGracePeriodProcessingEnabled returns a boolean if a field has been set.
 func (o *PayorV2) HasPayeeGracePeriodProcessingEnabled() bool {
-	if o != nil && o.PayeeGracePeriodProcessingEnabled != nil {
+	if o != nil && !IsNil(o.PayeeGracePeriodProcessingEnabled) {
 		return true
 	}
 
@@ -381,7 +457,7 @@ func (o *PayorV2) SetPayeeGracePeriodProcessingEnabled(v bool) {
 
 // GetPayeeGracePeriodDays returns the PayeeGracePeriodDays field value if set, zero value otherwise.
 func (o *PayorV2) GetPayeeGracePeriodDays() int32 {
-	if o == nil || o.PayeeGracePeriodDays == nil {
+	if o == nil || IsNil(o.PayeeGracePeriodDays) {
 		var ret int32
 		return ret
 	}
@@ -391,7 +467,7 @@ func (o *PayorV2) GetPayeeGracePeriodDays() int32 {
 // GetPayeeGracePeriodDaysOk returns a tuple with the PayeeGracePeriodDays field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetPayeeGracePeriodDaysOk() (*int32, bool) {
-	if o == nil || o.PayeeGracePeriodDays == nil {
+	if o == nil || IsNil(o.PayeeGracePeriodDays) {
 		return nil, false
 	}
 	return o.PayeeGracePeriodDays, true
@@ -399,7 +475,7 @@ func (o *PayorV2) GetPayeeGracePeriodDaysOk() (*int32, bool) {
 
 // HasPayeeGracePeriodDays returns a boolean if a field has been set.
 func (o *PayorV2) HasPayeeGracePeriodDays() bool {
-	if o != nil && o.PayeeGracePeriodDays != nil {
+	if o != nil && !IsNil(o.PayeeGracePeriodDays) {
 		return true
 	}
 
@@ -413,7 +489,7 @@ func (o *PayorV2) SetPayeeGracePeriodDays(v int32) {
 
 // GetCollectiveAlias returns the CollectiveAlias field value if set, zero value otherwise.
 func (o *PayorV2) GetCollectiveAlias() string {
-	if o == nil || o.CollectiveAlias == nil {
+	if o == nil || IsNil(o.CollectiveAlias) {
 		var ret string
 		return ret
 	}
@@ -423,7 +499,7 @@ func (o *PayorV2) GetCollectiveAlias() string {
 // GetCollectiveAliasOk returns a tuple with the CollectiveAlias field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetCollectiveAliasOk() (*string, bool) {
-	if o == nil || o.CollectiveAlias == nil {
+	if o == nil || IsNil(o.CollectiveAlias) {
 		return nil, false
 	}
 	return o.CollectiveAlias, true
@@ -431,7 +507,7 @@ func (o *PayorV2) GetCollectiveAliasOk() (*string, bool) {
 
 // HasCollectiveAlias returns a boolean if a field has been set.
 func (o *PayorV2) HasCollectiveAlias() bool {
-	if o != nil && o.CollectiveAlias != nil {
+	if o != nil && !IsNil(o.CollectiveAlias) {
 		return true
 	}
 
@@ -445,7 +521,7 @@ func (o *PayorV2) SetCollectiveAlias(v string) {
 
 // GetSupportContact returns the SupportContact field value if set, zero value otherwise.
 func (o *PayorV2) GetSupportContact() string {
-	if o == nil || o.SupportContact == nil {
+	if o == nil || IsNil(o.SupportContact) {
 		var ret string
 		return ret
 	}
@@ -455,7 +531,7 @@ func (o *PayorV2) GetSupportContact() string {
 // GetSupportContactOk returns a tuple with the SupportContact field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetSupportContactOk() (*string, bool) {
-	if o == nil || o.SupportContact == nil {
+	if o == nil || IsNil(o.SupportContact) {
 		return nil, false
 	}
 	return o.SupportContact, true
@@ -463,7 +539,7 @@ func (o *PayorV2) GetSupportContactOk() (*string, bool) {
 
 // HasSupportContact returns a boolean if a field has been set.
 func (o *PayorV2) HasSupportContact() bool {
-	if o != nil && o.SupportContact != nil {
+	if o != nil && !IsNil(o.SupportContact) {
 		return true
 	}
 
@@ -477,7 +553,7 @@ func (o *PayorV2) SetSupportContact(v string) {
 
 // GetDbaName returns the DbaName field value if set, zero value otherwise.
 func (o *PayorV2) GetDbaName() string {
-	if o == nil || o.DbaName == nil {
+	if o == nil || IsNil(o.DbaName) {
 		var ret string
 		return ret
 	}
@@ -487,7 +563,7 @@ func (o *PayorV2) GetDbaName() string {
 // GetDbaNameOk returns a tuple with the DbaName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetDbaNameOk() (*string, bool) {
-	if o == nil || o.DbaName == nil {
+	if o == nil || IsNil(o.DbaName) {
 		return nil, false
 	}
 	return o.DbaName, true
@@ -495,7 +571,7 @@ func (o *PayorV2) GetDbaNameOk() (*string, bool) {
 
 // HasDbaName returns a boolean if a field has been set.
 func (o *PayorV2) HasDbaName() bool {
-	if o != nil && o.DbaName != nil {
+	if o != nil && !IsNil(o.DbaName) {
 		return true
 	}
 
@@ -509,7 +585,7 @@ func (o *PayorV2) SetDbaName(v string) {
 
 // GetAllowsLanguageChoice returns the AllowsLanguageChoice field value if set, zero value otherwise.
 func (o *PayorV2) GetAllowsLanguageChoice() bool {
-	if o == nil || o.AllowsLanguageChoice == nil {
+	if o == nil || IsNil(o.AllowsLanguageChoice) {
 		var ret bool
 		return ret
 	}
@@ -519,7 +595,7 @@ func (o *PayorV2) GetAllowsLanguageChoice() bool {
 // GetAllowsLanguageChoiceOk returns a tuple with the AllowsLanguageChoice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetAllowsLanguageChoiceOk() (*bool, bool) {
-	if o == nil || o.AllowsLanguageChoice == nil {
+	if o == nil || IsNil(o.AllowsLanguageChoice) {
 		return nil, false
 	}
 	return o.AllowsLanguageChoice, true
@@ -527,7 +603,7 @@ func (o *PayorV2) GetAllowsLanguageChoiceOk() (*bool, bool) {
 
 // HasAllowsLanguageChoice returns a boolean if a field has been set.
 func (o *PayorV2) HasAllowsLanguageChoice() bool {
-	if o != nil && o.AllowsLanguageChoice != nil {
+	if o != nil && !IsNil(o.AllowsLanguageChoice) {
 		return true
 	}
 
@@ -541,7 +617,7 @@ func (o *PayorV2) SetAllowsLanguageChoice(v bool) {
 
 // GetReminderEmailsOptOut returns the ReminderEmailsOptOut field value if set, zero value otherwise.
 func (o *PayorV2) GetReminderEmailsOptOut() bool {
-	if o == nil || o.ReminderEmailsOptOut == nil {
+	if o == nil || IsNil(o.ReminderEmailsOptOut) {
 		var ret bool
 		return ret
 	}
@@ -551,7 +627,7 @@ func (o *PayorV2) GetReminderEmailsOptOut() bool {
 // GetReminderEmailsOptOutOk returns a tuple with the ReminderEmailsOptOut field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetReminderEmailsOptOutOk() (*bool, bool) {
-	if o == nil || o.ReminderEmailsOptOut == nil {
+	if o == nil || IsNil(o.ReminderEmailsOptOut) {
 		return nil, false
 	}
 	return o.ReminderEmailsOptOut, true
@@ -559,7 +635,7 @@ func (o *PayorV2) GetReminderEmailsOptOutOk() (*bool, bool) {
 
 // HasReminderEmailsOptOut returns a boolean if a field has been set.
 func (o *PayorV2) HasReminderEmailsOptOut() bool {
-	if o != nil && o.ReminderEmailsOptOut != nil {
+	if o != nil && !IsNil(o.ReminderEmailsOptOut) {
 		return true
 	}
 
@@ -573,7 +649,7 @@ func (o *PayorV2) SetReminderEmailsOptOut(v bool) {
 
 // GetLanguage returns the Language field value if set, zero value otherwise.
 func (o *PayorV2) GetLanguage() string {
-	if o == nil || o.Language == nil {
+	if o == nil || IsNil(o.Language) {
 		var ret string
 		return ret
 	}
@@ -583,7 +659,7 @@ func (o *PayorV2) GetLanguage() string {
 // GetLanguageOk returns a tuple with the Language field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetLanguageOk() (*string, bool) {
-	if o == nil || o.Language == nil {
+	if o == nil || IsNil(o.Language) {
 		return nil, false
 	}
 	return o.Language, true
@@ -591,7 +667,7 @@ func (o *PayorV2) GetLanguageOk() (*string, bool) {
 
 // HasLanguage returns a boolean if a field has been set.
 func (o *PayorV2) HasLanguage() bool {
-	if o != nil && o.Language != nil {
+	if o != nil && !IsNil(o.Language) {
 		return true
 	}
 
@@ -605,7 +681,7 @@ func (o *PayorV2) SetLanguage(v string) {
 
 // GetIncludesReports returns the IncludesReports field value if set, zero value otherwise.
 func (o *PayorV2) GetIncludesReports() bool {
-	if o == nil || o.IncludesReports == nil {
+	if o == nil || IsNil(o.IncludesReports) {
 		var ret bool
 		return ret
 	}
@@ -615,7 +691,7 @@ func (o *PayorV2) GetIncludesReports() bool {
 // GetIncludesReportsOk returns a tuple with the IncludesReports field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetIncludesReportsOk() (*bool, bool) {
-	if o == nil || o.IncludesReports == nil {
+	if o == nil || IsNil(o.IncludesReports) {
 		return nil, false
 	}
 	return o.IncludesReports, true
@@ -623,7 +699,7 @@ func (o *PayorV2) GetIncludesReportsOk() (*bool, bool) {
 
 // HasIncludesReports returns a boolean if a field has been set.
 func (o *PayorV2) HasIncludesReports() bool {
-	if o != nil && o.IncludesReports != nil {
+	if o != nil && !IsNil(o.IncludesReports) {
 		return true
 	}
 
@@ -637,7 +713,7 @@ func (o *PayorV2) SetIncludesReports(v bool) {
 
 // GetWuCustomerId returns the WuCustomerId field value if set, zero value otherwise.
 func (o *PayorV2) GetWuCustomerId() string {
-	if o == nil || o.WuCustomerId == nil {
+	if o == nil || IsNil(o.WuCustomerId) {
 		var ret string
 		return ret
 	}
@@ -647,7 +723,7 @@ func (o *PayorV2) GetWuCustomerId() string {
 // GetWuCustomerIdOk returns a tuple with the WuCustomerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetWuCustomerIdOk() (*string, bool) {
-	if o == nil || o.WuCustomerId == nil {
+	if o == nil || IsNil(o.WuCustomerId) {
 		return nil, false
 	}
 	return o.WuCustomerId, true
@@ -655,7 +731,7 @@ func (o *PayorV2) GetWuCustomerIdOk() (*string, bool) {
 
 // HasWuCustomerId returns a boolean if a field has been set.
 func (o *PayorV2) HasWuCustomerId() bool {
-	if o != nil && o.WuCustomerId != nil {
+	if o != nil && !IsNil(o.WuCustomerId) {
 		return true
 	}
 
@@ -669,7 +745,7 @@ func (o *PayorV2) SetWuCustomerId(v string) {
 
 // GetMaxMasterPayorAdmins returns the MaxMasterPayorAdmins field value if set, zero value otherwise.
 func (o *PayorV2) GetMaxMasterPayorAdmins() int32 {
-	if o == nil || o.MaxMasterPayorAdmins == nil {
+	if o == nil || IsNil(o.MaxMasterPayorAdmins) {
 		var ret int32
 		return ret
 	}
@@ -679,7 +755,7 @@ func (o *PayorV2) GetMaxMasterPayorAdmins() int32 {
 // GetMaxMasterPayorAdminsOk returns a tuple with the MaxMasterPayorAdmins field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetMaxMasterPayorAdminsOk() (*int32, bool) {
-	if o == nil || o.MaxMasterPayorAdmins == nil {
+	if o == nil || IsNil(o.MaxMasterPayorAdmins) {
 		return nil, false
 	}
 	return o.MaxMasterPayorAdmins, true
@@ -687,7 +763,7 @@ func (o *PayorV2) GetMaxMasterPayorAdminsOk() (*int32, bool) {
 
 // HasMaxMasterPayorAdmins returns a boolean if a field has been set.
 func (o *PayorV2) HasMaxMasterPayorAdmins() bool {
-	if o != nil && o.MaxMasterPayorAdmins != nil {
+	if o != nil && !IsNil(o.MaxMasterPayorAdmins) {
 		return true
 	}
 
@@ -700,9 +776,9 @@ func (o *PayorV2) SetMaxMasterPayorAdmins(v int32) {
 }
 
 // GetPaymentRails returns the PaymentRails field value if set, zero value otherwise.
-func (o *PayorV2) GetPaymentRails() PaymentRails {
-	if o == nil || o.PaymentRails == nil {
-		var ret PaymentRails
+func (o *PayorV2) GetPaymentRails() string {
+	if o == nil || IsNil(o.PaymentRails) {
+		var ret string
 		return ret
 	}
 	return *o.PaymentRails
@@ -710,8 +786,8 @@ func (o *PayorV2) GetPaymentRails() PaymentRails {
 
 // GetPaymentRailsOk returns a tuple with the PaymentRails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PayorV2) GetPaymentRailsOk() (*PaymentRails, bool) {
-	if o == nil || o.PaymentRails == nil {
+func (o *PayorV2) GetPaymentRailsOk() (*string, bool) {
+	if o == nil || IsNil(o.PaymentRails) {
 		return nil, false
 	}
 	return o.PaymentRails, true
@@ -719,21 +795,21 @@ func (o *PayorV2) GetPaymentRailsOk() (*PaymentRails, bool) {
 
 // HasPaymentRails returns a boolean if a field has been set.
 func (o *PayorV2) HasPaymentRails() bool {
-	if o != nil && o.PaymentRails != nil {
+	if o != nil && !IsNil(o.PaymentRails) {
 		return true
 	}
 
 	return false
 }
 
-// SetPaymentRails gets a reference to the given PaymentRails and assigns it to the PaymentRails field.
-func (o *PayorV2) SetPaymentRails(v PaymentRails) {
+// SetPaymentRails gets a reference to the given string and assigns it to the PaymentRails field.
+func (o *PayorV2) SetPaymentRails(v string) {
 	o.PaymentRails = &v
 }
 
 // GetTransmissionTypes returns the TransmissionTypes field value if set, zero value otherwise.
 func (o *PayorV2) GetTransmissionTypes() TransmissionTypes2 {
-	if o == nil || o.TransmissionTypes == nil {
+	if o == nil || IsNil(o.TransmissionTypes) {
 		var ret TransmissionTypes2
 		return ret
 	}
@@ -743,7 +819,7 @@ func (o *PayorV2) GetTransmissionTypes() TransmissionTypes2 {
 // GetTransmissionTypesOk returns a tuple with the TransmissionTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PayorV2) GetTransmissionTypesOk() (*TransmissionTypes2, bool) {
-	if o == nil || o.TransmissionTypes == nil {
+	if o == nil || IsNil(o.TransmissionTypes) {
 		return nil, false
 	}
 	return o.TransmissionTypes, true
@@ -751,7 +827,7 @@ func (o *PayorV2) GetTransmissionTypesOk() (*TransmissionTypes2, bool) {
 
 // HasTransmissionTypes returns a boolean if a field has been set.
 func (o *PayorV2) HasTransmissionTypes() bool {
-	if o != nil && o.TransmissionTypes != nil {
+	if o != nil && !IsNil(o.TransmissionTypes) {
 		return true
 	}
 
@@ -765,17 +841,17 @@ func (o *PayorV2) SetTransmissionTypes(v TransmissionTypes2) {
 
 // GetRemoteSystemIds returns the RemoteSystemIds field value if set, zero value otherwise.
 func (o *PayorV2) GetRemoteSystemIds() []string {
-	if o == nil || o.RemoteSystemIds == nil {
+	if o == nil || IsNil(o.RemoteSystemIds) {
 		var ret []string
 		return ret
 	}
-	return *o.RemoteSystemIds
+	return o.RemoteSystemIds
 }
 
 // GetRemoteSystemIdsOk returns a tuple with the RemoteSystemIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PayorV2) GetRemoteSystemIdsOk() (*[]string, bool) {
-	if o == nil || o.RemoteSystemIds == nil {
+func (o *PayorV2) GetRemoteSystemIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.RemoteSystemIds) {
 		return nil, false
 	}
 	return o.RemoteSystemIds, true
@@ -783,7 +859,7 @@ func (o *PayorV2) GetRemoteSystemIdsOk() (*[]string, bool) {
 
 // HasRemoteSystemIds returns a boolean if a field has been set.
 func (o *PayorV2) HasRemoteSystemIds() bool {
-	if o != nil && o.RemoteSystemIds != nil {
+	if o != nil && !IsNil(o.RemoteSystemIds) {
 		return true
 	}
 
@@ -792,81 +868,161 @@ func (o *PayorV2) HasRemoteSystemIds() bool {
 
 // SetRemoteSystemIds gets a reference to the given []string and assigns it to the RemoteSystemIds field.
 func (o *PayorV2) SetRemoteSystemIds(v []string) {
-	o.RemoteSystemIds = &v
+	o.RemoteSystemIds = v
+}
+
+// GetUsdTxnValueReportingThreshold returns the UsdTxnValueReportingThreshold field value if set, zero value otherwise.
+func (o *PayorV2) GetUsdTxnValueReportingThreshold() int32 {
+	if o == nil || IsNil(o.UsdTxnValueReportingThreshold) {
+		var ret int32
+		return ret
+	}
+	return *o.UsdTxnValueReportingThreshold
+}
+
+// GetUsdTxnValueReportingThresholdOk returns a tuple with the UsdTxnValueReportingThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PayorV2) GetUsdTxnValueReportingThresholdOk() (*int32, bool) {
+	if o == nil || IsNil(o.UsdTxnValueReportingThreshold) {
+		return nil, false
+	}
+	return o.UsdTxnValueReportingThreshold, true
+}
+
+// HasUsdTxnValueReportingThreshold returns a boolean if a field has been set.
+func (o *PayorV2) HasUsdTxnValueReportingThreshold() bool {
+	if o != nil && !IsNil(o.UsdTxnValueReportingThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsdTxnValueReportingThreshold gets a reference to the given int32 and assigns it to the UsdTxnValueReportingThreshold field.
+func (o *PayorV2) SetUsdTxnValueReportingThreshold(v int32) {
+	o.UsdTxnValueReportingThreshold = &v
+}
+
+// GetManagingPayees returns the ManagingPayees field value if set, zero value otherwise.
+func (o *PayorV2) GetManagingPayees() bool {
+	if o == nil || IsNil(o.ManagingPayees) {
+		var ret bool
+		return ret
+	}
+	return *o.ManagingPayees
+}
+
+// GetManagingPayeesOk returns a tuple with the ManagingPayees field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PayorV2) GetManagingPayeesOk() (*bool, bool) {
+	if o == nil || IsNil(o.ManagingPayees) {
+		return nil, false
+	}
+	return o.ManagingPayees, true
+}
+
+// HasManagingPayees returns a boolean if a field has been set.
+func (o *PayorV2) HasManagingPayees() bool {
+	if o != nil && !IsNil(o.ManagingPayees) {
+		return true
+	}
+
+	return false
+}
+
+// SetManagingPayees gets a reference to the given bool and assigns it to the ManagingPayees field.
+func (o *PayorV2) SetManagingPayees(v bool) {
+	o.ManagingPayees = &v
 }
 
 func (o PayorV2) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["payorId"] = o.PayorId
-	}
-	if true {
-		toSerialize["payorName"] = o.PayorName
-	}
-	if o.PayorXid != nil {
-		toSerialize["payorXid"] = o.PayorXid
-	}
-	if o.Address != nil {
-		toSerialize["address"] = o.Address
-	}
-	if o.PrimaryContactName != nil {
-		toSerialize["primaryContactName"] = o.PrimaryContactName
-	}
-	if o.PrimaryContactPhone != nil {
-		toSerialize["primaryContactPhone"] = o.PrimaryContactPhone
-	}
-	if o.PrimaryContactEmail != nil {
-		toSerialize["primaryContactEmail"] = o.PrimaryContactEmail
-	}
-	if o.KycState != nil {
-		toSerialize["kycState"] = o.KycState
-	}
-	if o.ManualLockout != nil {
-		toSerialize["manualLockout"] = o.ManualLockout
-	}
-	if o.PayeeGracePeriodProcessingEnabled != nil {
-		toSerialize["payeeGracePeriodProcessingEnabled"] = o.PayeeGracePeriodProcessingEnabled
-	}
-	if o.PayeeGracePeriodDays != nil {
-		toSerialize["payeeGracePeriodDays"] = o.PayeeGracePeriodDays
-	}
-	if o.CollectiveAlias != nil {
-		toSerialize["collectiveAlias"] = o.CollectiveAlias
-	}
-	if o.SupportContact != nil {
-		toSerialize["supportContact"] = o.SupportContact
-	}
-	if o.DbaName != nil {
-		toSerialize["dbaName"] = o.DbaName
-	}
-	if o.AllowsLanguageChoice != nil {
-		toSerialize["allowsLanguageChoice"] = o.AllowsLanguageChoice
-	}
-	if o.ReminderEmailsOptOut != nil {
-		toSerialize["reminderEmailsOptOut"] = o.ReminderEmailsOptOut
-	}
-	if o.Language != nil {
-		toSerialize["language"] = o.Language
-	}
-	if o.IncludesReports != nil {
-		toSerialize["includesReports"] = o.IncludesReports
-	}
-	if o.WuCustomerId != nil {
-		toSerialize["wuCustomerId"] = o.WuCustomerId
-	}
-	if o.MaxMasterPayorAdmins != nil {
-		toSerialize["maxMasterPayorAdmins"] = o.MaxMasterPayorAdmins
-	}
-	if o.PaymentRails != nil {
-		toSerialize["paymentRails"] = o.PaymentRails
-	}
-	if o.TransmissionTypes != nil {
-		toSerialize["transmissionTypes"] = o.TransmissionTypes
-	}
-	if o.RemoteSystemIds != nil {
-		toSerialize["remoteSystemIds"] = o.RemoteSystemIds
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PayorV2) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["payorId"] = o.PayorId
+	toSerialize["payorName"] = o.PayorName
+	if !IsNil(o.PayorXid) {
+		toSerialize["payorXid"] = o.PayorXid
+	}
+	if !IsNil(o.Provider) {
+		toSerialize["provider"] = o.Provider
+	}
+	if !IsNil(o.Address) {
+		toSerialize["address"] = o.Address
+	}
+	if !IsNil(o.PrimaryContactName) {
+		toSerialize["primaryContactName"] = o.PrimaryContactName
+	}
+	if !IsNil(o.PrimaryContactPhone) {
+		toSerialize["primaryContactPhone"] = o.PrimaryContactPhone
+	}
+	if !IsNil(o.PrimaryContactEmail) {
+		toSerialize["primaryContactEmail"] = o.PrimaryContactEmail
+	}
+	if !IsNil(o.KycState) {
+		toSerialize["kycState"] = o.KycState
+	}
+	if !IsNil(o.ManualLockout) {
+		toSerialize["manualLockout"] = o.ManualLockout
+	}
+	if !IsNil(o.OpenBankingEnabled) {
+		toSerialize["openBankingEnabled"] = o.OpenBankingEnabled
+	}
+	if !IsNil(o.PayeeGracePeriodProcessingEnabled) {
+		toSerialize["payeeGracePeriodProcessingEnabled"] = o.PayeeGracePeriodProcessingEnabled
+	}
+	if !IsNil(o.PayeeGracePeriodDays) {
+		toSerialize["payeeGracePeriodDays"] = o.PayeeGracePeriodDays
+	}
+	if !IsNil(o.CollectiveAlias) {
+		toSerialize["collectiveAlias"] = o.CollectiveAlias
+	}
+	if !IsNil(o.SupportContact) {
+		toSerialize["supportContact"] = o.SupportContact
+	}
+	if !IsNil(o.DbaName) {
+		toSerialize["dbaName"] = o.DbaName
+	}
+	if !IsNil(o.AllowsLanguageChoice) {
+		toSerialize["allowsLanguageChoice"] = o.AllowsLanguageChoice
+	}
+	if !IsNil(o.ReminderEmailsOptOut) {
+		toSerialize["reminderEmailsOptOut"] = o.ReminderEmailsOptOut
+	}
+	if !IsNil(o.Language) {
+		toSerialize["language"] = o.Language
+	}
+	if !IsNil(o.IncludesReports) {
+		toSerialize["includesReports"] = o.IncludesReports
+	}
+	if !IsNil(o.WuCustomerId) {
+		toSerialize["wuCustomerId"] = o.WuCustomerId
+	}
+	if !IsNil(o.MaxMasterPayorAdmins) {
+		toSerialize["maxMasterPayorAdmins"] = o.MaxMasterPayorAdmins
+	}
+	if !IsNil(o.PaymentRails) {
+		toSerialize["paymentRails"] = o.PaymentRails
+	}
+	if !IsNil(o.TransmissionTypes) {
+		toSerialize["transmissionTypes"] = o.TransmissionTypes
+	}
+	if !IsNil(o.RemoteSystemIds) {
+		toSerialize["remoteSystemIds"] = o.RemoteSystemIds
+	}
+	if !IsNil(o.UsdTxnValueReportingThreshold) {
+		toSerialize["usdTxnValueReportingThreshold"] = o.UsdTxnValueReportingThreshold
+	}
+	if !IsNil(o.ManagingPayees) {
+		toSerialize["managingPayees"] = o.ManagingPayees
+	}
+	return toSerialize, nil
 }
 
 type NullablePayorV2 struct {

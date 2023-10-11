@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EventId** | **string** | The id of the event. | 
 **EventDateTime** | **time.Time** | The date/time at which the event occurred. | 
-**EventType** | **string** | The type of the event. | 
-**SourceCurrency** | Pointer to [**PaymentAuditCurrencyV3**](PaymentAuditCurrencyV3.md) |  | [optional] 
+**EventType** | **string** | The type of the event. One of the following values: PAYOUT_SUBMITTED, PAYOUT_COMPLETED, PAYOUT_INSTRUCTED_V3, BANK_PAYMENT_REQUESTED, SOURCE_AMOUNT_CONFIRMED, PAYMENT_SUBMITTED, PAYMENT_SUBMITTED_ACCEPTED, PAYMENT_SUBMITTED_REJECTED, PAYMENT_CONFIRMED, PAYMENT_AWAITING_FUNDS, PAYMENT_FUNDED, PAYMENT_UNFUNDED, PAYMENT_FAILED, ACH_SUBMITTED_TO_ODFI, PAYMENT_ACCEPTED_BY_RAILS, ACH_RETURN_RECEIVED, RETURN_PAYMENT_FUNDING_REQUESTED, PAYOUT_BATCH_EXECUTED, PAYOUT_BATCH_QUOTE_EXPIRED, PAYOUT_BATCH_FUNDED, PAYOUT_BATCH_FUNDS_RETURN_REQUEST, PAYOUT_BATCH_FUNDS_RETURNED, PAYOUT_FUNDS_REQUEST, PAYOUT_FUNDS_GRANTED, PAYOUT_FUNDS_DENIED, PAYOUT_BATCH_QUOTED, PAYOUT_QUOTED, ACH_PAYMENT_RETURN_CANCELLED, RETURN_PAYMENT_CANCELLATION_REQUESTED, PAYOUT_WITHDRAWN | 
+**SourceCurrency** | Pointer to **string** | ISO 3 character currency code | [optional] 
 **SourceAmount** | Pointer to **int64** | The source amount exposed by the event. | [optional] 
-**PaymentCurrency** | Pointer to [**PaymentAuditCurrencyV3**](PaymentAuditCurrencyV3.md) |  | [optional] 
+**PaymentCurrency** | Pointer to **string** | ISO 3 character currency code | [optional] 
 **PaymentAmount** | Pointer to **int64** | The destination amount exposed by the event. | [optional] 
 **AccountNumber** | Pointer to **string** | The account number attached to the event. | [optional] 
 **RoutingNumber** | Pointer to **string** | The routing number attached to the event. | [optional] 
@@ -98,20 +98,20 @@ SetEventType sets EventType field to given value.
 
 ### GetSourceCurrency
 
-`func (o *PaymentEventResponseV3) GetSourceCurrency() PaymentAuditCurrencyV3`
+`func (o *PaymentEventResponseV3) GetSourceCurrency() string`
 
 GetSourceCurrency returns the SourceCurrency field if non-nil, zero value otherwise.
 
 ### GetSourceCurrencyOk
 
-`func (o *PaymentEventResponseV3) GetSourceCurrencyOk() (*PaymentAuditCurrencyV3, bool)`
+`func (o *PaymentEventResponseV3) GetSourceCurrencyOk() (*string, bool)`
 
 GetSourceCurrencyOk returns a tuple with the SourceCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceCurrency
 
-`func (o *PaymentEventResponseV3) SetSourceCurrency(v PaymentAuditCurrencyV3)`
+`func (o *PaymentEventResponseV3) SetSourceCurrency(v string)`
 
 SetSourceCurrency sets SourceCurrency field to given value.
 
@@ -148,20 +148,20 @@ HasSourceAmount returns a boolean if a field has been set.
 
 ### GetPaymentCurrency
 
-`func (o *PaymentEventResponseV3) GetPaymentCurrency() PaymentAuditCurrencyV3`
+`func (o *PaymentEventResponseV3) GetPaymentCurrency() string`
 
 GetPaymentCurrency returns the PaymentCurrency field if non-nil, zero value otherwise.
 
 ### GetPaymentCurrencyOk
 
-`func (o *PaymentEventResponseV3) GetPaymentCurrencyOk() (*PaymentAuditCurrencyV3, bool)`
+`func (o *PaymentEventResponseV3) GetPaymentCurrencyOk() (*string, bool)`
 
 GetPaymentCurrencyOk returns a tuple with the PaymentCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentCurrency
 
-`func (o *PaymentEventResponseV3) SetPaymentCurrency(v PaymentAuditCurrencyV3)`
+`func (o *PaymentEventResponseV3) SetPaymentCurrency(v string)`
 
 SetPaymentCurrency sets PaymentCurrency field to given value.
 

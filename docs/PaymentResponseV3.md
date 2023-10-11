@@ -13,14 +13,14 @@ Name | Type | Description | Notes
 **SourceAccountName** | Pointer to **string** | The name of the source account from which the payment was taken | [optional] 
 **RemoteId** | Pointer to **string** | The remote id by which the payor refers to the payee. Only populated once payment is confirmed | [optional] 
 **SourceAmount** | Pointer to **int32** | The source amount for the payment (amount debited to make the payment) | [optional] 
-**SourceCurrency** | Pointer to [**PaymentAuditCurrencyV3**](PaymentAuditCurrencyV3.md) |  | [optional] 
+**SourceCurrency** | Pointer to **string** | ISO 3 character currency code | [optional] 
 **PaymentAmount** | **int32** | The amount which the payee will receive | 
-**PaymentCurrency** | Pointer to [**PaymentAuditCurrencyV3**](PaymentAuditCurrencyV3.md) |  | [optional] 
+**PaymentCurrency** | Pointer to **string** | ISO 3 character currency code | [optional] 
 **Rate** | Pointer to **float32** | The FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed | [optional] 
 **InvertedRate** | Pointer to **float32** | The inverted FX rate for the payment, if FX was involved. **Note** that (depending on the role of the caller) this information may not be displayed | [optional] 
 **SubmittedDateTime** | **time.Time** |  | 
-**Status** | **string** |  | 
-**FundingStatus** | **string** | The funding status of the payment | 
+**Status** | **string** | Current status of the payment. One of the following values: ACCEPTED, AWAITING_FUNDS, FUNDED, UNFUNDED, BANK_PAYMENT_REQUESTED, REJECTED, ACCEPTED_BY_RAILS, CONFIRMED, FAILED, WITHDRAWN | 
+**FundingStatus** | **string** | The funding status of the payment. One of the following values: [FUNDED, INSTRUCTED, UNFUNDED | 
 **RoutingNumber** | Pointer to **string** | The routing number for the payment. | [optional] 
 **AccountNumber** | Pointer to **string** | The account number for the account which will receive the payment. | [optional] 
 **Iban** | Pointer to **string** | The iban for the payment. | [optional] 
@@ -39,6 +39,7 @@ Name | Type | Description | Notes
 **ReturnReason** | Pointer to **string** |  | [optional] 
 **RailsPaymentId** | Pointer to **string** |  | [optional] 
 **RailsBatchId** | Pointer to **string** |  | [optional] 
+**PaymentScheme** | Pointer to **string** |  | [optional] 
 **RejectionReason** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -262,20 +263,20 @@ HasSourceAmount returns a boolean if a field has been set.
 
 ### GetSourceCurrency
 
-`func (o *PaymentResponseV3) GetSourceCurrency() PaymentAuditCurrencyV3`
+`func (o *PaymentResponseV3) GetSourceCurrency() string`
 
 GetSourceCurrency returns the SourceCurrency field if non-nil, zero value otherwise.
 
 ### GetSourceCurrencyOk
 
-`func (o *PaymentResponseV3) GetSourceCurrencyOk() (*PaymentAuditCurrencyV3, bool)`
+`func (o *PaymentResponseV3) GetSourceCurrencyOk() (*string, bool)`
 
 GetSourceCurrencyOk returns a tuple with the SourceCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceCurrency
 
-`func (o *PaymentResponseV3) SetSourceCurrency(v PaymentAuditCurrencyV3)`
+`func (o *PaymentResponseV3) SetSourceCurrency(v string)`
 
 SetSourceCurrency sets SourceCurrency field to given value.
 
@@ -307,20 +308,20 @@ SetPaymentAmount sets PaymentAmount field to given value.
 
 ### GetPaymentCurrency
 
-`func (o *PaymentResponseV3) GetPaymentCurrency() PaymentAuditCurrencyV3`
+`func (o *PaymentResponseV3) GetPaymentCurrency() string`
 
 GetPaymentCurrency returns the PaymentCurrency field if non-nil, zero value otherwise.
 
 ### GetPaymentCurrencyOk
 
-`func (o *PaymentResponseV3) GetPaymentCurrencyOk() (*PaymentAuditCurrencyV3, bool)`
+`func (o *PaymentResponseV3) GetPaymentCurrencyOk() (*string, bool)`
 
 GetPaymentCurrencyOk returns a tuple with the PaymentCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentCurrency
 
-`func (o *PaymentResponseV3) SetPaymentCurrency(v PaymentAuditCurrencyV3)`
+`func (o *PaymentResponseV3) SetPaymentCurrency(v string)`
 
 SetPaymentCurrency sets PaymentCurrency field to given value.
 
@@ -879,6 +880,31 @@ SetRailsBatchId sets RailsBatchId field to given value.
 `func (o *PaymentResponseV3) HasRailsBatchId() bool`
 
 HasRailsBatchId returns a boolean if a field has been set.
+
+### GetPaymentScheme
+
+`func (o *PaymentResponseV3) GetPaymentScheme() string`
+
+GetPaymentScheme returns the PaymentScheme field if non-nil, zero value otherwise.
+
+### GetPaymentSchemeOk
+
+`func (o *PaymentResponseV3) GetPaymentSchemeOk() (*string, bool)`
+
+GetPaymentSchemeOk returns a tuple with the PaymentScheme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentScheme
+
+`func (o *PaymentResponseV3) SetPaymentScheme(v string)`
+
+SetPaymentScheme sets PaymentScheme field to given value.
+
+### HasPaymentScheme
+
+`func (o *PaymentResponseV3) HasPaymentScheme() bool`
+
+HasPaymentScheme returns a boolean if a field has been set.
 
 ### GetRejectionReason
 

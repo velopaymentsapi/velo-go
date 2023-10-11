@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **PayorId** | **string** |  | 
 **PayorName** | **string** |  | 
 **PrimaryContactEmail** | Pointer to **string** |  | [optional] 
-**KycState** | Pointer to **string** |  | [optional] 
+**KycState** | Pointer to **string** | Current KYC state. One of the following values: FAILED_KYC, PASSED_KYC, REQUIRES_KYC | [optional] 
 
 ## Methods
 

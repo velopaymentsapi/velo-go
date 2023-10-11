@@ -1,26 +1,26 @@
-# \UsersApi
+# \UsersAPI
 
 All URIs are relative to *https://api.sandbox.velopayments.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteUserByIdV2**](UsersApi.md#DeleteUserByIdV2) | **Delete** /v2/users/{userId} | Delete a User
-[**DisableUserV2**](UsersApi.md#DisableUserV2) | **Post** /v2/users/{userId}/disable | Disable a User
-[**EnableUserV2**](UsersApi.md#EnableUserV2) | **Post** /v2/users/{userId}/enable | Enable a User
-[**GetSelf**](UsersApi.md#GetSelf) | **Get** /v2/users/self | Get Self
-[**GetUserByIdV2**](UsersApi.md#GetUserByIdV2) | **Get** /v2/users/{userId} | Get User
-[**InviteUser**](UsersApi.md#InviteUser) | **Post** /v2/users/invite | Invite a User
-[**ListUsers**](UsersApi.md#ListUsers) | **Get** /v2/users | List Users
-[**RegisterSms**](UsersApi.md#RegisterSms) | **Post** /v2/users/registration/sms | Register SMS Number
-[**ResendToken**](UsersApi.md#ResendToken) | **Post** /v2/users/{userId}/tokens | Resend a token
-[**RoleUpdate**](UsersApi.md#RoleUpdate) | **Post** /v2/users/{userId}/roleUpdate | Update User Role
-[**UnlockUserV2**](UsersApi.md#UnlockUserV2) | **Post** /v2/users/{userId}/unlock | Unlock a User
-[**UnregisterMFA**](UsersApi.md#UnregisterMFA) | **Post** /v2/users/{userId}/mfa/unregister | Unregister MFA for the user
-[**UnregisterMFAForSelf**](UsersApi.md#UnregisterMFAForSelf) | **Post** /v2/users/self/mfa/unregister | Unregister MFA for Self
-[**UpdatePasswordSelf**](UsersApi.md#UpdatePasswordSelf) | **Post** /v2/users/self/password | Update Password for self
-[**UserDetailsUpdate**](UsersApi.md#UserDetailsUpdate) | **Post** /v2/users/{userId}/userDetailsUpdate | Update User Details
-[**UserDetailsUpdateForSelf**](UsersApi.md#UserDetailsUpdateForSelf) | **Post** /v2/users/self/userDetailsUpdate | Update User Details for self
-[**ValidatePasswordSelf**](UsersApi.md#ValidatePasswordSelf) | **Post** /v2/users/self/password/validate | Validate the proposed password
+[**DeleteUserByIdV2**](UsersAPI.md#DeleteUserByIdV2) | **Delete** /v2/users/{userId} | Delete a User
+[**DisableUserV2**](UsersAPI.md#DisableUserV2) | **Post** /v2/users/{userId}/disable | Disable a User
+[**EnableUserV2**](UsersAPI.md#EnableUserV2) | **Post** /v2/users/{userId}/enable | Enable a User
+[**GetSelf**](UsersAPI.md#GetSelf) | **Get** /v2/users/self | Get Self
+[**GetUserByIdV2**](UsersAPI.md#GetUserByIdV2) | **Get** /v2/users/{userId} | Get User
+[**InviteUser**](UsersAPI.md#InviteUser) | **Post** /v2/users/invite | Invite a User
+[**ListUsers**](UsersAPI.md#ListUsers) | **Get** /v2/users | List Users
+[**RegisterSms**](UsersAPI.md#RegisterSms) | **Post** /v2/users/registration/sms | Register SMS Number
+[**ResendToken**](UsersAPI.md#ResendToken) | **Post** /v2/users/{userId}/tokens | Resend a token
+[**RoleUpdate**](UsersAPI.md#RoleUpdate) | **Post** /v2/users/{userId}/roleUpdate | Update User Role
+[**UnlockUserV2**](UsersAPI.md#UnlockUserV2) | **Post** /v2/users/{userId}/unlock | Unlock a User
+[**UnregisterMFA**](UsersAPI.md#UnregisterMFA) | **Post** /v2/users/{userId}/mfa/unregister | Unregister MFA for the user
+[**UnregisterMFAForSelf**](UsersAPI.md#UnregisterMFAForSelf) | **Post** /v2/users/self/mfa/unregister | Unregister MFA for Self
+[**UpdatePasswordSelf**](UsersAPI.md#UpdatePasswordSelf) | **Post** /v2/users/self/password | Update Password for self
+[**UserDetailsUpdate**](UsersAPI.md#UserDetailsUpdate) | **Post** /v2/users/{userId}/userDetailsUpdate | Update User Details
+[**UserDetailsUpdateForSelf**](UsersAPI.md#UserDetailsUpdateForSelf) | **Post** /v2/users/self/userDetailsUpdate | Update User Details for self
+[**ValidatePasswordSelf**](UsersAPI.md#ValidatePasswordSelf) | **Post** /v2/users/self/password/validate | Validate the proposed password
 
 
 
@@ -41,17 +41,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    userId := TODO // string | The UUID of the User.
+    userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the User.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.DeleteUserByIdV2(context.Background(), userId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.DeleteUserByIdV2(context.Background(), userId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.DeleteUserByIdV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.DeleteUserByIdV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -63,7 +63,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md) | The UUID of the User. | 
+**userId** | **string** | The UUID of the User. | 
 
 ### Other Parameters
 
@@ -109,17 +109,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    userId := TODO // string | The UUID of the User.
+    userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the User.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.DisableUserV2(context.Background(), userId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.DisableUserV2(context.Background(), userId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.DisableUserV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.DisableUserV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -131,7 +131,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md) | The UUID of the User. | 
+**userId** | **string** | The UUID of the User. | 
 
 ### Other Parameters
 
@@ -177,17 +177,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    userId := TODO // string | The UUID of the User.
+    userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the User.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.EnableUserV2(context.Background(), userId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.EnableUserV2(context.Background(), userId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.EnableUserV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.EnableUserV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -199,7 +199,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md) | The UUID of the User. | 
+**userId** | **string** | The UUID of the User. | 
 
 ### Other Parameters
 
@@ -245,20 +245,20 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.GetSelf(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UsersAPI.GetSelf(context.Background()).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.GetSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.GetSelf``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetSelf`: UserResponse
-    fmt.Fprintf(os.Stdout, "Response from `UsersApi.GetSelf`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `UsersAPI.GetSelf`: %v\n", resp)
 }
 ```
 
@@ -306,21 +306,21 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    userId := TODO // string | The UUID of the User.
+    userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the User.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.GetUserByIdV2(context.Background(), userId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UsersAPI.GetUserByIdV2(context.Background(), userId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.GetUserByIdV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.GetUserByIdV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetUserByIdV2`: UserResponse
-    fmt.Fprintf(os.Stdout, "Response from `UsersApi.GetUserByIdV2`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `UsersAPI.GetUserByIdV2`: %v\n", resp)
 }
 ```
 
@@ -330,7 +330,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md) | The UUID of the User. | 
+**userId** | **string** | The UUID of the User. | 
 
 ### Other Parameters
 
@@ -376,17 +376,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     inviteUserRequest := *openapiclient.NewInviteUserRequest("foo@example.com", "TOTP", "11235555555", "11235555555", []string{"Roles_example"}) // InviteUserRequest | Details of User to invite
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.InviteUser(context.Background()).InviteUserRequest(inviteUserRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.InviteUser(context.Background()).InviteUserRequest(inviteUserRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.InviteUser``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.InviteUser``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 
 ## ListUsers
 
-> PagedUserResponse ListUsers(ctx).Type_(type_).Status(status).EntityId(entityId).Page(page).PageSize(pageSize).Sort(sort).Execute()
+> PagedUserResponse ListUsers(ctx).Type_(type_).Status(status).EntityId(entityId).PayeeType(payeeType).Page(page).PageSize(pageSize).Sort(sort).Execute()
 
 List Users
 
@@ -440,26 +440,27 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     type_ := openapiclient.UserType("BACKOFFICE") // UserType | The Type of the User. (optional)
     status := openapiclient.UserStatus("ENABLED") // UserStatus | The status of the User. (optional)
-    entityId := TODO // string | The entityId of the User. (optional)
+    entityId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The entityId of the User. (optional)
+    payeeType := openapiclient.PayeeType("COMPANY") // PayeeType | The Type of the Payee entity. Either COMPANY or INDIVIDUAL. (optional)
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields (e.g. ?sort=email:asc,lastName:asc) Default is email:asc 'name' The supported sort fields are - email, lastNmae.  (optional) (default to "email:asc")
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.ListUsers(context.Background()).Type_(type_).Status(status).EntityId(entityId).Page(page).PageSize(pageSize).Sort(sort).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UsersAPI.ListUsers(context.Background()).Type_(type_).Status(status).EntityId(entityId).PayeeType(payeeType).Page(page).PageSize(pageSize).Sort(sort).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.ListUsers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.ListUsers``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListUsers`: PagedUserResponse
-    fmt.Fprintf(os.Stdout, "Response from `UsersApi.ListUsers`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `UsersAPI.ListUsers`: %v\n", resp)
 }
 ```
 
@@ -476,7 +477,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **type_** | [**UserType**](UserType.md) | The Type of the User. | 
  **status** | [**UserStatus**](UserStatus.md) | The status of the User. | 
- **entityId** | [**string**](string.md) | The entityId of the User. | 
+ **entityId** | **string** | The entityId of the User. | 
+ **payeeType** | [**PayeeType**](PayeeType.md) | The Type of the Payee entity. Either COMPANY or INDIVIDUAL. | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;email:asc,lastName:asc) Default is email:asc &#39;name&#39; The supported sort fields are - email, lastNmae.  | [default to &quot;email:asc&quot;]
@@ -516,17 +518,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     registerSmsRequest := *openapiclient.NewRegisterSmsRequest("11235555555") // RegisterSmsRequest | a SMS Number to send an OTP to
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.RegisterSms(context.Background()).RegisterSmsRequest(registerSmsRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.RegisterSms(context.Background()).RegisterSmsRequest(registerSmsRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.RegisterSms``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.RegisterSms``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -580,18 +582,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    userId := TODO // string | The UUID of the User.
+    userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the User.
     resendTokenRequest := *openapiclient.NewResendTokenRequest("INVITE_MFA_USER") // ResendTokenRequest | The type of token to resend
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.ResendToken(context.Background(), userId).ResendTokenRequest(resendTokenRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.ResendToken(context.Background(), userId).ResendTokenRequest(resendTokenRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.ResendToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.ResendToken``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -603,7 +605,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md) | The UUID of the User. | 
+**userId** | **string** | The UUID of the User. | 
 
 ### Other Parameters
 
@@ -650,18 +652,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    userId := TODO // string | The UUID of the User.
+    userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the User.
     roleUpdateRequest := *openapiclient.NewRoleUpdateRequest([]string{"Roles_example"}) // RoleUpdateRequest | The Role to change to
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.RoleUpdate(context.Background(), userId).RoleUpdateRequest(roleUpdateRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.RoleUpdate(context.Background(), userId).RoleUpdateRequest(roleUpdateRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.RoleUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.RoleUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -673,7 +675,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md) | The UUID of the User. | 
+**userId** | **string** | The UUID of the User. | 
 
 ### Other Parameters
 
@@ -720,17 +722,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    userId := TODO // string | The UUID of the User.
+    userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the User.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.UnlockUserV2(context.Background(), userId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.UnlockUserV2(context.Background(), userId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UnlockUserV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.UnlockUserV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -742,7 +744,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md) | The UUID of the User. | 
+**userId** | **string** | The UUID of the User. | 
 
 ### Other Parameters
 
@@ -788,18 +790,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    userId := TODO // string | The UUID of the User.
+    userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the User.
     unregisterMFARequest := *openapiclient.NewUnregisterMFARequest("TOTP") // UnregisterMFARequest | The MFA Type to unregister
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.UnregisterMFA(context.Background(), userId).UnregisterMFARequest(unregisterMFARequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.UnregisterMFA(context.Background(), userId).UnregisterMFARequest(unregisterMFARequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UnregisterMFA``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.UnregisterMFA``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -811,7 +813,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md) | The UUID of the User. | 
+**userId** | **string** | The UUID of the User. | 
 
 ### Other Parameters
 
@@ -858,7 +860,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -866,10 +868,10 @@ func main() {
     authorization := "authorization_example" // string | Bearer token authorization leg of validate (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.UnregisterMFAForSelf(context.Background()).SelfMFATypeUnregisterRequest(selfMFATypeUnregisterRequest).Authorization(authorization).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.UnregisterMFAForSelf(context.Background()).SelfMFATypeUnregisterRequest(selfMFATypeUnregisterRequest).Authorization(authorization).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UnregisterMFAForSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.UnregisterMFAForSelf``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -924,17 +926,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     selfUpdatePasswordRequest := *openapiclient.NewSelfUpdatePasswordRequest("My_current_password", "My_new_password") // SelfUpdatePasswordRequest | The password
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.UpdatePasswordSelf(context.Background()).SelfUpdatePasswordRequest(selfUpdatePasswordRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.UpdatePasswordSelf(context.Background()).SelfUpdatePasswordRequest(selfUpdatePasswordRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UpdatePasswordSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.UpdatePasswordSelf``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -988,18 +990,18 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    userId := TODO // string | The UUID of the User.
+    userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The UUID of the User.
     userDetailsUpdateRequest := *openapiclient.NewUserDetailsUpdateRequest() // UserDetailsUpdateRequest | The details of the user to update
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.UserDetailsUpdate(context.Background(), userId).UserDetailsUpdateRequest(userDetailsUpdateRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.UserDetailsUpdate(context.Background(), userId).UserDetailsUpdateRequest(userDetailsUpdateRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UserDetailsUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.UserDetailsUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -1011,7 +1013,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | [**string**](.md) | The UUID of the User. | 
+**userId** | **string** | The UUID of the User. | 
 
 ### Other Parameters
 
@@ -1058,17 +1060,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     payeeUserSelfUpdateRequest := *openapiclient.NewPayeeUserSelfUpdateRequest() // PayeeUserSelfUpdateRequest | The details of the user to update
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.UserDetailsUpdateForSelf(context.Background()).PayeeUserSelfUpdateRequest(payeeUserSelfUpdateRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UsersAPI.UserDetailsUpdateForSelf(context.Background()).PayeeUserSelfUpdateRequest(payeeUserSelfUpdateRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UserDetailsUpdateForSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.UserDetailsUpdateForSelf``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -1122,21 +1124,21 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     passwordRequest := *openapiclient.NewPasswordRequest("My_strong_password") // PasswordRequest | The password
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.ValidatePasswordSelf(context.Background()).PasswordRequest(passwordRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UsersAPI.ValidatePasswordSelf(context.Background()).PasswordRequest(passwordRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.ValidatePasswordSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.ValidatePasswordSelf``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ValidatePasswordSelf`: ValidatePasswordResponse
-    fmt.Fprintf(os.Stdout, "Response from `UsersApi.ValidatePasswordSelf`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `UsersAPI.ValidatePasswordSelf`: %v\n", resp)
 }
 ```
 

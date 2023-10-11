@@ -16,9 +16,9 @@ Name | Type | Description | Notes
 **BalanceVisible** | **bool** |  | 
 **CustomerId** | Pointer to **NullableString** |  | [optional] 
 **PhysicalAccountId** | Pointer to **string** |  | [optional] 
-**Notifications** | Pointer to [**Notifications**](Notifications.md) |  | [optional] 
+**Notifications** | Pointer to [**NotificationsV2**](NotificationsV2.md) |  | [optional] 
 **FundingAccountId** | Pointer to **NullableString** |  | [optional] 
-**AutoTopUpConfig** | Pointer to [**AutoTopUpConfig**](AutoTopUpConfig.md) |  | [optional] 
+**AutoTopUpConfig** | Pointer to [**AutoTopUpConfigV2**](AutoTopUpConfigV2.md) |  | [optional] 
 **AccountType** | **string** |  | 
 
 ## Methods
@@ -322,20 +322,20 @@ HasPhysicalAccountId returns a boolean if a field has been set.
 
 ### GetNotifications
 
-`func (o *SourceAccountResponseV2) GetNotifications() Notifications`
+`func (o *SourceAccountResponseV2) GetNotifications() NotificationsV2`
 
 GetNotifications returns the Notifications field if non-nil, zero value otherwise.
 
 ### GetNotificationsOk
 
-`func (o *SourceAccountResponseV2) GetNotificationsOk() (*Notifications, bool)`
+`func (o *SourceAccountResponseV2) GetNotificationsOk() (*NotificationsV2, bool)`
 
 GetNotificationsOk returns a tuple with the Notifications field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotifications
 
-`func (o *SourceAccountResponseV2) SetNotifications(v Notifications)`
+`func (o *SourceAccountResponseV2) SetNotifications(v NotificationsV2)`
 
 SetNotifications sets Notifications field to given value.
 
@@ -382,20 +382,20 @@ HasFundingAccountId returns a boolean if a field has been set.
 UnsetFundingAccountId ensures that no value is present for FundingAccountId, not even an explicit nil
 ### GetAutoTopUpConfig
 
-`func (o *SourceAccountResponseV2) GetAutoTopUpConfig() AutoTopUpConfig`
+`func (o *SourceAccountResponseV2) GetAutoTopUpConfig() AutoTopUpConfigV2`
 
 GetAutoTopUpConfig returns the AutoTopUpConfig field if non-nil, zero value otherwise.
 
 ### GetAutoTopUpConfigOk
 
-`func (o *SourceAccountResponseV2) GetAutoTopUpConfigOk() (*AutoTopUpConfig, bool)`
+`func (o *SourceAccountResponseV2) GetAutoTopUpConfigOk() (*AutoTopUpConfigV2, bool)`
 
 GetAutoTopUpConfigOk returns a tuple with the AutoTopUpConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAutoTopUpConfig
 
-`func (o *SourceAccountResponseV2) SetAutoTopUpConfig(v AutoTopUpConfig)`
+`func (o *SourceAccountResponseV2) SetAutoTopUpConfig(v AutoTopUpConfigV2)`
 
 SetAutoTopUpConfig sets AutoTopUpConfig field to given value.
 

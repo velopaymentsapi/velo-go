@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayoutId** | **string** |  | 
 **PayorId** | Pointer to **string** |  | [optional] 
-**Status** | [**PayoutStatusV3**](PayoutStatusV3.md) |  | 
+**Status** | **string** | Current status of the payout. One of the following values: ACCEPTED, REJECTED, SUBMITTED, QUOTED, INSTRUCTED, COMPLETED, INCOMPLETE, CONFIRMED, WITHDRAWN | 
 **SubmittedDateTime** | **string** |  | 
 **InstructedDateTime** | Pointer to **string** |  | [optional] 
 **WithdrawnDateTime** | Pointer to **string** |  | [optional] 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewPayoutSummaryAuditV3
 
-`func NewPayoutSummaryAuditV3(payoutId string, status PayoutStatusV3, submittedDateTime string, ) *PayoutSummaryAuditV3`
+`func NewPayoutSummaryAuditV3(payoutId string, status string, submittedDateTime string, ) *PayoutSummaryAuditV3`
 
 NewPayoutSummaryAuditV3 instantiates a new PayoutSummaryAuditV3 object
 This constructor will assign default values to properties that have it defined,
@@ -83,20 +83,20 @@ HasPayorId returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *PayoutSummaryAuditV3) GetStatus() PayoutStatusV3`
+`func (o *PayoutSummaryAuditV3) GetStatus() string`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *PayoutSummaryAuditV3) GetStatusOk() (*PayoutStatusV3, bool)`
+`func (o *PayoutSummaryAuditV3) GetStatusOk() (*string, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *PayoutSummaryAuditV3) SetStatus(v PayoutStatusV3)`
+`func (o *PayoutSummaryAuditV3) SetStatus(v string)`
 
 SetStatus sets Status field to given value.
 

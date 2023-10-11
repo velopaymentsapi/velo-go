@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SourceAccountId** | **string** |  | 
 **TotalCost** | **int64** |  | 
-**Currency** | Pointer to [**PaymentAuditCurrencyV3**](PaymentAuditCurrencyV3.md) |  | [optional] 
+**Currency** | Pointer to **string** | ISO 3 character currency code | [optional] 
 
 ## Methods
 
@@ -69,20 +69,20 @@ SetTotalCost sets TotalCost field to given value.
 
 ### GetCurrency
 
-`func (o *SourceAccountSummaryV3) GetCurrency() PaymentAuditCurrencyV3`
+`func (o *SourceAccountSummaryV3) GetCurrency() string`
 
 GetCurrency returns the Currency field if non-nil, zero value otherwise.
 
 ### GetCurrencyOk
 
-`func (o *SourceAccountSummaryV3) GetCurrencyOk() (*PaymentAuditCurrencyV3, bool)`
+`func (o *SourceAccountSummaryV3) GetCurrencyOk() (*string, bool)`
 
 GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrency
 
-`func (o *SourceAccountSummaryV3) SetCurrency(v PaymentAuditCurrencyV3)`
+`func (o *SourceAccountSummaryV3) SetCurrency(v string)`
 
 SetCurrency sets Currency field to given value.
 

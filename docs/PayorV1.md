@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **FundingAccountRoutingNumber** | Pointer to **string** | The funding account routing number to be used for the payor. | [optional] 
 **FundingAccountAccountNumber** | Pointer to **string** | The funding account number to be used for the payor. | [optional] 
 **FundingAccountAccountName** | Pointer to **string** | The funding account name to be used for the payor. | [optional] 
-**KycState** | Pointer to [**KycState**](KycState.md) |  | [optional] 
+**KycState** | Pointer to **string** | The kyc state of the payor. One of the following values: FAILED_KYC, PASSED_KYC, REQUIRES_KYC | [optional] [readonly] 
 **ManualLockout** | Pointer to **bool** | Whether or not the payor has been manually locked by the backoffice. | [optional] 
 **PayeeGracePeriodProcessingEnabled** | Pointer to **bool** | Whether grace period processing is enabled. | [optional] [readonly] 
 **PayeeGracePeriodDays** | Pointer to **int32** | The grace period for paying payees in days. | [optional] [readonly] 
@@ -268,20 +268,20 @@ HasFundingAccountAccountName returns a boolean if a field has been set.
 
 ### GetKycState
 
-`func (o *PayorV1) GetKycState() KycState`
+`func (o *PayorV1) GetKycState() string`
 
 GetKycState returns the KycState field if non-nil, zero value otherwise.
 
 ### GetKycStateOk
 
-`func (o *PayorV1) GetKycStateOk() (*KycState, bool)`
+`func (o *PayorV1) GetKycStateOk() (*string, bool)`
 
 GetKycStateOk returns a tuple with the KycState field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKycState
 
-`func (o *PayorV1) SetKycState(v KycState)`
+`func (o *PayorV1) SetKycState(v string)`
 
 SetKycState sets KycState field to given value.
 

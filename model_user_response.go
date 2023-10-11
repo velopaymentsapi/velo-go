@@ -1,10 +1,10 @@
 /*
- * Velo Payments APIs
- *
- * ## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
- *
- * API version: 2.26.124
- */
+Velo Payments APIs
+
+## Terms and Definitions  Throughout this document and the Velo platform the following terms are used:  * **Payor.** An entity (typically a corporation) which wishes to pay funds to one or more payees via a payout. * **Payee.** The recipient of funds paid out by a payor. * **Payment.** A single transfer of funds from a payor to a payee. * **Payout.** A batch of Payments, typically used by a payor to logically group payments (e.g. by business day). Technically there need be no relationship between the payments in a payout - a single payout can contain payments to multiple payees and/or multiple payments to a single payee. * **Sandbox.** An integration environment provided by Velo Payments which offers a similar API experience to the production environment, but all funding and payment events are simulated, along with many other services such as OFAC sanctions list checking.  ## Overview  The Velo Payments API allows a payor to perform a number of operations. The following is a list of the main capabilities in a natural order of execution:  * Authenticate with the Velo platform * Maintain a collection of payees * Query the payor’s current balance of funds within the platform and perform additional funding * Issue payments to payees * Query the platform for a history of those payments  This document describes the main concepts and APIs required to get up and running with the Velo Payments platform. It is not an exhaustive API reference. For that, please see the separate Velo Payments API Reference.  ## API Considerations  The Velo Payments API is REST based and uses the JSON format for requests and responses.  Most calls are secured using OAuth 2 security and require a valid authentication access token for successful operation. See the Authentication section for details.  Where a dynamic value is required in the examples below, the {token} format is used, suggesting that the caller needs to supply the appropriate value of the token in question (without including the { or } characters).  Where curl examples are given, the –d @filename.json approach is used, indicating that the request body should be placed into a file named filename.json in the current directory. Each of the curl examples in this document should be considered a single line on the command-line, regardless of how they appear in print.  ## Authenticating with the Velo Platform  Once Velo backoffice staff have added your organization as a payor within the Velo platform sandbox, they will create you a payor Id, an API key and an API secret and share these with you in a secure manner.  You will need to use these values to authenticate with the Velo platform in order to gain access to the APIs. The steps to take are explained in the following:  create a string comprising the API key (e.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8) and API secret (e.g. c396b26b-137a-44fd-87f5-34631f8fd529) with a colon between them. E.g. 44a9537d-d55d-4b47-8082-14061c2bcdd8:c396b26b-137a-44fd-87f5-34631f8fd529  base64 encode this string. E.g.: NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  create an HTTP **Authorization** header with the value set to e.g. Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==  perform the Velo authentication REST call using the HTTP header created above e.g. via curl:  ```   curl -X POST \\   -H \"Content-Type: application/json\" \\   -H \"Authorization: Basic NDRhOTUzN2QtZDU1ZC00YjQ3LTgwODItMTQwNjFjMmJjZGQ4OmMzOTZiMjZiLTEzN2EtNDRmZC04N2Y1LTM0NjMxZjhmZDUyOQ==\" \\   'https://api.sandbox.velopayments.com/v1/authenticate?grant_type=client_credentials' ```  If successful, this call will result in a **200** HTTP status code and a response body such as:  ```   {     \"access_token\":\"19f6bafd-93fd-4747-b229-00507bbc991f\",     \"token_type\":\"bearer\",     \"expires_in\":1799,     \"scope\":\"...\"   } ``` ## API access following authentication Following successful authentication, the value of the access_token field in the response (indicated in green above) should then be presented with all subsequent API calls to allow the Velo platform to validate that the caller is authenticated.  This is achieved by setting the HTTP Authorization header with the value set to e.g. Bearer 19f6bafd-93fd-4747-b229-00507bbc991f such as the curl example below:  ```   -H \"Authorization: Bearer 19f6bafd-93fd-4747-b229-00507bbc991f \" ```  If you make other Velo API calls which require authorization but the Authorization header is missing or invalid then you will get a **401** HTTP status response. 
+
+API version: 2.35.58
+*/
 
 // Code generated by OpenAPI Generator (https://openapi-generator.tech); DO NOT EDIT.
 
@@ -14,6 +14,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the UserResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserResponse{}
 
 // UserResponse struct for UserResponse
 type UserResponse struct {
@@ -33,8 +36,12 @@ type UserResponse struct {
 	LastName *string `json:"lastName,omitempty"`
 	// The payorId or payeeId or null if the user is not a payor or payee user 
 	EntityId *string `json:"entityId,omitempty"`
+	// The payor or payee company name or null if the user is not a payor or payee user 
+	CompanyName *string `json:"companyName,omitempty"`
 	// The role(s) for the user 
-	Roles *[]Role `json:"roles,omitempty"`
+	Roles []Role `json:"roles,omitempty"`
+	// Indicates the type of user. Could be BACKOFFICE, PAYOR or PAYEE.
+	UserType *string `json:"userType,omitempty"`
 	// The type of the MFA device
 	MfaType *string `json:"mfaType,omitempty"`
 	// The status of the MFA device
@@ -64,7 +71,7 @@ func NewUserResponseWithDefaults() *UserResponse {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *UserResponse) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -74,7 +81,7 @@ func (o *UserResponse) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -82,7 +89,7 @@ func (o *UserResponse) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *UserResponse) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -96,7 +103,7 @@ func (o *UserResponse) SetId(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *UserResponse) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -106,7 +113,7 @@ func (o *UserResponse) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -114,7 +121,7 @@ func (o *UserResponse) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *UserResponse) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -128,7 +135,7 @@ func (o *UserResponse) SetStatus(v string) {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *UserResponse) GetEmail() string {
-	if o == nil || o.Email == nil {
+	if o == nil || IsNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -138,7 +145,7 @@ func (o *UserResponse) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetEmailOk() (*string, bool) {
-	if o == nil || o.Email == nil {
+	if o == nil || IsNil(o.Email) {
 		return nil, false
 	}
 	return o.Email, true
@@ -146,7 +153,7 @@ func (o *UserResponse) GetEmailOk() (*string, bool) {
 
 // HasEmail returns a boolean if a field has been set.
 func (o *UserResponse) HasEmail() bool {
-	if o != nil && o.Email != nil {
+	if o != nil && !IsNil(o.Email) {
 		return true
 	}
 
@@ -160,7 +167,7 @@ func (o *UserResponse) SetEmail(v string) {
 
 // GetSmsNumber returns the SmsNumber field value if set, zero value otherwise.
 func (o *UserResponse) GetSmsNumber() string {
-	if o == nil || o.SmsNumber == nil {
+	if o == nil || IsNil(o.SmsNumber) {
 		var ret string
 		return ret
 	}
@@ -170,7 +177,7 @@ func (o *UserResponse) GetSmsNumber() string {
 // GetSmsNumberOk returns a tuple with the SmsNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetSmsNumberOk() (*string, bool) {
-	if o == nil || o.SmsNumber == nil {
+	if o == nil || IsNil(o.SmsNumber) {
 		return nil, false
 	}
 	return o.SmsNumber, true
@@ -178,7 +185,7 @@ func (o *UserResponse) GetSmsNumberOk() (*string, bool) {
 
 // HasSmsNumber returns a boolean if a field has been set.
 func (o *UserResponse) HasSmsNumber() bool {
-	if o != nil && o.SmsNumber != nil {
+	if o != nil && !IsNil(o.SmsNumber) {
 		return true
 	}
 
@@ -192,7 +199,7 @@ func (o *UserResponse) SetSmsNumber(v string) {
 
 // GetPrimaryContactNumber returns the PrimaryContactNumber field value if set, zero value otherwise.
 func (o *UserResponse) GetPrimaryContactNumber() string {
-	if o == nil || o.PrimaryContactNumber == nil {
+	if o == nil || IsNil(o.PrimaryContactNumber) {
 		var ret string
 		return ret
 	}
@@ -202,7 +209,7 @@ func (o *UserResponse) GetPrimaryContactNumber() string {
 // GetPrimaryContactNumberOk returns a tuple with the PrimaryContactNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetPrimaryContactNumberOk() (*string, bool) {
-	if o == nil || o.PrimaryContactNumber == nil {
+	if o == nil || IsNil(o.PrimaryContactNumber) {
 		return nil, false
 	}
 	return o.PrimaryContactNumber, true
@@ -210,7 +217,7 @@ func (o *UserResponse) GetPrimaryContactNumberOk() (*string, bool) {
 
 // HasPrimaryContactNumber returns a boolean if a field has been set.
 func (o *UserResponse) HasPrimaryContactNumber() bool {
-	if o != nil && o.PrimaryContactNumber != nil {
+	if o != nil && !IsNil(o.PrimaryContactNumber) {
 		return true
 	}
 
@@ -224,7 +231,7 @@ func (o *UserResponse) SetPrimaryContactNumber(v string) {
 
 // GetSecondaryContactNumber returns the SecondaryContactNumber field value if set, zero value otherwise.
 func (o *UserResponse) GetSecondaryContactNumber() string {
-	if o == nil || o.SecondaryContactNumber == nil {
+	if o == nil || IsNil(o.SecondaryContactNumber) {
 		var ret string
 		return ret
 	}
@@ -234,7 +241,7 @@ func (o *UserResponse) GetSecondaryContactNumber() string {
 // GetSecondaryContactNumberOk returns a tuple with the SecondaryContactNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetSecondaryContactNumberOk() (*string, bool) {
-	if o == nil || o.SecondaryContactNumber == nil {
+	if o == nil || IsNil(o.SecondaryContactNumber) {
 		return nil, false
 	}
 	return o.SecondaryContactNumber, true
@@ -242,7 +249,7 @@ func (o *UserResponse) GetSecondaryContactNumberOk() (*string, bool) {
 
 // HasSecondaryContactNumber returns a boolean if a field has been set.
 func (o *UserResponse) HasSecondaryContactNumber() bool {
-	if o != nil && o.SecondaryContactNumber != nil {
+	if o != nil && !IsNil(o.SecondaryContactNumber) {
 		return true
 	}
 
@@ -256,7 +263,7 @@ func (o *UserResponse) SetSecondaryContactNumber(v string) {
 
 // GetFirstName returns the FirstName field value if set, zero value otherwise.
 func (o *UserResponse) GetFirstName() string {
-	if o == nil || o.FirstName == nil {
+	if o == nil || IsNil(o.FirstName) {
 		var ret string
 		return ret
 	}
@@ -266,7 +273,7 @@ func (o *UserResponse) GetFirstName() string {
 // GetFirstNameOk returns a tuple with the FirstName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetFirstNameOk() (*string, bool) {
-	if o == nil || o.FirstName == nil {
+	if o == nil || IsNil(o.FirstName) {
 		return nil, false
 	}
 	return o.FirstName, true
@@ -274,7 +281,7 @@ func (o *UserResponse) GetFirstNameOk() (*string, bool) {
 
 // HasFirstName returns a boolean if a field has been set.
 func (o *UserResponse) HasFirstName() bool {
-	if o != nil && o.FirstName != nil {
+	if o != nil && !IsNil(o.FirstName) {
 		return true
 	}
 
@@ -288,7 +295,7 @@ func (o *UserResponse) SetFirstName(v string) {
 
 // GetLastName returns the LastName field value if set, zero value otherwise.
 func (o *UserResponse) GetLastName() string {
-	if o == nil || o.LastName == nil {
+	if o == nil || IsNil(o.LastName) {
 		var ret string
 		return ret
 	}
@@ -298,7 +305,7 @@ func (o *UserResponse) GetLastName() string {
 // GetLastNameOk returns a tuple with the LastName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetLastNameOk() (*string, bool) {
-	if o == nil || o.LastName == nil {
+	if o == nil || IsNil(o.LastName) {
 		return nil, false
 	}
 	return o.LastName, true
@@ -306,7 +313,7 @@ func (o *UserResponse) GetLastNameOk() (*string, bool) {
 
 // HasLastName returns a boolean if a field has been set.
 func (o *UserResponse) HasLastName() bool {
-	if o != nil && o.LastName != nil {
+	if o != nil && !IsNil(o.LastName) {
 		return true
 	}
 
@@ -320,7 +327,7 @@ func (o *UserResponse) SetLastName(v string) {
 
 // GetEntityId returns the EntityId field value if set, zero value otherwise.
 func (o *UserResponse) GetEntityId() string {
-	if o == nil || o.EntityId == nil {
+	if o == nil || IsNil(o.EntityId) {
 		var ret string
 		return ret
 	}
@@ -330,7 +337,7 @@ func (o *UserResponse) GetEntityId() string {
 // GetEntityIdOk returns a tuple with the EntityId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetEntityIdOk() (*string, bool) {
-	if o == nil || o.EntityId == nil {
+	if o == nil || IsNil(o.EntityId) {
 		return nil, false
 	}
 	return o.EntityId, true
@@ -338,7 +345,7 @@ func (o *UserResponse) GetEntityIdOk() (*string, bool) {
 
 // HasEntityId returns a boolean if a field has been set.
 func (o *UserResponse) HasEntityId() bool {
-	if o != nil && o.EntityId != nil {
+	if o != nil && !IsNil(o.EntityId) {
 		return true
 	}
 
@@ -350,19 +357,51 @@ func (o *UserResponse) SetEntityId(v string) {
 	o.EntityId = &v
 }
 
+// GetCompanyName returns the CompanyName field value if set, zero value otherwise.
+func (o *UserResponse) GetCompanyName() string {
+	if o == nil || IsNil(o.CompanyName) {
+		var ret string
+		return ret
+	}
+	return *o.CompanyName
+}
+
+// GetCompanyNameOk returns a tuple with the CompanyName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserResponse) GetCompanyNameOk() (*string, bool) {
+	if o == nil || IsNil(o.CompanyName) {
+		return nil, false
+	}
+	return o.CompanyName, true
+}
+
+// HasCompanyName returns a boolean if a field has been set.
+func (o *UserResponse) HasCompanyName() bool {
+	if o != nil && !IsNil(o.CompanyName) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompanyName gets a reference to the given string and assigns it to the CompanyName field.
+func (o *UserResponse) SetCompanyName(v string) {
+	o.CompanyName = &v
+}
+
 // GetRoles returns the Roles field value if set, zero value otherwise.
 func (o *UserResponse) GetRoles() []Role {
-	if o == nil || o.Roles == nil {
+	if o == nil || IsNil(o.Roles) {
 		var ret []Role
 		return ret
 	}
-	return *o.Roles
+	return o.Roles
 }
 
 // GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UserResponse) GetRolesOk() (*[]Role, bool) {
-	if o == nil || o.Roles == nil {
+func (o *UserResponse) GetRolesOk() ([]Role, bool) {
+	if o == nil || IsNil(o.Roles) {
 		return nil, false
 	}
 	return o.Roles, true
@@ -370,7 +409,7 @@ func (o *UserResponse) GetRolesOk() (*[]Role, bool) {
 
 // HasRoles returns a boolean if a field has been set.
 func (o *UserResponse) HasRoles() bool {
-	if o != nil && o.Roles != nil {
+	if o != nil && !IsNil(o.Roles) {
 		return true
 	}
 
@@ -379,12 +418,44 @@ func (o *UserResponse) HasRoles() bool {
 
 // SetRoles gets a reference to the given []Role and assigns it to the Roles field.
 func (o *UserResponse) SetRoles(v []Role) {
-	o.Roles = &v
+	o.Roles = v
+}
+
+// GetUserType returns the UserType field value if set, zero value otherwise.
+func (o *UserResponse) GetUserType() string {
+	if o == nil || IsNil(o.UserType) {
+		var ret string
+		return ret
+	}
+	return *o.UserType
+}
+
+// GetUserTypeOk returns a tuple with the UserType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserResponse) GetUserTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.UserType) {
+		return nil, false
+	}
+	return o.UserType, true
+}
+
+// HasUserType returns a boolean if a field has been set.
+func (o *UserResponse) HasUserType() bool {
+	if o != nil && !IsNil(o.UserType) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserType gets a reference to the given string and assigns it to the UserType field.
+func (o *UserResponse) SetUserType(v string) {
+	o.UserType = &v
 }
 
 // GetMfaType returns the MfaType field value if set, zero value otherwise.
 func (o *UserResponse) GetMfaType() string {
-	if o == nil || o.MfaType == nil {
+	if o == nil || IsNil(o.MfaType) {
 		var ret string
 		return ret
 	}
@@ -394,7 +465,7 @@ func (o *UserResponse) GetMfaType() string {
 // GetMfaTypeOk returns a tuple with the MfaType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetMfaTypeOk() (*string, bool) {
-	if o == nil || o.MfaType == nil {
+	if o == nil || IsNil(o.MfaType) {
 		return nil, false
 	}
 	return o.MfaType, true
@@ -402,7 +473,7 @@ func (o *UserResponse) GetMfaTypeOk() (*string, bool) {
 
 // HasMfaType returns a boolean if a field has been set.
 func (o *UserResponse) HasMfaType() bool {
-	if o != nil && o.MfaType != nil {
+	if o != nil && !IsNil(o.MfaType) {
 		return true
 	}
 
@@ -416,7 +487,7 @@ func (o *UserResponse) SetMfaType(v string) {
 
 // GetMfaStatus returns the MfaStatus field value if set, zero value otherwise.
 func (o *UserResponse) GetMfaStatus() string {
-	if o == nil || o.MfaStatus == nil {
+	if o == nil || IsNil(o.MfaStatus) {
 		var ret string
 		return ret
 	}
@@ -426,7 +497,7 @@ func (o *UserResponse) GetMfaStatus() string {
 // GetMfaStatusOk returns a tuple with the MfaStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetMfaStatusOk() (*string, bool) {
-	if o == nil || o.MfaStatus == nil {
+	if o == nil || IsNil(o.MfaStatus) {
 		return nil, false
 	}
 	return o.MfaStatus, true
@@ -434,7 +505,7 @@ func (o *UserResponse) GetMfaStatusOk() (*string, bool) {
 
 // HasMfaStatus returns a boolean if a field has been set.
 func (o *UserResponse) HasMfaStatus() bool {
-	if o != nil && o.MfaStatus != nil {
+	if o != nil && !IsNil(o.MfaStatus) {
 		return true
 	}
 
@@ -448,7 +519,7 @@ func (o *UserResponse) SetMfaStatus(v string) {
 
 // GetLockedOut returns the LockedOut field value if set, zero value otherwise.
 func (o *UserResponse) GetLockedOut() bool {
-	if o == nil || o.LockedOut == nil {
+	if o == nil || IsNil(o.LockedOut) {
 		var ret bool
 		return ret
 	}
@@ -458,7 +529,7 @@ func (o *UserResponse) GetLockedOut() bool {
 // GetLockedOutOk returns a tuple with the LockedOut field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserResponse) GetLockedOutOk() (*bool, bool) {
-	if o == nil || o.LockedOut == nil {
+	if o == nil || IsNil(o.LockedOut) {
 		return nil, false
 	}
 	return o.LockedOut, true
@@ -466,7 +537,7 @@ func (o *UserResponse) GetLockedOutOk() (*bool, bool) {
 
 // HasLockedOut returns a boolean if a field has been set.
 func (o *UserResponse) HasLockedOut() bool {
-	if o != nil && o.LockedOut != nil {
+	if o != nil && !IsNil(o.LockedOut) {
 		return true
 	}
 
@@ -480,7 +551,7 @@ func (o *UserResponse) SetLockedOut(v bool) {
 
 // GetLockedOutTimestamp returns the LockedOutTimestamp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserResponse) GetLockedOutTimestamp() time.Time {
-	if o == nil || o.LockedOutTimestamp.Get() == nil {
+	if o == nil || IsNil(o.LockedOutTimestamp.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -491,7 +562,7 @@ func (o *UserResponse) GetLockedOutTimestamp() time.Time {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserResponse) GetLockedOutTimestampOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.LockedOutTimestamp.Get(), o.LockedOutTimestamp.IsSet()
@@ -521,50 +592,64 @@ func (o *UserResponse) UnsetLockedOutTimestamp() {
 }
 
 func (o UserResponse) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UserResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if o.Email != nil {
+	if !IsNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
-	if o.SmsNumber != nil {
+	if !IsNil(o.SmsNumber) {
 		toSerialize["smsNumber"] = o.SmsNumber
 	}
-	if o.PrimaryContactNumber != nil {
+	if !IsNil(o.PrimaryContactNumber) {
 		toSerialize["primaryContactNumber"] = o.PrimaryContactNumber
 	}
-	if o.SecondaryContactNumber != nil {
+	if !IsNil(o.SecondaryContactNumber) {
 		toSerialize["secondaryContactNumber"] = o.SecondaryContactNumber
 	}
-	if o.FirstName != nil {
+	if !IsNil(o.FirstName) {
 		toSerialize["firstName"] = o.FirstName
 	}
-	if o.LastName != nil {
+	if !IsNil(o.LastName) {
 		toSerialize["lastName"] = o.LastName
 	}
-	if o.EntityId != nil {
+	if !IsNil(o.EntityId) {
 		toSerialize["entityId"] = o.EntityId
 	}
-	if o.Roles != nil {
+	if !IsNil(o.CompanyName) {
+		toSerialize["companyName"] = o.CompanyName
+	}
+	if !IsNil(o.Roles) {
 		toSerialize["roles"] = o.Roles
 	}
-	if o.MfaType != nil {
+	if !IsNil(o.UserType) {
+		toSerialize["userType"] = o.UserType
+	}
+	if !IsNil(o.MfaType) {
 		toSerialize["mfaType"] = o.MfaType
 	}
-	if o.MfaStatus != nil {
+	if !IsNil(o.MfaStatus) {
 		toSerialize["mfaStatus"] = o.MfaStatus
 	}
-	if o.LockedOut != nil {
+	if !IsNil(o.LockedOut) {
 		toSerialize["lockedOut"] = o.LockedOut
 	}
 	if o.LockedOutTimestamp.IsSet() {
 		toSerialize["lockedOutTimestamp"] = o.LockedOutTimestamp.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableUserResponse struct {

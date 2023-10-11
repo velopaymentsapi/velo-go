@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **Amount** | Pointer to **float64** | The amount funded | [optional] 
 **Currency** | Pointer to **string** | The currency of the funding | [optional] 
 **DateTime** | Pointer to **time.Time** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
+**Status** | Pointer to **string** | Status of the funding. One of the following values: PENDING, FAILED, CREDIT, DEBIT | [optional] 
 **SourceAccountName** | Pointer to **string** |  | [optional] 
 **FundingAccountName** | Pointer to **string** |  | [optional] 
-**FundingType** | Pointer to **string** |  | [optional] 
+**FundingType** | Pointer to **string** | Funding type. One of the following values: ACH, WIRE, EMBEDDED, BANK_TRANSFER | [optional] 
 **Events** | Pointer to [**[]FundingEvent**](FundingEvent.md) |  | [optional] 
-**TopupType** | Pointer to **string** |  | [optional] 
+**TopupType** | Pointer to **string** | Type of top up. One of the following values: AUTOMATIC, MANUAL | [optional] 
 
 ## Methods
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayorName** | **string** | The name of the payor | 
-**LogoUrl** | **string** | The URL to use for this payor’s logo | 
+**LogoUrl** | **string** | &lt;p&gt;The URL to use for this payor’s logo&lt;/p&gt; &lt;p&gt;This will be an immutable system-generated URL&lt;/p&gt;  | 
 **CollectiveAlias** | Pointer to **NullableString** | How the payor has chosen to refer to payees | [optional] 
 **SupportContact** | Pointer to **NullableString** | The payor’s support contact address | [optional] 
 **DbaName** | Pointer to **NullableString** | The payor’s &#39;Doing Business As&#39; name | [optional] 

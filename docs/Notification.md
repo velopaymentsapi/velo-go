@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **SequenceNumber** | **int64** | This is a payor specific sequence number starting at 1 for the first notification sent | 
 **Category** | **string** | The category that the notification relates to. One of \&quot;payment\&quot;, \&quot;payee\&quot;, \&quot;debit\&quot; or \&quot;system\&quot; | 
 **EventName** | **string** | The name of event that led to this notification | 
-**Source** | Pointer to [**OneOfPingPaymentStatusChangedPaymentRejectedOrReturnedOnboardingStatusChangedPayableStatusChangedPayeeDetailsChangedDebitStatusChanged**](oneOf&lt;Ping,PaymentStatusChanged,PaymentRejectedOrReturned,OnboardingStatusChanged,PayableStatusChanged,PayeeDetailsChanged,DebitStatusChanged&gt;.md) | One of the available set of source event payloads | [optional] 
+**Source** | Pointer to [**NotificationSource**](NotificationSource.md) |  | [optional] 
 
 ## Methods
 
@@ -111,20 +111,20 @@ SetEventName sets EventName field to given value.
 
 ### GetSource
 
-`func (o *Notification) GetSource() OneOfPingPaymentStatusChangedPaymentRejectedOrReturnedOnboardingStatusChangedPayableStatusChangedPayeeDetailsChangedDebitStatusChanged`
+`func (o *Notification) GetSource() NotificationSource`
 
 GetSource returns the Source field if non-nil, zero value otherwise.
 
 ### GetSourceOk
 
-`func (o *Notification) GetSourceOk() (*OneOfPingPaymentStatusChangedPaymentRejectedOrReturnedOnboardingStatusChangedPayableStatusChangedPayeeDetailsChangedDebitStatusChanged, bool)`
+`func (o *Notification) GetSourceOk() (*NotificationSource, bool)`
 
 GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSource
 
-`func (o *Notification) SetSource(v OneOfPingPaymentStatusChangedPaymentRejectedOrReturnedOnboardingStatusChangedPayableStatusChangedPayeeDetailsChangedDebitStatusChanged)`
+`func (o *Notification) SetSource(v NotificationSource)`
 
 SetSource sets Source field to given value.
 

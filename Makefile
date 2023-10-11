@@ -16,6 +16,9 @@ version:
 oa3config:
 	sed -i.bak 's/"packageVersion": ".*"/"packageVersion": "${VERSION}"/g' oa3-config.json && rm oa3-config.json.bak
 
+sdkversion:
+	@docker run -i stedolan/jq <oa3-config.json -r '.packageVersion'
+
 clean:
 	rm -Rf api
 	rm -Rf docs
@@ -45,7 +48,7 @@ trim:
 	rm git_push.sh
 	rm -Rf api
 
-info:
+adjustments:
 	# wget https://raw.githubusercontent.com/velopaymentsapi/changelog/main/README.md -O CHANGELOG.md
 
 	echo "package velopayments" >> OneOfPingPaymentStatusChangedPaymentRejectedOrReturnedOnboardingStatusChangedPayableStatusChangedPayeeDetailsChangedDebitStatusChanged.go
@@ -62,28 +65,16 @@ info:
 	sed -i.bak 's/ApiResendTokenRequest/ApiResendUserTokenRequest/g' api_users.go && rm api_users.go.bak
 	
 	- rm *.bak
-	- rm ./docs/*.bak
+	# - rm ./docs/*.bak
 
-build_client:
-	#
+rcnaming: ## 
+	$(eval RC_REVISION="$(shell make WORKING_SPEC=${WORKING_SPEC} version)")
+	@echo "${RC_REVISION}.beta${RC_BUILD}"
 
-client: clean generate trim info build_client
+client: clean generate trim adjustments
 
 tests:
 	# test and generate coverage
 	# go test -race $(go list ./... | grep -v /vendor/) -v -coverprofile .testCoverage.txt -args -key=${KEY} -secret=${SECRET} -payor=${PAYOR}
 	docker build -t=client-go-tests .
 	docker run -t -v $(PWD):/usr/src/app -e CGO_ENABLED=0 -e KEY=${KEY} -e SECRET=${SECRET} -e PAYOR=${PAYOR} -e APIURL=${APIURL} -e APITOKEN="" client-go-tests go test -short $(go list ./... | grep -v /vendor/) -v -coverprofile .testCoverage.txt
-
-commit:
-	sed -i.bak 's/- Package version: .*/- Package version: ${VERSION}/' README.md && rm README.md.bak
-	git add --all
-	git commit -am 'bump version to v${VERSION}'
-	git push --set-upstream origin master
-
-build:
-	@echo "Not doing anything just yet"
-
-publish:
-	git tag v$(VERSION)
-	git push origin tag v$(VERSION)
