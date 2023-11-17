@@ -75,6 +75,7 @@ client: clean generate trim adjustments
 
 tests:
 	# test and generate coverage
+	- rm -Rf test
 	# go test -race $(go list ./... | grep -v /vendor/) -v -coverprofile .testCoverage.txt -args -key=${KEY} -secret=${SECRET} -payor=${PAYOR}
 	docker build -t=client-go-tests .
 	docker run -t -v $(PWD):/usr/src/app -e CGO_ENABLED=0 -e KEY=${KEY} -e SECRET=${SECRET} -e PAYOR=${PAYOR} -e APIURL=${APIURL} -e APITOKEN="" client-go-tests go test -short $(go list ./... | grep -v /vendor/) -v -coverprofile .testCoverage.txt
