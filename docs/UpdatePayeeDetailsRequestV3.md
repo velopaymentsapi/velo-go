@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **PayeeType** | Pointer to [**PayeeTypeEnum**](PayeeTypeEnum.md) |  | [optional] 
 **Challenge** | Pointer to [**ChallengeV3**](ChallengeV3.md) |  | [optional] 
 **Email** | Pointer to **NullableString** |  | [optional] 
+**ContactSmsNumber** | Pointer to **string** | The phone number of a device that the payee wishes to receive sms messages on  | [optional] 
 
 ## Methods
 
@@ -226,6 +227,31 @@ HasEmail returns a boolean if a field has been set.
 `func (o *UpdatePayeeDetailsRequestV3) UnsetEmail()`
 
 UnsetEmail ensures that no value is present for Email, not even an explicit nil
+### GetContactSmsNumber
+
+`func (o *UpdatePayeeDetailsRequestV3) GetContactSmsNumber() string`
+
+GetContactSmsNumber returns the ContactSmsNumber field if non-nil, zero value otherwise.
+
+### GetContactSmsNumberOk
+
+`func (o *UpdatePayeeDetailsRequestV3) GetContactSmsNumberOk() (*string, bool)`
+
+GetContactSmsNumberOk returns a tuple with the ContactSmsNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContactSmsNumber
+
+`func (o *UpdatePayeeDetailsRequestV3) SetContactSmsNumber(v string)`
+
+SetContactSmsNumber sets ContactSmsNumber field to given value.
+
+### HasContactSmsNumber
+
+`func (o *UpdatePayeeDetailsRequestV3) HasContactSmsNumber() bool`
+
+HasContactSmsNumber returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

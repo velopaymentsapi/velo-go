@@ -472,7 +472,7 @@ import (
 )
 
 func main() {
-    createPayoutRequestV3 := *openapiclient.NewCreatePayoutRequestV3([]openapiclient.PaymentInstructionV3{*openapiclient.NewPaymentInstructionV3("remoteId1234", "USD", int64(1299), "MyAccountName")}) // CreatePayoutRequestV3 | Post amount to transfer using stored funding account details.
+    createPayoutRequestV3 := *openapiclient.NewCreatePayoutRequestV3([]openapiclient.PaymentInstructionV3{*openapiclient.NewPaymentInstructionV3("remoteId1234", "USD", int64(1299))}) // CreatePayoutRequestV3 | Post amount to transfer using stored funding account details.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/csv
+- **Accept**: application/csv, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -565,7 +565,7 @@ Name | Type | Description  | Notes
 
 ## ListPaymentsAuditV4
 
-> ListPaymentsResponseV4 ListPaymentsAuditV4(ctx).PayeeId(payeeId).PayorId(payorId).PayorName(payorName).RemoteId(remoteId).RemoteSystemId(remoteSystemId).Status(status).TransmissionType(transmissionType).SourceAccountName(sourceAccountName).SourceAmountFrom(sourceAmountFrom).SourceAmountTo(sourceAmountTo).SourceCurrency(sourceCurrency).PaymentAmountFrom(paymentAmountFrom).PaymentAmountTo(paymentAmountTo).PaymentCurrency(paymentCurrency).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).PaymentMemo(paymentMemo).RailsId(railsId).ScheduledForDateFrom(scheduledForDateFrom).ScheduledForDateTo(scheduledForDateTo).ScheduleStatus(scheduleStatus).PostInstructFxStatus(postInstructFxStatus).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
+> ListPaymentsResponseV4 ListPaymentsAuditV4(ctx).PayeeId(payeeId).PayorId(payorId).PayorName(payorName).RemoteId(remoteId).RemoteSystemId(remoteSystemId).Status(status).TransmissionType(transmissionType).SourceAccountName(sourceAccountName).SourceAmountFrom(sourceAmountFrom).SourceAmountTo(sourceAmountTo).SourceCurrency(sourceCurrency).PaymentAmountFrom(paymentAmountFrom).PaymentAmountTo(paymentAmountTo).PaymentCurrency(paymentCurrency).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).PaymentMemo(paymentMemo).PayorPaymentId(payorPaymentId).RailsId(railsId).ScheduledForDateFrom(scheduledForDateFrom).ScheduledForDateTo(scheduledForDateTo).ScheduleStatus(scheduleStatus).PostInstructFxStatus(postInstructFxStatus).TransactionReference(transactionReference).TransactionId(transactionId).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
 
 Get List of Payments
 
@@ -602,11 +602,14 @@ func main() {
     submittedDateFrom := time.Now() // string | The submitted date from range filter. Format is yyyy-MM-dd. (optional)
     submittedDateTo := time.Now() // string | The submitted date to range filter. Format is yyyy-MM-dd. (optional)
     paymentMemo := "paymentMemo_example" // string | The payment memo filter. This filters via a case insensitive substring match. (optional)
+    payorPaymentId := "payorPaymentId_example" // string | Payor's Id of the Payment (optional)
     railsId := "railsId_example" // string | Payout Rails ID filter - case insensitive match. Any value is allowed, but you should use one of the supported railsId values. To get this list of values, you should call the 'Get Supported Rails' endpoint.  (optional)
     scheduledForDateFrom := time.Now() // string | Filter payouts scheduled to run on or after the given date. Format is yyyy-MM-dd. (optional)
     scheduledForDateTo := time.Now() // string | Filter payouts scheduled to run on or before the given date. Format is yyyy-MM-dd. (optional)
     scheduleStatus := "scheduleStatus_example" // string | Payout Schedule Status (optional)
     postInstructFxStatus := "postInstructFxStatus_example" // string | The status of the post instruct FX step if one was required for the payment (optional)
+    transactionReference := "transactionReference_example" // string | Query for all payments associated with a specific transaction reference (optional)
+    transactionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Query for all payments associated with a specific transaction id (optional)
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
     pageSize := int32(56) // int32 | The number of results to return in a page (optional) (default to 25)
     sort := "sort_example" // string | List of sort fields (e.g. ?sort=submittedDateTime:asc,status:asc). Default is sort by submittedDateTime:desc,paymentId:asc The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency, routingNumber, accountNumber, remoteId, submittedDateTime, status and paymentId  (optional)
@@ -614,7 +617,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PaymentAuditServiceAPI.ListPaymentsAuditV4(context.Background()).PayeeId(payeeId).PayorId(payorId).PayorName(payorName).RemoteId(remoteId).RemoteSystemId(remoteSystemId).Status(status).TransmissionType(transmissionType).SourceAccountName(sourceAccountName).SourceAmountFrom(sourceAmountFrom).SourceAmountTo(sourceAmountTo).SourceCurrency(sourceCurrency).PaymentAmountFrom(paymentAmountFrom).PaymentAmountTo(paymentAmountTo).PaymentCurrency(paymentCurrency).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).PaymentMemo(paymentMemo).RailsId(railsId).ScheduledForDateFrom(scheduledForDateFrom).ScheduledForDateTo(scheduledForDateTo).ScheduleStatus(scheduleStatus).PostInstructFxStatus(postInstructFxStatus).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
+    resp, r, err := apiClient.PaymentAuditServiceAPI.ListPaymentsAuditV4(context.Background()).PayeeId(payeeId).PayorId(payorId).PayorName(payorName).RemoteId(remoteId).RemoteSystemId(remoteSystemId).Status(status).TransmissionType(transmissionType).SourceAccountName(sourceAccountName).SourceAmountFrom(sourceAmountFrom).SourceAmountTo(sourceAmountTo).SourceCurrency(sourceCurrency).PaymentAmountFrom(paymentAmountFrom).PaymentAmountTo(paymentAmountTo).PaymentCurrency(paymentCurrency).SubmittedDateFrom(submittedDateFrom).SubmittedDateTo(submittedDateTo).PaymentMemo(paymentMemo).PayorPaymentId(payorPaymentId).RailsId(railsId).ScheduledForDateFrom(scheduledForDateFrom).ScheduledForDateTo(scheduledForDateTo).ScheduleStatus(scheduleStatus).PostInstructFxStatus(postInstructFxStatus).TransactionReference(transactionReference).TransactionId(transactionId).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentAuditServiceAPI.ListPaymentsAuditV4``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -652,11 +655,14 @@ Name | Type | Description  | Notes
  **submittedDateFrom** | **string** | The submitted date from range filter. Format is yyyy-MM-dd. | 
  **submittedDateTo** | **string** | The submitted date to range filter. Format is yyyy-MM-dd. | 
  **paymentMemo** | **string** | The payment memo filter. This filters via a case insensitive substring match. | 
+ **payorPaymentId** | **string** | Payor&#39;s Id of the Payment | 
  **railsId** | **string** | Payout Rails ID filter - case insensitive match. Any value is allowed, but you should use one of the supported railsId values. To get this list of values, you should call the &#39;Get Supported Rails&#39; endpoint.  | 
  **scheduledForDateFrom** | **string** | Filter payouts scheduled to run on or after the given date. Format is yyyy-MM-dd. | 
  **scheduledForDateTo** | **string** | Filter payouts scheduled to run on or before the given date. Format is yyyy-MM-dd. | 
  **scheduleStatus** | **string** | Payout Schedule Status | 
  **postInstructFxStatus** | **string** | The status of the post instruct FX step if one was required for the payment | 
+ **transactionReference** | **string** | Query for all payments associated with a specific transaction reference | 
+ **transactionId** | **string** | Query for all payments associated with a specific transaction id | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]
  **pageSize** | **int32** | The number of results to return in a page | [default to 25]
  **sort** | **string** | List of sort fields (e.g. ?sort&#x3D;submittedDateTime:asc,status:asc). Default is sort by submittedDateTime:desc,paymentId:asc The supported sort fields are: sourceAmount, sourceCurrency, paymentAmount, paymentCurrency, routingNumber, accountNumber, remoteId, submittedDateTime, status and paymentId  | 

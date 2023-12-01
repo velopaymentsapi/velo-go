@@ -1,78 +1,78 @@
-# ListFundingAccountsResponseV2Links
+# CommonLinkObject
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Rel** | Pointer to **string** |  | [optional] 
-**Href** | Pointer to **string** |  | [optional] 
+**Rel** | Pointer to **string** | One of: first, last, or self | [optional] 
+**Href** | Pointer to **string** | the resource URI | [optional] 
 
 ## Methods
 
-### NewListFundingAccountsResponseV2Links
+### NewCommonLinkObject
 
-`func NewListFundingAccountsResponseV2Links() *ListFundingAccountsResponseV2Links`
+`func NewCommonLinkObject() *CommonLinkObject`
 
-NewListFundingAccountsResponseV2Links instantiates a new ListFundingAccountsResponseV2Links object
+NewCommonLinkObject instantiates a new CommonLinkObject object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewListFundingAccountsResponseV2LinksWithDefaults
+### NewCommonLinkObjectWithDefaults
 
-`func NewListFundingAccountsResponseV2LinksWithDefaults() *ListFundingAccountsResponseV2Links`
+`func NewCommonLinkObjectWithDefaults() *CommonLinkObject`
 
-NewListFundingAccountsResponseV2LinksWithDefaults instantiates a new ListFundingAccountsResponseV2Links object
+NewCommonLinkObjectWithDefaults instantiates a new CommonLinkObject object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetRel
 
-`func (o *ListFundingAccountsResponseV2Links) GetRel() string`
+`func (o *CommonLinkObject) GetRel() string`
 
 GetRel returns the Rel field if non-nil, zero value otherwise.
 
 ### GetRelOk
 
-`func (o *ListFundingAccountsResponseV2Links) GetRelOk() (*string, bool)`
+`func (o *CommonLinkObject) GetRelOk() (*string, bool)`
 
 GetRelOk returns a tuple with the Rel field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRel
 
-`func (o *ListFundingAccountsResponseV2Links) SetRel(v string)`
+`func (o *CommonLinkObject) SetRel(v string)`
 
 SetRel sets Rel field to given value.
 
 ### HasRel
 
-`func (o *ListFundingAccountsResponseV2Links) HasRel() bool`
+`func (o *CommonLinkObject) HasRel() bool`
 
 HasRel returns a boolean if a field has been set.
 
 ### GetHref
 
-`func (o *ListFundingAccountsResponseV2Links) GetHref() string`
+`func (o *CommonLinkObject) GetHref() string`
 
 GetHref returns the Href field if non-nil, zero value otherwise.
 
 ### GetHrefOk
 
-`func (o *ListFundingAccountsResponseV2Links) GetHrefOk() (*string, bool)`
+`func (o *CommonLinkObject) GetHrefOk() (*string, bool)`
 
 GetHrefOk returns a tuple with the Href field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHref
 
-`func (o *ListFundingAccountsResponseV2Links) SetHref(v string)`
+`func (o *CommonLinkObject) SetHref(v string)`
 
 SetHref sets Href field to given value.
 
 ### HasHref
 
-`func (o *ListFundingAccountsResponseV2Links) HasHref() bool`
+`func (o *CommonLinkObject) HasHref() bool`
 
 HasHref returns a boolean if a field has been set.
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Page** | Pointer to [**ListFundingAccountsResponseV2Page**](ListFundingAccountsResponseV2Page.md) |  | [optional] 
-**Links** | Pointer to [**[]ListFundingAccountsResponseV2Links**](ListFundingAccountsResponseV2Links.md) |  | [optional] 
+**Links** | Pointer to [**[]ListSourceAccountResponseV2Links**](ListSourceAccountResponseV2Links.md) |  | [optional] 
 **Content** | Pointer to [**[]FundingAccountResponseV2**](FundingAccountResponseV2.md) |  | [optional] 
 
 ## Methods
@@ -54,20 +54,20 @@ HasPage returns a boolean if a field has been set.
 
 ### GetLinks
 
-`func (o *ListFundingAccountsResponseV2) GetLinks() []ListFundingAccountsResponseV2Links`
+`func (o *ListFundingAccountsResponseV2) GetLinks() []ListSourceAccountResponseV2Links`
 
 GetLinks returns the Links field if non-nil, zero value otherwise.
 
 ### GetLinksOk
 
-`func (o *ListFundingAccountsResponseV2) GetLinksOk() (*[]ListFundingAccountsResponseV2Links, bool)`
+`func (o *ListFundingAccountsResponseV2) GetLinksOk() (*[]ListSourceAccountResponseV2Links, bool)`
 
 GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinks
 
-`func (o *ListFundingAccountsResponseV2) SetLinks(v []ListFundingAccountsResponseV2Links)`
+`func (o *ListFundingAccountsResponseV2) SetLinks(v []ListSourceAccountResponseV2Links)`
 
 SetLinks sets Links field to given value.
 

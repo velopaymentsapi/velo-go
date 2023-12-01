@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-    createFundingAccountRequestV2 := *openapiclient.NewCreateFundingAccountRequestV2("Type_example", "Name_example", "PayorId_example") // CreateFundingAccountRequestV2 |  (optional)
+    createFundingAccountRequestV2 := *openapiclient.NewCreateFundingAccountRequestV2("Type_example", "Name_example", "PayorId_example", "US") // CreateFundingAccountRequestV2 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

@@ -4,16 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EventId** | Pointer to **string** |  | [optional] 
-**EventDateTime** | Pointer to **time.Time** |  | [optional] 
-**FundingEventType** | Pointer to **string** | Funding event type. One of the following values: PAYOR_FUNDING_DETECTED, PAYOR_FUNDING_REQUESTED, PAYOR_FUNDING_RETURN_RECEIVED, FUNDING_RETURN_DETECTED, PAYOR_FUNDING_REQUEST_SUBMITTED, PAYOR_FUNDING_ENTRY_DETAIL_RECEIVED, FUNDING_DEALLOCATED | [optional] 
-**Principal** | Pointer to **string** |  | [optional] 
+**SourceType** | **string** | OA3 Schema type name for the source info which is used as the discriminator value to ensure that data binding works correctly | 
+**EventId** | **string** | UUID id of the source event in the Velo platform | 
+**CreatedAt** | **time.Time** | ISO8601 timestamp indicating when the source event was created | 
 
 ## Methods
 
 ### NewFundingEvent
 
-`func NewFundingEvent() *FundingEvent`
+`func NewFundingEvent(sourceType string, eventId string, createdAt time.Time, ) *FundingEvent`
 
 NewFundingEvent instantiates a new FundingEvent object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +26,26 @@ will change when the set of required properties is changed
 NewFundingEventWithDefaults instantiates a new FundingEvent object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetSourceType
+
+`func (o *FundingEvent) GetSourceType() string`
+
+GetSourceType returns the SourceType field if non-nil, zero value otherwise.
+
+### GetSourceTypeOk
+
+`func (o *FundingEvent) GetSourceTypeOk() (*string, bool)`
+
+GetSourceTypeOk returns a tuple with the SourceType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceType
+
+`func (o *FundingEvent) SetSourceType(v string)`
+
+SetSourceType sets SourceType field to given value.
+
 
 ### GetEventId
 
@@ -47,86 +66,26 @@ and a boolean to check if the value has been set.
 
 SetEventId sets EventId field to given value.
 
-### HasEventId
 
-`func (o *FundingEvent) HasEventId() bool`
+### GetCreatedAt
 
-HasEventId returns a boolean if a field has been set.
+`func (o *FundingEvent) GetCreatedAt() time.Time`
 
-### GetEventDateTime
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
-`func (o *FundingEvent) GetEventDateTime() time.Time`
+### GetCreatedAtOk
 
-GetEventDateTime returns the EventDateTime field if non-nil, zero value otherwise.
+`func (o *FundingEvent) GetCreatedAtOk() (*time.Time, bool)`
 
-### GetEventDateTimeOk
-
-`func (o *FundingEvent) GetEventDateTimeOk() (*time.Time, bool)`
-
-GetEventDateTimeOk returns a tuple with the EventDateTime field if it's non-nil, zero value otherwise
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEventDateTime
+### SetCreatedAt
 
-`func (o *FundingEvent) SetEventDateTime(v time.Time)`
+`func (o *FundingEvent) SetCreatedAt(v time.Time)`
 
-SetEventDateTime sets EventDateTime field to given value.
+SetCreatedAt sets CreatedAt field to given value.
 
-### HasEventDateTime
-
-`func (o *FundingEvent) HasEventDateTime() bool`
-
-HasEventDateTime returns a boolean if a field has been set.
-
-### GetFundingEventType
-
-`func (o *FundingEvent) GetFundingEventType() string`
-
-GetFundingEventType returns the FundingEventType field if non-nil, zero value otherwise.
-
-### GetFundingEventTypeOk
-
-`func (o *FundingEvent) GetFundingEventTypeOk() (*string, bool)`
-
-GetFundingEventTypeOk returns a tuple with the FundingEventType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFundingEventType
-
-`func (o *FundingEvent) SetFundingEventType(v string)`
-
-SetFundingEventType sets FundingEventType field to given value.
-
-### HasFundingEventType
-
-`func (o *FundingEvent) HasFundingEventType() bool`
-
-HasFundingEventType returns a boolean if a field has been set.
-
-### GetPrincipal
-
-`func (o *FundingEvent) GetPrincipal() string`
-
-GetPrincipal returns the Principal field if non-nil, zero value otherwise.
-
-### GetPrincipalOk
-
-`func (o *FundingEvent) GetPrincipalOk() (*string, bool)`
-
-GetPrincipalOk returns a tuple with the Principal field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPrincipal
-
-`func (o *FundingEvent) SetPrincipal(v string)`
-
-SetPrincipal sets Principal field to given value.
-
-### HasPrincipal
-
-`func (o *FundingEvent) HasPrincipal() bool`
-
-HasPrincipal returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

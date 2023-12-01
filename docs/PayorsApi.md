@@ -4,7 +4,6 @@ All URIs are relative to *https://api.sandbox.velopayments.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetPayorByIdV1**](PayorsAPI.md#GetPayorByIdV1) | **Get** /v1/payors/{payorId} | Get Payor
 [**GetPayorByIdV2**](PayorsAPI.md#GetPayorByIdV2) | **Get** /v2/payors/{payorId} | Get Payor
 [**PayorAddPayorLogoV1**](PayorsAPI.md#PayorAddPayorLogoV1) | **Post** /v1/payors/{payorId}/branding/logos | Add Logo
 [**PayorCreateApiKeyV1**](PayorsAPI.md#PayorCreateApiKeyV1) | **Post** /v1/payors/{payorId}/applications/{applicationId}/keys | Create API Key
@@ -12,76 +11,6 @@ Method | HTTP request | Description
 [**PayorEmailOptOut**](PayorsAPI.md#PayorEmailOptOut) | **Post** /v1/payors/{payorId}/reminderEmailsUpdate | Reminder Email Opt-Out
 [**PayorGetBranding**](PayorsAPI.md#PayorGetBranding) | **Get** /v1/payors/{payorId}/branding | Get Branding
 
-
-
-## GetPayorByIdV1
-
-> PayorV1 GetPayorByIdV1(ctx, payorId).Execute()
-
-Get Payor
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PayorsAPI.GetPayorByIdV1(context.Background(), payorId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PayorsAPI.GetPayorByIdV1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetPayorByIdV1`: PayorV1
-    fmt.Fprintf(os.Stdout, "Response from `PayorsAPI.GetPayorByIdV1`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | **string** | The Payor Id | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPayorByIdV1Request struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**PayorV1**](PayorV1.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## GetPayorByIdV2
@@ -105,7 +34,7 @@ import (
 )
 
 func main() {
-    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -125,7 +54,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | **string** | The Payor Id | 
+**payorId** | **string** | The account owner Payor ID | 
 
 ### Other Parameters
 
@@ -175,7 +104,7 @@ import (
 )
 
 func main() {
-    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
     logo := os.NewFile(1234, "some_file") // *os.File |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -194,7 +123,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | **string** | The Payor Id | 
+**payorId** | **string** | The account owner Payor ID | 
 
 ### Other Parameters
 
@@ -245,9 +174,9 @@ import (
 )
 
 func main() {
-    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
     applicationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Application ID
-    payorCreateApiKeyRequest := *openapiclient.NewPayorCreateApiKeyRequest("iOS Key", []string{"Roles_example"}) // PayorCreateApiKeyRequest | Details of application API key to create
+    payorCreateApiKeyRequest := *openapiclient.NewPayorCreateApiKeyRequest("SAP Key 01", []string{"Roles_example"}) // PayorCreateApiKeyRequest | Details of application API key to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -267,7 +196,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | **string** | The Payor Id | 
+**payorId** | **string** | The account owner Payor ID | 
 **applicationId** | **string** | Application ID | 
 
 ### Other Parameters
@@ -320,7 +249,7 @@ import (
 )
 
 func main() {
-    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
     payorCreateApplicationRequest := *openapiclient.NewPayorCreateApplicationRequest("SAP") // PayorCreateApplicationRequest | Details of application to create
 
     configuration := openapiclient.NewConfiguration()
@@ -339,7 +268,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | **string** | The Payor Id | 
+**payorId** | **string** | The account owner Payor ID | 
 
 ### Other Parameters
 
@@ -390,7 +319,7 @@ import (
 )
 
 func main() {
-    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
     payorEmailOptOutRequest := *openapiclient.NewPayorEmailOptOutRequest(false) // PayorEmailOptOutRequest | Reminder Emails Opt-Out Request
 
     configuration := openapiclient.NewConfiguration()
@@ -409,7 +338,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | **string** | The Payor Id | 
+**payorId** | **string** | The account owner Payor ID | 
 
 ### Other Parameters
 
@@ -460,7 +389,7 @@ import (
 )
 
 func main() {
-    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The Payor Id
+    payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The account owner Payor ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -480,7 +409,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**payorId** | **string** | The Payor Id | 
+**payorId** | **string** | The account owner Payor ID | 
 
 ### Other Parameters
 

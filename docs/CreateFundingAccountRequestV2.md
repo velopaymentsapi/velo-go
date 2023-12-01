@@ -10,13 +10,13 @@ Name | Type | Description | Notes
 **AccountName** | Pointer to **string** | Required if type is either FBO or PRIVATE | [optional] 
 **AccountNumber** | Pointer to **string** | Required if type is either FBO or PRIVATE | [optional] 
 **RoutingNumber** | Pointer to **string** | Required if type is either FBO or PRIVATE | [optional] 
-**Currency** | Pointer to **string** | ISO 4217 currency code, Required if type is either WUBS_DECOUPLED or PRIVATE | [optional] 
+**CountryCode** | **string** | ISO 3166-1 2 letter country code (upper case) | 
 
 ## Methods
 
 ### NewCreateFundingAccountRequestV2
 
-`func NewCreateFundingAccountRequestV2(type_ string, name string, payorId string, ) *CreateFundingAccountRequestV2`
+`func NewCreateFundingAccountRequestV2(type_ string, name string, payorId string, countryCode string, ) *CreateFundingAccountRequestV2`
 
 NewCreateFundingAccountRequestV2 instantiates a new CreateFundingAccountRequestV2 object
 This constructor will assign default values to properties that have it defined,
@@ -166,30 +166,25 @@ SetRoutingNumber sets RoutingNumber field to given value.
 
 HasRoutingNumber returns a boolean if a field has been set.
 
-### GetCurrency
+### GetCountryCode
 
-`func (o *CreateFundingAccountRequestV2) GetCurrency() string`
+`func (o *CreateFundingAccountRequestV2) GetCountryCode() string`
 
-GetCurrency returns the Currency field if non-nil, zero value otherwise.
+GetCountryCode returns the CountryCode field if non-nil, zero value otherwise.
 
-### GetCurrencyOk
+### GetCountryCodeOk
 
-`func (o *CreateFundingAccountRequestV2) GetCurrencyOk() (*string, bool)`
+`func (o *CreateFundingAccountRequestV2) GetCountryCodeOk() (*string, bool)`
 
-GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+GetCountryCodeOk returns a tuple with the CountryCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCurrency
+### SetCountryCode
 
-`func (o *CreateFundingAccountRequestV2) SetCurrency(v string)`
+`func (o *CreateFundingAccountRequestV2) SetCountryCode(v string)`
 
-SetCurrency sets Currency field to given value.
+SetCountryCode sets CountryCode field to given value.
 
-### HasCurrency
-
-`func (o *CreateFundingAccountRequestV2) HasCurrency() bool`
-
-HasCurrency returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

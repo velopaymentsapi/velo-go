@@ -4,33 +4,33 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayorId** | **string** |  | [readonly] 
-**PayorName** | **string** | The name of the payor. | 
+**PayorId** | **string** | The Payor Id | 
+**PayorName** | **string** | The name of the payor | 
 **PayorXid** | Pointer to **string** | A unique identifier that an external system uses to reference the payor in their system | [optional] 
 **Provider** | Pointer to **string** | The source of the payorXid, default is null which means Velo | [optional] 
 **Address** | Pointer to [**PayorAddressV2**](PayorAddressV2.md) |  | [optional] 
 **PrimaryContactName** | Pointer to **string** | Name of primary contact for the payor. | [optional] 
 **PrimaryContactPhone** | Pointer to **string** | Primary contact phone number for the payor. | [optional] 
 **PrimaryContactEmail** | Pointer to **string** | Primary contact email for the payor. | [optional] 
-**KycState** | Pointer to **string** | The kyc state of the payor. One of the following values: FAILED_KYC, PASSED_KYC, REQUIRES_KYC | [optional] [readonly] 
+**KycState** | Pointer to **string** | The kyc state of the payor. One of the following values: FAILED_KYC, PASSED_KYC, REQUIRES_KYC | [optional] 
 **ManualLockout** | Pointer to **bool** | Whether or not the payor has been manually locked by the backoffice. | [optional] 
 **OpenBankingEnabled** | Pointer to **bool** | Is Open Banking supported for this payor | [optional] 
-**PayeeGracePeriodProcessingEnabled** | Pointer to **bool** | Whether grace period processing is enabled. | [optional] [readonly] 
-**PayeeGracePeriodDays** | Pointer to **int32** | The grace period for paying payees in days. | [optional] [readonly] 
+**PayeeGracePeriodProcessingEnabled** | Pointer to **bool** | Whether grace period processing is enabled. | [optional] 
+**PayeeGracePeriodDays** | Pointer to **int32** | The grace period for paying payees in days before the payee must be onboarded. | [optional] 
 **CollectiveAlias** | Pointer to **string** | How the payor has chosen to refer to payees. | [optional] 
 **SupportContact** | Pointer to **string** | The payor’s support contact email address. | [optional] 
 **DbaName** | Pointer to **string** | The payor’s &#39;Doing Business As&#39; name. | [optional] 
 **AllowsLanguageChoice** | Pointer to **bool** | Whether or not the payor allows language choice in the UI. | [optional] 
-**ReminderEmailsOptOut** | Pointer to **bool** | Whether or not the payor has opted-out of reminder emails being sent. | [optional] [readonly] 
+**ReminderEmailsOptOut** | Pointer to **bool** | Whether or not the payor has opted-out of reminder emails being sent. | [optional] 
 **Language** | Pointer to **string** | The payor’s language preference. Must be one of [EN, FR] | [optional] 
-**IncludesReports** | Pointer to **bool** |  | [optional] 
-**WuCustomerId** | Pointer to **string** |  | [optional] 
-**MaxMasterPayorAdmins** | Pointer to **int32** |  | [optional] 
-**PaymentRails** | Pointer to **string** | The id of the payment rails | [optional] 
-**TransmissionTypes** | Pointer to [**TransmissionTypes2**](TransmissionTypes2.md) |  | [optional] 
-**RemoteSystemIds** | Pointer to **[]string** | The payor’s supported remote systems by id | [optional] 
-**UsdTxnValueReportingThreshold** | Pointer to **int32** | USD in minor units | [optional] 
-**ManagingPayees** | Pointer to **bool** |  | [optional] 
+**IncludesReports** | Pointer to **bool** | For internal use only (will be removed in a later version) | [optional] 
+**WuCustomerId** | Pointer to **string** | For internal use only (will be removed in a later version) | [optional] 
+**MaxMasterPayorAdmins** | Pointer to **int32** | The maximum number of payor users with the master admin role | [optional] 
+**PaymentRails** | Pointer to **string** | For internal use only (will be removed in a later version) | [optional] 
+**RemoteSystemIds** | Pointer to **[]string** | For internal use only (will be removed in a later version) | [optional] 
+**UsdTxnValueReportingThreshold** | Pointer to **int32** | USD in minor units. For internal use only (will be removed in a later version) | [optional] 
+**ManagingPayees** | Pointer to **bool** | Does this payor manage their own payees (payees are not invited but managed by the payor) | [optional] 
+**CreatedAt** | Pointer to **time.Time** | The date of creation of the payor | [optional] 
 
 ## Methods
 
@@ -616,31 +616,6 @@ SetPaymentRails sets PaymentRails field to given value.
 
 HasPaymentRails returns a boolean if a field has been set.
 
-### GetTransmissionTypes
-
-`func (o *PayorV2) GetTransmissionTypes() TransmissionTypes2`
-
-GetTransmissionTypes returns the TransmissionTypes field if non-nil, zero value otherwise.
-
-### GetTransmissionTypesOk
-
-`func (o *PayorV2) GetTransmissionTypesOk() (*TransmissionTypes2, bool)`
-
-GetTransmissionTypesOk returns a tuple with the TransmissionTypes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTransmissionTypes
-
-`func (o *PayorV2) SetTransmissionTypes(v TransmissionTypes2)`
-
-SetTransmissionTypes sets TransmissionTypes field to given value.
-
-### HasTransmissionTypes
-
-`func (o *PayorV2) HasTransmissionTypes() bool`
-
-HasTransmissionTypes returns a boolean if a field has been set.
-
 ### GetRemoteSystemIds
 
 `func (o *PayorV2) GetRemoteSystemIds() []string`
@@ -715,6 +690,31 @@ SetManagingPayees sets ManagingPayees field to given value.
 `func (o *PayorV2) HasManagingPayees() bool`
 
 HasManagingPayees returns a boolean if a field has been set.
+
+### GetCreatedAt
+
+`func (o *PayorV2) GetCreatedAt() time.Time`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *PayorV2) GetCreatedAtOk() (*time.Time, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *PayorV2) SetCreatedAt(v time.Time)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+### HasCreatedAt
+
+`func (o *PayorV2) HasCreatedAt() bool`
+
+HasCreatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

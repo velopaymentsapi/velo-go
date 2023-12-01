@@ -14,11 +14,12 @@ Name | Type | Description | Notes
 **Payee** | Pointer to [**PayoutPayeeV3**](PayoutPayeeV3.md) |  | [optional] 
 **Withdrawable** | Pointer to **bool** | Can this paynent be withdrawn | [optional] 
 **Status** | Pointer to **string** | Current status of payment. One of the following values: SUBMITTED, ACCEPTED, REJECTED, WITHDRAWN, RETURNED, AWAITING_FUNDS, FUNDED, UNFUNDED, CANCELLED, BANK_PAYMENT_REQUESTED | [optional] 
-**TransmissionType** | Pointer to **string** | The transmission method of the payment. One of the following values: ACH, SAME_DAY_ACH, WIRE, LOCAL, SWIFT | [optional] 
+**TransmissionType** | Pointer to **string** | &lt;p&gt;The transmission method of the payment.&lt;/p&gt; &lt;p&gt;Valid values for transmissionType can be found attached to the Source Account&lt;/p&gt;  | [optional] 
 **RemoteSystemId** | Pointer to **string** | &lt;p&gt;The identifier for the remote payments system if not Velo&lt;/p&gt;  | [optional] 
 **PaymentMetadata** | Pointer to **string** | &lt;p&gt;Metadata about the payment that may be relevant to the specific rails or remote system making the payout&lt;/p&gt; &lt;p&gt;The structure of the data will be dictated by the requirements of the payment rails&lt;/p&gt;  | [optional] 
 **AutoWithdrawnReasonCode** | Pointer to **string** | Populated only if the payment was automatically withdrawn during instruction for being invalid | [optional] 
 **RailsId** | Pointer to **string** | Indicates the 3rd party system involved in making this payment | [optional] 
+**TransactionId** | Pointer to **string** | The id of the transaction associated with this payment if there was one | [optional] 
 
 ## Methods
 
@@ -408,6 +409,31 @@ SetRailsId sets RailsId field to given value.
 `func (o *PaymentV3) HasRailsId() bool`
 
 HasRailsId returns a boolean if a field has been set.
+
+### GetTransactionId
+
+`func (o *PaymentV3) GetTransactionId() string`
+
+GetTransactionId returns the TransactionId field if non-nil, zero value otherwise.
+
+### GetTransactionIdOk
+
+`func (o *PaymentV3) GetTransactionIdOk() (*string, bool)`
+
+GetTransactionIdOk returns a tuple with the TransactionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionId
+
+`func (o *PaymentV3) SetTransactionId(v string)`
+
+SetTransactionId sets TransactionId field to given value.
+
+### HasTransactionId
+
+`func (o *PaymentV3) HasTransactionId() bool`
+
+HasTransactionId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

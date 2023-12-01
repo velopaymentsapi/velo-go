@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **Disabled** | Pointer to **bool** |  | [optional] 
 **DisabledComment** | Pointer to **string** |  | [optional] 
 **DisabledUpdatedTimestamp** | Pointer to **time.Time** |  | [optional] 
+**ManagedByPayorId** | Pointer to **string** | The id of the payor if the payee is managed | [optional] 
 **Individual** | Pointer to [**GetPayeeListResponseIndividualV4**](GetPayeeListResponseIndividualV4.md) |  | [optional] 
 **Company** | Pointer to [**GetPayeeListResponseCompanyV4**](GetPayeeListResponseCompanyV4.md) |  | [optional] 
 
@@ -455,6 +456,31 @@ SetDisabledUpdatedTimestamp sets DisabledUpdatedTimestamp field to given value.
 `func (o *GetPayeeListResponseV4) HasDisabledUpdatedTimestamp() bool`
 
 HasDisabledUpdatedTimestamp returns a boolean if a field has been set.
+
+### GetManagedByPayorId
+
+`func (o *GetPayeeListResponseV4) GetManagedByPayorId() string`
+
+GetManagedByPayorId returns the ManagedByPayorId field if non-nil, zero value otherwise.
+
+### GetManagedByPayorIdOk
+
+`func (o *GetPayeeListResponseV4) GetManagedByPayorIdOk() (*string, bool)`
+
+GetManagedByPayorIdOk returns a tuple with the ManagedByPayorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagedByPayorId
+
+`func (o *GetPayeeListResponseV4) SetManagedByPayorId(v string)`
+
+SetManagedByPayorId sets ManagedByPayorId field to given value.
+
+### HasManagedByPayorId
+
+`func (o *GetPayeeListResponseV4) HasManagedByPayorId() bool`
+
+HasManagedByPayorId returns a boolean if a field has been set.
 
 ### GetIndividual
 

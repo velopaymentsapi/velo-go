@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayorName** | **string** | The name of the payor | 
 **LogoUrl** | **string** | &lt;p&gt;The URL to use for this payor’s logo&lt;/p&gt; &lt;p&gt;This will be an immutable system-generated URL&lt;/p&gt;  | 
-**CollectiveAlias** | Pointer to **NullableString** | How the payor has chosen to refer to payees | [optional] 
-**SupportContact** | Pointer to **NullableString** | The payor’s support contact address | [optional] 
-**DbaName** | Pointer to **NullableString** | The payor’s &#39;Doing Business As&#39; name | [optional] 
+**CollectiveAlias** | Pointer to **string** | How the payor has chosen to refer to payees | [optional] 
+**SupportContact** | Pointer to **string** | The payor’s support contact address | [optional] 
+**DbaName** | Pointer to **string** | The payor’s &#39;Doing Business As&#39; name | [optional] 
 
 ## Methods
 
@@ -94,16 +94,6 @@ SetCollectiveAlias sets CollectiveAlias field to given value.
 
 HasCollectiveAlias returns a boolean if a field has been set.
 
-### SetCollectiveAliasNil
-
-`func (o *PayorBrandingResponse) SetCollectiveAliasNil(b bool)`
-
- SetCollectiveAliasNil sets the value for CollectiveAlias to be an explicit nil
-
-### UnsetCollectiveAlias
-`func (o *PayorBrandingResponse) UnsetCollectiveAlias()`
-
-UnsetCollectiveAlias ensures that no value is present for CollectiveAlias, not even an explicit nil
 ### GetSupportContact
 
 `func (o *PayorBrandingResponse) GetSupportContact() string`
@@ -129,16 +119,6 @@ SetSupportContact sets SupportContact field to given value.
 
 HasSupportContact returns a boolean if a field has been set.
 
-### SetSupportContactNil
-
-`func (o *PayorBrandingResponse) SetSupportContactNil(b bool)`
-
- SetSupportContactNil sets the value for SupportContact to be an explicit nil
-
-### UnsetSupportContact
-`func (o *PayorBrandingResponse) UnsetSupportContact()`
-
-UnsetSupportContact ensures that no value is present for SupportContact, not even an explicit nil
 ### GetDbaName
 
 `func (o *PayorBrandingResponse) GetDbaName() string`
@@ -164,16 +144,6 @@ SetDbaName sets DbaName field to given value.
 
 HasDbaName returns a boolean if a field has been set.
 
-### SetDbaNameNil
-
-`func (o *PayorBrandingResponse) SetDbaNameNil(b bool)`
-
- SetDbaNameNil sets the value for DbaName to be an explicit nil
-
-### UnsetDbaName
-`func (o *PayorBrandingResponse) UnsetDbaName()`
-
-UnsetDbaName ensures that no value is present for DbaName, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

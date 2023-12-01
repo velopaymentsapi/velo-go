@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to [**PagedPayeeInvitationStatusResponseV3Page**](PagedPayeeInvitationStatusResponseV3Page.md) |  | [optional] 
-**Links** | Pointer to [**[]PagedPayeeResponseV3Links**](PagedPayeeResponseV3Links.md) |  | [optional] 
+**Page** | Pointer to [**CommonPageObject**](CommonPageObject.md) |  | [optional] 
+**Links** | Pointer to [**[]CommonLinkObject**](CommonLinkObject.md) |  | [optional] 
 **Content** | Pointer to [**[]WebhookResponse**](WebhookResponse.md) |  | [optional] 
 
 ## Methods
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPage
 
-`func (o *WebhooksResponse) GetPage() PagedPayeeInvitationStatusResponseV3Page`
+`func (o *WebhooksResponse) GetPage() CommonPageObject`
 
 GetPage returns the Page field if non-nil, zero value otherwise.
 
 ### GetPageOk
 
-`func (o *WebhooksResponse) GetPageOk() (*PagedPayeeInvitationStatusResponseV3Page, bool)`
+`func (o *WebhooksResponse) GetPageOk() (*CommonPageObject, bool)`
 
 GetPageOk returns a tuple with the Page field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPage
 
-`func (o *WebhooksResponse) SetPage(v PagedPayeeInvitationStatusResponseV3Page)`
+`func (o *WebhooksResponse) SetPage(v CommonPageObject)`
 
 SetPage sets Page field to given value.
 
@@ -54,20 +54,20 @@ HasPage returns a boolean if a field has been set.
 
 ### GetLinks
 
-`func (o *WebhooksResponse) GetLinks() []PagedPayeeResponseV3Links`
+`func (o *WebhooksResponse) GetLinks() []CommonLinkObject`
 
 GetLinks returns the Links field if non-nil, zero value otherwise.
 
 ### GetLinksOk
 
-`func (o *WebhooksResponse) GetLinksOk() (*[]PagedPayeeResponseV3Links, bool)`
+`func (o *WebhooksResponse) GetLinksOk() (*[]CommonLinkObject, bool)`
 
 GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinks
 
-`func (o *WebhooksResponse) SetLinks(v []PagedPayeeResponseV3Links)`
+`func (o *WebhooksResponse) SetLinks(v []CommonLinkObject)`
 
 SetLinks sets Links field to given value.
 

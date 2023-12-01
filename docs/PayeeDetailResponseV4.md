@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayeeId** | Pointer to **string** |  | [optional] [readonly] 
 **PayorRefs** | Pointer to [**[]PayeePayorRefV4**](PayeePayorRefV4.md) |  | [optional] [readonly] 
+**PaymentChannels** | Pointer to [**[]PaymentChannelSummaryV4**](PaymentChannelSummaryV4.md) | A list of the Payee&#39;s payment channels in their preferred order | [optional] [readonly] 
 **Email** | Pointer to **NullableString** |  | [optional] 
 **OnboardedStatus** | Pointer to **string** | Payee onboarded status. One of the following values: CREATED, INVITED, REGISTERED, ONBOARDED | [optional] 
 **WatchlistStatus** | Pointer to **string** | Current watchlist status. One of the following values: NONE, PENDING, REVIEW, PASSED, FAILED | [optional] 
@@ -23,6 +24,7 @@ Name | Type | Description | Notes
 **Individual** | Pointer to [**IndividualV4**](IndividualV4.md) |  | [optional] 
 **Company** | Pointer to [**NullableCompanyV4**](CompanyV4.md) |  | [optional] 
 **CellphoneNumber** | Pointer to **string** |  | [optional] 
+**ManagedByPayorId** | Pointer to **string** | The id of the payor if the payee is managed | [optional] 
 **WatchlistStatusUpdatedTimestamp** | Pointer to **NullableString** |  | [optional] [readonly] 
 **GracePeriodEndDate** | Pointer to **NullableString** |  | [optional] [readonly] 
 **EnhancedKycCompleted** | Pointer to **bool** |  | [optional] 
@@ -113,6 +115,41 @@ HasPayorRefs returns a boolean if a field has been set.
 `func (o *PayeeDetailResponseV4) UnsetPayorRefs()`
 
 UnsetPayorRefs ensures that no value is present for PayorRefs, not even an explicit nil
+### GetPaymentChannels
+
+`func (o *PayeeDetailResponseV4) GetPaymentChannels() []PaymentChannelSummaryV4`
+
+GetPaymentChannels returns the PaymentChannels field if non-nil, zero value otherwise.
+
+### GetPaymentChannelsOk
+
+`func (o *PayeeDetailResponseV4) GetPaymentChannelsOk() (*[]PaymentChannelSummaryV4, bool)`
+
+GetPaymentChannelsOk returns a tuple with the PaymentChannels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentChannels
+
+`func (o *PayeeDetailResponseV4) SetPaymentChannels(v []PaymentChannelSummaryV4)`
+
+SetPaymentChannels sets PaymentChannels field to given value.
+
+### HasPaymentChannels
+
+`func (o *PayeeDetailResponseV4) HasPaymentChannels() bool`
+
+HasPaymentChannels returns a boolean if a field has been set.
+
+### SetPaymentChannelsNil
+
+`func (o *PayeeDetailResponseV4) SetPaymentChannelsNil(b bool)`
+
+ SetPaymentChannelsNil sets the value for PaymentChannels to be an explicit nil
+
+### UnsetPaymentChannels
+`func (o *PayeeDetailResponseV4) UnsetPaymentChannels()`
+
+UnsetPaymentChannels ensures that no value is present for PaymentChannels, not even an explicit nil
 ### GetEmail
 
 `func (o *PayeeDetailResponseV4) GetEmail() string`
@@ -567,6 +604,31 @@ SetCellphoneNumber sets CellphoneNumber field to given value.
 `func (o *PayeeDetailResponseV4) HasCellphoneNumber() bool`
 
 HasCellphoneNumber returns a boolean if a field has been set.
+
+### GetManagedByPayorId
+
+`func (o *PayeeDetailResponseV4) GetManagedByPayorId() string`
+
+GetManagedByPayorId returns the ManagedByPayorId field if non-nil, zero value otherwise.
+
+### GetManagedByPayorIdOk
+
+`func (o *PayeeDetailResponseV4) GetManagedByPayorIdOk() (*string, bool)`
+
+GetManagedByPayorIdOk returns a tuple with the ManagedByPayorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagedByPayorId
+
+`func (o *PayeeDetailResponseV4) SetManagedByPayorId(v string)`
+
+SetManagedByPayorId sets ManagedByPayorId field to given value.
+
+### HasManagedByPayorId
+
+`func (o *PayeeDetailResponseV4) HasManagedByPayorId() bool`
+
+HasManagedByPayorId returns a boolean if a field has been set.
 
 ### GetWatchlistStatusUpdatedTimestamp
 

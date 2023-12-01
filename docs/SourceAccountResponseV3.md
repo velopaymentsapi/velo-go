@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **Deleted** | Pointer to **bool** | An optional flag for whether the source account has been deleted. Only present in the response if true. | [optional] 
 **UserDeleted** | Pointer to **bool** | An optional flag for whether the source account has been deleted by a user. Only present in the response if true. | [optional] 
 **DeletedAt** | Pointer to **time.Time** | An optional timestamp when the source account has been deleted. Only present in the response if deleted. | [optional] 
+**TransmissionTypes** | Pointer to **[]string** | List of supported transmission types. | [optional] 
 
 ## Methods
 
@@ -486,6 +487,31 @@ SetDeletedAt sets DeletedAt field to given value.
 `func (o *SourceAccountResponseV3) HasDeletedAt() bool`
 
 HasDeletedAt returns a boolean if a field has been set.
+
+### GetTransmissionTypes
+
+`func (o *SourceAccountResponseV3) GetTransmissionTypes() []string`
+
+GetTransmissionTypes returns the TransmissionTypes field if non-nil, zero value otherwise.
+
+### GetTransmissionTypesOk
+
+`func (o *SourceAccountResponseV3) GetTransmissionTypesOk() (*[]string, bool)`
+
+GetTransmissionTypesOk returns a tuple with the TransmissionTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransmissionTypes
+
+`func (o *SourceAccountResponseV3) SetTransmissionTypes(v []string)`
+
+SetTransmissionTypes sets TransmissionTypes field to given value.
+
+### HasTransmissionTypes
+
+`func (o *SourceAccountResponseV3) HasTransmissionTypes() bool`
+
+HasTransmissionTypes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -16,12 +16,24 @@ Name | Type | Description | Notes
 **PayeeId** | **string** | ID of this payee within the Velo platform | 
 **Reasons** | Pointer to [**[]PayeeEventAllOfReasons**](PayeeEventAllOfReasons.md) | The reasons for the event notification. | [optional] 
 **DebitTransactionId** | **string** | ID of this debit transaction within the Velo platform | 
+**RailsId** | Pointer to **string** | the identifier of the payment rail from which funding was received | [optional] 
+**PayorId** | **string** | ID of the payor within the Velo platform | 
+**FundingRequestId** | **string** | ID of this funding transaction within the Velo platform | 
+**FundingRef** | Pointer to **string** | the external identity reference for this funding transaction | [optional] 
+**Currency** | Pointer to **string** | the ISO-4217 code for the currency in which the funding was made | [optional] 
+**Amount** | Pointer to **int64** | the received funding amount in currency minor units | [optional] 
+**PhysicalAccountName** | Pointer to **string** | the name of the account as registered with the payment rail | [optional] 
+**SourceAccountName** | Pointer to **string** | the name of the account as registered with the Velo platform | [optional] 
+**SourceAccountId** | Pointer to **string** | the ID of the account as registered with the Velo platform | [optional] 
+**AdditionalInformation** | Pointer to **string** | any additional information received from the payment rail | [optional] 
+**TransactionId** | Pointer to **string** | The Id of the related transaction | [optional] 
+**TransactionReference** | Pointer to **string** | The payors own reference for the related transaction | [optional] 
 
 ## Methods
 
 ### NewNotificationSource
 
-`func NewNotificationSource(sourceType string, eventId string, createdAt time.Time, paymentId string, status string, reasonCode string, reasonMessage string, payeeId string, debitTransactionId string, ) *NotificationSource`
+`func NewNotificationSource(sourceType string, eventId string, createdAt time.Time, paymentId string, status string, reasonCode string, reasonMessage string, payeeId string, debitTransactionId string, payorId string, fundingRequestId string, ) *NotificationSource`
 
 NewNotificationSource instantiates a new NotificationSource object
 This constructor will assign default values to properties that have it defined,
@@ -290,6 +302,296 @@ and a boolean to check if the value has been set.
 
 SetDebitTransactionId sets DebitTransactionId field to given value.
 
+
+### GetRailsId
+
+`func (o *NotificationSource) GetRailsId() string`
+
+GetRailsId returns the RailsId field if non-nil, zero value otherwise.
+
+### GetRailsIdOk
+
+`func (o *NotificationSource) GetRailsIdOk() (*string, bool)`
+
+GetRailsIdOk returns a tuple with the RailsId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRailsId
+
+`func (o *NotificationSource) SetRailsId(v string)`
+
+SetRailsId sets RailsId field to given value.
+
+### HasRailsId
+
+`func (o *NotificationSource) HasRailsId() bool`
+
+HasRailsId returns a boolean if a field has been set.
+
+### GetPayorId
+
+`func (o *NotificationSource) GetPayorId() string`
+
+GetPayorId returns the PayorId field if non-nil, zero value otherwise.
+
+### GetPayorIdOk
+
+`func (o *NotificationSource) GetPayorIdOk() (*string, bool)`
+
+GetPayorIdOk returns a tuple with the PayorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPayorId
+
+`func (o *NotificationSource) SetPayorId(v string)`
+
+SetPayorId sets PayorId field to given value.
+
+
+### GetFundingRequestId
+
+`func (o *NotificationSource) GetFundingRequestId() string`
+
+GetFundingRequestId returns the FundingRequestId field if non-nil, zero value otherwise.
+
+### GetFundingRequestIdOk
+
+`func (o *NotificationSource) GetFundingRequestIdOk() (*string, bool)`
+
+GetFundingRequestIdOk returns a tuple with the FundingRequestId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFundingRequestId
+
+`func (o *NotificationSource) SetFundingRequestId(v string)`
+
+SetFundingRequestId sets FundingRequestId field to given value.
+
+
+### GetFundingRef
+
+`func (o *NotificationSource) GetFundingRef() string`
+
+GetFundingRef returns the FundingRef field if non-nil, zero value otherwise.
+
+### GetFundingRefOk
+
+`func (o *NotificationSource) GetFundingRefOk() (*string, bool)`
+
+GetFundingRefOk returns a tuple with the FundingRef field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFundingRef
+
+`func (o *NotificationSource) SetFundingRef(v string)`
+
+SetFundingRef sets FundingRef field to given value.
+
+### HasFundingRef
+
+`func (o *NotificationSource) HasFundingRef() bool`
+
+HasFundingRef returns a boolean if a field has been set.
+
+### GetCurrency
+
+`func (o *NotificationSource) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *NotificationSource) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *NotificationSource) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *NotificationSource) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
+
+### GetAmount
+
+`func (o *NotificationSource) GetAmount() int64`
+
+GetAmount returns the Amount field if non-nil, zero value otherwise.
+
+### GetAmountOk
+
+`func (o *NotificationSource) GetAmountOk() (*int64, bool)`
+
+GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAmount
+
+`func (o *NotificationSource) SetAmount(v int64)`
+
+SetAmount sets Amount field to given value.
+
+### HasAmount
+
+`func (o *NotificationSource) HasAmount() bool`
+
+HasAmount returns a boolean if a field has been set.
+
+### GetPhysicalAccountName
+
+`func (o *NotificationSource) GetPhysicalAccountName() string`
+
+GetPhysicalAccountName returns the PhysicalAccountName field if non-nil, zero value otherwise.
+
+### GetPhysicalAccountNameOk
+
+`func (o *NotificationSource) GetPhysicalAccountNameOk() (*string, bool)`
+
+GetPhysicalAccountNameOk returns a tuple with the PhysicalAccountName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhysicalAccountName
+
+`func (o *NotificationSource) SetPhysicalAccountName(v string)`
+
+SetPhysicalAccountName sets PhysicalAccountName field to given value.
+
+### HasPhysicalAccountName
+
+`func (o *NotificationSource) HasPhysicalAccountName() bool`
+
+HasPhysicalAccountName returns a boolean if a field has been set.
+
+### GetSourceAccountName
+
+`func (o *NotificationSource) GetSourceAccountName() string`
+
+GetSourceAccountName returns the SourceAccountName field if non-nil, zero value otherwise.
+
+### GetSourceAccountNameOk
+
+`func (o *NotificationSource) GetSourceAccountNameOk() (*string, bool)`
+
+GetSourceAccountNameOk returns a tuple with the SourceAccountName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceAccountName
+
+`func (o *NotificationSource) SetSourceAccountName(v string)`
+
+SetSourceAccountName sets SourceAccountName field to given value.
+
+### HasSourceAccountName
+
+`func (o *NotificationSource) HasSourceAccountName() bool`
+
+HasSourceAccountName returns a boolean if a field has been set.
+
+### GetSourceAccountId
+
+`func (o *NotificationSource) GetSourceAccountId() string`
+
+GetSourceAccountId returns the SourceAccountId field if non-nil, zero value otherwise.
+
+### GetSourceAccountIdOk
+
+`func (o *NotificationSource) GetSourceAccountIdOk() (*string, bool)`
+
+GetSourceAccountIdOk returns a tuple with the SourceAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceAccountId
+
+`func (o *NotificationSource) SetSourceAccountId(v string)`
+
+SetSourceAccountId sets SourceAccountId field to given value.
+
+### HasSourceAccountId
+
+`func (o *NotificationSource) HasSourceAccountId() bool`
+
+HasSourceAccountId returns a boolean if a field has been set.
+
+### GetAdditionalInformation
+
+`func (o *NotificationSource) GetAdditionalInformation() string`
+
+GetAdditionalInformation returns the AdditionalInformation field if non-nil, zero value otherwise.
+
+### GetAdditionalInformationOk
+
+`func (o *NotificationSource) GetAdditionalInformationOk() (*string, bool)`
+
+GetAdditionalInformationOk returns a tuple with the AdditionalInformation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdditionalInformation
+
+`func (o *NotificationSource) SetAdditionalInformation(v string)`
+
+SetAdditionalInformation sets AdditionalInformation field to given value.
+
+### HasAdditionalInformation
+
+`func (o *NotificationSource) HasAdditionalInformation() bool`
+
+HasAdditionalInformation returns a boolean if a field has been set.
+
+### GetTransactionId
+
+`func (o *NotificationSource) GetTransactionId() string`
+
+GetTransactionId returns the TransactionId field if non-nil, zero value otherwise.
+
+### GetTransactionIdOk
+
+`func (o *NotificationSource) GetTransactionIdOk() (*string, bool)`
+
+GetTransactionIdOk returns a tuple with the TransactionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionId
+
+`func (o *NotificationSource) SetTransactionId(v string)`
+
+SetTransactionId sets TransactionId field to given value.
+
+### HasTransactionId
+
+`func (o *NotificationSource) HasTransactionId() bool`
+
+HasTransactionId returns a boolean if a field has been set.
+
+### GetTransactionReference
+
+`func (o *NotificationSource) GetTransactionReference() string`
+
+GetTransactionReference returns the TransactionReference field if non-nil, zero value otherwise.
+
+### GetTransactionReferenceOk
+
+`func (o *NotificationSource) GetTransactionReferenceOk() (*string, bool)`
+
+GetTransactionReferenceOk returns a tuple with the TransactionReference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionReference
+
+`func (o *NotificationSource) SetTransactionReference(v string)`
+
+SetTransactionReference sets TransactionReference field to given value.
+
+### HasTransactionReference
+
+`func (o *NotificationSource) HasTransactionReference() bool`
+
+HasTransactionReference returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

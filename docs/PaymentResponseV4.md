@@ -43,14 +43,19 @@ Name | Type | Description | Notes
 **ReturnReason** | Pointer to **string** |  | [optional] 
 **RailsPaymentId** | Pointer to **string** |  | [optional] 
 **RailsBatchId** | Pointer to **string** |  | [optional] 
+**RailsAccountId** | Pointer to **string** |  | [optional] 
 **PaymentScheme** | Pointer to **string** |  | [optional] 
 **RejectionReason** | Pointer to **string** |  | [optional] 
+**RailsRejectionInformation** | Pointer to **string** | The original reason that the payment was rejected. This can be third party rails specific if rejected by the underlying third party rails logic. | [optional] 
 **WithdrawnReason** | Pointer to **string** |  | [optional] 
 **Withdrawable** | Pointer to **bool** |  | [optional] 
 **AutoWithdrawnReasonCode** | Pointer to **string** | Populated with rejection reason code if the payment was withdrawn automatically at instruct time | [optional] 
 **TransmissionType** | Pointer to **string** | The transmission type of the payment, e.g. ACH, SAME_DAY_ACH, WIRE, GACHO | [optional] 
+**TransmissionTypeRequested** | Pointer to **string** | The transmission type of the payment requested by the payor | [optional] 
 **PaymentTrackingReference** | Pointer to **string** |  | [optional] 
 **PaymentMetadata** | Pointer to **string** | Metadata for the payment | [optional] 
+**TransactionId** | Pointer to **string** |  | [optional] 
+**TransactionReference** | Pointer to **string** |  | [optional] 
 **Schedule** | Pointer to [**PayoutSchedule**](PayoutSchedule.md) |  | [optional] 
 **PostInstructFxInfo** | Pointer to [**PostInstructFxInfo**](PostInstructFxInfo.md) |  | [optional] 
 **Payout** | Pointer to [**PaymentResponseV4Payout**](PaymentResponseV4Payout.md) |  | [optional] 
@@ -994,6 +999,31 @@ SetRailsBatchId sets RailsBatchId field to given value.
 
 HasRailsBatchId returns a boolean if a field has been set.
 
+### GetRailsAccountId
+
+`func (o *PaymentResponseV4) GetRailsAccountId() string`
+
+GetRailsAccountId returns the RailsAccountId field if non-nil, zero value otherwise.
+
+### GetRailsAccountIdOk
+
+`func (o *PaymentResponseV4) GetRailsAccountIdOk() (*string, bool)`
+
+GetRailsAccountIdOk returns a tuple with the RailsAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRailsAccountId
+
+`func (o *PaymentResponseV4) SetRailsAccountId(v string)`
+
+SetRailsAccountId sets RailsAccountId field to given value.
+
+### HasRailsAccountId
+
+`func (o *PaymentResponseV4) HasRailsAccountId() bool`
+
+HasRailsAccountId returns a boolean if a field has been set.
+
 ### GetPaymentScheme
 
 `func (o *PaymentResponseV4) GetPaymentScheme() string`
@@ -1043,6 +1073,31 @@ SetRejectionReason sets RejectionReason field to given value.
 `func (o *PaymentResponseV4) HasRejectionReason() bool`
 
 HasRejectionReason returns a boolean if a field has been set.
+
+### GetRailsRejectionInformation
+
+`func (o *PaymentResponseV4) GetRailsRejectionInformation() string`
+
+GetRailsRejectionInformation returns the RailsRejectionInformation field if non-nil, zero value otherwise.
+
+### GetRailsRejectionInformationOk
+
+`func (o *PaymentResponseV4) GetRailsRejectionInformationOk() (*string, bool)`
+
+GetRailsRejectionInformationOk returns a tuple with the RailsRejectionInformation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRailsRejectionInformation
+
+`func (o *PaymentResponseV4) SetRailsRejectionInformation(v string)`
+
+SetRailsRejectionInformation sets RailsRejectionInformation field to given value.
+
+### HasRailsRejectionInformation
+
+`func (o *PaymentResponseV4) HasRailsRejectionInformation() bool`
+
+HasRailsRejectionInformation returns a boolean if a field has been set.
 
 ### GetWithdrawnReason
 
@@ -1144,6 +1199,31 @@ SetTransmissionType sets TransmissionType field to given value.
 
 HasTransmissionType returns a boolean if a field has been set.
 
+### GetTransmissionTypeRequested
+
+`func (o *PaymentResponseV4) GetTransmissionTypeRequested() string`
+
+GetTransmissionTypeRequested returns the TransmissionTypeRequested field if non-nil, zero value otherwise.
+
+### GetTransmissionTypeRequestedOk
+
+`func (o *PaymentResponseV4) GetTransmissionTypeRequestedOk() (*string, bool)`
+
+GetTransmissionTypeRequestedOk returns a tuple with the TransmissionTypeRequested field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransmissionTypeRequested
+
+`func (o *PaymentResponseV4) SetTransmissionTypeRequested(v string)`
+
+SetTransmissionTypeRequested sets TransmissionTypeRequested field to given value.
+
+### HasTransmissionTypeRequested
+
+`func (o *PaymentResponseV4) HasTransmissionTypeRequested() bool`
+
+HasTransmissionTypeRequested returns a boolean if a field has been set.
+
 ### GetPaymentTrackingReference
 
 `func (o *PaymentResponseV4) GetPaymentTrackingReference() string`
@@ -1193,6 +1273,56 @@ SetPaymentMetadata sets PaymentMetadata field to given value.
 `func (o *PaymentResponseV4) HasPaymentMetadata() bool`
 
 HasPaymentMetadata returns a boolean if a field has been set.
+
+### GetTransactionId
+
+`func (o *PaymentResponseV4) GetTransactionId() string`
+
+GetTransactionId returns the TransactionId field if non-nil, zero value otherwise.
+
+### GetTransactionIdOk
+
+`func (o *PaymentResponseV4) GetTransactionIdOk() (*string, bool)`
+
+GetTransactionIdOk returns a tuple with the TransactionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionId
+
+`func (o *PaymentResponseV4) SetTransactionId(v string)`
+
+SetTransactionId sets TransactionId field to given value.
+
+### HasTransactionId
+
+`func (o *PaymentResponseV4) HasTransactionId() bool`
+
+HasTransactionId returns a boolean if a field has been set.
+
+### GetTransactionReference
+
+`func (o *PaymentResponseV4) GetTransactionReference() string`
+
+GetTransactionReference returns the TransactionReference field if non-nil, zero value otherwise.
+
+### GetTransactionReferenceOk
+
+`func (o *PaymentResponseV4) GetTransactionReferenceOk() (*string, bool)`
+
+GetTransactionReferenceOk returns a tuple with the TransactionReference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionReference
+
+`func (o *PaymentResponseV4) SetTransactionReference(v string)`
+
+SetTransactionReference sets TransactionReference field to given value.
+
+### HasTransactionReference
+
+`func (o *PaymentResponseV4) HasTransactionReference() bool`
+
+HasTransactionReference returns a boolean if a field has been set.
 
 ### GetSchedule
 

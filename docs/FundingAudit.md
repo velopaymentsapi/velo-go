@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**PayorId** | Pointer to **string** | The id of the payor associated with the funding. | [optional] 
 **Amount** | Pointer to **float64** | The amount funded | [optional] 
 **Currency** | Pointer to **string** | The currency of the funding | [optional] 
 **DateTime** | Pointer to **time.Time** |  | [optional] 
@@ -11,8 +12,10 @@ Name | Type | Description | Notes
 **SourceAccountName** | Pointer to **string** |  | [optional] 
 **FundingAccountName** | Pointer to **string** |  | [optional] 
 **FundingType** | Pointer to **string** | Funding type. One of the following values: ACH, WIRE, EMBEDDED, BANK_TRANSFER | [optional] 
-**Events** | Pointer to [**[]FundingEvent**](FundingEvent.md) |  | [optional] 
+**Events** | Pointer to [**[]FundingEvent2**](FundingEvent2.md) |  | [optional] 
 **TopupType** | Pointer to **string** | Type of top up. One of the following values: AUTOMATIC, MANUAL | [optional] 
+**TransactionId** | Pointer to **string** | The id of the transaction associated with the funding if there was one | [optional] 
+**TransactionReference** | Pointer to **string** | The payors reference for the transaction associated with the funding if there was one | [optional] 
 
 ## Methods
 
@@ -32,6 +35,31 @@ will change when the set of required properties is changed
 NewFundingAuditWithDefaults instantiates a new FundingAudit object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetPayorId
+
+`func (o *FundingAudit) GetPayorId() string`
+
+GetPayorId returns the PayorId field if non-nil, zero value otherwise.
+
+### GetPayorIdOk
+
+`func (o *FundingAudit) GetPayorIdOk() (*string, bool)`
+
+GetPayorIdOk returns a tuple with the PayorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPayorId
+
+`func (o *FundingAudit) SetPayorId(v string)`
+
+SetPayorId sets PayorId field to given value.
+
+### HasPayorId
+
+`func (o *FundingAudit) HasPayorId() bool`
+
+HasPayorId returns a boolean if a field has been set.
 
 ### GetAmount
 
@@ -210,20 +238,20 @@ HasFundingType returns a boolean if a field has been set.
 
 ### GetEvents
 
-`func (o *FundingAudit) GetEvents() []FundingEvent`
+`func (o *FundingAudit) GetEvents() []FundingEvent2`
 
 GetEvents returns the Events field if non-nil, zero value otherwise.
 
 ### GetEventsOk
 
-`func (o *FundingAudit) GetEventsOk() (*[]FundingEvent, bool)`
+`func (o *FundingAudit) GetEventsOk() (*[]FundingEvent2, bool)`
 
 GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEvents
 
-`func (o *FundingAudit) SetEvents(v []FundingEvent)`
+`func (o *FundingAudit) SetEvents(v []FundingEvent2)`
 
 SetEvents sets Events field to given value.
 
@@ -257,6 +285,56 @@ SetTopupType sets TopupType field to given value.
 `func (o *FundingAudit) HasTopupType() bool`
 
 HasTopupType returns a boolean if a field has been set.
+
+### GetTransactionId
+
+`func (o *FundingAudit) GetTransactionId() string`
+
+GetTransactionId returns the TransactionId field if non-nil, zero value otherwise.
+
+### GetTransactionIdOk
+
+`func (o *FundingAudit) GetTransactionIdOk() (*string, bool)`
+
+GetTransactionIdOk returns a tuple with the TransactionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionId
+
+`func (o *FundingAudit) SetTransactionId(v string)`
+
+SetTransactionId sets TransactionId field to given value.
+
+### HasTransactionId
+
+`func (o *FundingAudit) HasTransactionId() bool`
+
+HasTransactionId returns a boolean if a field has been set.
+
+### GetTransactionReference
+
+`func (o *FundingAudit) GetTransactionReference() string`
+
+GetTransactionReference returns the TransactionReference field if non-nil, zero value otherwise.
+
+### GetTransactionReferenceOk
+
+`func (o *FundingAudit) GetTransactionReferenceOk() (*string, bool)`
+
+GetTransactionReferenceOk returns a tuple with the TransactionReference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionReference
+
+`func (o *FundingAudit) SetTransactionReference(v string)`
+
+SetTransactionReference sets TransactionReference field to given value.
+
+### HasTransactionReference
+
+`func (o *FundingAudit) HasTransactionReference() bool`
+
+HasTransactionReference returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

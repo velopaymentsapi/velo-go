@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Line1** | **string** |  | 
-**Line2** | Pointer to **NullableString** |  | [optional] 
-**Line3** | Pointer to **NullableString** |  | [optional] 
-**Line4** | Pointer to **NullableString** |  | [optional] 
+**Line2** | Pointer to **string** |  | [optional] 
+**Line3** | Pointer to **string** |  | [optional] 
+**Line4** | Pointer to **string** |  | [optional] 
 **City** | **string** |  | 
-**CountyOrProvince** | Pointer to **NullableString** |  | [optional] 
-**ZipOrPostcode** | Pointer to **NullableString** |  | [optional] 
+**CountyOrProvince** | Pointer to **string** |  | [optional] 
+**ZipOrPostcode** | Pointer to **string** |  | [optional] 
 **Country** | **string** |  | 
 
 ## Methods
@@ -77,16 +77,6 @@ SetLine2 sets Line2 field to given value.
 
 HasLine2 returns a boolean if a field has been set.
 
-### SetLine2Nil
-
-`func (o *PayorAddressV2) SetLine2Nil(b bool)`
-
- SetLine2Nil sets the value for Line2 to be an explicit nil
-
-### UnsetLine2
-`func (o *PayorAddressV2) UnsetLine2()`
-
-UnsetLine2 ensures that no value is present for Line2, not even an explicit nil
 ### GetLine3
 
 `func (o *PayorAddressV2) GetLine3() string`
@@ -112,16 +102,6 @@ SetLine3 sets Line3 field to given value.
 
 HasLine3 returns a boolean if a field has been set.
 
-### SetLine3Nil
-
-`func (o *PayorAddressV2) SetLine3Nil(b bool)`
-
- SetLine3Nil sets the value for Line3 to be an explicit nil
-
-### UnsetLine3
-`func (o *PayorAddressV2) UnsetLine3()`
-
-UnsetLine3 ensures that no value is present for Line3, not even an explicit nil
 ### GetLine4
 
 `func (o *PayorAddressV2) GetLine4() string`
@@ -147,16 +127,6 @@ SetLine4 sets Line4 field to given value.
 
 HasLine4 returns a boolean if a field has been set.
 
-### SetLine4Nil
-
-`func (o *PayorAddressV2) SetLine4Nil(b bool)`
-
- SetLine4Nil sets the value for Line4 to be an explicit nil
-
-### UnsetLine4
-`func (o *PayorAddressV2) UnsetLine4()`
-
-UnsetLine4 ensures that no value is present for Line4, not even an explicit nil
 ### GetCity
 
 `func (o *PayorAddressV2) GetCity() string`
@@ -202,16 +172,6 @@ SetCountyOrProvince sets CountyOrProvince field to given value.
 
 HasCountyOrProvince returns a boolean if a field has been set.
 
-### SetCountyOrProvinceNil
-
-`func (o *PayorAddressV2) SetCountyOrProvinceNil(b bool)`
-
- SetCountyOrProvinceNil sets the value for CountyOrProvince to be an explicit nil
-
-### UnsetCountyOrProvince
-`func (o *PayorAddressV2) UnsetCountyOrProvince()`
-
-UnsetCountyOrProvince ensures that no value is present for CountyOrProvince, not even an explicit nil
 ### GetZipOrPostcode
 
 `func (o *PayorAddressV2) GetZipOrPostcode() string`
@@ -237,16 +197,6 @@ SetZipOrPostcode sets ZipOrPostcode field to given value.
 
 HasZipOrPostcode returns a boolean if a field has been set.
 
-### SetZipOrPostcodeNil
-
-`func (o *PayorAddressV2) SetZipOrPostcodeNil(b bool)`
-
- SetZipOrPostcodeNil sets the value for ZipOrPostcode to be an explicit nil
-
-### UnsetZipOrPostcode
-`func (o *PayorAddressV2) UnsetZipOrPostcode()`
-
-UnsetZipOrPostcode ensures that no value is present for ZipOrPostcode, not even an explicit nil
 ### GetCountry
 
 `func (o *PayorAddressV2) GetCountry() string`

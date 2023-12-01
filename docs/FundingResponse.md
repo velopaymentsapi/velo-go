@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FundingId** | **string** |  | 
 **PayorId** | **string** |  | 
-**AllocationDate** | **time.Time** |  | 
+**CreatedAt** | **time.Time** | The date and time the funding was created | 
 **DetectedFundingRef** | Pointer to **string** |  | [optional] 
 **Amount** | **int64** |  | 
 **Currency** | **string** | Valid ISO 4217 3 letter currency code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-4217-currency-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | 
@@ -14,16 +14,18 @@ Name | Type | Description | Notes
 **PhysicalAccountName** | Pointer to **string** |  | [optional] 
 **SourceAccountId** | Pointer to **string** |  | [optional] 
 **AllocationType** | Pointer to **string** | Funding Allocation Type. One of the following values: AUTOMATIC, MANUAL | [optional] 
+**AllocatedAt** | Pointer to **time.Time** | Populated only if the funding has been allocated. The date and time the funding was allocated. | [optional] 
+**AllocationDate** | Pointer to **time.Time** | Populated with allocatedAt if allocated otherwise createdAt. Deprecated in v2.36 - will be removed in the future. | [optional] 
 **Reason** | Pointer to **string** |  | [optional] 
 **HiddenDate** | Pointer to **time.Time** |  | [optional] 
-**FundingAccountType** | **string** | Funding Account Type. One of the following values: FBO, WUBS_DECOUPLED, PRIVATE | 
+**FundingAccountType** | **string** | Funding Account Type. One of the following values: FBO, PRIVATE | 
 **Status** | **string** | Current status of the funding. One of the follwing values: PENDING, UNALLOCATED, ALLOCATED, HIDDEN, RETURNED, RETURNING, BULK_RETURN, OTHER | 
 
 ## Methods
 
 ### NewFundingResponse
 
-`func NewFundingResponse(fundingId string, payorId string, allocationDate time.Time, amount int64, currency string, fundingAccountType string, status string, ) *FundingResponse`
+`func NewFundingResponse(fundingId string, payorId string, createdAt time.Time, amount int64, currency string, fundingAccountType string, status string, ) *FundingResponse`
 
 NewFundingResponse instantiates a new FundingResponse object
 This constructor will assign default values to properties that have it defined,
@@ -78,24 +80,24 @@ and a boolean to check if the value has been set.
 SetPayorId sets PayorId field to given value.
 
 
-### GetAllocationDate
+### GetCreatedAt
 
-`func (o *FundingResponse) GetAllocationDate() time.Time`
+`func (o *FundingResponse) GetCreatedAt() time.Time`
 
-GetAllocationDate returns the AllocationDate field if non-nil, zero value otherwise.
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
-### GetAllocationDateOk
+### GetCreatedAtOk
 
-`func (o *FundingResponse) GetAllocationDateOk() (*time.Time, bool)`
+`func (o *FundingResponse) GetCreatedAtOk() (*time.Time, bool)`
 
-GetAllocationDateOk returns a tuple with the AllocationDate field if it's non-nil, zero value otherwise
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAllocationDate
+### SetCreatedAt
 
-`func (o *FundingResponse) SetAllocationDate(v time.Time)`
+`func (o *FundingResponse) SetCreatedAt(v time.Time)`
 
-SetAllocationDate sets AllocationDate field to given value.
+SetCreatedAt sets CreatedAt field to given value.
 
 
 ### GetDetectedFundingRef
@@ -262,6 +264,56 @@ SetAllocationType sets AllocationType field to given value.
 `func (o *FundingResponse) HasAllocationType() bool`
 
 HasAllocationType returns a boolean if a field has been set.
+
+### GetAllocatedAt
+
+`func (o *FundingResponse) GetAllocatedAt() time.Time`
+
+GetAllocatedAt returns the AllocatedAt field if non-nil, zero value otherwise.
+
+### GetAllocatedAtOk
+
+`func (o *FundingResponse) GetAllocatedAtOk() (*time.Time, bool)`
+
+GetAllocatedAtOk returns a tuple with the AllocatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllocatedAt
+
+`func (o *FundingResponse) SetAllocatedAt(v time.Time)`
+
+SetAllocatedAt sets AllocatedAt field to given value.
+
+### HasAllocatedAt
+
+`func (o *FundingResponse) HasAllocatedAt() bool`
+
+HasAllocatedAt returns a boolean if a field has been set.
+
+### GetAllocationDate
+
+`func (o *FundingResponse) GetAllocationDate() time.Time`
+
+GetAllocationDate returns the AllocationDate field if non-nil, zero value otherwise.
+
+### GetAllocationDateOk
+
+`func (o *FundingResponse) GetAllocationDateOk() (*time.Time, bool)`
+
+GetAllocationDateOk returns a tuple with the AllocationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllocationDate
+
+`func (o *FundingResponse) SetAllocationDate(v time.Time)`
+
+SetAllocationDate sets AllocationDate field to given value.
+
+### HasAllocationDate
+
+`func (o *FundingResponse) HasAllocationDate() bool`
+
+HasAllocationDate returns a boolean if a field has been set.
 
 ### GetReason
 

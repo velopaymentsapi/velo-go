@@ -227,7 +227,7 @@ Name | Type | Description  | Notes
 
 ## GetFundingAccountsV2
 
-> ListFundingAccountsResponseV2 GetFundingAccountsV2(ctx).PayorId(payorId).Name(name).Country(country).Currency(currency).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
+> ListFundingAccountsResponseV2 GetFundingAccountsV2(ctx).PayorId(payorId).Name(name).CountryCode(countryCode).Currency(currency).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
 
 Get Funding Accounts
 
@@ -248,7 +248,7 @@ import (
 func main() {
     payorId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
     name := "name_example" // string | The descriptive funding account name (optional)
-    country := "US" // string | The 2 letter ISO 3166-1 country code (upper case) (optional)
+    countryCode := "US" // string | The 2 letter ISO 3166-1 country code (upper case) (optional)
     currency := "USD" // string | The ISO 4217 currency code (optional)
     type_ := "type__example" // string | The type of funding account. (optional)
     page := int32(56) // int32 | Page number. Default is 1. (optional) (default to 1)
@@ -258,7 +258,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FundingAPI.GetFundingAccountsV2(context.Background()).PayorId(payorId).Name(name).Country(country).Currency(currency).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
+    resp, r, err := apiClient.FundingAPI.GetFundingAccountsV2(context.Background()).PayorId(payorId).Name(name).CountryCode(countryCode).Currency(currency).Type_(type_).Page(page).PageSize(pageSize).Sort(sort).Sensitive(sensitive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FundingAPI.GetFundingAccountsV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payorId** | **string** |  | 
  **name** | **string** | The descriptive funding account name | 
- **country** | **string** | The 2 letter ISO 3166-1 country code (upper case) | 
+ **countryCode** | **string** | The 2 letter ISO 3166-1 country code (upper case) | 
  **currency** | **string** | The ISO 4217 currency code | 
  **type_** | **string** | The type of funding account. | 
  **page** | **int32** | Page number. Default is 1. | [default to 1]

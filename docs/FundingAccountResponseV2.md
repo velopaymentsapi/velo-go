@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **RoutingNumber** | Pointer to **string** | bank account routing number | [optional] 
 **Name** | Pointer to **string** | name of funding account | [optional] 
 **Currency** | Pointer to **string** | Valid ISO 4217 3 letter currency code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-4217-currency-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | [optional] 
-**Country** | Pointer to **string** | ISO 3166-1 2 letter country code (upper case) | [optional] 
-**Type** | Pointer to **string** | Funding account type. One of the following values: FBO, WUBS_DECOUPLED, PRIVATE | [optional] 
+**CountryCode** | Pointer to **string** | ISO 3166-1 2 letter country code (upper case) | [optional] 
+**Type** | Pointer to **string** | Funding account type. One of the following values: FBO, PRIVATE | [optional] 
 **Archived** | Pointer to **bool** | A flag for whether the funding account has been archived.  Only present in the response if true. | [optional] 
 
 ## Methods
@@ -209,30 +209,30 @@ SetCurrency sets Currency field to given value.
 
 HasCurrency returns a boolean if a field has been set.
 
-### GetCountry
+### GetCountryCode
 
-`func (o *FundingAccountResponseV2) GetCountry() string`
+`func (o *FundingAccountResponseV2) GetCountryCode() string`
 
-GetCountry returns the Country field if non-nil, zero value otherwise.
+GetCountryCode returns the CountryCode field if non-nil, zero value otherwise.
 
-### GetCountryOk
+### GetCountryCodeOk
 
-`func (o *FundingAccountResponseV2) GetCountryOk() (*string, bool)`
+`func (o *FundingAccountResponseV2) GetCountryCodeOk() (*string, bool)`
 
-GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
+GetCountryCodeOk returns a tuple with the CountryCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCountry
+### SetCountryCode
 
-`func (o *FundingAccountResponseV2) SetCountry(v string)`
+`func (o *FundingAccountResponseV2) SetCountryCode(v string)`
 
-SetCountry sets Country field to given value.
+SetCountryCode sets CountryCode field to given value.
 
-### HasCountry
+### HasCountryCode
 
-`func (o *FundingAccountResponseV2) HasCountry() bool`
+`func (o *FundingAccountResponseV2) HasCountryCode() bool`
 
-HasCountry returns a boolean if a field has been set.
+HasCountryCode returns a boolean if a field has been set.
 
 ### GetType
 

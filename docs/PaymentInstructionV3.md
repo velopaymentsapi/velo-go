@@ -8,9 +8,10 @@ Name | Type | Description | Notes
 **Currency** | **string** | Valid ISO 4217 3 letter currency code. See the &lt;a href&#x3D;\&quot;https://www.iso.org/iso-4217-currency-codes.html\&quot; target&#x3D;\&quot;_blank\&quot; a&gt;ISO specification&lt;/a&gt; for details. | 
 **Amount** | **int64** | &lt;p&gt;Amount to send to Payee&lt;/p&gt; &lt;p&gt;The maximum payment amount is dependent on the currency&lt;/p&gt;  | 
 **PaymentMemo** | Pointer to **string** | &lt;p&gt;Any value here will override the memo value in the parent payout&lt;/p&gt; &lt;p&gt;This should be the reference field on the statement seen by the payee (but not via ACH)&lt;/p&gt;  | [optional] 
-**SourceAccountName** | **string** | Must match a valid source account name belonging to the payor | 
+**SourceAccountName** | Pointer to **string** | Must match a valid source account name belonging to the payor. Exactly one of sourceAccountName or transactionId is required. | [optional] 
+**TransactionId** | Pointer to **string** | Must match a valid transaction id previously created by the payor. Exactly one of sourceAccountName or transactionId is required. | [optional] 
 **PayorPaymentId** | Pointer to **string** | A reference identifier for the payor for the given payee payment | [optional] 
-**TransmissionType** | Pointer to **string** | Optionally choose a specific transmission method for the payment | [optional] 
+**TransmissionType** | Pointer to **string** | &lt;p&gt;Optionally choose a specific transmission method for the payment.&lt;/p&gt; &lt;p&gt;Valid values for transmissionType can be found attached to the Source Account&lt;/p&gt;  | [optional] 
 **RemoteSystemId** | Pointer to **string** | &lt;p&gt;The identifier for the remote payments system if not Velo&lt;/p&gt; &lt;p&gt;Should only be used after consultation with Velo Payments&lt;/p&gt;  | [optional] 
 **PaymentMetadata** | Pointer to **string** | &lt;p&gt;Metadata about the payment that may be relevant to the specific rails or remote system making the payout&lt;/p&gt; &lt;p&gt;The structure of the data will be dictated by the requirements of the payment rails&lt;/p&gt;  | [optional] 
 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewPaymentInstructionV3
 
-`func NewPaymentInstructionV3(remoteId string, currency string, amount int64, sourceAccountName string, ) *PaymentInstructionV3`
+`func NewPaymentInstructionV3(remoteId string, currency string, amount int64, ) *PaymentInstructionV3`
 
 NewPaymentInstructionV3 instantiates a new PaymentInstructionV3 object
 This constructor will assign default values to properties that have it defined,
@@ -137,6 +138,36 @@ and a boolean to check if the value has been set.
 
 SetSourceAccountName sets SourceAccountName field to given value.
 
+### HasSourceAccountName
+
+`func (o *PaymentInstructionV3) HasSourceAccountName() bool`
+
+HasSourceAccountName returns a boolean if a field has been set.
+
+### GetTransactionId
+
+`func (o *PaymentInstructionV3) GetTransactionId() string`
+
+GetTransactionId returns the TransactionId field if non-nil, zero value otherwise.
+
+### GetTransactionIdOk
+
+`func (o *PaymentInstructionV3) GetTransactionIdOk() (*string, bool)`
+
+GetTransactionIdOk returns a tuple with the TransactionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionId
+
+`func (o *PaymentInstructionV3) SetTransactionId(v string)`
+
+SetTransactionId sets TransactionId field to given value.
+
+### HasTransactionId
+
+`func (o *PaymentInstructionV3) HasTransactionId() bool`
+
+HasTransactionId returns a boolean if a field has been set.
 
 ### GetPayorPaymentId
 
